@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunnyPot SSH Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #c0c0c0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #00ff00;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #61dafb;
+        }
+        .card p {
+            font-size: 2rem;
+            margin: 10px 0 0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .top-users {
+            margin-top: 40px;
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+        th {
+            color: #61dafb;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Omega-Black Dashboard</h1>
+        <div id="loading">Loading statistics...</div>
+        
+        <div id="dashboard" style="display: none;">
+            <div class="stats-grid">
+                <div class="card">
+                    <h3>Total Sessions</h3>
+                    <p id="totalSessions">0</p>
+                </div>
+                <div class="card">
+                    <h3>Total Messages</h3>
+                    <p id="totalMessages">0</p>
+                </div>
+                <div class="card">
+                    <h3>Blocked Ops</h3>
+                    <p id="totalBlocked">0</p>
+                </div>
+                <div class="card">
+                    <h3>Total Duration</h3>
+                    <p id="totalDuration">0h</p>
+                </div>
+                <div class="card">
+                    <h3>Prompt Tokens</h3>
+                    <p id="totalPromptTokens">0</p>
+                </div>
+                <div class="card">
+                    <h3>Completion Tokens</h3>
+                    <p id="totalCompletionTokens">0</p>
+                </div>
+            </div>
+
+            <div class="top-users">
+                <h3>Top Users</h3>
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Sessions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be added here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="footer">
+                Last Updated: <span id="lastUpdated">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchStats() {
+            try {
+                // Fetch global_stats.json. Ensure this file is in the same directory or adjust path.
+                const response = await fetch('global_stats.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const stats = await response.json();
+                renderStats(stats);
+            } catch (error) {
+                console.error('Failed to fetch stats:', error);
+                document.getElementById('loading').innerText = 'Failed to load statistics. Data may not be available yet.';
+            }
+        }
+
+        function renderStats(stats) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+
+            document.getElementById('totalSessions').innerText = stats.TotalSessions.toLocaleString();
+            document.getElementById('totalMessages').innerText = stats.TotalMessages.toLocaleString();
+            document.getElementById('totalBlocked').innerText = stats.TotalBlockedOperations.toLocaleString();
+            
+            const hours = (stats.TotalDurationMs / (1000 * 60 * 60)).toFixed(1);
+            document.getElementById('totalDuration').innerText = hours + 'h';
+            
+            document.getElementById('totalPromptTokens').innerText = stats.TotalPromptTokens.toLocaleString();
+            document.getElementById('totalCompletionTokens').innerText = stats.TotalCompletionTokens.toLocaleString();
+            
+            document.getElementById('lastUpdated').innerText = new Date(stats.LastUpdated).toLocaleString();
+
+            const tbody = document.querySelector('#usersTable tbody');
+            tbody.innerHTML = '';
+            for (const [user, count] of Object.entries(stats.TopUsers)) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${user}</td><td>${count}</td>`;
+                tbody.appendChild(tr);
+            }
+        }
+
+        fetchStats();
+    </script>
+</body>
+</html>

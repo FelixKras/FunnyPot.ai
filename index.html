@@ -284,6 +284,73 @@
             overflow-wrap: anywhere;
         }
 
+        .hour-grid {
+            display: grid;
+            grid-template-columns: repeat(24, minmax(18px, 1fr));
+            gap: 6px;
+            align-items: end;
+            min-height: 180px;
+        }
+
+        .hour {
+            display: grid;
+            gap: 6px;
+            align-items: end;
+            min-width: 0;
+        }
+
+        .hour-bar {
+            min-height: 4px;
+            border-radius: 999px 999px 3px 3px;
+            background: linear-gradient(180deg, var(--green), var(--cyan));
+            box-shadow: 0 0 18px rgba(53, 255, 122, 0.16);
+        }
+
+        .hour-label {
+            color: var(--muted);
+            font-size: 0.68rem;
+            text-align: center;
+        }
+
+        .exchange-feed {
+            display: grid;
+            gap: 12px;
+            max-height: 540px;
+            overflow: auto;
+            padding-right: 8px;
+        }
+
+        .exchange-session {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .exchange-title {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: #fff;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .exchange-line {
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 10px;
+            padding: 8px 0;
+            border-top: 1px solid rgba(38, 54, 70, 0.7);
+        }
+
+        .exchange-role {
+            color: var(--cyan);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
         .muted { color: var(--muted); }
         .nowrap { white-space: nowrap; }
         .empty { color: var(--muted); padding: 18px; text-align: center; }
@@ -336,6 +403,8 @@
                     <div class="metric"><div class="metric-label">Blocked Ops</div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
                     <div class="metric"><div class="metric-label">Harvested Creds</div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
                     <div class="metric"><div class="metric-label">Events</div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
+                    <div class="metric"><div class="metric-label">Binary Attempts</div><div class="metric-value" id="binaryAttempts">0</div><div class="metric-note">Payload/tool execution signals</div></div>
+                    <div class="metric"><div class="metric-label">Text Commands</div><div class="metric-value" id="textAttempts">0</div><div class="metric-note">Recon and shell text activity</div></div>
                 </div>
             </section>
 
@@ -349,6 +418,29 @@
                     <div class="bars" id="tacticBars"></div>
                     <div style="height:14px"></div>
                     <div class="bars" id="infraBars"></div>
+                </div>
+            </section>
+
+            <section class="section grid insight-grid">
+                <div class="panel">
+                    <h3>Time-of-Day Activity</h3>
+                    <div class="hour-grid" id="hourGrid"></div>
+                    <div class="muted" style="margin-top:12px;">Hourly telemetry volume in UTC, based on event timestamps.</div>
+                </div>
+                <div class="panel">
+                    <h3>Binary vs Text Attempts</h3>
+                    <div class="bars" id="attemptTypeBars"></div>
+                    <div class="muted" style="margin-top:12px;">Binary attempts include payload URLs, transfer tools, encoded payloads, chmod execution prep, tunneling, or persistence tooling.</div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Latest Command Exchanges</h2>
+                    <span class="muted">Newest sessions, last attacker commands, and observed outcomes</span>
+                </div>
+                <div class="panel">
+                    <div class="exchange-feed" id="latestExchanges"></div>
                 </div>
             </section>
 
@@ -447,6 +539,9 @@
                 renderBars('eventBars', summary.EventCounts || {}, 'cyan');
                 renderBars('tacticBars', stats.MitreTechniqueDistribution || summarizeTactics(sessionModels), 'purple', 'MITRE');
                 renderBars('infraBars', stats.SessionsByInfrastructureCategory || summarizeInfrastructure(sessionModels), 'green', 'Infra');
+                renderTimeOfDay(events);
+                renderAttemptTypes(sessionModels);
+                renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
@@ -489,6 +584,8 @@
                         semanticDriftMax: 0,
                         turingMax: 0,
                         failedCommands: 0,
+                        binaryAttempts: 0,
+                        textAttempts: 0,
                     });
                 }
                 return sessions.get(id);
@@ -518,6 +615,8 @@
 
                 if (event.Event === 'command') {
                     model.commands.push(data);
+                    if (isBinaryAttempt(data)) model.binaryAttempts++;
+                    else model.textAttempts++;
                     model.avpMax = Math.max(model.avpMax, data.AssetValuePerceptionScore || 0);
                     (data.MitreAttackTechniques || []).forEach(value => model.tactics.add(value));
                     (data.PayloadUrls || []).forEach(value => model.payloadUrls.add(value));
@@ -568,6 +667,68 @@
             setText('blockedOps', fmt.format(stats.TotalBlockedOperations || 0));
             setText('harvestedCreds', fmt.format(summary.EventCounts?.harvested_credential || 0));
             setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
+            setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));
+            setText('textAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.textAttempts, 0)));
+        }
+
+        function renderTimeOfDay(events) {
+            const counts = Array.from({ length: 24 }, () => 0);
+            for (const event of events) {
+                const timestamp = event.Data?.Timestamp || event.Timestamp;
+                if (!timestamp) continue;
+                const date = new Date(timestamp);
+                if (!Number.isNaN(date.getTime())) counts[date.getUTCHours()]++;
+            }
+
+            const max = Math.max(...counts, 1);
+            document.getElementById('hourGrid').innerHTML = counts.map((count, hour) => `
+                <div class="hour" title="${hour}:00 UTC / ${fmt.format(count)} events">
+                    <div class="hour-bar" style="height:${Math.max(4, count / max * 150)}px"></div>
+                    <div class="hour-label">${String(hour).padStart(2, '0')}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderAttemptTypes(sessions) {
+            renderBars('attemptTypeBars', {
+                'binary/tooling attempts': sessions.reduce((sum, session) => sum + session.binaryAttempts, 0),
+                'text-only commands': sessions.reduce((sum, session) => sum + session.textAttempts, 0),
+            });
+        }
+
+        function renderLatestExchanges(sessions) {
+            const target = document.getElementById('latestExchanges');
+            const recent = sessions
+                .filter(session => session.commands.length)
+                .sort((a, b) => new Date(b.endedAt || b.startedAt || 0) - new Date(a.endedAt || a.startedAt || 0))
+                .slice(0, 5);
+
+            if (!recent.length) {
+                target.innerHTML = '<div class="empty">No command exchanges yet.</div>';
+                return;
+            }
+
+            target.innerHTML = recent.map(session => `
+                <div class="exchange-session">
+                    <div class="exchange-title">
+                        <span>${escapeHtml(session.remote)} / ${escapeHtml(session.username)}</span>
+                        <span class="muted">${fmtTime(session.endedAt || session.startedAt)}</span>
+                    </div>
+                    ${session.commands.slice(-5).map(command => {
+                        const result = findCommandResult(session, command);
+                        return `
+                            <div class="exchange-line">
+                                <div class="exchange-role">attacker</div>
+                                <div class="command">${escapeHtml(command.Command)}</div>
+                            </div>
+                            <div class="exchange-line">
+                                <div class="exchange-role">honeypot</div>
+                                <div>${result ? `${result.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} response ${fmt.format(result.ResponseDurationMs)}ms / error ratio ${pct(result.StandardErrorRatio || 0)}` : '<span class="muted">no result recorded yet</span>'}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `).join('');
         }
 
         function renderBars(targetId, data, color = 'cyan', prefix = '') {
@@ -687,12 +848,12 @@
             }
 
             target.innerHTML = session.commands.map(command => {
-                const result = session.results.find(item => item.Command === command.Command);
+                const result = findCommandResult(session, command);
                 return `
                     <div class="command">
                         <div>${escapeHtml(command.Command)}</div>
                         <div class="muted" style="margin-top:8px;">
-                            #${command.MessageNumber} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
+                            #${command.MessageNumber} / ${isBinaryAttempt(command) ? 'binary/tooling' : 'text'} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
                             ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms` : ''}
                         </div>
                         <div style="margin-top:6px;">${renderBadges(command.MitreAttackTechniques || [], 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
@@ -719,6 +880,8 @@
                         'Max AVP Score': session.avpMax,
                         'Semantic Drift': session.semanticDriftMax,
                         'Turing Multiplier': formatNumber(session.turingMax),
+                        'Binary Attempts': session.binaryAttempts,
+                        'Text Commands': session.textAttempts,
                     })}
                 </div>
                 <div style="height:16px"></div>
@@ -769,6 +932,20 @@
             const counts = {};
             sessions.forEach(session => counts[session.infra] = (counts[session.infra] || 0) + 1);
             return counts;
+        }
+
+        function findCommandResult(session, command) {
+            return session.results.find(item => item.Command === command.Command && new Date(item.Timestamp || 0) >= new Date(command.Timestamp || 0))
+                || session.results.find(item => item.Command === command.Command);
+        }
+
+        function isBinaryAttempt(command) {
+            const text = String(command.Command || '').toLowerCase();
+            return Boolean((command.PayloadUrls || []).length)
+                || command.TunnelingIntent && command.TunnelingIntent !== 'none'
+                || command.PersistenceVector && command.PersistenceVector !== 'none'
+                || /\b(curl|wget|fetch|tftp|scp|sftp|ftp|nc|netcat|base64|xxd|chmod\s+\+x|chmod\s+7|python\s+-c|perl\s+-e|openssl|chisel|frp|socat)\b/.test(text)
+                || /\.(sh|elf|bin|so|py|pl|jar|exe)\b/.test(text);
         }
 
         function kvRows(values) {

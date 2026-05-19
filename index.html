@@ -3,169 +3,813 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunnyPot SSH Dashboard</title>
+    <title>FunnyPot SSH Intelligence Dashboard</title>
     <style>
+        :root {
+            --bg: #080c10;
+            --panel: #111820;
+            --panel-2: #17212b;
+            --line: #263646;
+            --text: #d7e3ee;
+            --muted: #8292a2;
+            --green: #35ff7a;
+            --cyan: #48dfff;
+            --amber: #ffcc66;
+            --red: #ff647c;
+            --purple: #a78bfa;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e1e;
-            color: #c0c0c0;
             margin: 0;
-            padding: 20px;
+            background: radial-gradient(circle at top left, #122034 0, var(--bg) 42%);
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
-        h1 {
-            color: #00ff00;
-            text-align: center;
-        }
+
         .container {
-            max-width: 800px;
+            width: min(1440px, calc(100% - 32px));
             margin: 0 auto;
+            padding: 28px 0 48px;
         }
-        .stats-grid {
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        h1, h2, h3 { margin: 0; }
+
+        h1 {
+            color: var(--green);
+            font-size: clamp(2rem, 4vw, 4rem);
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 24px rgba(53, 255, 122, 0.26);
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin-top: 8px;
+            max-width: 860px;
+            line-height: 1.5;
+        }
+
+        .status-pill {
+            border: 1px solid rgba(72, 223, 255, 0.38);
+            background: rgba(72, 223, 255, 0.08);
+            border-radius: 999px;
+            color: var(--cyan);
+            padding: 10px 14px;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            gap: 14px;
         }
-        .card {
-            background-color: #2d2d2d;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            text-align: center;
+
+        .metrics {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
         }
-        .card h3 {
-            margin: 0;
-            font-size: 1.2rem;
-            color: #61dafb;
+
+        .insight-grid {
+            grid-template-columns: 1.25fr 1fr;
         }
-        .card p {
-            font-size: 2rem;
-            margin: 10px 0 0;
-            color: #ffffff;
-            font-weight: bold;
+
+        .panel, .metric {
+            background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)), var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: 0 12px 38px rgba(0, 0, 0, 0.28);
         }
-        .top-users {
-            margin-top: 40px;
-            background-color: #2d2d2d;
-            padding: 20px;
-            border-radius: 8px;
+
+        .metric {
+            min-height: 124px;
+            padding: 18px;
         }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .metric-value {
+            margin-top: 10px;
+            font-size: clamp(1.7rem, 3vw, 2.8rem);
+            line-height: 1;
+            font-weight: 850;
+            color: #fff;
+        }
+
+        .metric-note {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .panel {
+            padding: 18px;
+            overflow: hidden;
+        }
+
+        .panel h3 {
+            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 14px;
+        }
+
+        .bars {
+            display: grid;
+            gap: 10px;
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: minmax(110px, 180px) 1fr auto;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .bar-track {
+            height: 10px;
+            background: #0b1117;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            border-radius: inherit;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
         }
+
         th, td {
             text-align: left;
-            padding: 10px;
-            border-bottom: 1px solid #444;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
         }
+
         th {
-            color: #61dafb;
+            color: var(--cyan);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #666;
+
+        td {
+            color: var(--text);
+            font-size: 0.92rem;
+        }
+
+        tr.session-row {
+            cursor: pointer;
+            transition: background 0.16s ease;
+        }
+
+        tr.session-row:hover, tr.session-row.active {
+            background: rgba(72, 223, 255, 0.06);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: 0.78rem;
+            font-weight: 750;
+            background: rgba(130, 146, 162, 0.18);
+            color: var(--text);
+            margin: 2px 4px 2px 0;
+        }
+
+        .badge.green { background: rgba(53, 255, 122, 0.13); color: var(--green); }
+        .badge.red { background: rgba(255, 100, 124, 0.13); color: var(--red); }
+        .badge.amber { background: rgba(255, 204, 102, 0.13); color: var(--amber); }
+        .badge.cyan { background: rgba(72, 223, 255, 0.13); color: var(--cyan); }
+        .badge.purple { background: rgba(167, 139, 250, 0.13); color: var(--purple); }
+
+        .details-layout {
+            display: grid;
+            grid-template-columns: 0.95fr 1.35fr;
+            gap: 14px;
+        }
+
+        .kv {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 8px 12px;
+            font-size: 0.92rem;
+        }
+
+        .kv .key { color: var(--muted); }
+        .kv .value { color: #fff; overflow-wrap: anywhere; }
+
+        .timeline {
+            position: relative;
+            display: grid;
+            gap: 10px;
+            max-height: 460px;
+            overflow: auto;
+            padding-right: 8px;
+        }
+
+        .timeline-item {
+            border-left: 3px solid var(--cyan);
+            background: rgba(255,255,255,0.025);
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+
+        .timeline-time {
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .timeline-body {
+            margin-top: 4px;
+            color: var(--text);
+            overflow-wrap: anywhere;
+        }
+
+        .command-list {
+            display: grid;
+            gap: 8px;
+            max-height: 360px;
+            overflow: auto;
+        }
+
+        .command {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            background: #071018;
+            border: 1px solid #193040;
+            border-radius: 12px;
+            padding: 10px;
+            color: #e8f8ff;
+            overflow-wrap: anywhere;
+        }
+
+        .muted { color: var(--muted); }
+        .nowrap { white-space: nowrap; }
+        .empty { color: var(--muted); padding: 18px; text-align: center; }
+        .loading { padding: 22px; color: var(--muted); background: var(--panel); border-radius: 16px; }
+
+        @media (max-width: 1100px) {
+            .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .insight-grid, .details-layout { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 720px) {
+            .container { width: min(100% - 20px, 1440px); padding-top: 18px; }
+            .hero { align-items: flex-start; flex-direction: column; }
+            .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .bar-row { grid-template-columns: 1fr; gap: 5px; }
+            table { min-width: 900px; }
+            .table-scroll { overflow-x: auto; }
+            .kv { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Omega-Black Dashboard</h1>
-        <div id="loading">Loading statistics...</div>
-        
-        <div id="dashboard" style="display: none;">
-            <div class="stats-grid">
-                <div class="card">
-                    <h3>Total Sessions</h3>
-                    <p id="totalSessions">0</p>
-                </div>
-                <div class="card">
-                    <h3>Total Messages</h3>
-                    <p id="totalMessages">0</p>
-                </div>
-                <div class="card">
-                    <h3>Blocked Ops</h3>
-                    <p id="totalBlocked">0</p>
-                </div>
-                <div class="card">
-                    <h3>Total Duration</h3>
-                    <p id="totalDuration">0h</p>
-                </div>
-                <div class="card">
-                    <h3>Prompt Tokens</h3>
-                    <p id="totalPromptTokens">0</p>
-                </div>
-                <div class="card">
-                    <h3>Completion Tokens</h3>
-                    <p id="totalCompletionTokens">0</p>
-                </div>
+    <main class="container">
+        <header class="hero">
+            <div>
+                <h1>Omega-Black Dashboard</h1>
+                <p class="subtitle">Operational view of honeypot performance and attacker sessions. Performance metrics show how the simulation behaves; attacker intelligence shows who connected, what they tried, commands, timing, tactics, and harvested signals.</p>
             </div>
+            <div class="status-pill" id="dataStatus">Loading data</div>
+        </header>
 
-            <div class="top-users">
-                <h3>Top Users</h3>
-                <table id="usersTable">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Sessions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Rows will be added here -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="footer">
-                Last Updated: <span id="lastUpdated">-</span>
-            </div>
-        </div>
-    </div>
+        <div id="loading" class="loading">Loading statistics, events, and session telemetry...</div>
+
+        <section id="dashboard" style="display:none;">
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Honeypot Performance</h2>
+                    <span class="muted">Simulation health, token use, and engagement</span>
+                </div>
+                <div class="grid metrics">
+                    <div class="metric"><div class="metric-label">Closed Shell Sessions</div><div class="metric-value" id="totalSessions">0</div><div class="metric-note">Completed interactive shells</div></div>
+                    <div class="metric"><div class="metric-label">SSH Connections</div><div class="metric-value" id="connections">0</div><div class="metric-note">Raw accepted connections</div></div>
+                    <div class="metric"><div class="metric-label">Auth Attempts</div><div class="metric-value" id="authAttempts">0</div><div class="metric-note">Credential attempts observed</div></div>
+                    <div class="metric"><div class="metric-label">Commands</div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
+                    <div class="metric"><div class="metric-label">Mean Engagement</div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average active shell time</div></div>
+                    <div class="metric"><div class="metric-label">Failure Ratio</div><div class="metric-value" id="failureRatio">0%</div><div class="metric-note">Failed command responses</div></div>
+                    <div class="metric"><div class="metric-label">Prompt Tokens</div><div class="metric-value" id="promptTokens">0</div><div class="metric-note">LLM input cost driver</div></div>
+                    <div class="metric"><div class="metric-label">Completion Tokens</div><div class="metric-value" id="completionTokens">0</div><div class="metric-note">LLM output cost driver</div></div>
+                    <div class="metric"><div class="metric-label">Response Time</div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
+                    <div class="metric"><div class="metric-label">Blocked Ops</div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
+                    <div class="metric"><div class="metric-label">Harvested Creds</div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
+                    <div class="metric"><div class="metric-label">Events</div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
+                </div>
+            </section>
+
+            <section class="section grid insight-grid">
+                <div class="panel">
+                    <h3>Event Pipeline</h3>
+                    <div class="bars" id="eventBars"></div>
+                </div>
+                <div class="panel">
+                    <h3>Tactics & Infrastructure</h3>
+                    <div class="bars" id="tacticBars"></div>
+                    <div style="height:14px"></div>
+                    <div class="bars" id="infraBars"></div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Attacker Sessions</h2>
+                    <span class="muted">Click a row to inspect timeline, auth, commands, and tactics</span>
+                </div>
+                <div class="panel table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Remote</th>
+                                <th>User</th>
+                                <th>Client</th>
+                                <th>Auth</th>
+                                <th>Commands</th>
+                                <th>Tactics</th>
+                                <th>Risk</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sessionsTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section" id="sessionDetailsSection" style="display:none;">
+                <div class="section-header">
+                    <h2 class="section-title">Session Detail</h2>
+                    <span class="muted" id="selectedSessionLabel"></span>
+                </div>
+                <div class="details-layout">
+                    <div class="panel">
+                        <h3>Attacker Profile</h3>
+                        <div class="kv" id="profileKv"></div>
+                        <div style="height:18px"></div>
+                        <h3>Auth Attempts</h3>
+                        <div class="timeline" id="authTimeline"></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Timeline</h3>
+                        <div class="timeline" id="sessionTimeline"></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Commands</h3>
+                        <div class="command-list" id="commandList"></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Tactics, Signals & Outcomes</h3>
+                        <div id="signals"></div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                Last updated: <span id="lastUpdated">-</span>. Data source: FunnyPot.ai <code>data</code> branch.
+            </footer>
+        </section>
+    </main>
 
     <script>
-        async function fetchStats() {
+        const DATA_BASE = 'https://raw.githubusercontent.com/FelixKras/FunnyPot.ai/data';
+        let sessionModels = [];
+        let selectedSessionId = null;
+
+        const fmt = new Intl.NumberFormat();
+        const fmtTime = value => value ? new Date(value).toLocaleString() : '-';
+        const pct = value => `${Math.round((value || 0) * 100)}%`;
+        const sec = value => `${Math.round(value || 0)}s`;
+
+        async function fetchJson(path) {
+            const response = await fetch(`${DATA_BASE}/${path}`, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`${path}: ${response.status}`);
+            return response.json();
+        }
+
+        async function fetchJsonl(path) {
+            const response = await fetch(`${DATA_BASE}/${path}`, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`${path}: ${response.status}`);
+            const text = await response.text();
+            return text.split('\n').filter(Boolean).map(line => JSON.parse(line));
+        }
+
+        async function loadDashboard() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/FelixKras/FunnyPot.ai/data/global_stats.json', { cache: 'no-store' });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const stats = await response.json();
-                renderStats(stats);
+                const [stats, summary, events] = await Promise.all([
+                    fetchJson('global_stats.json'),
+                    fetchJson('data/harvest_summary.json'),
+                    fetchJsonl('data/harvest.jsonl')
+                ]);
+
+                sessionModels = buildSessions(events);
+                renderPerformance(stats, summary, events, sessionModels);
+                renderBars('eventBars', summary.EventCounts || {}, 'cyan');
+                renderBars('tacticBars', stats.MitreTechniqueDistribution || summarizeTactics(sessionModels), 'purple', 'MITRE');
+                renderBars('infraBars', stats.SessionsByInfrastructureCategory || summarizeInfrastructure(sessionModels), 'green', 'Infra');
+                renderSessions(sessionModels);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || events.length)} events loaded`;
+                document.getElementById('lastUpdated').textContent = fmtTime(summary.LastUpdated || stats.LastUpdated);
+                if (sessionModels.length) selectSession(sessionModels[0].id);
             } catch (error) {
-                console.error('Failed to fetch stats:', error);
-                document.getElementById('loading').innerText = 'Failed to load statistics. Data may not be available yet.';
+                console.error('Failed to load dashboard data:', error);
+                document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
+                document.getElementById('dataStatus').textContent = 'Data unavailable';
             }
         }
 
-        function renderStats(stats) {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
+        function buildSessions(events) {
+            const sessions = new Map();
 
-            document.getElementById('totalSessions').innerText = stats.TotalSessions.toLocaleString();
-            document.getElementById('totalMessages').innerText = stats.TotalMessages.toLocaleString();
-            document.getElementById('totalBlocked').innerText = stats.TotalBlockedOperations.toLocaleString();
-            
-            const hours = (stats.TotalDurationMs / (1000 * 60 * 60)).toFixed(1);
-            document.getElementById('totalDuration').innerText = hours + 'h';
-            
-            document.getElementById('totalPromptTokens').innerText = stats.TotalPromptTokens.toLocaleString();
-            document.getElementById('totalCompletionTokens').innerText = stats.TotalCompletionTokens.toLocaleString();
-            
-            document.getElementById('lastUpdated').innerText = new Date(stats.LastUpdated).toLocaleString();
-
-            const tbody = document.querySelector('#usersTable tbody');
-            tbody.innerHTML = '';
-            for (const [user, count] of Object.entries(stats.TopUsers)) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${user}</td><td>${count}</td>`;
-                tbody.appendChild(tr);
+            function ensure(id) {
+                if (!sessions.has(id)) {
+                    sessions.set(id, {
+                        id,
+                        sessionKey: id,
+                        shellSessionId: '',
+                        remote: 'unknown',
+                        username: 'unknown',
+                        client: 'unknown',
+                        startedAt: null,
+                        endedAt: null,
+                        durationSeconds: 0,
+                        timeToCompromiseMs: 0,
+                        authAttempts: [],
+                        commands: [],
+                        results: [],
+                        timeline: [],
+                        tactics: new Set(),
+                        payloadUrls: new Set(),
+                        egressTargets: new Set(),
+                        persistence: new Set(),
+                        infra: 'unknown',
+                        avpMax: 0,
+                        semanticDriftMax: 0,
+                        turingMax: 0,
+                        failedCommands: 0,
+                    });
+                }
+                return sessions.get(id);
             }
+
+            for (const event of events) {
+                const data = event.Data || {};
+                const id = data.ShellSessionId || data.SessionKey || 'unknown';
+                const model = ensure(id);
+                model.sessionKey = data.SessionKey || model.sessionKey;
+                model.shellSessionId = data.ShellSessionId || model.shellSessionId;
+                model.remote = data.RemoteEndpoint || model.remote;
+                model.username = data.Username || model.username;
+                model.client = data.ClientVersion || model.client;
+                model.startedAt = earliest(model.startedAt, data.Timestamp || event.Timestamp);
+                model.endedAt = latest(model.endedAt, data.Timestamp || event.Timestamp);
+
+                if (data.DurationSeconds) model.durationSeconds = Math.max(model.durationSeconds, data.DurationSeconds);
+                if (data.TimeToCompromiseMs) model.timeToCompromiseMs = Math.max(model.timeToCompromiseMs, data.TimeToCompromiseMs);
+
+                model.timeline.push({ type: event.Event, timestamp: data.Timestamp || event.Timestamp, data });
+
+                if (event.Event === 'auth_attempt') {
+                    model.authAttempts.push(data);
+                    model.infra = data.InfrastructureCategory || model.infra;
+                }
+
+                if (event.Event === 'command') {
+                    model.commands.push(data);
+                    model.avpMax = Math.max(model.avpMax, data.AssetValuePerceptionScore || 0);
+                    (data.MitreAttackTechniques || []).forEach(value => model.tactics.add(value));
+                    (data.PayloadUrls || []).forEach(value => model.payloadUrls.add(value));
+                    (data.EgressTargets || []).forEach(value => model.egressTargets.add(value));
+                    if (data.PersistenceVector && data.PersistenceVector !== 'none') model.persistence.add(data.PersistenceVector);
+                }
+
+                if (event.Event === 'command_result') {
+                    model.results.push(data);
+                    if (data.FailedCommand) model.failedCommands++;
+                    model.semanticDriftMax = Math.max(model.semanticDriftMax, data.SemanticDrift || 0);
+                    model.turingMax = Math.max(model.turingMax, data.TuringMultiplier || 0);
+                }
+            }
+
+            return [...sessions.values()]
+                .filter(session => session.id !== 'unknown')
+                .sort((a, b) => new Date(b.startedAt || 0) - new Date(a.startedAt || 0));
         }
 
-        fetchStats();
+        function earliest(a, b) {
+            if (!b) return a;
+            if (!a) return b;
+            return new Date(a) <= new Date(b) ? a : b;
+        }
+
+        function latest(a, b) {
+            if (!b) return a;
+            if (!a) return b;
+            return new Date(a) >= new Date(b) ? a : b;
+        }
+
+        function renderPerformance(stats, summary, events, sessions) {
+            const commands = events.filter(event => event.Event === 'command');
+            const results = events.filter(event => event.Event === 'command_result');
+            const failedResults = results.filter(event => event.Data?.FailedCommand).length;
+            const avgResponse = average(results.map(event => event.Data?.ResponseDurationMs || 0));
+
+            setText('totalSessions', fmt.format(stats.TotalSessions || sessions.filter(s => s.shellSessionId).length));
+            setText('connections', fmt.format(summary.EventCounts?.session_start || 0));
+            setText('authAttempts', fmt.format(summary.EventCounts?.auth_attempt || 0));
+            setText('commands', fmt.format(commands.length));
+            setText('meanEngagement', sec(stats.MeanEngagementSeconds || average(sessions.map(s => s.durationSeconds))));
+            setText('failureRatio', pct(results.length ? failedResults / results.length : 0));
+            setText('promptTokens', fmt.format(stats.TotalPromptTokens || 0));
+            setText('completionTokens', fmt.format(stats.TotalCompletionTokens || 0));
+            setText('avgResponse', `${fmt.format(Math.round(avgResponse))}ms`);
+            setText('blockedOps', fmt.format(stats.TotalBlockedOperations || 0));
+            setText('harvestedCreds', fmt.format(summary.EventCounts?.harvested_credential || 0));
+            setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
+        }
+
+        function renderBars(targetId, data, color = 'cyan', prefix = '') {
+            const target = document.getElementById(targetId);
+            const entries = Object.entries(data || {}).sort((a, b) => b[1] - a[1]);
+            if (!entries.length) {
+                target.innerHTML = `<div class="empty">No ${prefix || 'data'} signals yet.</div>`;
+                return;
+            }
+            const max = Math.max(...entries.map(([, value]) => value), 1);
+            target.innerHTML = entries.map(([key, value]) => `
+                <div class="bar-row">
+                    <div>${escapeHtml(prefix ? `${prefix}: ${key}` : key)}</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:${Math.max(4, value / max * 100)}%;"></div></div>
+                    <strong>${fmt.format(value)}</strong>
+                </div>
+            `).join('');
+        }
+
+        function renderSessions(sessions) {
+            const tbody = document.getElementById('sessionsTable');
+            if (!sessions.length) {
+                tbody.innerHTML = `<tr><td colspan="9" class="empty">No attacker sessions yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = sessions.map(session => {
+                const success = session.authAttempts.some(attempt => attempt.Accepted);
+                const failed = session.authAttempts.filter(attempt => !attempt.Accepted).length;
+                return `
+                    <tr class="session-row" data-session-id="${escapeAttr(session.id)}">
+                        <td class="nowrap">${fmtTime(session.startedAt)}</td>
+                        <td>${escapeHtml(session.remote)}<br><span class="muted">${escapeHtml(session.infra)}</span></td>
+                        <td>${escapeHtml(session.username)}</td>
+                        <td>${escapeHtml(shorten(session.client, 34))}</td>
+                        <td>${badge(success ? 'accepted' : 'rejected', success ? 'green' : 'red')} ${failed ? badge(`${failed} failed`, 'amber') : ''}</td>
+                        <td>${fmt.format(session.commands.length)} cmds<br><span class="muted">${session.failedCommands} failed</span></td>
+                        <td>${renderBadges([...session.tactics], 'purple') || '<span class="muted">none</span>'}</td>
+                        <td>${riskBadge(session)}</td>
+                        <td>${sec(session.durationSeconds)}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            tbody.querySelectorAll('tr.session-row').forEach(row => {
+                row.addEventListener('click', () => selectSession(row.dataset.sessionId));
+            });
+        }
+
+        function selectSession(id) {
+            selectedSessionId = id;
+            const session = sessionModels.find(item => item.id === id);
+            if (!session) return;
+
+            document.getElementById('sessionDetailsSection').style.display = 'block';
+            document.querySelectorAll('tr.session-row').forEach(row => row.classList.toggle('active', row.dataset.sessionId === id));
+            document.getElementById('selectedSessionLabel').textContent = `${session.remote} / ${session.id}`;
+            renderProfile(session);
+            renderAuthTimeline(session);
+            renderTimeline(session);
+            renderCommands(session);
+            renderSignals(session);
+        }
+
+        function renderProfile(session) {
+            document.getElementById('profileKv').innerHTML = kvRows({
+                'Remote': session.remote,
+                'Username': session.username,
+                'Client': session.client,
+                'Infrastructure': session.infra,
+                'Session Key': session.sessionKey,
+                'Shell Session': session.shellSessionId || '-',
+                'Started': fmtTime(session.startedAt),
+                'Ended': fmtTime(session.endedAt),
+                'Duration': sec(session.durationSeconds),
+                'Time To Shell': session.timeToCompromiseMs ? `${fmt.format(session.timeToCompromiseMs)}ms` : '-',
+            });
+        }
+
+        function renderAuthTimeline(session) {
+            const target = document.getElementById('authTimeline');
+            if (!session.authAttempts.length) {
+                target.innerHTML = '<div class="empty">No auth attempts recorded.</div>';
+                return;
+            }
+
+            target.innerHTML = session.authAttempts.map(attempt => `
+                <div class="timeline-item">
+                    <div class="timeline-time">${fmtTime(attempt.Timestamp)} / attempt ${attempt.AttemptNumber}</div>
+                    <div class="timeline-body">
+                        ${badge(attempt.Accepted ? 'accepted' : 'rejected', attempt.Accepted ? 'green' : 'red')}
+                        ${badge(attempt.AcceptanceReason || 'unknown', 'cyan')}
+                        user <strong>${escapeHtml(attempt.Username)}</strong> via ${escapeHtml(attempt.AuthMethod)}
+                        <br><span class="muted">entropy ${formatNumber(attempt.CredentialEntropy)} / mutation distance ${attempt.PreviousCredentialDistance}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderTimeline(session) {
+            const target = document.getElementById('sessionTimeline');
+            target.innerHTML = session.timeline
+                .sort((a, b) => new Date(a.timestamp || 0) - new Date(b.timestamp || 0))
+                .map(item => `
+                    <div class="timeline-item">
+                        <div class="timeline-time">${fmtTime(item.timestamp)} / ${escapeHtml(item.type)}</div>
+                        <div class="timeline-body">${describeEvent(item)}</div>
+                    </div>
+                `).join('');
+        }
+
+        function renderCommands(session) {
+            const target = document.getElementById('commandList');
+            if (!session.commands.length) {
+                target.innerHTML = '<div class="empty">No commands recorded.</div>';
+                return;
+            }
+
+            target.innerHTML = session.commands.map(command => {
+                const result = session.results.find(item => item.Command === command.Command);
+                return `
+                    <div class="command">
+                        <div>${escapeHtml(command.Command)}</div>
+                        <div class="muted" style="margin-top:8px;">
+                            #${command.MessageNumber} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
+                            ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms` : ''}
+                        </div>
+                        <div style="margin-top:6px;">${renderBadges(command.MitreAttackTechniques || [], 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderSignals(session) {
+            const authAccepted = session.authAttempts.filter(item => item.Accepted).length;
+            const authRejected = session.authAttempts.length - authAccepted;
+            const payloads = [...session.payloadUrls];
+            const egress = [...session.egressTargets];
+            const persistence = [...session.persistence];
+            const tactics = [...session.tactics];
+
+            document.getElementById('signals').innerHTML = `
+                <div class="kv">
+                    ${kvRows({
+                        'Risk': riskLabel(session),
+                        'Accepted Auth': authAccepted,
+                        'Rejected Auth': authRejected,
+                        'Command Failure Ratio': pct(session.commands.length ? session.failedCommands / session.commands.length : 0),
+                        'Max AVP Score': session.avpMax,
+                        'Semantic Drift': session.semanticDriftMax,
+                        'Turing Multiplier': formatNumber(session.turingMax),
+                    })}
+                </div>
+                <div style="height:16px"></div>
+                <div>${renderBadges(tactics, 'purple') || badge('no MITRE tactics yet', 'cyan')}</div>
+                <div style="height:10px"></div>
+                <div>${renderBadges(persistence, 'amber') || '<span class="muted">No persistence vectors.</span>'}</div>
+                <div style="height:10px"></div>
+                <div>${payloads.length ? payloads.map(url => `<div class="command">payload: ${escapeHtml(url)}</div>`).join('') : '<span class="muted">No payload URLs.</span>'}</div>
+                <div style="height:10px"></div>
+                <div>${egress.length ? egress.map(target => `<div class="command">egress: ${escapeHtml(target)}</div>`).join('') : '<span class="muted">No egress targets.</span>'}</div>
+            `;
+        }
+
+        function describeEvent(item) {
+            const data = item.data || {};
+            if (item.type === 'command') return `command <strong>${escapeHtml(data.Command)}</strong>`;
+            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} ${escapeHtml(data.Command)} / ${data.ResponseDurationMs}ms`;
+            if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
+            if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
+            if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;
+            if (item.type === 'harvested_credential') return `credential harvested for <strong>${escapeHtml(data.Username)}</strong>`;
+            return escapeHtml(data.Event || item.type);
+        }
+
+        function riskScore(session) {
+            return session.avpMax + session.tactics.size * 12 + session.payloadUrls.size * 10 + session.egressTargets.size * 10 + session.failedCommands * 2 + (session.authAttempts.some(a => a.Accepted) ? 10 : 0);
+        }
+
+        function riskLabel(session) {
+            const score = riskScore(session);
+            if (score >= 60) return 'high';
+            if (score >= 25) return 'medium';
+            return 'low';
+        }
+
+        function riskBadge(session) {
+            const label = riskLabel(session);
+            return badge(label, label === 'high' ? 'red' : label === 'medium' ? 'amber' : 'green');
+        }
+
+        function summarizeTactics(sessions) {
+            const counts = {};
+            sessions.forEach(session => session.tactics.forEach(tactic => counts[tactic] = (counts[tactic] || 0) + 1));
+            return counts;
+        }
+
+        function summarizeInfrastructure(sessions) {
+            const counts = {};
+            sessions.forEach(session => counts[session.infra] = (counts[session.infra] || 0) + 1);
+            return counts;
+        }
+
+        function kvRows(values) {
+            return Object.entries(values).map(([key, value]) => `<div class="key">${escapeHtml(key)}</div><div class="value">${escapeHtml(String(value ?? '-'))}</div>`).join('');
+        }
+
+        function renderBadges(values, color) {
+            return (values || []).map(value => badge(value, color)).join('');
+        }
+
+        function badge(label, color = '') {
+            return `<span class="badge ${color}">${escapeHtml(String(label))}</span>`;
+        }
+
+        function average(values) {
+            const clean = values.filter(value => Number.isFinite(value));
+            return clean.length ? clean.reduce((sum, value) => sum + value, 0) / clean.length : 0;
+        }
+
+        function formatNumber(value) {
+            return Number.isFinite(Number(value)) ? Number(value).toFixed(2).replace(/\.00$/, '') : '-';
+        }
+
+        function shorten(value, length) {
+            value = value || 'unknown';
+            return value.length > length ? `${value.slice(0, length - 1)}...` : value;
+        }
+
+        function setText(id, value) {
+            document.getElementById(id).textContent = value;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
+        }
+
+        function escapeAttr(value) {
+            return escapeHtml(value).replace(/`/g, '&#96;');
+        }
+
+        loadDashboard();
     </script>
 </body>
 </html>

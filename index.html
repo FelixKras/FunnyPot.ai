@@ -423,6 +423,17 @@
 
             <section class="section grid insight-grid">
                 <div class="panel">
+                    <h3>Most Used Usernames</h3>
+                    <div class="bars" id="usernameBars"></div>
+                </div>
+                <div class="panel">
+                    <h3>Most Used Passwords</h3>
+                    <div class="bars" id="passwordBars"></div>
+                </div>
+            </section>
+
+            <section class="section grid insight-grid">
+                <div class="panel">
                     <h3>Time-of-Day Activity</h3>
                     <div class="hour-grid" id="hourGrid"></div>
                     <div class="muted" style="margin-top:12px;">Hourly telemetry volume in UTC, based on event timestamps.</div>
@@ -537,6 +548,7 @@
                 sessionModels = buildSessions(events);
                 renderPerformance(stats, summary, events, sessionModels);
                 renderBars('eventBars', summary.EventCounts || {}, 'cyan');
+                renderCredentialStats(summary, events);
                 renderBars('tacticBars', stats.MitreTechniqueDistribution || summarizeTactics(sessionModels), 'purple', 'MITRE');
                 renderBars('infraBars', stats.SessionsByInfrastructureCategory || summarizeInfrastructure(sessionModels), 'green', 'Infra');
                 renderTimeOfDay(events);
@@ -694,6 +706,30 @@
                 'binary/tooling attempts': sessions.reduce((sum, session) => sum + session.binaryAttempts, 0),
                 'text-only commands': sessions.reduce((sum, session) => sum + session.textAttempts, 0),
             });
+        }
+
+        function renderCredentialStats(summary, events) {
+            const usernames = Object.keys(summary.TopUsernames || {}).length ? summary.TopUsernames : countCredentialField(events, 'Username');
+            const passwords = Object.keys(summary.TopPasswords || {}).length ? summary.TopPasswords : countCredentialField(events, 'Password');
+            renderBars('usernameBars', takeTop(usernames, 12), 'cyan');
+            renderBars('passwordBars', takeTop(passwords, 12), 'amber');
+        }
+
+        function countCredentialField(events, field) {
+            const counts = {};
+            for (const event of events) {
+                if (event.Event !== 'auth_attempt') continue;
+                const value = event.Data?.[field];
+                if (!value) continue;
+                counts[value] = (counts[value] || 0) + 1;
+            }
+            return counts;
+        }
+
+        function takeTop(data, limit) {
+            return Object.fromEntries(Object.entries(data || {})
+                .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+                .slice(0, limit));
         }
 
         function renderLatestExchanges(sessions) {

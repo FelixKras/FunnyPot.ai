@@ -490,7 +490,7 @@
                         <div class="metric"><div class="metric-label">Commands<span class="tooltip-trigger">?<span class="tooltip-box">Commands sent by attackers after successful shell access. Includes both text commands and binary/tooling attempts.</span></span></div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
                         <div class="metric"><div class="metric-label">Mean Connection<span class="tooltip-trigger">?<span class="tooltip-box">Average duration from TCP connection established to shell session closed. Lower values may indicate quick reconnaissance or failed interactions.</span></span></div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average SSH connection lifetime</div></div>
                         <div class="metric"><div class="metric-label">Failure Ratio<span class="tooltip-trigger">?<span class="tooltip-box">Percentage of commands that received error responses. High failure ratios may indicate testing or failed exploitation attempts.</span></span></div><div class="metric-value" id="failureRatio">0%</div><div class="metric-note">Failed command responses</div></div>
-                        <div class="metric"><div class="metric-label">Unique Scan IPs<span class="tooltip-trigger">?<span class="tooltip-box">Distinct IP addresses that attempted authentication. Repeated attempts from the same IP count as one unique source.</span></span></div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct authentication sources</div></div>
+                        <div class="metric"><div class="metric-label">Unique Source IPs<span class="tooltip-trigger">?<span class="tooltip-box">Distinct IP addresses that opened SSH connections. Authentication attempts are counted separately.</span></span></div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct connection sources</div></div>
                         <div class="metric"><div class="metric-label">Shell Opens<span class="tooltip-trigger">?<span class="tooltip-box">Interactive shell sessions that started (shell_session_start events). Each successful auth that triggers shell creation increments this.</span></span></div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Interactive shells started</div></div>
                         <div class="metric"><div class="metric-label">Response Time<span class="tooltip-trigger">?<span class="tooltip-box">Average latency from receiving a command to sending the LLM-generated response. Includes LLM inference + response formatting time.</span></span></div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
                         <div class="metric"><div class="metric-label">Blocked Ops<span class="tooltip-trigger">?<span class="tooltip-box">Dangerous operations that were rejected or sanitized before execution. Includes destructive commands, privilege escalation, and persistence attempts.</span></span></div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
@@ -646,10 +646,13 @@
                 const data = event.Data || {};
                 summary.EventCounts[event.Event] = (summary.EventCounts[event.Event] || 0) + 1;
 
-                if (event.Event === 'auth_attempt') {
-                    summary.TotalScanAttempts++;
+                if (event.Event === 'session_start') {
                     const ip = remoteIp(data.RemoteEndpoint);
                     if (ip) summary.ScansByIp[ip] = (summary.ScansByIp[ip] || 0) + 1;
+                }
+
+                if (event.Event === 'auth_attempt') {
+                    summary.TotalScanAttempts++;
                     if (data.Username) summary.TopUsernames[data.Username] = (summary.TopUsernames[data.Username] || 0) + 1;
                     if (data.Password) summary.TopPasswords[data.Password] = (summary.TopPasswords[data.Password] || 0) + 1;
                 }

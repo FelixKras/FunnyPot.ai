@@ -377,12 +377,12 @@
         <header class="hero">
             <div>
                 <h1>Omega-Black Dashboard</h1>
-                <p class="subtitle">Operational view of recent honeypot activity. Metrics focus on the latest 24 hours of connections, authentication attempts, credentials, commands, timing, tactics, and harvested signals.</p>
+                <p class="subtitle">Operational view of retained honeypot activity. Metrics cover all telemetry currently published on the data branch after pruning early test traffic.</p>
             </div>
             <div class="status-pill" id="dataStatus">Loading data</div>
         </header>
 
-        <div id="loading" class="loading">Loading recent statistics, events, and telemetry...</div>
+        <div id="loading" class="loading">Loading retained statistics, events, and telemetry...</div>
 
         <section id="dashboard" style="display:none;">
             <section class="section">
@@ -446,14 +446,13 @@
             </section>
 
             <footer class="footer">
-                Last updated: <span id="lastUpdated">-</span>. Showing the latest <span id="recentWindow">24</span> hours from FunnyPot.ai <code>data</code> branch.
+                Last updated: <span id="lastUpdated">-</span>. Showing all retained telemetry from FunnyPot.ai <code>data</code> branch.
             </footer>
         </section>
     </main>
 
     <script>
         const DATA_BASE = 'https://raw.githubusercontent.com/FelixKras/FunnyPot.ai/data';
-        const RECENT_HOURS = 24;
         let sessionModels = [];
 
         const fmt = new Intl.NumberFormat();
@@ -482,36 +481,24 @@
                     fetchJsonl('data/harvest.jsonl')
                 ]);
 
-                const recentEvents = filterRecentEvents(events, RECENT_HOURS);
-                const recentSummary = summarizeEvents(recentEvents);
-                sessionModels = buildSessions(recentEvents);
-                renderPerformance(stats, recentSummary, recentEvents, sessionModels);
-                renderBars('eventBars', recentSummary.EventCounts || {}, 'cyan');
-                renderCredentialStats(recentSummary, recentEvents);
+                const retainedSummary = summarizeEvents(events);
+                sessionModels = buildSessions(events);
+                renderPerformance(stats, retainedSummary, events, sessionModels);
+                renderBars('eventBars', retainedSummary.EventCounts || {}, 'cyan');
+                renderCredentialStats(retainedSummary, events);
                 renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
                 renderBars('infraBars', summarizeInfrastructure(sessionModels), 'green', 'Infra');
-                renderTimeOfDay(recentEvents);
+                renderTimeOfDay(events);
                 renderAttemptTypes(sessionModels);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('dataStatus').textContent = `${fmt.format(recentSummary.TotalEvents)} recent events`;
+                document.getElementById('dataStatus').textContent = `${fmt.format(retainedSummary.TotalEvents)} retained events`;
                 document.getElementById('lastUpdated').textContent = fmtTime(summary.LastUpdated || stats.LastUpdated);
-                document.getElementById('recentWindow').textContent = RECENT_HOURS;
             } catch (error) {
                 console.error('Failed to load dashboard data:', error);
                 document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
                 document.getElementById('dataStatus').textContent = 'Data unavailable';
             }
-        }
-
-        function filterRecentEvents(events, hours) {
-            const cutoff = Date.now() - hours * 60 * 60 * 1000;
-            return events.filter(event => {
-                const timestamp = event.Data?.Timestamp || event.Timestamp;
-                if (!timestamp) return false;
-                const time = new Date(timestamp).getTime();
-                return !Number.isNaN(time) && time >= cutoff;
-            });
         }
 
         function summarizeEvents(events) {

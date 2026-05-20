@@ -487,6 +487,12 @@
                         <div class="bars" id="ipBars"></div>
                     </div>
                 </section>
+                <section class="section">
+                    <div class="panel">
+                        <h3>Organization / ASN Distribution</h3>
+                        <div class="bars" id="orgBars"><div class="empty">Resolving organizations...</div></div>
+                    </div>
+                </section>
             </div>
 
             <div class="tab-panel" data-tab-panel="activity">
@@ -789,6 +795,7 @@
             if (!ips.length) {
                 renderBars('countryBars', {}, 'green');
                 renderBars('regionBars', {}, 'purple');
+                renderBars('orgBars', {}, 'amber');
                 return;
             }
 
@@ -796,33 +803,89 @@
                 const locations = await Promise.all(ips.map(resolveIpLocation));
                 const countries = {};
                 const regions = {};
+                const organizations = {};
 
                 locations.forEach((location, index) => {
                     const count = ipCounts[ips[index]] || 0;
                     countries[location.country] = (countries[location.country] || 0) + count;
                     regions[location.region] = (regions[location.region] || 0) + count;
+                    organizations[location.organization] = (organizations[location.organization] || 0) + count;
                 });
 
                 renderBars('countryBars', takeTop(countries, 15), 'green');
                 renderBars('regionBars', takeTop(regions, 15), 'purple');
+                renderBars('orgBars', takeTop(organizations, 15), 'amber');
             } catch (error) {
                 document.getElementById('countryBars').innerHTML = '<div class="empty">Geography lookup unavailable.</div>';
                 document.getElementById('regionBars').innerHTML = '<div class="empty">Geography lookup unavailable.</div>';
+                document.getElementById('orgBars').innerHTML = '<div class="empty">Organization lookup unavailable.</div>';
             }
         }
 
         async function resolveIpLocation(ip) {
             if (ip === 'unknown' || ip.startsWith('10.') || ip.startsWith('192.168.') || /^172\.(1[6-9]|2\d|3[01])\./.test(ip)) {
-                return { country: 'Private/Unknown', region: 'Private/Unknown' };
+                return { country: 'Private/Unknown', region: 'Private/Unknown', organization: 'Private/Unknown' };
             }
 
-            const response = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`, { cache: 'force-cache' });
-            if (!response.ok) return { country: 'Unknown', region: 'Unknown' };
-            const data = await response.json();
-            if (!data.success) return { country: 'Unknown', region: 'Unknown' };
-            const country = data.country || 'Unknown';
-            const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
-            return { country, region };
+            const cached = readGeoCache(ip);
+            if (cached) return cached;
+
+            const location = await resolveIpWhoIs(ip) || await resolveIpInfo(ip) || {
+                country: 'Unknown',
+                region: 'Unknown',
+                organization: `Unknown (${ip})`,
+            };
+            writeGeoCache(ip, location);
+            return location;
+        }
+
+        async function resolveIpWhoIs(ip) {
+            try {
+                const response = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`, { cache: 'force-cache' });
+                if (!response.ok) return null;
+                const data = await response.json();
+                if (!data.success) return null;
+                const country = data.country || data.country_code || 'Unknown';
+                const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
+                const organization = data.connection?.org || data.connection?.isp || (data.connection?.asn ? `AS${data.connection.asn}` : '') || `Unknown (${ip})`;
+                return { country, region, organization };
+            } catch {
+                return null;
+            }
+        }
+
+        async function resolveIpInfo(ip) {
+            try {
+                const response = await fetch(`https://ipinfo.io/${encodeURIComponent(ip)}/json`, { cache: 'force-cache' });
+                if (!response.ok) return null;
+                const data = await response.json();
+                if (data.error) return null;
+                const country = data.country || 'Unknown';
+                const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
+                const organization = data.org || `Unknown (${ip})`;
+                return { country, region, organization };
+            } catch {
+                return null;
+            }
+        }
+
+        function readGeoCache(ip) {
+            try {
+                const cached = JSON.parse(localStorage.getItem(`geo:${ip}`) || 'null');
+                if (!cached || !cached.expiresAt || cached.expiresAt < Date.now()) return null;
+                return cached.location;
+            } catch {
+                return null;
+            }
+        }
+
+        function writeGeoCache(ip, location) {
+            try {
+                localStorage.setItem(`geo:${ip}`, JSON.stringify({
+                    location,
+                    expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000,
+                }));
+            } catch { }
         }
 
         function renderLatestExchanges(sessions) {

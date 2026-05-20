@@ -377,12 +377,12 @@
         <header class="hero">
             <div>
                 <h1>Omega-Black Dashboard</h1>
-                <p class="subtitle">Operational view of honeypot performance and attacker sessions. Performance metrics show how the simulation behaves; attacker intelligence shows who connected, what they tried, commands, timing, tactics, and harvested signals.</p>
+                <p class="subtitle">Operational view of recent honeypot activity. Metrics focus on the latest 24 hours of connections, authentication attempts, credentials, commands, timing, tactics, and harvested signals.</p>
             </div>
             <div class="status-pill" id="dataStatus">Loading data</div>
         </header>
 
-        <div id="loading" class="loading">Loading statistics, events, and session telemetry...</div>
+        <div id="loading" class="loading">Loading recent statistics, events, and telemetry...</div>
 
         <section id="dashboard" style="display:none;">
             <section class="section">
@@ -397,8 +397,8 @@
                     <div class="metric"><div class="metric-label">Commands</div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
                     <div class="metric"><div class="metric-label">Mean Engagement</div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average active shell time</div></div>
                     <div class="metric"><div class="metric-label">Failure Ratio</div><div class="metric-value" id="failureRatio">0%</div><div class="metric-note">Failed command responses</div></div>
-                    <div class="metric"><div class="metric-label">Prompt Tokens</div><div class="metric-value" id="promptTokens">0</div><div class="metric-note">LLM input cost driver</div></div>
-                    <div class="metric"><div class="metric-label">Completion Tokens</div><div class="metric-value" id="completionTokens">0</div><div class="metric-note">LLM output cost driver</div></div>
+                    <div class="metric"><div class="metric-label">Unique Scan IPs</div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct authentication sources</div></div>
+                    <div class="metric"><div class="metric-label">Shell Opens</div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Interactive shells started</div></div>
                     <div class="metric"><div class="metric-label">Response Time</div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
                     <div class="metric"><div class="metric-label">Blocked Ops</div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
                     <div class="metric"><div class="metric-label">Harvested Creds</div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
@@ -445,79 +445,16 @@
                 </div>
             </section>
 
-            <section class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Latest Command Exchanges</h2>
-                    <span class="muted">Newest sessions, last attacker commands, and observed outcomes</span>
-                </div>
-                <div class="panel">
-                    <div class="exchange-feed" id="latestExchanges"></div>
-                </div>
-            </section>
-
-            <section class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Attacker Sessions</h2>
-                    <span class="muted">Click a row to inspect timeline, auth, commands, and tactics</span>
-                </div>
-                <div class="panel table-scroll">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Remote</th>
-                                <th>User</th>
-                                <th>Client</th>
-                                <th>Auth</th>
-                                <th>Commands</th>
-                                <th>Tactics</th>
-                                <th>Risk</th>
-                                <th>Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody id="sessionsTable"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="section" id="sessionDetailsSection" style="display:none;">
-                <div class="section-header">
-                    <h2 class="section-title">Session Detail</h2>
-                    <span class="muted" id="selectedSessionLabel"></span>
-                </div>
-                <div class="details-layout">
-                    <div class="panel">
-                        <h3>Attacker Profile</h3>
-                        <div class="kv" id="profileKv"></div>
-                        <div style="height:18px"></div>
-                        <h3>Auth Attempts</h3>
-                        <div class="timeline" id="authTimeline"></div>
-                    </div>
-                    <div class="panel">
-                        <h3>Timeline</h3>
-                        <div class="timeline" id="sessionTimeline"></div>
-                    </div>
-                    <div class="panel">
-                        <h3>Commands</h3>
-                        <div class="command-list" id="commandList"></div>
-                    </div>
-                    <div class="panel">
-                        <h3>Tactics, Signals & Outcomes</h3>
-                        <div id="signals"></div>
-                    </div>
-                </div>
-            </section>
-
             <footer class="footer">
-                Last updated: <span id="lastUpdated">-</span>. Data source: FunnyPot.ai <code>data</code> branch.
+                Last updated: <span id="lastUpdated">-</span>. Showing the latest <span id="recentWindow">24</span> hours from FunnyPot.ai <code>data</code> branch.
             </footer>
         </section>
     </main>
 
     <script>
         const DATA_BASE = 'https://raw.githubusercontent.com/FelixKras/FunnyPot.ai/data';
+        const RECENT_HOURS = 24;
         let sessionModels = [];
-        let selectedSessionId = null;
 
         const fmt = new Intl.NumberFormat();
         const fmtTime = value => value ? new Date(value).toLocaleString() : '-';
@@ -545,26 +482,80 @@
                     fetchJsonl('data/harvest.jsonl')
                 ]);
 
-                sessionModels = buildSessions(events);
-                renderPerformance(stats, summary, events, sessionModels);
-                renderBars('eventBars', summary.EventCounts || {}, 'cyan');
-                renderCredentialStats(summary, events);
-                renderBars('tacticBars', stats.MitreTechniqueDistribution || summarizeTactics(sessionModels), 'purple', 'MITRE');
-                renderBars('infraBars', stats.SessionsByInfrastructureCategory || summarizeInfrastructure(sessionModels), 'green', 'Infra');
-                renderTimeOfDay(events);
+                const recentEvents = filterRecentEvents(events, RECENT_HOURS);
+                const recentSummary = summarizeEvents(recentEvents);
+                sessionModels = buildSessions(recentEvents);
+                renderPerformance(stats, recentSummary, recentEvents, sessionModels);
+                renderBars('eventBars', recentSummary.EventCounts || {}, 'cyan');
+                renderCredentialStats(recentSummary, recentEvents);
+                renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
+                renderBars('infraBars', summarizeInfrastructure(sessionModels), 'green', 'Infra');
+                renderTimeOfDay(recentEvents);
                 renderAttemptTypes(sessionModels);
-                renderLatestExchanges(sessionModels);
-                renderSessions(sessionModels);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || events.length)} events loaded`;
+                document.getElementById('dataStatus').textContent = `${fmt.format(recentSummary.TotalEvents)} recent events`;
                 document.getElementById('lastUpdated').textContent = fmtTime(summary.LastUpdated || stats.LastUpdated);
-                if (sessionModels.length) selectSession(sessionModels[0].id);
+                document.getElementById('recentWindow').textContent = RECENT_HOURS;
             } catch (error) {
                 console.error('Failed to load dashboard data:', error);
                 document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
                 document.getElementById('dataStatus').textContent = 'Data unavailable';
             }
+        }
+
+        function filterRecentEvents(events, hours) {
+            const cutoff = Date.now() - hours * 60 * 60 * 1000;
+            return events.filter(event => {
+                const timestamp = event.Data?.Timestamp || event.Timestamp;
+                if (!timestamp) return false;
+                const time = new Date(timestamp).getTime();
+                return !Number.isNaN(time) && time >= cutoff;
+            });
+        }
+
+        function summarizeEvents(events) {
+            const summary = {
+                LastUpdated: latestTimestamp(events),
+                TotalEvents: events.length,
+                TotalScanAttempts: 0,
+                UniqueScanIps: 0,
+                TotalShells: 0,
+                EventCounts: {},
+                ScansByIp: {},
+                TopUsernames: {},
+                TopPasswords: {},
+            };
+
+            for (const event of events) {
+                const data = event.Data || {};
+                summary.EventCounts[event.Event] = (summary.EventCounts[event.Event] || 0) + 1;
+
+                if (event.Event === 'auth_attempt') {
+                    summary.TotalScanAttempts++;
+                    const ip = remoteIp(data.RemoteEndpoint);
+                    if (ip) summary.ScansByIp[ip] = (summary.ScansByIp[ip] || 0) + 1;
+                    if (data.Username) summary.TopUsernames[data.Username] = (summary.TopUsernames[data.Username] || 0) + 1;
+                    if (data.Password) summary.TopPasswords[data.Password] = (summary.TopPasswords[data.Password] || 0) + 1;
+                }
+
+                if (event.Event === 'shell_session_start') summary.TotalShells++;
+            }
+
+            summary.UniqueScanIps = Object.keys(summary.ScansByIp).length;
+            return summary;
+        }
+
+        function latestTimestamp(events) {
+            return events.reduce((current, event) => latest(current, event.Data?.Timestamp || event.Timestamp), null);
+        }
+
+        function remoteIp(remoteEndpoint) {
+            if (!remoteEndpoint || remoteEndpoint === 'unknown') return '';
+            const bracketMatch = String(remoteEndpoint).match(/^\[([^\]]+)]/);
+            if (bracketMatch) return bracketMatch[1];
+            const parts = String(remoteEndpoint).split(':');
+            return parts.length > 1 ? parts.slice(0, -1).join(':') : String(remoteEndpoint);
         }
 
         function buildSessions(events) {
@@ -667,16 +658,16 @@
             const failedResults = results.filter(event => event.Data?.FailedCommand).length;
             const avgResponse = average(results.map(event => event.Data?.ResponseDurationMs || 0));
 
-            setText('totalSessions', fmt.format(stats.TotalSessions || sessions.filter(s => s.shellSessionId).length));
+            setText('totalSessions', fmt.format(summary.EventCounts?.shell_session_end || 0));
             setText('connections', fmt.format(summary.EventCounts?.session_start || 0));
             setText('authAttempts', fmt.format(summary.EventCounts?.auth_attempt || 0));
             setText('commands', fmt.format(commands.length));
-            setText('meanEngagement', sec(stats.MeanEngagementSeconds || average(sessions.map(s => s.durationSeconds))));
+            setText('meanEngagement', sec(average(sessions.map(s => s.durationSeconds))));
             setText('failureRatio', pct(results.length ? failedResults / results.length : 0));
-            setText('promptTokens', fmt.format(stats.TotalPromptTokens || 0));
-            setText('completionTokens', fmt.format(stats.TotalCompletionTokens || 0));
+            setText('uniqueScanIps', fmt.format(summary.UniqueScanIps || 0));
+            setText('shellOpens', fmt.format(summary.TotalShells || 0));
             setText('avgResponse', `${fmt.format(Math.round(avgResponse))}ms`);
-            setText('blockedOps', fmt.format(stats.TotalBlockedOperations || 0));
+            setText('blockedOps', fmt.format(0));
             setText('harvestedCreds', fmt.format(summary.EventCounts?.harvested_credential || 0));
             setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
             setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));

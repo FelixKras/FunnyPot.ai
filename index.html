@@ -511,6 +511,8 @@
                         <div class="bars" id="tacticBars"></div>
                         <div style="height:14px"></div>
                         <div class="bars" id="infraBars"></div>
+                        <div style="height:14px"></div>
+                        <div class="bars" id="bannerBars"></div>
                     </div>
                 </section>
             </div>
@@ -612,6 +614,7 @@
                 renderGeography(retainedSummary);
                 renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
                 renderBars('infraBars', summarizeInfrastructure(sessionModels), 'green', 'Infra');
+                renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
                 renderTimeOfDay(events);
                 renderAttemptTypes(sessionModels);
                 setupTabs();
@@ -695,6 +698,7 @@
                         egressTargets: new Set(),
                         persistence: new Set(),
                         infra: 'unknown',
+                        sshBanner: '',
                         avpMax: 0,
                         semanticDriftMax: 0,
                         turingMax: 0,
@@ -715,6 +719,7 @@
                 model.remote = data.RemoteEndpoint || model.remote;
                 model.username = data.Username || model.username;
                 model.client = data.ClientVersion || model.client;
+                model.sshBanner = data.SshBanner || model.sshBanner;
                 model.startedAt = earliest(model.startedAt, data.Timestamp || event.Timestamp);
                 model.endedAt = latest(model.endedAt, data.Timestamp || event.Timestamp);
 
@@ -1048,6 +1053,7 @@
                 'Remote': session.remote,
                 'Username': session.username,
                 'Client': session.client,
+                'SSH Banner': session.sshBanner || '-',
                 'Infrastructure': session.infra,
                 'Session Key': session.sessionKey,
                 'Shell Session': session.shellSessionId || '-',
@@ -1181,6 +1187,12 @@
         function summarizeInfrastructure(sessions) {
             const counts = {};
             sessions.forEach(session => counts[session.infra] = (counts[session.infra] || 0) + 1);
+            return counts;
+        }
+
+        function summarizeBanners(sessions) {
+            const counts = {};
+            sessions.forEach(session => { if (session.sshBanner) counts[session.sshBanner] = (counts[session.sshBanner] || 0) + 1; });
             return counts;
         }
 

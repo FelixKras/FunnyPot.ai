@@ -140,10 +140,68 @@
         }
 
         .metric-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             color: var(--muted);
             font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
+        }
+
+        .tooltip-trigger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--line);
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 900;
+            cursor: help;
+            position: relative;
+        }
+
+        .tooltip-trigger:hover .tooltip-box {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .tooltip-box {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 12px;
+            width: max(200px, 20ch);
+            font-size: 0.76rem;
+            font-weight: 400;
+            color: var(--text);
+            text-transform: none;
+            letter-spacing: normal;
+            line-height: 1.45;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .tooltip-box::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--line);
         }
 
         .metric-value {
@@ -426,20 +484,20 @@
                         <span class="muted">Simulation health, token use, and engagement</span>
                     </div>
                     <div class="grid metrics">
-                        <div class="metric"><div class="metric-label">Closed Shell Sessions</div><div class="metric-value" id="totalSessions">0</div><div class="metric-note">Completed interactive shells</div></div>
-                        <div class="metric"><div class="metric-label">SSH Connections</div><div class="metric-value" id="connections">0</div><div class="metric-note">Raw accepted connections</div></div>
-                        <div class="metric"><div class="metric-label">Auth Attempts</div><div class="metric-value" id="authAttempts">0</div><div class="metric-note">Credential attempts observed</div></div>
-                        <div class="metric"><div class="metric-label">Commands</div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
-                        <div class="metric"><div class="metric-label">Mean Connection</div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average SSH connection lifetime</div></div>
-                        <div class="metric"><div class="metric-label">Failure Ratio</div><div class="metric-value" id="failureRatio">0%</div><div class="metric-note">Failed command responses</div></div>
-                        <div class="metric"><div class="metric-label">Unique Scan IPs</div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct authentication sources</div></div>
-                        <div class="metric"><div class="metric-label">Shell Opens</div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Interactive shells started</div></div>
-                        <div class="metric"><div class="metric-label">Response Time</div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
-                        <div class="metric"><div class="metric-label">Blocked Ops</div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
-                        <div class="metric"><div class="metric-label">Harvested Creds</div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
-                        <div class="metric"><div class="metric-label">Events</div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
-                        <div class="metric"><div class="metric-label">Binary Attempts</div><div class="metric-value" id="binaryAttempts">0</div><div class="metric-note">Payload/tool execution signals</div></div>
-                        <div class="metric"><div class="metric-label">Text Commands</div><div class="metric-value" id="textAttempts">0</div><div class="metric-note">Recon and shell text activity</div></div>
+                        <div class="metric"><div class="metric-label">Closed Shell Sessions<span class="tooltip-trigger">?<span class="tooltip-box">Shell sessions that completed gracefully (shell_session_end events). Does not count sessions that were abruptly terminated.</span></span></div><div class="metric-value" id="totalSessions">0</div><div class="metric-note">Completed interactive shells</div></div>
+                        <div class="metric"><div class="metric-label">SSH Connections<span class="tooltip-trigger">?<span class="tooltip-box">Raw TCP connections that reached the SSH protocol layer (session_start events). Includes connections that may never attempt authentication.</span></span></div><div class="metric-value" id="connections">0</div><div class="metric-note">Raw accepted connections</div></div>
+                        <div class="metric"><div class="metric-label">Auth Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Password or key authentication attempts observed. Not all connections reach this stage — many are port scans or protocol probes.</span></span></div><div class="metric-value" id="authAttempts">0</div><div class="metric-note">Credential attempts observed</div></div>
+                        <div class="metric"><div class="metric-label">Commands<span class="tooltip-trigger">?<span class="tooltip-box">Commands sent by attackers after successful shell access. Includes both text commands and binary/tooling attempts.</span></span></div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
+                        <div class="metric"><div class="metric-label">Mean Connection<span class="tooltip-trigger">?<span class="tooltip-box">Average duration from TCP connection established to shell session closed. Lower values may indicate quick reconnaissance or failed interactions.</span></span></div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average SSH connection lifetime</div></div>
+                        <div class="metric"><div class="metric-label">Failure Ratio<span class="tooltip-trigger">?<span class="tooltip-box">Percentage of commands that received error responses. High failure ratios may indicate testing or failed exploitation attempts.</span></span></div><div class="metric-value" id="failureRatio">0%</div><div class="metric-note">Failed command responses</div></div>
+                        <div class="metric"><div class="metric-label">Unique Scan IPs<span class="tooltip-trigger">?<span class="tooltip-box">Distinct IP addresses that attempted authentication. Repeated attempts from the same IP count as one unique source.</span></span></div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct authentication sources</div></div>
+                        <div class="metric"><div class="metric-label">Shell Opens<span class="tooltip-trigger">?<span class="tooltip-box">Interactive shell sessions that started (shell_session_start events). Each successful auth that triggers shell creation increments this.</span></span></div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Interactive shells started</div></div>
+                        <div class="metric"><div class="metric-label">Response Time<span class="tooltip-trigger">?<span class="tooltip-box">Average latency from receiving a command to sending the LLM-generated response. Includes LLM inference + response formatting time.</span></span></div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
+                        <div class="metric"><div class="metric-label">Blocked Ops<span class="tooltip-trigger">?<span class="tooltip-box">Dangerous operations that were rejected or sanitized before execution. Includes destructive commands, privilege escalation, and persistence attempts.</span></span></div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
+                        <div class="metric"><div class="metric-label">Harvested Creds<span class="tooltip-trigger">?<span class="tooltip-box">Credentials captured after passing the harvest threshold. After N failed attempts, auth is accepted and credentials are logged for tracking.</span></span></div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
+                        <div class="metric"><div class="metric-label">Events<span class="tooltip-trigger">?<span class="tooltip-box">Total JSONL telemetry records in the current data branch. Each event (session_start, auth_attempt, command, etc.) counts as one event.</span></span></div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
+                        <div class="metric"><div class="metric-label">Binary Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Commands involving payloads, downloads, encoding, tunneling, or persistence tooling. Indicates serious exploitation intent.</span></span></div><div class="metric-value" id="binaryAttempts">0</div><div class="metric-note">Payload/tool execution signals</div></div>
+                        <div class="metric"><div class="metric-label">Text Commands<span class="tooltip-trigger">?<span class="tooltip-box">Plain text commands used for reconnaissance, system enumeration, or simple shell interactions. Lower risk than binary attempts.</span></span></div><div class="metric-value" id="textAttempts">0</div><div class="metric-note">Recon and shell text activity</div></div>
                     </div>
                 </section>
 

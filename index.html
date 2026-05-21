@@ -23,7 +23,12 @@
 
         body {
             margin: 0;
-            background: radial-gradient(circle at top left, #122034 0, var(--bg) 42%);
+            background:
+                radial-gradient(circle at 12% 8%, rgba(255, 204, 102, 0.16) 0, transparent 28%),
+                radial-gradient(circle at 82% 12%, rgba(72, 223, 255, 0.12) 0, transparent 32%),
+                linear-gradient(135deg, rgba(53, 255, 122, 0.04) 0 25%, transparent 25% 50%, rgba(72, 223, 255, 0.035) 50% 75%, transparent 75%),
+                var(--bg);
+            background-size: auto, auto, 42px 42px, auto;
             color: var(--text);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
@@ -37,18 +42,48 @@
         .hero {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: center;
             gap: 24px;
             margin-bottom: 24px;
+            padding: 22px;
+            border: 1px solid rgba(72, 223, 255, 0.18);
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(17, 24, 32, 0.92), rgba(17, 24, 32, 0.68));
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: -60px 40% auto auto;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 204, 102, 0.16), transparent 68%);
+            pointer-events: none;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: var(--amber);
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
         }
 
         h1, h2, h3 { margin: 0; }
 
         h1 {
-            color: var(--green);
+            color: #fff;
             font-size: clamp(2rem, 4vw, 4rem);
             letter-spacing: -0.05em;
-            text-shadow: 0 0 24px rgba(53, 255, 122, 0.26);
+            text-shadow: 0 0 30px rgba(255, 204, 102, 0.22);
         }
 
         .subtitle {
@@ -56,6 +91,20 @@
             margin-top: 8px;
             max-width: 860px;
             line-height: 1.5;
+        }
+
+        .hero-visual {
+            flex: 0 0 min(34vw, 360px);
+            min-width: 260px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-visual svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.38));
         }
 
         .status-pill {
@@ -137,6 +186,21 @@
         .metric {
             min-height: 124px;
             padding: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric::after {
+            content: '';
+            position: absolute;
+            right: -28px;
+            top: -28px;
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 204, 102, 0.22);
+            background: radial-gradient(circle, rgba(255, 204, 102, 0.09), transparent 62%);
+            pointer-events: none;
         }
 
         .metric-label {
@@ -449,6 +513,7 @@
         @media (max-width: 720px) {
             .container { width: min(100% - 20px, 1440px); padding-top: 18px; }
             .hero { align-items: flex-start; flex-direction: column; }
+            .hero-visual { min-width: 0; width: 100%; }
             .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .bar-row { grid-template-columns: 1fr; gap: 5px; }
             table { min-width: 900px; }
@@ -461,8 +526,44 @@
     <main class="container">
         <header class="hero">
             <div>
-                <h1>Omega-Black Dashboard</h1>
-                <p class="subtitle">Operational view of retained honeypot activity. Metrics cover all telemetry currently published on the data branch after pruning early test traffic.</p>
+                <div class="brand-mark">SSH honeypot telemetry</div>
+                <h1>FunnyPot Dashboard</h1>
+                <p class="subtitle">Operational view of retained honeypot activity: live SSH connections, captured credentials, command behavior, and attacker infrastructure signals published to the data branch.</p>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <svg viewBox="0 0 420 260" role="img">
+                    <defs>
+                        <linearGradient id="potGlow" x1="0" x2="1" y1="0" y2="1">
+                            <stop offset="0" stop-color="#ffcc66"/>
+                            <stop offset="1" stop-color="#35ff7a"/>
+                        </linearGradient>
+                        <linearGradient id="wireGlow" x1="0" x2="1">
+                            <stop offset="0" stop-color="#48dfff"/>
+                            <stop offset="1" stop-color="#a78bfa"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="24" y="22" width="372" height="216" rx="28" fill="#0b1117" stroke="#263646"/>
+                    <path d="M60 70 C128 20, 178 114, 236 66 S330 46, 360 106" fill="none" stroke="url(#wireGlow)" stroke-width="3" stroke-dasharray="8 10" opacity="0.9"/>
+                    <path d="M76 178 C132 126, 180 198, 230 150 S326 112, 360 170" fill="none" stroke="#35ff7a" stroke-width="2" stroke-dasharray="5 8" opacity="0.6"/>
+                    <circle cx="78" cy="72" r="10" fill="#48dfff"/>
+                    <circle cx="214" cy="66" r="8" fill="#a78bfa"/>
+                    <circle cx="356" cy="106" r="10" fill="#35ff7a"/>
+                    <circle cx="92" cy="178" r="8" fill="#ff647c"/>
+                    <circle cx="358" cy="170" r="8" fill="#ffcc66"/>
+                    <g transform="translate(142 90)">
+                        <ellipse cx="68" cy="110" rx="86" ry="18" fill="#05090d" opacity="0.8"/>
+                        <path d="M8 42 H128 L112 154 H24 Z" fill="#111820" stroke="url(#potGlow)" stroke-width="4"/>
+                        <path d="M26 42 C30 12, 106 12, 110 42" fill="none" stroke="#ffcc66" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M22 70 C52 88, 88 54, 118 74" fill="none" stroke="#35ff7a" stroke-width="5" opacity="0.9"/>
+                        <path d="M42 92 H96" stroke="#48dfff" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M52 116 H86" stroke="#48dfff" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+                    </g>
+                    <g fill="#8292a2" font-family="Consolas, monospace" font-size="12">
+                        <text x="50" y="216">ssh auth</text>
+                        <text x="274" y="48">commands</text>
+                        <text x="286" y="216">telemetry</text>
+                    </g>
+                </svg>
             </div>
             <div class="status-pill" id="dataStatus">Loading data</div>
         </header>

@@ -489,7 +489,6 @@
                         <div class="metric"><div class="metric-label">Auth Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Password or key authentication attempts observed. Not all connections reach this stage — many are port scans or protocol probes.</span></span></div><div class="metric-value" id="authAttempts">0</div><div class="metric-note">Credential attempts observed</div></div>
                         <div class="metric"><div class="metric-label">Commands<span class="tooltip-trigger">?<span class="tooltip-box">Commands sent by attackers after successful shell access. Includes both text commands and binary/tooling attempts.</span></span></div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
                         <div class="metric"><div class="metric-label">Mean Connection<span class="tooltip-trigger">?<span class="tooltip-box">Average duration from TCP connection established to shell session closed. Lower values may indicate quick reconnaissance or failed interactions.</span></span></div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average SSH connection lifetime</div></div>
-                        <div class="metric"><div class="metric-label">Failure Ratio<span class="tooltip-trigger">?<span class="tooltip-box">Percentage of commands that received error responses. High failure ratios may indicate testing or failed exploitation attempts.</span></span></div><div class="metric-value" id="failureRatio">0%</div><div class="metric-note">Failed command responses</div></div>
                         <div class="metric"><div class="metric-label">Unique Source IPs<span class="tooltip-trigger">?<span class="tooltip-box">Distinct IP addresses that opened SSH connections. Authentication attempts are counted separately.</span></span></div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct connection sources</div></div>
                         <div class="metric"><div class="metric-label">Shell Opens<span class="tooltip-trigger">?<span class="tooltip-box">Interactive shell sessions that started (shell_session_start events). Each successful auth that triggers shell creation increments this.</span></span></div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Interactive shells started</div></div>
                         <div class="metric"><div class="metric-label">Response Time<span class="tooltip-trigger">?<span class="tooltip-box">Average latency from receiving a command to sending the LLM-generated response. Includes LLM inference + response formatting time.</span></span></div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
@@ -507,11 +506,16 @@
                         <div class="bars" id="eventBars"></div>
                     </div>
                     <div class="panel">
-                        <h3>Tactics & Infrastructure</h3>
+                        <h3>MITRE Tactics</h3>
                         <div class="bars" id="tacticBars"></div>
-                        <div style="height:14px"></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Source Classification</h3>
+                        <div class="muted" style="margin-bottom:12px;">Connection source categories derived from remote endpoints, separate from SSH banner rotation.</div>
                         <div class="bars" id="infraBars"></div>
-                        <div style="height:14px"></div>
+                    </div>
+                    <div class="panel">
+                        <h3>SSH Banners</h3>
                         <div class="bars" id="bannerBars"></div>
                     </div>
                 </section>
@@ -547,12 +551,6 @@
                         <div class="bars" id="ipBars"></div>
                     </div>
                 </section>
-                <section class="section">
-                    <div class="panel">
-                        <h3>Organization / ASN Distribution</h3>
-                        <div class="bars" id="orgBars"><div class="empty">Resolving organizations...</div></div>
-                    </div>
-                </section>
             </div>
 
             <div class="tab-panel" data-tab-panel="activity">
@@ -568,6 +566,58 @@
                         <div class="muted" style="margin-top:12px;">Binary attempts include payload URLs, transfer tools, encoded payloads, chmod execution prep, tunneling, or persistence tooling.</div>
                     </div>
                 </section>
+                <section class="section grid insight-grid">
+                    <div class="panel">
+                        <h3>Recent Command Exchanges</h3>
+                        <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Interactive Sessions</h3>
+                        <div class="table-scroll">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Started</th>
+                                        <th>Remote</th>
+                                        <th>User</th>
+                                        <th>Client</th>
+                                        <th>Auth</th>
+                                        <th>Commands</th>
+                                        <th>Tactics</th>
+                                        <th>Risk</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sessionsTable"><tr><td colspan="9" class="empty">No attacker sessions yet.</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <section class="section" id="sessionDetailsSection" style="display:none;">
+                    <div class="section-header">
+                        <h2 class="section-title">Session Details</h2>
+                        <span class="muted" id="selectedSessionLabel">Select a session</span>
+                    </div>
+                    <div class="details-layout">
+                        <div class="panel">
+                            <h3>Profile</h3>
+                            <div id="profileKv" class="kv"></div>
+                            <div style="height:16px"></div>
+                            <h3>Signals</h3>
+                            <div id="signals"></div>
+                        </div>
+                        <div class="panel">
+                            <h3>Timeline</h3>
+                            <div id="sessionTimeline" class="timeline"></div>
+                            <div style="height:16px"></div>
+                            <h3>Auth Attempts</h3>
+                            <div id="authTimeline" class="timeline"></div>
+                            <div style="height:16px"></div>
+                            <h3>Commands</h3>
+                            <div id="commandList" class="command-list"></div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <footer class="footer">
@@ -579,6 +629,7 @@
     <script>
         const DATA_BASE = 'https://raw.githubusercontent.com/FelixKras/FunnyPot.ai/data';
         let sessionModels = [];
+        let selectedSessionId = null;
 
         const fmt = new Intl.NumberFormat();
         const fmtTime = value => value ? new Date(value).toLocaleString() : '-';
@@ -613,10 +664,12 @@
                 renderCredentialStats(retainedSummary, events);
                 renderGeography(retainedSummary);
                 renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
-                renderBars('infraBars', summarizeInfrastructure(sessionModels), 'green', 'Infra');
+                renderBars('infraBars', summarizeInfrastructure(sessionModels), 'green', 'Source');
                 renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
                 renderTimeOfDay(events);
                 renderAttemptTypes(sessionModels);
+                renderLatestExchanges(sessionModels);
+                renderSessions(sessionModels);
                 setupTabs();
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
@@ -775,7 +828,6 @@
         function renderPerformance(stats, summary, events, sessions) {
             const commands = events.filter(event => event.Event === 'command');
             const results = events.filter(event => event.Event === 'command_result');
-            const failedResults = results.filter(event => event.Data?.FailedCommand).length;
             const avgResponse = average(results.map(event => event.Data?.ResponseDurationMs || 0));
 
             setText('totalSessions', fmt.format(summary.EventCounts?.shell_session_end || 0));
@@ -783,7 +835,6 @@
             setText('authAttempts', fmt.format(summary.EventCounts?.auth_attempt || 0));
             setText('commands', fmt.format(commands.length));
             setText('meanEngagement', sec(average(sessions.map(s => s.durationSeconds))));
-            setText('failureRatio', pct(results.length ? failedResults / results.length : 0));
             setText('uniqueScanIps', fmt.format(summary.UniqueScanIps || 0));
             setText('shellOpens', fmt.format(summary.TotalShells || 0));
             setText('avgResponse', `${fmt.format(Math.round(avgResponse))}ms`);
@@ -861,7 +912,6 @@
             if (!ips.length) {
                 renderBars('countryBars', {}, 'green');
                 renderBars('regionBars', {}, 'purple');
-                renderBars('orgBars', {}, 'amber');
                 return;
             }
 
@@ -869,28 +919,24 @@
                 const locations = await Promise.all(ips.map(resolveIpLocation));
                 const countries = {};
                 const regions = {};
-                const organizations = {};
 
                 locations.forEach((location, index) => {
                     const count = ipCounts[ips[index]] || 0;
                     countries[location.country] = (countries[location.country] || 0) + count;
                     regions[location.region] = (regions[location.region] || 0) + count;
-                    organizations[location.organization] = (organizations[location.organization] || 0) + count;
                 });
 
                 renderBars('countryBars', takeTop(countries, 15), 'green');
                 renderBars('regionBars', takeTop(regions, 15), 'purple');
-                renderBars('orgBars', takeTop(organizations, 15), 'amber');
             } catch (error) {
                 document.getElementById('countryBars').innerHTML = '<div class="empty">Geography lookup unavailable.</div>';
                 document.getElementById('regionBars').innerHTML = '<div class="empty">Geography lookup unavailable.</div>';
-                document.getElementById('orgBars').innerHTML = '<div class="empty">Organization lookup unavailable.</div>';
             }
         }
 
         async function resolveIpLocation(ip) {
             if (ip === 'unknown' || ip.startsWith('10.') || ip.startsWith('192.168.') || /^172\.(1[6-9]|2\d|3[01])\./.test(ip)) {
-                return { country: 'Private/Unknown', region: 'Private/Unknown', organization: 'Private/Unknown' };
+                return { country: 'Private/Unknown', region: 'Private/Unknown' };
             }
 
             const cached = readGeoCache(ip);
@@ -899,7 +945,6 @@
             const location = await resolveIpWhoIs(ip) || await resolveIpInfo(ip) || {
                 country: 'Unknown',
                 region: 'Unknown',
-                organization: `Unknown (${ip})`,
             };
             writeGeoCache(ip, location);
             return location;
@@ -913,8 +958,7 @@
                 if (!data.success) return null;
                 const country = data.country || data.country_code || 'Unknown';
                 const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
-                const organization = data.connection?.org || data.connection?.isp || (data.connection?.asn ? `AS${data.connection.asn}` : '') || `Unknown (${ip})`;
-                return { country, region, organization };
+                return { country, region };
             } catch {
                 return null;
             }
@@ -928,8 +972,7 @@
                 if (data.error) return null;
                 const country = data.country || 'Unknown';
                 const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
-                const organization = data.org || `Unknown (${ip})`;
-                return { country, region, organization };
+                return { country, region };
             } catch {
                 return null;
             }
@@ -1189,8 +1232,18 @@
 
         function summarizeInfrastructure(sessions) {
             const counts = {};
-            sessions.forEach(session => counts[session.infra] = (counts[session.infra] || 0) + 1);
+            sessions.forEach(session => {
+                const category = formatSourceCategory(session.infra);
+                counts[category] = (counts[category] || 0) + 1;
+            });
             return counts;
+        }
+
+        function formatSourceCategory(value) {
+            if (value === 'private') return 'Private/reserved source';
+            if (value === 'lookup_unavailable') return 'Public source, lookup unavailable';
+            if (!value || value === 'unknown') return 'Unclassified source';
+            return value;
         }
 
         function summarizeBanners(sessions) {

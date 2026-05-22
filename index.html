@@ -433,6 +433,19 @@
             overflow-wrap: anywhere;
         }
 
+        .response-output {
+            margin-top: 8px;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(53, 255, 122, 0.18);
+            background: rgba(4, 12, 8, 0.72);
+            color: #dfffe8;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
         .hour-grid {
             display: grid;
             grid-template-columns: repeat(24, minmax(18px, 1fr));
@@ -1125,7 +1138,9 @@
                             </div>
                             <div class="exchange-line">
                                 <div class="exchange-role">honeypot</div>
-                                <div>${result ? `${result.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} response ${fmt.format(result.ResponseDurationMs)}ms / error ratio ${pct(result.StandardErrorRatio || 0)}` : '<span class="muted">no result recorded yet</span>'}</div>
+                                <div>
+                                    ${result ? `${result.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} response ${fmt.format(result.ResponseDurationMs)}ms / error ratio ${pct(result.StandardErrorRatio || 0)}${result.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}` : '<span class="muted">no result recorded yet</span>'}
+                                </div>
                             </div>
                         `;
                     }).join('')}
@@ -1260,6 +1275,7 @@
                             ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms` : ''}
                         </div>
                         <div style="margin-top:6px;">${renderBadges(command.MitreAttackTechniques || [], 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
+                        ${result?.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}
                     </div>
                 `;
             }).join('');
@@ -1301,7 +1317,7 @@
         function describeEvent(item) {
             const data = item.data || {};
             if (item.type === 'command') return `command <strong>${escapeHtml(data.Command)}</strong>`;
-            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} ${escapeHtml(data.Command)} / ${data.ResponseDurationMs}ms`;
+            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} ${escapeHtml(data.Command)} / ${data.ResponseDurationMs}ms${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
             if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;

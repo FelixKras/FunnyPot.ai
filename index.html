@@ -680,6 +680,12 @@
                         <div class="muted" style="margin-top:12px;">Binary attempts include payload URLs, transfer tools, encoded payloads, chmod execution prep, tunneling, or persistence tooling.</div>
                     </div>
                 </section>
+                <section class="section">
+                    <div class="panel">
+                        <h3>Most Common Commands</h3>
+                        <div class="bars" id="commonCommandBars"></div>
+                    </div>
+                </section>
                 <section class="section grid insight-grid">
                     <div class="panel">
                         <h3>Recent Command Exchanges</h3>
@@ -782,6 +788,7 @@
                 renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
                 renderTimeOfDay(events);
                 renderAttemptTypes(sessionModels);
+                renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
                 setupTabs();
@@ -982,6 +989,17 @@
                 'binary/tooling attempts': sessions.reduce((sum, session) => sum + session.binaryAttempts, 0),
                 'text-only commands': sessions.reduce((sum, session) => sum + session.textAttempts, 0),
             });
+        }
+
+        function summarizeCommonCommands(events) {
+            const counts = {};
+            for (const event of events) {
+                if (event.Event !== 'command') continue;
+                const command = String(event.Data?.Command || '').trim();
+                if (!command) continue;
+                counts[command] = (counts[command] || 0) + 1;
+            }
+            return takeTop(counts, 15);
         }
 
         function renderCredentialStats(summary, events) {

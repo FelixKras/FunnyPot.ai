@@ -925,7 +925,7 @@
                     if (isBinaryAttempt(data)) model.binaryAttempts++;
                     else model.textAttempts++;
                     model.avpMax = Math.max(model.avpMax, data.AssetValuePerceptionScore || 0);
-                    (data.MitreAttackTechniques || []).forEach(value => model.tactics.add(value));
+                    mitreTactics(data.MitreAttackTechniques).forEach(value => model.tactics.add(value));
                     (data.PayloadUrls || []).forEach(value => model.payloadUrls.add(value));
                     (data.EgressTargets || []).forEach(value => model.egressTargets.add(value));
                     if (data.PersistenceVector && data.PersistenceVector !== 'none') model.persistence.add(data.PersistenceVector);
@@ -1326,7 +1326,7 @@
                             #${command.MessageNumber} / ${isBinaryAttempt(command) ? 'binary/tooling' : 'text'} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
                             ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms` : ''}
                         </div>
-                        <div style="margin-top:6px;">${renderBadges(command.MitreAttackTechniques || [], 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
+                        <div style="margin-top:6px;">${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                         ${result?.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}
                     </div>
                 `;
@@ -1415,6 +1415,19 @@
             const counts = {};
             sessions.forEach(session => session.tactics.forEach(tactic => counts[tactic] = (counts[tactic] || 0) + 1));
             return counts;
+        }
+
+        function mitreTactics(values) {
+            const tacticByTechnique = {
+                T1053: 'Persistence',
+                T1083: 'Discovery',
+                T1090: 'Command and Control',
+                T1105: 'Command and Control',
+                T1595: 'Reconnaissance',
+            };
+            const tactics = new Set();
+            (values || []).forEach(value => tactics.add(tacticByTechnique[value] || value));
+            return [...tactics];
         }
 
         function summarizeInfrastructure(sessions) {

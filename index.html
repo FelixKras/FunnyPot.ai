@@ -611,6 +611,9 @@
                         <div class="metric"><div class="metric-label">Events<span class="tooltip-trigger">?<span class="tooltip-box">Total JSONL telemetry records in the current data branch. Each event (session_start, auth_attempt, command, etc.) counts as one event.</span></span></div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
                         <div class="metric"><div class="metric-label">Binary Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Commands involving payloads, downloads, encoding, tunneling, or persistence tooling. Indicates serious exploitation intent.</span></span></div><div class="metric-value" id="binaryAttempts">0</div><div class="metric-note">Payload/tool execution signals</div></div>
                         <div class="metric"><div class="metric-label">Text Commands<span class="tooltip-trigger">?<span class="tooltip-box">Plain text commands used for reconnaissance, system enumeration, or simple shell interactions. Lower risk than binary attempts.</span></span></div><div class="metric-value" id="textAttempts">0</div><div class="metric-note">Recon and shell text activity</div></div>
+                        <div class="metric"><div class="metric-label">Captured Uploads<span class="tooltip-trigger">?<span class="tooltip-box">SCP uploads accepted by the honeypot and written to the configured uploads directory.</span></span></div><div class="metric-value" id="capturedUploads">0</div><div class="metric-note">Binary files saved</div></div>
+                        <div class="metric"><div class="metric-label">Upload Bytes<span class="tooltip-trigger">?<span class="tooltip-box">Total bytes written for captured SCP uploads. Uploads over 5 MB are rejected before transfer.</span></span></div><div class="metric-value" id="uploadBytes">0 B</div><div class="metric-note">Stored binary volume</div></div>
+                        <div class="metric"><div class="metric-label">Rejected Uploads<span class="tooltip-trigger">?<span class="tooltip-box">SCP uploads rejected by policy, usually because the announced file size exceeded the 5 MB limit.</span></span></div><div class="metric-value" id="rejectedUploads">0</div><div class="metric-note">Oversize or invalid transfers</div></div>
                     </div>
                 </section>
 
@@ -678,6 +681,11 @@
                         <h3>Binary vs Text Attempts</h3>
                         <div class="bars" id="attemptTypeBars"></div>
                         <div class="muted" style="margin-top:12px;">Binary attempts include payload URLs, transfer tools, encoded payloads, chmod execution prep, tunneling, or persistence tooling.</div>
+                    </div>
+                    <div class="panel">
+                        <h3>Binary Uploads</h3>
+                        <div class="bars" id="uploadBars"></div>
+                        <div class="muted" style="margin-top:12px;">Captured and rejected SCP upload events, grouped by filename.</div>
                     </div>
                 </section>
                 <section class="section">
@@ -788,6 +796,7 @@
                 renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
                 renderTimeOfDay(events);
                 renderAttemptTypes(sessionModels);
+                renderUploadBars(events);
                 renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
@@ -882,6 +891,7 @@
                         failedCommands: 0,
                         binaryAttempts: 0,
                         textAttempts: 0,
+                        uploads: [],
                     });
                 }
                 return sessions.get(id);
@@ -927,6 +937,11 @@
                     model.semanticDriftMax = Math.max(model.semanticDriftMax, data.SemanticDrift || 0);
                     model.turingMax = Math.max(model.turingMax, data.TuringMultiplier || 0);
                 }
+
+                if (event.Event === 'scp_upload_captured' || event.Event === 'scp_upload_rejected') {
+                    model.uploads.push({ ...data, EventType: event.Event });
+                    if (event.Event === 'scp_upload_captured') model.binaryAttempts++;
+                }
             }
 
             return [...sessions.values()]
@@ -964,6 +979,13 @@
             setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
             setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));
             setText('textAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.textAttempts, 0)));
+            setText('capturedUploads', fmt.format(uploadEvents(events, 'scp_upload_captured').length));
+            setText('uploadBytes', formatBytes(uploadEvents(events, 'scp_upload_captured').reduce((sum, event) => sum + (event.Data?.Bytes || 0), 0)));
+            setText('rejectedUploads', fmt.format(uploadEvents(events, 'scp_upload_rejected').length));
+        }
+
+        function uploadEvents(events, type) {
+            return events.filter(event => event.Event === type);
         }
 
         function renderTimeOfDay(events) {
@@ -989,6 +1011,18 @@
                 'binary/tooling attempts': sessions.reduce((sum, session) => sum + session.binaryAttempts, 0),
                 'text-only commands': sessions.reduce((sum, session) => sum + session.textAttempts, 0),
             });
+        }
+
+        function renderUploadBars(events) {
+            const counts = {};
+            for (const event of events) {
+                if (event.Event !== 'scp_upload_captured' && event.Event !== 'scp_upload_rejected') continue;
+                const data = event.Data || {};
+                const status = event.Event === 'scp_upload_captured' ? 'captured' : 'rejected';
+                const filename = data.Filename || 'unknown file';
+                counts[`${status}: ${filename}`] = (counts[`${status}: ${filename}`] || 0) + 1;
+            }
+            renderBars('uploadBars', takeTop(counts, 12), 'amber');
         }
 
         function summarizeCommonCommands(events) {
@@ -1306,6 +1340,8 @@
             const egress = [...session.egressTargets];
             const persistence = [...session.persistence];
             const tactics = [...session.tactics];
+            const capturedUploads = session.uploads.filter(upload => upload.EventType === 'scp_upload_captured');
+            const rejectedUploads = session.uploads.filter(upload => upload.EventType === 'scp_upload_rejected');
 
             document.getElementById('signals').innerHTML = `
                 <div class="kv">
@@ -1319,6 +1355,9 @@
                         'Turing Multiplier': formatNumber(session.turingMax),
                         'Binary Attempts': session.binaryAttempts,
                         'Text Commands': session.textAttempts,
+                        'Captured Uploads': capturedUploads.length,
+                        'Upload Bytes': formatBytes(capturedUploads.reduce((sum, upload) => sum + (upload.Bytes || 0), 0)),
+                        'Rejected Uploads': rejectedUploads.length,
                     })}
                 </div>
                 <div style="height:16px"></div>
@@ -1329,7 +1368,19 @@
                 <div>${payloads.length ? payloads.map(url => `<div class="command">payload: ${escapeHtml(url)}</div>`).join('') : '<span class="muted">No payload URLs.</span>'}</div>
                 <div style="height:10px"></div>
                 <div>${egress.length ? egress.map(target => `<div class="command">egress: ${escapeHtml(target)}</div>`).join('') : '<span class="muted">No egress targets.</span>'}</div>
+                <div style="height:10px"></div>
+                <div>${session.uploads.length ? session.uploads.map(upload => renderUpload(upload)).join('') : '<span class="muted">No binary uploads.</span>'}</div>
             `;
+        }
+
+        function renderUpload(upload) {
+            const captured = upload.EventType === 'scp_upload_captured';
+            return `<div class="command">
+                ${badge(captured ? 'captured upload' : 'rejected upload', captured ? 'green' : 'red')}
+                <strong>${escapeHtml(upload.Filename || 'unknown file')}</strong> / ${formatBytes(upload.Bytes || 0)}
+                ${upload.Sha256 ? `<br><span class="muted">sha256 ${escapeHtml(upload.Sha256)}</span>` : ''}
+                ${upload.Path ? `<br><span class="muted">stored at ${escapeHtml(upload.Path)}</span>` : ''}
+            </div>`;
         }
 
         function describeEvent(item) {
@@ -1340,6 +1391,7 @@
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;
             if (item.type === 'harvested_credential') return `credential harvested for <strong>${escapeHtml(data.Username)}</strong>`;
+            if (item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected') return renderUpload({ ...data, EventType: item.type });
             return escapeHtml(data.Event || item.type);
         }
 
@@ -1420,6 +1472,13 @@
 
         function formatNumber(value) {
             return Number.isFinite(Number(value)) ? Number(value).toFixed(2).replace(/\.00$/, '') : '-';
+        }
+
+        function formatBytes(value) {
+            const bytes = Number(value) || 0;
+            if (bytes < 1024) return `${fmt.format(bytes)} B`;
+            if (bytes < 1024 * 1024) return `${formatNumber(bytes / 1024)} KB`;
+            return `${formatNumber(bytes / 1024 / 1024)} MB`;
         }
 
         function shorten(value, length) {

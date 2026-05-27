@@ -1413,7 +1413,9 @@
 
         function summarizeTactics(sessions) {
             const counts = {};
-            sessions.forEach(session => session.tactics.forEach(tactic => counts[tactic] = (counts[tactic] || 0) + 1));
+            sessions.forEach(session => session.commands.forEach(command => {
+                mitreTactics(command.MitreAttackTechniques).forEach(tactic => counts[tactic] = (counts[tactic] || 0) + 1);
+            }));
             return counts;
         }
 

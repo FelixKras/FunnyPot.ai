@@ -541,7 +541,7 @@
             <div>
                 <div class="brand-mark">SSH honeypot telemetry</div>
                 <h1>FunnyPot Dashboard</h1>
-                <p class="subtitle">Operational view of retained honeypot activity: live SSH connections, captured credentials, command behavior, and attacker infrastructure signals published to the data branch.</p>
+                <p class="subtitle">Operational view of retained honeypot activity: live SSH connections, captured credentials, command behavior, and attacker telemetry published to the data branch.</p>
             </div>
             <div class="hero-visual" aria-hidden="true">
                 <svg viewBox="0 0 420 260" role="img">
@@ -625,11 +625,6 @@
                     <div class="panel">
                         <h3>MITRE Tactics</h3>
                         <div class="bars" id="tacticBars"></div>
-                    </div>
-                    <div class="panel">
-                        <h3>Source Classification</h3>
-                        <div class="muted" style="margin-bottom:12px;">Connection source categories derived from remote endpoints, separate from SSH banner rotation.</div>
-                        <div class="bars" id="infraBars"></div>
                     </div>
                     <div class="panel">
                         <h3>SSH Banners</h3>
@@ -792,7 +787,6 @@
                 renderCredentialStats(retainedSummary, events);
                 renderGeography(retainedSummary);
                 renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
-                renderBars('infraBars', summarizeInfrastructure(sessionModels), 'green', 'Source');
                 renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
                 renderTimeOfDay(events);
                 renderAttemptTypes(sessionModels);
@@ -883,7 +877,6 @@
                         payloadUrls: new Set(),
                         egressTargets: new Set(),
                         persistence: new Set(),
-                        infra: 'unknown',
                         sshBanner: '',
                         avpMax: 0,
                         semanticDriftMax: 0,
@@ -917,7 +910,6 @@
 
                 if (event.Event === 'auth_attempt') {
                     model.authAttempts.push(data);
-                    model.infra = data.InfrastructureCategory || model.infra;
                 }
 
                 if (event.Event === 'command') {
@@ -1230,7 +1222,7 @@
                 return `
                     <tr class="session-row" data-session-id="${escapeAttr(session.id)}">
                         <td class="nowrap">${fmtTime(session.startedAt)}</td>
-                        <td>${escapeHtml(session.remote)}<br><span class="muted">${escapeHtml(session.infra)}</span></td>
+                        <td>${escapeHtml(session.remote)}</td>
                         <td>${escapeHtml(session.username)}</td>
                         <td>${escapeHtml(shorten(session.client, 34))}</td>
                         <td>${badge(success ? 'accepted' : 'rejected', success ? 'green' : 'red')} ${failed ? badge(`${failed} failed`, 'amber') : ''}</td>
@@ -1268,7 +1260,6 @@
                 'Username': session.username,
                 'Client': session.client,
                 'SSH Banner': session.sshBanner || '-',
-                'Infrastructure': session.infra,
                 'Session Key': session.sessionKey,
                 'Shell Session': session.shellSessionId || '-',
                 'Started': fmtTime(session.startedAt),
@@ -1430,22 +1421,6 @@
             const tactics = new Set();
             (values || []).forEach(value => tactics.add(tacticByTechnique[value] || value));
             return [...tactics];
-        }
-
-        function summarizeInfrastructure(sessions) {
-            const counts = {};
-            sessions.forEach(session => {
-                const category = formatSourceCategory(session.infra);
-                counts[category] = (counts[category] || 0) + 1;
-            });
-            return counts;
-        }
-
-        function formatSourceCategory(value) {
-            if (value === 'private') return 'Private/reserved source';
-            if (value === 'lookup_unavailable') return 'Public source, lookup unavailable';
-            if (!value || value === 'unknown') return 'Unclassified source';
-            return value;
         }
 
         function summarizeBanners(sessions) {

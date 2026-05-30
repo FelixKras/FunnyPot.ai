@@ -396,12 +396,12 @@
             font-size: 0.92rem;
         }
 
-        tr.session-row {
+        tr.session-row, .session-row {
             cursor: pointer;
             transition: background 0.16s ease;
         }
 
-        tr.session-row:hover, tr.session-row.active {
+        tr.session-row:hover, tr.session-row.active, .session-row:hover, .session-row.active {
             background: rgba(72, 223, 255, 0.06);
         }
 
@@ -564,6 +564,105 @@
             letter-spacing: 0.08em;
         }
 
+        .word-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 12px;
+            min-height: 180px;
+            padding: 8px 0;
+        }
+
+        .word-token {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(72, 223, 255, 0.18);
+            border-radius: 999px;
+            padding: 6px 10px;
+            background: rgba(72, 223, 255, 0.06);
+            color: var(--cyan);
+            font-weight: 850;
+            line-height: 1;
+        }
+
+        .word-token.green { color: var(--green); border-color: rgba(53, 255, 122, 0.2); background: rgba(53, 255, 122, 0.07); }
+        .word-token.amber { color: var(--amber); border-color: rgba(255, 204, 102, 0.2); background: rgba(255, 204, 102, 0.07); }
+        .word-token.purple { color: var(--purple); border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.07); }
+
+        .intent-map {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .intent-node, .session-card, .history-item {
+            border: 1px solid rgba(72, 223, 255, 0.14);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.025);
+            padding: 12px;
+        }
+
+        .intent-node {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intent-node::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: var(--weight, 18%);
+            background: linear-gradient(90deg, rgba(53,255,122,0.14), transparent);
+            pointer-events: none;
+        }
+
+        .intent-title, .session-card-title, .history-title {
+            position: relative;
+            color: #fff;
+            font-weight: 850;
+            overflow-wrap: anywhere;
+        }
+
+        .intent-meta, .session-card-meta, .history-meta {
+            position: relative;
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+
+        .session-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            max-height: 540px;
+            overflow: auto;
+            padding-right: 8px;
+        }
+
+        .session-card-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .command-history {
+            display: grid;
+            gap: 10px;
+            max-height: 760px;
+            overflow: auto;
+            padding-right: 8px;
+        }
+
+        .history-command {
+            margin-top: 8px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            color: #e8f8ff;
+            overflow-wrap: anywhere;
+        }
+
         .muted { color: var(--muted); }
         .nowrap { white-space: nowrap; }
         .empty { color: var(--muted); padding: 18px; text-align: center; }
@@ -580,6 +679,7 @@
             .hero-visual { min-width: 0; width: 100%; }
             .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .bar-row { grid-template-columns: 1fr; gap: 5px; }
+            .session-summary-grid { grid-template-columns: 1fr; }
             table { min-width: 900px; }
             .table-scroll { overflow-x: auto; }
             .kv { grid-template-columns: 1fr; }
@@ -735,10 +835,15 @@
                         <div class="muted" style="margin-top:12px;">Captured and rejected SCP upload events, grouped by filename.</div>
                     </div>
                 </section>
-                <section class="section">
+                <section class="section grid insight-grid">
                     <div class="panel">
-                        <h3>Most Common Commands</h3>
-                        <div class="bars" id="commonCommandBars"></div>
+                        <h3>Attacker Command Cloud</h3>
+                        <div class="word-cloud" id="commandCloud"><div class="empty">No command terms yet.</div></div>
+                        <div class="muted" style="margin-top:12px;">Weighted by recurring command verbs, files, tools, and probes across retained attacker sessions.</div>
+                    </div>
+                    <div class="panel">
+                        <h3>Intent Map</h3>
+                        <div class="intent-map" id="intentMap"><div class="empty">No intent patterns yet.</div></div>
                     </div>
                 </section>
                 <section class="section grid insight-grid">
@@ -747,26 +852,14 @@
                         <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
                     </div>
                     <div class="panel">
-                        <h3>Interactive Sessions</h3>
-                        <div class="table-scroll">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Started</th>
-                                        <th>Remote</th>
-                                        <th>User</th>
-                                        <th>Client</th>
-                                        <th>Auth</th>
-                                        <th>Commands</th>
-                                        <th>Tactics</th>
-                                        <th>Risk</th>
-                                        <th>Analysis</th>
-                                        <th>Duration</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sessionsTable"><tr><td colspan="10" class="empty">No attacker sessions yet.</td></tr></tbody>
-                            </table>
-                        </div>
+                        <h3>Session Synopsis</h3>
+                        <div class="session-summary-grid" id="sessionSummaryCards"><div class="empty">No attacker sessions yet.</div></div>
+                    </div>
+                </section>
+                <section class="section">
+                    <div class="panel">
+                        <h3>Attacker Command History</h3>
+                        <div class="command-history" id="commandHistory"><div class="empty">No commands recorded yet.</div></div>
                     </div>
                 </section>
                 <section class="section" id="sessionDetailsSection" style="display:none;">
@@ -845,6 +938,9 @@
                 renderAttemptTypes(sessionModels);
                 renderUploadBars(events);
                 renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
+                renderCommandCloud(sessionModels);
+                renderIntentMap(sessionModels);
+                renderCommandHistory(sessionModels);
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
                 setupTabs();
@@ -1214,7 +1310,7 @@
             const recent = sessions
                 .filter(session => session.commands.length)
                 .sort((a, b) => new Date(b.endedAt || b.startedAt || 0) - new Date(a.endedAt || a.startedAt || 0))
-                .slice(0, 5);
+                .slice(0, 8);
 
             if (!recent.length) {
                 target.innerHTML = '<div class="empty">No command exchanges yet.</div>';
@@ -1227,7 +1323,7 @@
                         <span>${escapeHtml(session.remote)} / ${escapeHtml(session.username)} ${analysisTooltip(session)}</span>
                         <span class="muted">${fmtTime(session.endedAt || session.startedAt)}</span>
                     </div>
-                    ${session.commands.slice(-5).map(command => {
+                    ${session.commands.slice(-8).map(command => {
                         const result = findCommandResult(session, command);
                         return `
                             <div class="exchange-line">
@@ -1248,6 +1344,7 @@
 
         function renderBars(targetId, data, color = 'cyan', prefix = '') {
             const target = document.getElementById(targetId);
+            if (!target) return;
             const entries = Object.entries(data || {}).sort((a, b) => b[1] - a[1]);
             if (!entries.length) {
                 target.innerHTML = `<div class="empty">No ${prefix || 'data'} signals yet.</div>`;
@@ -1263,33 +1360,122 @@
             `).join('');
         }
 
-        function renderSessions(sessions) {
-            const tbody = document.getElementById('sessionsTable');
-            if (!sessions.length) {
-                tbody.innerHTML = `<tr><td colspan="10" class="empty">No attacker sessions yet.</td></tr>`;
+        function renderCommandCloud(sessions) {
+            const target = document.getElementById('commandCloud');
+            if (!target) return;
+            const counts = countCommandTerms(sessions);
+            const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 42);
+            if (!entries.length) {
+                target.innerHTML = '<div class="empty">No command terms yet.</div>';
                 return;
             }
 
-            tbody.innerHTML = sessions.map(session => {
+            const max = Math.max(...entries.map(([, count]) => count), 1);
+            target.innerHTML = entries.map(([term, count], index) => {
+                const size = 0.82 + (count / max) * 1.45;
+                const colors = ['cyan', 'green', 'amber', 'purple'];
+                const color = colors[index % colors.length];
+                return `<span class="word-token ${color}" style="font-size:${size.toFixed(2)}rem" title="${fmt.format(count)} hit${count === 1 ? '' : 's'}">${escapeHtml(term)}</span>`;
+            }).join('');
+        }
+
+        function renderIntentMap(sessions) {
+            const target = document.getElementById('intentMap');
+            if (!target) return;
+            const counts = {};
+            sessions.forEach(session => {
+                const intent = inferIntent(session);
+                counts[intent] = (counts[intent] || 0) + 1;
+            });
+            const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+            if (!entries.length) {
+                target.innerHTML = '<div class="empty">No intent patterns yet.</div>';
+                return;
+            }
+
+            const max = Math.max(...entries.map(([, count]) => count), 1);
+            target.innerHTML = entries.map(([intent, count]) => `
+                <div class="intent-node" style="--weight:${Math.max(12, count / max * 100)}%">
+                    <div class="intent-title">${escapeHtml(intent)}</div>
+                    <div class="intent-meta">${fmt.format(count)} session${count === 1 ? '' : 's'} · ${escapeHtml(topToolsForIntent(sessions, intent).join(', ') || 'no repeated tools')}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderCommandHistory(sessions) {
+            const target = document.getElementById('commandHistory');
+            if (!target) return;
+            const history = flattenCommands(sessions).slice(0, 80);
+            if (!history.length) {
+                target.innerHTML = '<div class="empty">No commands recorded yet.</div>';
+                return;
+            }
+
+            target.innerHTML = history.map(item => {
+                const result = findCommandResult(item.session, item.command);
+                const status = result ? (result.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')) : badge('pending', 'amber');
+                const kind = isBinaryAttempt(item.command) ? badge('tooling', 'amber') : badge('text', 'cyan');
+                return `
+                    <div class="history-item">
+                        <div class="history-title">${escapeHtml(item.session.remote)} / ${escapeHtml(item.session.username)} ${analysisTooltip(item.session)}</div>
+                        <div class="history-meta">${fmtTime(item.command.Timestamp)} · ${status} ${kind} ${renderBadges(mitreTactics(item.command.MitreAttackTechniques).slice(0, 2), 'purple')}</div>
+                        <div class="history-command">${escapeHtml(item.command.Command)}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function flattenCommands(sessions) {
+            return sessions.flatMap(session => session.commands.map(command => ({ session, command })))
+                .sort((a, b) => new Date(b.command.Timestamp || b.session.startedAt || 0) - new Date(a.command.Timestamp || a.session.startedAt || 0));
+        }
+
+        function countCommandTerms(sessions) {
+            const stop = new Set(['sudo', 'echo', 'cat', 'ls', 'cd', 'pwd', 'true', 'false', 'exit', 'logout', 'then', 'else', 'fi', 'for', 'while', 'done', 'dev', 'null', 'tmp', 'var', 'usr', 'bin', 'home', 'root']);
+            const counts = {};
+            sessions.forEach(session => session.commands.forEach(command => {
+                String(command.Command || '').toLowerCase()
+                    .match(/[a-z0-9_./:-]{2,}/g)?.forEach(term => {
+                        const cleaned = term.replace(/^\/+|\/+$/g, '').replace(/^\.\//, '');
+                        if (!cleaned || stop.has(cleaned) || /^\d+$/.test(cleaned)) return;
+                        counts[cleaned] = (counts[cleaned] || 0) + 1;
+                    });
+            }));
+            return counts;
+        }
+
+        function topToolsForIntent(sessions, intent) {
+            const counts = {};
+            sessions.filter(session => inferIntent(session) === intent).forEach(session => {
+                summarizeTools(session).forEach(tool => counts[tool] = (counts[tool] || 0) + 1);
+            });
+            return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([tool]) => tool);
+        }
+
+        function renderSessions(sessions) {
+            const target = document.getElementById('sessionSummaryCards');
+            if (!target) return;
+            if (!sessions.length) {
+                target.innerHTML = '<div class="empty">No attacker sessions yet.</div>';
+                return;
+            }
+
+            target.innerHTML = sessions.slice(0, 12).map(session => {
                 const success = session.authAttempts.some(attempt => attempt.Accepted);
                 const failed = session.authAttempts.filter(attempt => !attempt.Accepted).length;
                 return `
-                    <tr class="session-row" data-session-id="${escapeAttr(session.id)}">
-                        <td class="nowrap">${fmtTime(session.startedAt)}</td>
-                        <td>${escapeHtml(session.remote)}</td>
-                        <td>${escapeHtml(session.username)}</td>
-                        <td>${escapeHtml(shorten(session.client, 34))}</td>
-                        <td>${badge(success ? 'accepted' : 'rejected', success ? 'green' : 'red')} ${failed ? badge(`${failed} failed`, 'amber') : ''}</td>
-                        <td>${fmt.format(session.commands.length)} cmds<br><span class="muted">${session.failedCommands} failed</span></td>
-                        <td>${renderBadges([...session.tactics], 'purple') || '<span class="muted">none</span>'}</td>
-                        <td>${riskBadge(session)}</td>
-                        <td>${analysisTooltip(session)}</td>
-                        <td>${sec(session.durationSeconds)}</td>
-                    </tr>
+                    <div class="session-card session-row" data-session-id="${escapeAttr(session.id)}">
+                        <div class="session-card-title">${escapeHtml(session.remote)} / ${escapeHtml(session.username)} ${analysisTooltip(session)}</div>
+                        <div class="session-card-meta">${fmtTime(session.startedAt)} · ${escapeHtml(shorten(session.client, 42))}</div>
+                        <div style="margin-top:8px;">${riskBadge(session)} ${badge(success ? 'accepted' : 'rejected', success ? 'green' : 'red')} ${failed ? badge(`${failed} failed auth`, 'amber') : ''}</div>
+                        <div class="session-card-meta">${fmt.format(session.commands.length)} commands · ${session.binaryAttempts} tooling · ${session.failedCommands} failed · ${sec(session.durationSeconds)}</div>
+                        <div class="session-card-meta">${escapeHtml(inferIntent(session))}</div>
+                        <div class="session-card-actions"><span>${renderBadges([...session.tactics].slice(0, 3), 'purple') || '<span class="muted">no tactics</span>'}</span><span class="muted">details</span></div>
+                    </div>
                 `;
             }).join('');
 
-            tbody.querySelectorAll('tr.session-row').forEach(row => {
+            target.querySelectorAll('.session-row').forEach(row => {
                 row.addEventListener('click', () => selectSession(row.dataset.sessionId));
             });
         }
@@ -1300,7 +1486,7 @@
             if (!session) return;
 
             document.getElementById('sessionDetailsSection').style.display = 'block';
-            document.querySelectorAll('tr.session-row').forEach(row => row.classList.toggle('active', row.dataset.sessionId === id));
+            document.querySelectorAll('.session-row').forEach(row => row.classList.toggle('active', row.dataset.sessionId === id));
             document.getElementById('selectedSessionLabel').textContent = `${session.remote} / ${session.id}`;
             renderProfile(session);
             renderAuthTimeline(session);

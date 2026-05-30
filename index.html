@@ -1339,8 +1339,7 @@
                         <span>Session: ${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</span>
                         <span class="muted">User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
                     </div>
-                    ${session.commands.slice(0, 5).map(command => {
-                        const result = findCommandResult(session, command);
+                    ${commandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
                         return `
                             <div class="exchange-line">
                                 <div class="exchange-role">attacker$</div>
@@ -1645,8 +1644,7 @@
                 return;
             }
 
-            target.innerHTML = session.commands.map(command => {
-                const result = findCommandResult(session, command);
+            target.innerHTML = commandResponsePairs(session).map(({ command, result }) => {
                 return `
                     <div class="command">
                         <div>${escapeHtml(command.Command)}</div>
@@ -1957,8 +1955,48 @@
         }
 
         function findCommandResult(session, command) {
-            return session.results.find(item => item.Command === command.Command && new Date(item.Timestamp || 0) >= new Date(command.Timestamp || 0))
-                || session.results.find(item => item.Command === command.Command);
+            return commandResponsePairs(session).find(pair => pair.command === command)?.result || null;
+        }
+
+        function commandResponsePairs(session) {
+            if (session._commandResponsePairs) return session._commandResponsePairs;
+            const results = session.results
+                .slice()
+                .sort((a, b) => new Date(a.Timestamp || 0) - new Date(b.Timestamp || 0));
+            const used = new Set();
+            const commands = session.commands
+                .slice()
+                .sort((a, b) => new Date(a.Timestamp || 0) - new Date(b.Timestamp || 0));
+
+            session._commandResponsePairs = commands.map((command, index) => {
+                const commandTime = new Date(command.Timestamp || 0);
+                const nextCommandTime = commands[index + 1]?.Timestamp ? new Date(commands[index + 1].Timestamp) : null;
+                let resultIndex = results.findIndex((result, candidateIndex) =>
+                    !used.has(candidateIndex)
+                    && result.Command === command.Command
+                    && new Date(result.Timestamp || 0) >= commandTime
+                    && (!nextCommandTime || new Date(result.Timestamp || 0) < nextCommandTime)
+                );
+                if (resultIndex < 0) {
+                    resultIndex = results.findIndex((result, candidateIndex) =>
+                        !used.has(candidateIndex)
+                        && result.Command === command.Command
+                        && new Date(result.Timestamp || 0) >= commandTime
+                    );
+                }
+                if (resultIndex < 0) {
+                    resultIndex = results.findIndex((result, candidateIndex) =>
+                        !used.has(candidateIndex)
+                        && new Date(result.Timestamp || 0) >= commandTime
+                        && (!nextCommandTime || new Date(result.Timestamp || 0) < nextCommandTime)
+                    );
+                }
+                if (resultIndex < 0) return { command, result: null };
+                used.add(resultIndex);
+                return { command, result: results[resultIndex] };
+            });
+
+            return session._commandResponsePairs;
         }
 
         function isBinaryAttempt(command) {

@@ -528,14 +528,14 @@
         .exchange-feed {
             display: grid;
             gap: 12px;
-            max-height: 540px;
+            max-height: 680px;
             overflow: auto;
             padding-right: 8px;
         }
 
         .exchange-session {
-            background: rgba(255,255,255,0.025);
-            border: 1px solid var(--line);
+            background: #071018;
+            border: 1px solid #193040;
             border-radius: 14px;
             padding: 12px;
         }
@@ -551,7 +551,7 @@
 
         .exchange-line {
             display: grid;
-            grid-template-columns: 90px 1fr;
+            grid-template-columns: 110px 1fr;
             gap: 10px;
             padding: 8px 0;
             border-top: 1px solid rgba(38, 54, 70, 0.7);
@@ -572,6 +572,8 @@
             min-height: 180px;
             padding: 8px 0;
         }
+
+        .word-cloud.compact { min-height: 0; margin-top: 12px; }
 
         .word-token {
             display: inline-flex;
@@ -596,6 +598,36 @@
             padding: 12px;
         }
 
+        .activity-summary-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+        .story-text {
+            margin-top: 8px;
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        .pattern-samples, .finding-list, .ghost-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .finding-card, .ghost-stat {
+            border: 1px solid rgba(72, 223, 255, 0.14);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.025);
+            padding: 12px;
+        }
+
+        .terminal-line {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            color: #e8f8ff;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .terminal-prompt { color: var(--green); }
+        .terminal-response { color: #dfffe8; }
+
         .session-card-title, .history-title {
             position: relative;
             color: #fff;
@@ -613,7 +645,7 @@
 
         .session-summary-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: 1fr;
             gap: 12px;
             max-height: 540px;
             overflow: auto;
@@ -631,7 +663,7 @@
         .command-history {
             display: grid;
             gap: 10px;
-            max-height: 760px;
+            max-height: 620px;
             overflow: auto;
             padding-right: 8px;
         }
@@ -720,7 +752,7 @@
                 <button class="tab-button active" data-tab="overview" type="button">Overview</button>
                 <button class="tab-button" data-tab="credentials" type="button">Credentials</button>
                 <button class="tab-button" data-tab="geography" type="button">Geography</button>
-                <button class="tab-button" data-tab="activity" type="button">Activity</button>
+                <button class="tab-button" data-tab="activity" type="button">Attacker Activity</button>
             </div>
 
             <div class="tab-panel active" data-tab-panel="overview">
@@ -798,44 +830,44 @@
             </div>
 
             <div class="tab-panel" data-tab-panel="activity">
-                <section class="section grid insight-grid">
-                    <div class="panel">
-                        <h3>Time-of-Day Activity</h3>
-                        <div class="hour-grid" id="hourGrid"></div>
-                        <div class="muted" style="margin-top:12px;">Hourly telemetry volume in UTC, based on event timestamps.</div>
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Attacker Behavior</h2>
+                        <span class="muted" id="activityFreshness">Loading telemetry freshness...</span>
                     </div>
-                    <div class="panel">
-                        <h3>Binary vs Text Attempts</h3>
-                        <div class="bars" id="attemptTypeBars"></div>
-                        <div class="muted" style="margin-top:12px;">Binary attempts include payload URLs, transfer tools, encoded payloads, chmod execution prep, tunneling, or persistence tooling.</div>
-                    </div>
-                    <div class="panel">
-                        <h3>Binary Uploads</h3>
-                        <div class="bars" id="uploadBars"></div>
-                        <div class="muted" style="margin-top:12px;">Captured and rejected SCP upload events, grouped by filename.</div>
-                    </div>
+                    <div class="grid metrics activity-summary-grid" id="activitySummaryCards"></div>
                 </section>
                 <section class="section grid insight-grid">
                     <div class="panel">
-                        <h3>Commandless Session Cloud</h3>
-                        <div class="word-cloud" id="commandCloud"><div class="empty">No commandless sessions yet.</div></div>
-                        <div class="muted" style="margin-top:12px;">Weighted by usernames, passwords, client banners, auth methods, and connection metadata from sessions that never reached a command.</div>
-                    </div>
-                </section>
-                <section class="section grid insight-grid">
-                    <div class="panel">
-                        <h3>Recent Command Exchanges</h3>
+                        <h3>Attacker Command Exchange</h3>
                         <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
+                        <div class="muted" style="margin-top:12px;">Some commands may not have a recorded response if the session ended early or the interaction was interrupted.</div>
                     </div>
                     <div class="panel">
-                        <h3>Session Synopsis</h3>
+                        <h3>Behavior Story Cards</h3>
                         <div class="session-summary-grid" id="sessionSummaryCards"><div class="empty">No attacker sessions yet.</div></div>
                     </div>
                 </section>
-                <section class="section">
+                <section class="section grid insight-grid">
                     <div class="panel">
-                        <h3>Attacker Command History</h3>
-                        <div class="command-history" id="commandHistory"><div class="empty">No commands recorded yet.</div></div>
+                        <h3>Command Patterns</h3>
+                        <div class="command-history" id="commandHistory"><div class="empty">No command patterns yet.</div></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Ghosted Sessions</h3>
+                        <p class="muted">Commandless sessions are successful shell openings where the attacker disconnected before issuing a command. They often indicate scanner behavior, credential-validation automation, or low-engagement bots.</p>
+                        <div class="ghost-grid" id="ghostedSessions"><div class="empty">No ghosted sessions yet.</div></div>
+                        <div class="word-cloud compact" id="commandCloud"><div class="empty">No commandless sessions yet.</div></div>
+                    </div>
+                </section>
+                <section class="section grid insight-grid">
+                    <div class="panel">
+                        <h3>High-Risk Activity</h3>
+                        <div class="finding-list" id="highRiskActivity"><div class="empty">No high-risk activity yet.</div></div>
+                    </div>
+                    <div class="panel">
+                        <h3>MITRE Behavior Mapping</h3>
+                        <div class="finding-list" id="mitreNarrative"><div class="empty">No MITRE behavior yet.</div></div>
                     </div>
                 </section>
                 <section class="section" id="sessionDetailsSection" style="display:none;">
@@ -914,10 +946,15 @@
                 renderAttemptTypes(sessionModels);
                 renderUploadBars(events);
                 renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
+                renderActivityFreshness(summary, stats, retainedSummary);
+                renderActivitySummary(retainedSummary, events, sessionModels);
                 renderCommandCloud(sessionModels);
                 renderCommandHistory(sessionModels);
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
+                renderGhostedSessions(sessionModels);
+                renderHighRiskActivity(sessionModels);
+                renderMitreNarrative(sessionModels);
                 setupTabs();
                 setupFloatingTooltips();
                 document.getElementById('loading').style.display = 'none';
@@ -928,6 +965,8 @@
                 console.error('Failed to load dashboard data:', error);
                 document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
                 document.getElementById('dataStatus').textContent = 'Data unavailable';
+                const freshness = document.getElementById('activityFreshness');
+                if (freshness) freshness.textContent = `Status: failed to load telemetry (${error.message})`;
             }
         }
 
@@ -1284,32 +1323,30 @@
             const target = document.getElementById('latestExchanges');
             const recent = sessions
                 .filter(session => session.commands.length)
-                .sort((a, b) => new Date(b.endedAt || b.startedAt || 0) - new Date(a.endedAt || a.startedAt || 0))
-                .slice(0, 8);
+                .sort((a, b) => riskScore(b) - riskScore(a) || new Date(b.endedAt || b.startedAt || 0) - new Date(a.endedAt || a.startedAt || 0))
+                .slice(0, 5);
 
             if (!recent.length) {
-                target.innerHTML = '<div class="empty">No command exchanges yet.</div>';
+                target.innerHTML = '<div class="empty">No command exchanges yet. Attackers authenticated, looked around, and vanished.</div>';
                 return;
             }
 
             target.innerHTML = recent.map(session => `
                 <div class="exchange-session">
                     <div class="exchange-title">
-                        <span>${escapeHtml(session.remote)} / ${escapeHtml(session.username)} ${analysisTooltip(session)}</span>
-                        <span class="muted">${fmtTime(session.endedAt || session.startedAt)}</span>
+                        <span>Session: ${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</span>
+                        <span class="muted">User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
                     </div>
-                    ${session.commands.slice(-8).map(command => {
+                    ${session.commands.slice(0, 5).map(command => {
                         const result = findCommandResult(session, command);
                         return `
                             <div class="exchange-line">
-                                <div class="exchange-role">attacker</div>
-                                <div class="command">${escapeHtml(command.Command)}</div>
+                                <div class="exchange-role">attacker$</div>
+                                <div class="terminal-line">${escapeHtml(command.Command)}</div>
                             </div>
                             <div class="exchange-line">
-                                <div class="exchange-role">honeypot</div>
-                                <div>
-                                    ${result ? `${result.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} response ${fmt.format(result.ResponseDurationMs)}ms / error ratio ${pct(result.StandardErrorRatio || 0)}${result.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}` : '<span class="muted">no result recorded yet</span>'}
-                                </div>
+                                <div class="exchange-role">funny-pot&gt;</div>
+                                <div class="terminal-line terminal-response">${result?.Response ? escapeHtml(result.Response) : '<span class="muted">no response recorded</span>'}</div>
                             </div>
                         `;
                     }).join('')}
@@ -1335,6 +1372,36 @@
             `).join('');
         }
 
+        function renderActivityFreshness(summary, stats, retainedSummary) {
+            const target = document.getElementById('activityFreshness');
+            if (!target) return;
+            const updated = summary.LastUpdated || stats.LastUpdated || retainedSummary.LastUpdated;
+            target.textContent = `Last telemetry update: ${fmtTime(updated)} / Data source: GitHub data branch / Status: loaded successfully`;
+        }
+
+        function renderActivitySummary(summary, events, sessions) {
+            const target = document.getElementById('activitySummaryCards');
+            if (!target) return;
+            const commands = summary.EventCounts?.command || 0;
+            const responses = summary.EventCounts?.command_result || 0;
+            const shellStarts = summary.EventCounts?.shell_session_start || sessions.filter(hasShellOpen).length;
+            const ghosted = sessions.filter(isGhostedSession).length;
+            const payloadAttempts = sessions.reduce((sum, session) => sum + session.binaryAttempts + session.uploads.length, 0);
+            const common = mostCommonBehavior(sessions);
+            target.innerHTML = [
+                summaryMetric('Interactive Shells', shellStarts, 'Successful shell openings'),
+                summaryMetric('Commands Observed', commands, 'Attacker command inputs'),
+                summaryMetric('Responses Generated', responses, 'FunnyPot replies recorded'),
+                summaryMetric('Payload Attempts', payloadAttempts, 'Downloads, binaries, uploads'),
+                summaryMetric('Ghosted Sessions', ghosted, 'Shell opened, zero commands'),
+                summaryMetric('Common Behavior', common, 'Dominant attacker pattern')
+            ].join('');
+        }
+
+        function summaryMetric(label, value, note) {
+            return `<div class="metric"><div class="metric-label">${escapeHtml(label)}</div><div class="metric-value">${escapeHtml(String(value))}</div><div class="metric-note">${escapeHtml(note)}</div></div>`;
+        }
+
         function renderCommandCloud(sessions) {
             const target = document.getElementById('commandCloud');
             if (!target) return;
@@ -1357,24 +1424,46 @@
         function renderCommandHistory(sessions) {
             const target = document.getElementById('commandHistory');
             if (!target) return;
-            const history = flattenCommands(sessions).slice(0, 80);
-            if (!history.length) {
-                target.innerHTML = '<div class="empty">No commands recorded yet.</div>';
+            const groups = commandPatternGroups(sessions);
+            const entries = Object.entries(groups).filter(([, items]) => items.length);
+            if (!entries.length) {
+                target.innerHTML = '<div class="empty">No command patterns yet.</div>';
                 return;
             }
 
-            target.innerHTML = history.map(item => {
-                const result = findCommandResult(item.session, item.command);
-                const status = result ? (result.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')) : badge('pending', 'amber');
-                const kind = isBinaryAttempt(item.command) ? badge('tooling', 'amber') : badge('text', 'cyan');
+            target.innerHTML = entries.map(([category, items]) => {
+                const samples = items.slice(0, 5).map(item => `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(item.command.Command)}</div>`).join('');
                 return `
                     <div class="history-item">
-                        <div class="history-title">${escapeHtml(item.session.remote)} / ${escapeHtml(item.session.username)} ${analysisTooltip(item.session)}</div>
-                        <div class="history-meta">${fmtTime(item.command.Timestamp)} · ${status} ${kind} ${renderBadges(mitreTactics(item.command.MitreAttackTechniques).slice(0, 2), 'purple')}</div>
-                        <div class="history-command">${escapeHtml(item.command.Command)}</div>
+                        <div class="history-title">${escapeHtml(category)}</div>
+                        <div class="history-meta">${fmt.format(items.length)} command${items.length === 1 ? '' : 's'} observed</div>
+                        <div class="pattern-samples">${samples}</div>
                     </div>
                 `;
             }).join('');
+        }
+
+        function commandPatternGroups(sessions) {
+            const groups = {
+                'Discovery': [],
+                'Filesystem probing': [],
+                'Network probing': [],
+                'Payload download': [],
+                'Automation or bot behavior': [],
+                'Other shell activity': []
+            };
+            flattenCommands(sessions).forEach(item => groups[commandCategory(item.command)].push(item));
+            return groups;
+        }
+
+        function commandCategory(command) {
+            const text = String(command.Command || '').toLowerCase();
+            if (/\b(curl|wget|fetch|tftp|scp|sftp|ftp|base64|chmod\s+\+x|python\s+-c|perl\s+-e)\b|\.(sh|elf|bin|py|pl|jar|exe)\b/.test(text)) return 'Payload download';
+            if (/\b(ip\s+a|ip\s+addr|ifconfig|netstat|ss|route|arp|iptables|ufw)\b/.test(text)) return 'Network probing';
+            if (/\b(ls|find|locate|cat\s+\/etc|cat\s+\/proc|df\s+-h|du\s+-h|mount)\b/.test(text)) return 'Filesystem probing';
+            if (/\b(whoami|id|uname|hostname|pwd|lscpu|uptime|ps|top|env)\b/.test(text)) return 'Discovery';
+            if (/^exit$|^logout$|^true$|^false$|^\s*$/.test(text)) return 'Automation or bot behavior';
+            return 'Other shell activity';
         }
 
         function flattenCommands(sessions) {
@@ -1409,16 +1498,19 @@
                 return;
             }
 
-            target.innerHTML = sessions.slice(0, 12).map(session => {
-                const success = session.authAttempts.some(attempt => attempt.Accepted);
-                const failed = session.authAttempts.filter(attempt => !attempt.Accepted).length;
+            target.innerHTML = sessions
+                .slice()
+                .sort((a, b) => riskScore(b) - riskScore(a) || b.commands.length - a.commands.length)
+                .slice(0, 8)
+                .map(session => {
+                const representative = representativeCommand(session);
                 return `
                     <div class="session-card session-row" data-session-id="${escapeAttr(session.id)}">
-                        <div class="session-card-title">${escapeHtml(session.remote)} / ${escapeHtml(session.username)} ${analysisTooltip(session)}</div>
-                        <div class="session-card-meta">${fmtTime(session.startedAt)} · ${escapeHtml(shorten(session.client, 42))}</div>
-                        <div style="margin-top:8px;">${riskBadge(session)} ${badge(success ? 'accepted' : 'rejected', success ? 'green' : 'red')} ${failed ? badge(`${failed} failed auth`, 'amber') : ''}</div>
-                        <div class="session-card-meta">${fmt.format(session.commands.length)} commands · ${session.binaryAttempts} tooling · ${session.failedCommands} failed · ${sec(session.durationSeconds)}</div>
-                        <div class="session-card-actions"><span>${renderBadges([...session.tactics].slice(0, 3), 'purple') || '<span class="muted">no tactics</span>'}</span><span class="muted">details</span></div>
+                        <div class="session-card-title">${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</div>
+                        <div class="story-text">${escapeHtml(behaviorStory(session))}</div>
+                        <div class="session-card-meta">User ${escapeHtml(session.username)} · ${fmt.format(session.commands.length)} commands · ${sec(session.durationSeconds)} · ${riskBadge(session)}</div>
+                        ${representative ? `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(representative)}</div>` : ''}
+                        <div class="session-card-actions"><span>${renderBadges([...session.tactics].slice(0, 2), 'purple') || '<span class="muted">no MITRE tactic</span>'}</span><span class="muted">details</span></div>
                     </div>
                 `;
             }).join('');
@@ -1426,6 +1518,60 @@
             target.querySelectorAll('.session-row').forEach(row => {
                 row.addEventListener('click', () => selectSession(row.dataset.sessionId));
             });
+        }
+
+        function renderGhostedSessions(sessions) {
+            const target = document.getElementById('ghostedSessions');
+            if (!target) return;
+            const ghosted = sessions.filter(isGhostedSession);
+            if (!ghosted.length) {
+                target.innerHTML = '<div class="empty">No ghosted sessions yet.</div>';
+                return;
+            }
+            const shellCount = Math.max(sessions.filter(hasShellOpen).length, ghosted.length, 1);
+            target.innerHTML = `
+                <div class="ghost-stat"><div class="session-card-title">${fmt.format(ghosted.length)} ghosted session${ghosted.length === 1 ? '' : 's'}</div><div class="session-card-meta">${pct(ghosted.length / shellCount)} of shell sessions ended before the first command.</div></div>
+                <div class="ghost-stat"><div class="session-card-title">Common usernames</div><div class="session-card-meta">${escapeHtml(topValues(ghosted.map(session => session.username)).join(', ') || 'none')}</div></div>
+                <div class="ghost-stat"><div class="session-card-title">Common client/banner family</div><div class="session-card-meta">${escapeHtml(topValues(ghosted.map(session => session.client || session.sshBanner)).join(', ') || 'none')}</div></div>
+            `;
+        }
+
+        function renderHighRiskActivity(sessions) {
+            const target = document.getElementById('highRiskActivity');
+            if (!target) return;
+            const findings = sessions
+                .filter(session => riskLabel(session) === 'high' || session.binaryAttempts || session.uploads.length || session.payloadUrls.size || session.persistence.size)
+                .sort((a, b) => riskScore(b) - riskScore(a))
+                .slice(0, 6);
+            if (!findings.length) {
+                target.innerHTML = '<div class="empty">No payload attempts in this time range.</div>';
+                return;
+            }
+            target.innerHTML = findings.map(session => `
+                <div class="finding-card">
+                    <div class="session-card-title">${escapeHtml(highRiskTitle(session))}</div>
+                    <div class="session-card-meta">${riskBadge(session)} · ${fmt.format(session.binaryAttempts)} tooling signal${session.binaryAttempts === 1 ? '' : 's'} · ${fmt.format(session.uploads.length)} upload event${session.uploads.length === 1 ? '' : 's'}</div>
+                    <div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(representativeCommand(session) || summarizeNotableCommands([]))}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderMitreNarrative(sessions) {
+            const target = document.getElementById('mitreNarrative');
+            if (!target) return;
+            const tactics = summarizeTactics(sessions);
+            const entries = Object.entries(tactics).sort((a, b) => b[1] - a[1]);
+            if (!entries.length) {
+                target.innerHTML = '<div class="empty">No MITRE behavior yet.</div>';
+                return;
+            }
+            target.innerHTML = entries.slice(0, 4).map(([tactic, count]) => `
+                <div class="finding-card">
+                    <div class="session-card-title">${escapeHtml(tactic)}</div>
+                    <div class="session-card-meta">Observed in ${fmt.format(count)} command${count === 1 ? '' : 's'}.</div>
+                    <div class="story-text">${escapeHtml(mitreExplanation(tactic, sessions))}</div>
+                </div>
+            `).join('');
         }
 
         function selectSession(id) {
@@ -1573,6 +1719,73 @@
             if (item.type === 'harvested_credential') return `credential harvested for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected') return renderUpload({ ...data, EventType: item.type });
             return escapeHtml(data.Event || item.type);
+        }
+
+        function hasShellOpen(session) {
+            return session.timeline.some(item => item.type === 'shell_session_start') || session.authAttempts.some(attempt => attempt.Accepted);
+        }
+
+        function isGhostedSession(session) {
+            return hasShellOpen(session) && !session.commands.length;
+        }
+
+        function behaviorType(session) {
+            if (isGhostedSession(session)) return 'Ghosted session';
+            if (session.uploads.length || session.payloadUrls.size || session.binaryAttempts) return 'Payload attempt';
+            if (session.persistence.size) return 'Persistence attempt';
+            if (session.commands.some(command => commandCategory(command) === 'Network probing')) return 'Network probing';
+            if (session.commands.some(command => commandCategory(command) === 'Discovery')) return 'Recon behavior';
+            if (session.authAttempts.length && !session.commands.length) return 'Credential validation';
+            return session.commands.length ? 'Shell interaction' : 'Connection probing';
+        }
+
+        function behaviorStory(session) {
+            const user = session.username || 'unknown user';
+            if (isGhostedSession(session)) return `Ghosted session. ${user} authenticated successfully, opened a shell, and disconnected before issuing commands.`;
+            if (session.uploads.length || session.payloadUrls.size || session.binaryAttempts) return `Payload attempt detected. The attacker used ${user} and tried tooling, transfer, upload, or executable-style shell activity.`;
+            if (session.persistence.size) return `Persistence-oriented behavior. The attacker moved beyond discovery and attempted foothold setup.`;
+            if (session.commands.length) return `${behaviorType(session)} observed. The attacker opened a shell, ran ${session.commands.length} command${session.commands.length === 1 ? '' : 's'}, and received ${session.results.length} FunnyPot response${session.results.length === 1 ? '' : 's'}.`;
+            return `Low-engagement probing. The session produced authentication or connection telemetry but no command exchange.`;
+        }
+
+        function representativeCommand(session) {
+            const risky = session.commands.find(command => isBinaryAttempt(command));
+            const failed = session.commands.find(command => findCommandResult(session, command)?.FailedCommand);
+            const discovery = session.commands.find(command => commandCategory(command) === 'Discovery');
+            return (risky || failed || discovery || session.commands[0])?.Command || '';
+        }
+
+        function mostCommonBehavior(sessions) {
+            const values = topValues(sessions.map(behaviorType));
+            return values[0] || 'none yet';
+        }
+
+        function topValues(values, limit = 3) {
+            const counts = {};
+            values.filter(Boolean).forEach(value => counts[value] = (counts[value] || 0) + 1);
+            return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, limit).map(([value]) => value);
+        }
+
+        function highRiskTitle(session) {
+            if (session.uploads.some(upload => upload.EventType === 'scp_upload_captured')) return 'Binary upload captured';
+            if (session.uploads.length) return 'Binary upload attempt rejected';
+            if (session.payloadUrls.size) return 'Payload download attempt detected';
+            if (session.persistence.size) return 'Persistence attempt detected';
+            if (session.binaryAttempts) return 'Suspicious shell tooling observed';
+            return 'High-risk command sequence observed';
+        }
+
+        function mitreExplanation(tactic, sessions) {
+            const examples = flattenCommands(sessions)
+                .filter(item => mitreTactics(item.command.MitreAttackTechniques).includes(tactic))
+                .slice(0, 3)
+                .map(item => shorten(item.command.Command, 42));
+            const exampleText = examples.length ? ` Examples: ${examples.join(' | ')}.` : '';
+            if (tactic === 'Discovery') return `Attackers attempted to identify the environment, user, filesystem, process, or network context.${exampleText}`;
+            if (tactic === 'Command and Control') return `Some sessions attempted outbound connectivity, transfer tooling, tunneling, or payload retrieval.${exampleText}`;
+            if (tactic === 'Execution') return `Observed shell commands indicate attempts to run scripts, chained commands, or executable content.${exampleText}`;
+            if (tactic === 'Reconnaissance') return `Activity suggests broad probing before deeper interaction.${exampleText}`;
+            return `This tactic appeared in attacker command telemetry.${exampleText}`;
         }
 
         function riskScore(session) {

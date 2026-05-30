@@ -1190,7 +1190,7 @@
             target.innerHTML = recent.map(session => `
                 <div class="exchange-session">
                     <div class="exchange-title">
-                        <span>${escapeHtml(session.remote)} / ${escapeHtml(session.username)}</span>
+                        <span>${escapeHtml(session.remote)} / ${escapeHtml(session.username)} ${analysisTooltip(session)}</span>
                         <span class="muted">${fmtTime(session.endedAt || session.startedAt)}</span>
                     </div>
                     ${session.commands.slice(-5).map(command => {

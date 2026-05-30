@@ -1145,6 +1145,8 @@
         }
 
         function renderTimeOfDay(events) {
+            const target = document.getElementById('hourGrid');
+            if (!target) return;
             const counts = Array.from({ length: 24 }, () => 0);
             for (const event of events) {
                 const timestamp = event.Data?.Timestamp || event.Timestamp;
@@ -1154,7 +1156,7 @@
             }
 
             const max = Math.max(...counts, 1);
-            document.getElementById('hourGrid').innerHTML = counts.map((count, hour) => `
+            target.innerHTML = counts.map((count, hour) => `
                 <div class="hour" title="${hour}:00 UTC / ${fmt.format(count)} events">
                     <div class="hour-bar" style="height:${Math.max(4, count / max * 150)}px"></div>
                     <div class="hour-label">${String(hour).padStart(2, '0')}</div>

@@ -589,41 +589,21 @@
         .word-token.amber { color: var(--amber); border-color: rgba(255, 204, 102, 0.2); background: rgba(255, 204, 102, 0.07); }
         .word-token.purple { color: var(--purple); border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.07); }
 
-        .intent-map {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .intent-node, .session-card, .history-item {
+        .session-card, .history-item {
             border: 1px solid rgba(72, 223, 255, 0.14);
             border-radius: 14px;
             background: rgba(255,255,255,0.025);
             padding: 12px;
         }
 
-        .intent-node {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .intent-node::before {
-            content: '';
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: var(--weight, 18%);
-            background: linear-gradient(90deg, rgba(53,255,122,0.14), transparent);
-            pointer-events: none;
-        }
-
-        .intent-title, .session-card-title, .history-title {
+        .session-card-title, .history-title {
             position: relative;
             color: #fff;
             font-weight: 850;
             overflow-wrap: anywhere;
         }
 
-        .intent-meta, .session-card-meta, .history-meta {
+        .session-card-meta, .history-meta {
             position: relative;
             margin-top: 6px;
             color: var(--muted);
@@ -837,13 +817,9 @@
                 </section>
                 <section class="section grid insight-grid">
                     <div class="panel">
-                        <h3>Attacker Command Cloud</h3>
-                        <div class="word-cloud" id="commandCloud"><div class="empty">No command terms yet.</div></div>
-                        <div class="muted" style="margin-top:12px;">Weighted by recurring command verbs, files, tools, and probes across retained attacker sessions.</div>
-                    </div>
-                    <div class="panel">
-                        <h3>Intent Map</h3>
-                        <div class="intent-map" id="intentMap"><div class="empty">No intent patterns yet.</div></div>
+                        <h3>Commandless Session Cloud</h3>
+                        <div class="word-cloud" id="commandCloud"><div class="empty">No commandless sessions yet.</div></div>
+                        <div class="muted" style="margin-top:12px;">Weighted by usernames, passwords, client banners, auth methods, and connection metadata from sessions that never reached a command.</div>
                     </div>
                 </section>
                 <section class="section grid insight-grid">
@@ -939,7 +915,6 @@
                 renderUploadBars(events);
                 renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
                 renderCommandCloud(sessionModels);
-                renderIntentMap(sessionModels);
                 renderCommandHistory(sessionModels);
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
@@ -1363,10 +1338,10 @@
         function renderCommandCloud(sessions) {
             const target = document.getElementById('commandCloud');
             if (!target) return;
-            const counts = countCommandTerms(sessions);
+            const counts = countCommandlessTerms(sessions);
             const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 42);
             if (!entries.length) {
-                target.innerHTML = '<div class="empty">No command terms yet.</div>';
+                target.innerHTML = '<div class="empty">No commandless sessions yet.</div>';
                 return;
             }
 
@@ -1377,29 +1352,6 @@
                 const color = colors[index % colors.length];
                 return `<span class="word-token ${color}" style="font-size:${size.toFixed(2)}rem" title="${fmt.format(count)} hit${count === 1 ? '' : 's'}">${escapeHtml(term)}</span>`;
             }).join('');
-        }
-
-        function renderIntentMap(sessions) {
-            const target = document.getElementById('intentMap');
-            if (!target) return;
-            const counts = {};
-            sessions.forEach(session => {
-                const intent = inferIntent(session);
-                counts[intent] = (counts[intent] || 0) + 1;
-            });
-            const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
-            if (!entries.length) {
-                target.innerHTML = '<div class="empty">No intent patterns yet.</div>';
-                return;
-            }
-
-            const max = Math.max(...entries.map(([, count]) => count), 1);
-            target.innerHTML = entries.map(([intent, count]) => `
-                <div class="intent-node" style="--weight:${Math.max(12, count / max * 100)}%">
-                    <div class="intent-title">${escapeHtml(intent)}</div>
-                    <div class="intent-meta">${fmt.format(count)} session${count === 1 ? '' : 's'} · ${escapeHtml(topToolsForIntent(sessions, intent).join(', ') || 'no repeated tools')}</div>
-                </div>
-            `).join('');
         }
 
         function renderCommandHistory(sessions) {
@@ -1430,26 +1382,23 @@
                 .sort((a, b) => new Date(b.command.Timestamp || b.session.startedAt || 0) - new Date(a.command.Timestamp || a.session.startedAt || 0));
         }
 
-        function countCommandTerms(sessions) {
-            const stop = new Set(['sudo', 'echo', 'cat', 'ls', 'cd', 'pwd', 'true', 'false', 'exit', 'logout', 'then', 'else', 'fi', 'for', 'while', 'done', 'dev', 'null', 'tmp', 'var', 'usr', 'bin', 'home', 'root']);
+        function countCommandlessTerms(sessions) {
+            const stop = new Set(['unknown', 'ssh', 'client', 'none', 'null', 'true', 'false']);
             const counts = {};
-            sessions.forEach(session => session.commands.forEach(command => {
-                String(command.Command || '').toLowerCase()
-                    .match(/[a-z0-9_./:-]{2,}/g)?.forEach(term => {
-                        const cleaned = term.replace(/^\/+|\/+$/g, '').replace(/^\.\//, '');
-                        if (!cleaned || stop.has(cleaned) || /^\d+$/.test(cleaned)) return;
-                        counts[cleaned] = (counts[cleaned] || 0) + 1;
-                    });
-            }));
-            return counts;
-        }
-
-        function topToolsForIntent(sessions, intent) {
-            const counts = {};
-            sessions.filter(session => inferIntent(session) === intent).forEach(session => {
-                summarizeTools(session).forEach(tool => counts[tool] = (counts[tool] || 0) + 1);
+            sessions.filter(session => !session.commands.length).forEach(session => {
+                const fields = [session.remote, session.username, session.client, session.sshBanner];
+                session.authAttempts.forEach(attempt => fields.push(attempt.Username, attempt.Password, attempt.AuthMethod, attempt.AcceptanceReason));
+                session.timeline.forEach(item => fields.push(item.type));
+                fields.forEach(value => {
+                    String(value || '').toLowerCase()
+                        .match(/[a-z0-9_.:/-]{2,}/g)?.forEach(term => {
+                            const cleaned = term.replace(/^\/+|\/+$/g, '').replace(/^\.\//, '');
+                            if (!cleaned || stop.has(cleaned) || /^\d+$/.test(cleaned)) return;
+                            counts[cleaned] = (counts[cleaned] || 0) + 1;
+                        });
+                });
             });
-            return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([tool]) => tool);
+            return counts;
         }
 
         function renderSessions(sessions) {
@@ -1469,7 +1418,6 @@
                         <div class="session-card-meta">${fmtTime(session.startedAt)} · ${escapeHtml(shorten(session.client, 42))}</div>
                         <div style="margin-top:8px;">${riskBadge(session)} ${badge(success ? 'accepted' : 'rejected', success ? 'green' : 'red')} ${failed ? badge(`${failed} failed auth`, 'amber') : ''}</div>
                         <div class="session-card-meta">${fmt.format(session.commands.length)} commands · ${session.binaryAttempts} tooling · ${session.failedCommands} failed · ${sec(session.durationSeconds)}</div>
-                        <div class="session-card-meta">${escapeHtml(inferIntent(session))}</div>
                         <div class="session-card-actions"><span>${renderBadges([...session.tactics].slice(0, 3), 'purple') || '<span class="muted">no tactics</span>'}</span><span class="muted">details</span></div>
                     </div>
                 `;
@@ -1650,7 +1598,6 @@
 
         function analyzeSession(session) {
             const tools = summarizeTools(session);
-            const intent = inferIntent(session);
             const accepted = session.authAttempts.some(attempt => attempt.Accepted);
             const commands = session.commands.map(command => String(command.Command || '').trim()).filter(Boolean);
             const notable = summarizeNotableCommands(commands);
@@ -1664,7 +1611,6 @@
             if (session.failedCommands) signals.push(`${session.failedCommands} failed command${session.failedCommands === 1 ? '' : 's'}`);
 
             return [
-                `Intent: ${intent}`,
                 `Observed tools: ${tools.length ? tools.join(', ') : 'none beyond basic shell builtins'}`,
                 `Command pattern: ${notable}`,
                 `Signals: ${signals.length ? signals.join(', ') : 'short low-noise interaction with no payloads'}`,
@@ -1684,21 +1630,6 @@
             });
             if (session.uploads.length) tools.add('scp upload');
             return [...tools].slice(0, 8);
-        }
-
-        function inferIntent(session) {
-            const tactics = [...session.tactics].map(value => value.toLowerCase());
-            const commandText = session.commands.map(command => String(command.Command || '').toLowerCase()).join('\n');
-            if (/^\/ip |\n\/ip |\/system |\/interface /.test(commandText)) return 'fingerprint a possible MikroTik/RouterOS target, then fall back to Linux checks';
-            if (session.persistence.size) return 'persistence or foothold setup';
-            if (session.uploads.some(upload => upload.EventType === 'scp_upload_captured')) return 'payload staging via file upload';
-            if (session.payloadUrls.size || session.binaryAttempts > 0) return 'payload download or tool execution';
-            if (session.egressTargets.size || tactics.some(value => value.includes('command and control'))) return 'outbound connectivity or tunneling check';
-            if (/\b(ifconfig|ip addr|ip a|netstat|ss|route|arp)\b/.test(commandText)) return 'network interface and routing reconnaissance';
-            if (/\b(uname|cat \/proc|lscpu|hostname|whoami|id)\b/.test(commandText)) return 'host fingerprinting and privilege discovery';
-            if (tactics.some(value => value.includes('discovery')) || session.commands.length > 0) return 'host discovery and environment probing';
-            if (session.authAttempts.length) return 'credential probing';
-            return 'connection probing';
         }
 
         function summarizeNotableCommands(commands) {

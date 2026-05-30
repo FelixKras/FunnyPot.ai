@@ -287,6 +287,36 @@
 
         .analysis-line:last-child { margin-bottom: 0; }
 
+        .floating-tooltip {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: min(360px, calc(100vw - 24px));
+            max-height: min(70vh, 420px);
+            overflow: auto;
+            background: #101923;
+            border: 1px solid rgba(72, 223, 255, 0.28);
+            border-radius: 14px;
+            padding: 12px 14px;
+            color: var(--text);
+            font-size: 0.82rem;
+            line-height: 1.45;
+            white-space: pre-line;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.62);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(4px);
+            transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
+            pointer-events: none;
+        }
+
+        .floating-tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
         .metric-value {
             margin-top: 10px;
             font-size: clamp(1.7rem, 3vw, 2.8rem);
@@ -556,6 +586,7 @@
 </head>
 <body>
     <main class="container">
+        <div class="floating-tooltip" id="floatingTooltip" role="tooltip"></div>
         <header class="hero">
             <div>
                 <div class="brand-mark">SSH honeypot telemetry</div>
@@ -815,6 +846,7 @@
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
                 setupTabs();
+                setupFloatingTooltips();
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('dataStatus').textContent = `${fmt.format(retainedSummary.TotalEvents)} retained events`;
@@ -1425,13 +1457,16 @@
 
         function analysisTooltip(session) {
             const lines = analyzeSession(session);
-            return `<span class="tooltip-trigger session-analysis">?<span class="tooltip-box">${lines.map(line => `<span class="analysis-line">${escapeHtml(line)}</span>`).join('')}</span></span>`;
+            return `<button class="tooltip-trigger session-analysis" type="button" data-tooltip="${escapeAttr(lines.join('\n'))}" aria-label="Session analysis">?</button>`;
         }
 
         function analyzeSession(session) {
             const tools = summarizeTools(session);
             const intent = inferIntent(session);
             const accepted = session.authAttempts.some(attempt => attempt.Accepted);
+            const commands = session.commands.map(command => String(command.Command || '').trim()).filter(Boolean);
+            const notable = summarizeNotableCommands(commands);
+            const failures = summarizeFailures(session);
             const signals = [];
             if (accepted) signals.push('accepted auth');
             if (session.payloadUrls.size) signals.push(`${session.payloadUrls.size} payload URL${session.payloadUrls.size === 1 ? '' : 's'}`);
@@ -1441,10 +1476,12 @@
             if (session.failedCommands) signals.push(`${session.failedCommands} failed command${session.failedCommands === 1 ? '' : 's'}`);
 
             return [
-                `Intent: ${intent}.`,
-                `Tools: ${tools.length ? tools.join(', ') : 'plain shell commands only'}.`,
-                `Signals: ${signals.length ? signals.join(', ') : 'low-interaction reconnaissance'}.`,
-                `Summary: ${session.commands.length} command${session.commands.length === 1 ? '' : 's'}, ${session.binaryAttempts} binary/tooling attempt${session.binaryAttempts === 1 ? '' : 's'}, risk ${riskLabel(session)}.`
+                `Intent: ${intent}`,
+                `Observed tools: ${tools.length ? tools.join(', ') : 'none beyond basic shell builtins'}`,
+                `Command pattern: ${notable}`,
+                `Signals: ${signals.length ? signals.join(', ') : 'short low-noise interaction with no payloads'}`,
+                `Failure clues: ${failures}`,
+                `Assessment: ${session.commands.length} command${session.commands.length === 1 ? '' : 's'}, ${session.binaryAttempts} tooling/payload attempt${session.binaryAttempts === 1 ? '' : 's'}, ${riskLabel(session)} risk`
             ];
         }
 
@@ -1452,7 +1489,8 @@
             const tools = new Set();
             session.commands.forEach(command => {
                 const text = String(command.Command || '').toLowerCase();
-                ['curl', 'wget', 'fetch', 'tftp', 'scp', 'sftp', 'ftp', 'nc', 'netcat', 'base64', 'xxd', 'chmod', 'python', 'python3', 'perl', 'bash', 'sh', 'openssl', 'chisel', 'frp', 'socat', 'ssh', 'telnet'].forEach(tool => {
+                if (text.startsWith('/ip ') || text.startsWith('/system ') || text.startsWith('/interface ')) tools.add('RouterOS probe');
+                ['curl', 'wget', 'fetch', 'tftp', 'scp', 'sftp', 'ftp', 'nc', 'netcat', 'base64', 'xxd', 'chmod', 'python', 'python3', 'perl', 'bash', 'sh', 'openssl', 'chisel', 'frp', 'socat', 'ssh', 'telnet', 'ifconfig', 'ip', 'uname', 'whoami', 'id', 'ps', 'top', 'find', 'locate'].forEach(tool => {
                     if (new RegExp(`\\b${tool.replace('+', '\\+')}\\b`).test(text)) tools.add(tool);
                 });
             });
@@ -1462,13 +1500,99 @@
 
         function inferIntent(session) {
             const tactics = [...session.tactics].map(value => value.toLowerCase());
+            const commandText = session.commands.map(command => String(command.Command || '').toLowerCase()).join('\n');
+            if (/^\/ip |\n\/ip |\/system |\/interface /.test(commandText)) return 'fingerprint a possible MikroTik/RouterOS target, then fall back to Linux checks';
             if (session.persistence.size) return 'persistence or foothold setup';
             if (session.uploads.some(upload => upload.EventType === 'scp_upload_captured')) return 'payload staging via file upload';
             if (session.payloadUrls.size || session.binaryAttempts > 0) return 'payload download or tool execution';
             if (session.egressTargets.size || tactics.some(value => value.includes('command and control'))) return 'outbound connectivity or tunneling check';
+            if (/\b(ifconfig|ip addr|ip a|netstat|ss|route|arp)\b/.test(commandText)) return 'network interface and routing reconnaissance';
+            if (/\b(uname|cat \/proc|lscpu|hostname|whoami|id)\b/.test(commandText)) return 'host fingerprinting and privilege discovery';
             if (tactics.some(value => value.includes('discovery')) || session.commands.length > 0) return 'host discovery and environment probing';
             if (session.authAttempts.length) return 'credential probing';
             return 'connection probing';
+        }
+
+        function summarizeNotableCommands(commands) {
+            if (!commands.length) return 'no commands after authentication';
+            const first = commands[0];
+            const last = commands[commands.length - 1];
+            const routerProbe = commands.find(command => /^\/(ip|system|interface)\b/i.test(command));
+            const payload = commands.find(command => /\b(curl|wget|fetch|tftp|scp|chmod\s+\+x|base64|python\s+-c|perl\s+-e)\b/i.test(command));
+            const discovery = commands.filter(command => /\b(uname|ifconfig|ip\s+a|ip\s+addr|id|whoami|hostname|ps|top|find|locate|cat\s+\/proc)\b/i.test(command)).slice(0, 3);
+            if (routerProbe) return `starts with RouterOS syntax (${shorten(routerProbe, 44)}), then tests Linux compatibility`;
+            if (payload) return `moves from discovery into tooling or payload staging (${shorten(payload, 44)})`;
+            if (discovery.length) return `mostly discovery: ${discovery.map(command => shorten(command, 34)).join(' | ')}`;
+            if (commands.length === 1) return `single command: ${shorten(first, 48)}`;
+            return `starts with ${shorten(first, 32)} and ends with ${shorten(last, 32)}`;
+        }
+
+        function summarizeFailures(session) {
+            if (!session.failedCommands) return 'commands generally matched the simulated host';
+            const failed = session.results.filter(result => result.FailedCommand).map(result => result.Command).filter(Boolean).slice(0, 3);
+            if (!failed.length) return `${session.failedCommands} failed command${session.failedCommands === 1 ? '' : 's'} recorded`;
+            return `${session.failedCommands} failure${session.failedCommands === 1 ? '' : 's'} around ${failed.map(command => shorten(command, 34)).join(' | ')}`;
+        }
+
+        function setupFloatingTooltips() {
+            const tooltip = document.getElementById('floatingTooltip');
+            if (!tooltip || tooltip.dataset.ready) return;
+            tooltip.dataset.ready = 'true';
+            let activeTrigger = null;
+
+            function show(trigger) {
+                const text = trigger.dataset.tooltip;
+                if (!text) return;
+                activeTrigger = trigger;
+                tooltip.textContent = text;
+                tooltip.classList.add('visible');
+                positionTooltip(trigger);
+            }
+
+            function hide() {
+                activeTrigger = null;
+                tooltip.classList.remove('visible');
+            }
+
+            function positionTooltip(trigger) {
+                const rect = trigger.getBoundingClientRect();
+                const margin = 12;
+                const width = tooltip.offsetWidth || Math.min(360, window.innerWidth - margin * 2);
+                const height = tooltip.offsetHeight || 160;
+                let left = rect.left + rect.width / 2 - width / 2;
+                let top = rect.bottom + 10;
+                if (top + height > window.innerHeight - margin) top = rect.top - height - 10;
+                left = Math.max(margin, Math.min(left, window.innerWidth - width - margin));
+                top = Math.max(margin, Math.min(top, window.innerHeight - height - margin));
+                tooltip.style.left = `${left}px`;
+                tooltip.style.top = `${top}px`;
+            }
+
+            document.addEventListener('mouseover', event => {
+                const trigger = event.target.closest('[data-tooltip]');
+                if (trigger) show(trigger);
+            });
+            document.addEventListener('focusin', event => {
+                const trigger = event.target.closest('[data-tooltip]');
+                if (trigger) show(trigger);
+            });
+            document.addEventListener('click', event => {
+                const trigger = event.target.closest('[data-tooltip]');
+                if (trigger) {
+                    event.stopPropagation();
+                    activeTrigger === trigger ? hide() : show(trigger);
+                } else {
+                    hide();
+                }
+            });
+            document.addEventListener('mouseout', event => {
+                if (event.target.closest('[data-tooltip]') && !event.relatedTarget?.closest('.floating-tooltip')) hide();
+            });
+            document.addEventListener('focusout', event => {
+                if (event.target.closest('[data-tooltip]')) hide();
+            });
+            window.addEventListener('scroll', () => { if (activeTrigger) positionTooltip(activeTrigger); }, true);
+            window.addEventListener('resize', () => { if (activeTrigger) positionTooltip(activeTrigger); });
         }
 
         function summarizeTactics(sessions) {

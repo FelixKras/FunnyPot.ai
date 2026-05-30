@@ -564,33 +564,6 @@
             letter-spacing: 0.08em;
         }
 
-        .word-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px 12px;
-            min-height: 180px;
-            padding: 8px 0;
-        }
-
-        .word-cloud.compact { min-height: 0; margin-top: 12px; }
-
-        .word-token {
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid rgba(72, 223, 255, 0.18);
-            border-radius: 999px;
-            padding: 6px 10px;
-            background: rgba(72, 223, 255, 0.06);
-            color: var(--cyan);
-            font-weight: 850;
-            line-height: 1;
-        }
-
-        .word-token.green { color: var(--green); border-color: rgba(53, 255, 122, 0.2); background: rgba(53, 255, 122, 0.07); }
-        .word-token.amber { color: var(--amber); border-color: rgba(255, 204, 102, 0.2); background: rgba(255, 204, 102, 0.07); }
-        .word-token.purple { color: var(--purple); border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.07); }
-
         .session-card, .history-item {
             border: 1px solid rgba(72, 223, 255, 0.14);
             border-radius: 14px;
@@ -857,7 +830,6 @@
                         <h3>Ghosted Sessions</h3>
                         <p class="muted">Commandless sessions are successful shell openings where the attacker disconnected before issuing a command. They often indicate scanner behavior, credential-validation automation, or low-engagement bots.</p>
                         <div class="ghost-grid" id="ghostedSessions"><div class="empty">No ghosted sessions yet.</div></div>
-                        <div class="word-cloud compact" id="commandCloud"><div class="empty">No commandless sessions yet.</div></div>
                     </div>
                 </section>
                 <section class="section grid insight-grid">
@@ -948,7 +920,6 @@
                 renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
                 renderActivityFreshness(summary, stats, retainedSummary);
                 renderActivitySummary(retainedSummary, events, sessionModels);
-                renderCommandCloud(sessionModels);
                 renderCommandHistory(sessionModels);
                 renderLatestExchanges(sessionModels);
                 renderSessions(sessionModels);
@@ -1403,25 +1374,6 @@
             return `<div class="metric"><div class="metric-label">${escapeHtml(label)}</div><div class="metric-value">${escapeHtml(String(value))}</div><div class="metric-note">${escapeHtml(note)}</div></div>`;
         }
 
-        function renderCommandCloud(sessions) {
-            const target = document.getElementById('commandCloud');
-            if (!target) return;
-            const counts = countCommandlessTerms(sessions);
-            const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 42);
-            if (!entries.length) {
-                target.innerHTML = '<div class="empty">No commandless sessions yet.</div>';
-                return;
-            }
-
-            const max = Math.max(...entries.map(([, count]) => count), 1);
-            target.innerHTML = entries.map(([term, count], index) => {
-                const size = 0.82 + (count / max) * 1.45;
-                const colors = ['cyan', 'green', 'amber', 'purple'];
-                const color = colors[index % colors.length];
-                return `<span class="word-token ${color}" style="font-size:${size.toFixed(2)}rem" title="${fmt.format(count)} hit${count === 1 ? '' : 's'}">${escapeHtml(term)}</span>`;
-            }).join('');
-        }
-
         function renderCommandHistory(sessions) {
             const target = document.getElementById('commandHistory');
             if (!target) return;
@@ -1433,15 +1385,26 @@
             }
 
             target.innerHTML = entries.map(([category, items]) => {
-                const samples = items.slice(0, 5).map(item => `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(item.command.Command)}</div>`).join('');
+                const uniqueItems = uniqueCommandItems(items);
+                const samples = uniqueItems.slice(0, 5).map(item => `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(item.command.Command)}</div>`).join('');
                 return `
                     <div class="history-item">
                         <div class="history-title">${escapeHtml(category)}</div>
-                        <div class="history-meta">${fmt.format(items.length)} command${items.length === 1 ? '' : 's'} observed</div>
+                        <div class="history-meta">${fmt.format(uniqueItems.length)} unique command${uniqueItems.length === 1 ? '' : 's'} observed</div>
                         <div class="pattern-samples">${samples}</div>
                     </div>
                 `;
             }).join('');
+        }
+
+        function uniqueCommandItems(items) {
+            const seen = new Set();
+            return items.filter(item => {
+                const key = normalizeCommandSignature(item.command.Command);
+                if (!key || seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
         }
 
         function commandPatternGroups(sessions) {
@@ -1470,25 +1433,6 @@
         function flattenCommands(sessions) {
             return sessions.flatMap(session => session.commands.map(command => ({ session, command })))
                 .sort((a, b) => new Date(b.command.Timestamp || b.session.startedAt || 0) - new Date(a.command.Timestamp || a.session.startedAt || 0));
-        }
-
-        function countCommandlessTerms(sessions) {
-            const stop = new Set(['unknown', 'ssh', 'client', 'none', 'null', 'true', 'false']);
-            const counts = {};
-            sessions.filter(session => !session.commands.length).forEach(session => {
-                const fields = [session.remote, session.username, session.client, session.sshBanner];
-                session.authAttempts.forEach(attempt => fields.push(attempt.Username, attempt.Password, attempt.AuthMethod, attempt.AcceptanceReason));
-                session.timeline.forEach(item => fields.push(item.type));
-                fields.forEach(value => {
-                    String(value || '').toLowerCase()
-                        .match(/[a-z0-9_.:/-]{2,}/g)?.forEach(term => {
-                            const cleaned = term.replace(/^\/+|\/+$/g, '').replace(/^\.\//, '');
-                            if (!cleaned || stop.has(cleaned) || /^\d+$/.test(cleaned)) return;
-                            counts[cleaned] = (counts[cleaned] || 0) + 1;
-                        });
-                });
-            });
-            return counts;
         }
 
         function renderSessions(sessions) {

@@ -268,6 +268,25 @@
             border-top-color: var(--line);
         }
 
+        .session-analysis .tooltip-box {
+            left: auto;
+            right: 0;
+            transform: translateY(4px);
+            width: min(340px, 82vw);
+            white-space: normal;
+        }
+
+        .session-analysis:hover .tooltip-box {
+            transform: translateY(0);
+        }
+
+        .analysis-line {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .analysis-line:last-child { margin-bottom: 0; }
+
         .metric-value {
             margin-top: 10px;
             font-size: clamp(1.7rem, 3vw, 2.8rem);
@@ -708,10 +727,11 @@
                                         <th>Commands</th>
                                         <th>Tactics</th>
                                         <th>Risk</th>
+                                        <th>Analysis</th>
                                         <th>Duration</th>
                                     </tr>
                                 </thead>
-                                <tbody id="sessionsTable"><tr><td colspan="9" class="empty">No attacker sessions yet.</td></tr></tbody>
+                                <tbody id="sessionsTable"><tr><td colspan="10" class="empty">No attacker sessions yet.</td></tr></tbody>
                             </table>
                         </div>
                     </div>
@@ -1212,7 +1232,7 @@
         function renderSessions(sessions) {
             const tbody = document.getElementById('sessionsTable');
             if (!sessions.length) {
-                tbody.innerHTML = `<tr><td colspan="9" class="empty">No attacker sessions yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="10" class="empty">No attacker sessions yet.</td></tr>`;
                 return;
             }
 
@@ -1229,6 +1249,7 @@
                         <td>${fmt.format(session.commands.length)} cmds<br><span class="muted">${session.failedCommands} failed</span></td>
                         <td>${renderBadges([...session.tactics], 'purple') || '<span class="muted">none</span>'}</td>
                         <td>${riskBadge(session)}</td>
+                        <td>${analysisTooltip(session)}</td>
                         <td>${sec(session.durationSeconds)}</td>
                     </tr>
                 `;
@@ -1400,6 +1421,54 @@
         function riskBadge(session) {
             const label = riskLabel(session);
             return badge(label, label === 'high' ? 'red' : label === 'medium' ? 'amber' : 'green');
+        }
+
+        function analysisTooltip(session) {
+            const lines = analyzeSession(session);
+            return `<span class="tooltip-trigger session-analysis">?<span class="tooltip-box">${lines.map(line => `<span class="analysis-line">${escapeHtml(line)}</span>`).join('')}</span></span>`;
+        }
+
+        function analyzeSession(session) {
+            const tools = summarizeTools(session);
+            const intent = inferIntent(session);
+            const accepted = session.authAttempts.some(attempt => attempt.Accepted);
+            const signals = [];
+            if (accepted) signals.push('accepted auth');
+            if (session.payloadUrls.size) signals.push(`${session.payloadUrls.size} payload URL${session.payloadUrls.size === 1 ? '' : 's'}`);
+            if (session.egressTargets.size) signals.push(`${session.egressTargets.size} egress target${session.egressTargets.size === 1 ? '' : 's'}`);
+            if (session.persistence.size) signals.push('persistence attempt');
+            if (session.uploads.length) signals.push(`${session.uploads.length} upload event${session.uploads.length === 1 ? '' : 's'}`);
+            if (session.failedCommands) signals.push(`${session.failedCommands} failed command${session.failedCommands === 1 ? '' : 's'}`);
+
+            return [
+                `Intent: ${intent}.`,
+                `Tools: ${tools.length ? tools.join(', ') : 'plain shell commands only'}.`,
+                `Signals: ${signals.length ? signals.join(', ') : 'low-interaction reconnaissance'}.`,
+                `Summary: ${session.commands.length} command${session.commands.length === 1 ? '' : 's'}, ${session.binaryAttempts} binary/tooling attempt${session.binaryAttempts === 1 ? '' : 's'}, risk ${riskLabel(session)}.`
+            ];
+        }
+
+        function summarizeTools(session) {
+            const tools = new Set();
+            session.commands.forEach(command => {
+                const text = String(command.Command || '').toLowerCase();
+                ['curl', 'wget', 'fetch', 'tftp', 'scp', 'sftp', 'ftp', 'nc', 'netcat', 'base64', 'xxd', 'chmod', 'python', 'python3', 'perl', 'bash', 'sh', 'openssl', 'chisel', 'frp', 'socat', 'ssh', 'telnet'].forEach(tool => {
+                    if (new RegExp(`\\b${tool.replace('+', '\\+')}\\b`).test(text)) tools.add(tool);
+                });
+            });
+            if (session.uploads.length) tools.add('scp upload');
+            return [...tools].slice(0, 8);
+        }
+
+        function inferIntent(session) {
+            const tactics = [...session.tactics].map(value => value.toLowerCase());
+            if (session.persistence.size) return 'persistence or foothold setup';
+            if (session.uploads.some(upload => upload.EventType === 'scp_upload_captured')) return 'payload staging via file upload';
+            if (session.payloadUrls.size || session.binaryAttempts > 0) return 'payload download or tool execution';
+            if (session.egressTargets.size || tactics.some(value => value.includes('command and control'))) return 'outbound connectivity or tunneling check';
+            if (tactics.some(value => value.includes('discovery')) || session.commands.length > 0) return 'host discovery and environment probing';
+            if (session.authAttempts.length) return 'credential probing';
+            return 'connection probing';
         }
 
         function summarizeTactics(sessions) {

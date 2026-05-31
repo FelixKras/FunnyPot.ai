@@ -564,6 +564,14 @@
             letter-spacing: 0.08em;
         }
 
+        .exchange-time {
+            color: var(--muted);
+            font-size: 0.74rem;
+            margin-top: 3px;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
         .session-card, .history-item {
             border: 1px solid rgba(72, 223, 255, 0.14);
             border-radius: 14px;
@@ -1296,7 +1304,7 @@
             const target = document.getElementById('latestExchanges');
             const recent = uniqueSessions(sessions
                 .filter(session => session.commands.length)
-                .sort((a, b) => riskScore(b) - riskScore(a) || new Date(b.endedAt || b.startedAt || 0) - new Date(a.endedAt || a.startedAt || 0)), session => `${behaviorType(session)}:${normalizeCommandSignature(representativeCommand(session))}`)
+                .sort((a, b) => latestExchangeTime(b) - latestExchangeTime(a) || riskScore(b) - riskScore(a)), session => `${behaviorType(session)}:${normalizeCommandSignature(representativeCommand(session))}`)
                 .slice(0, 5);
 
             if (!recent.length) {
@@ -1308,22 +1316,37 @@
                 <div class="exchange-session">
                     <div class="exchange-title">
                         <span>Session: ${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</span>
-                        <span class="muted">User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
+                        <span class="muted">Latest: ${fmtTime(latestExchangeTimestamp(session))} · User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
                     </div>
-                    ${commandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
+                    ${recentCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
                         return `
                             <div class="exchange-line">
-                                <div class="exchange-role">attacker$</div>
+                                <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
                                 <div class="terminal-line">${escapeHtml(command.Command)}</div>
                             </div>
                             <div class="exchange-line">
-                                <div class="exchange-role">funny-pot&gt;</div>
+                                <div class="exchange-role">funny-pot&gt;<div class="exchange-time">${fmtTime(result?.Timestamp || command.Timestamp)}</div></div>
                                 <div class="terminal-line terminal-response">${escapeHtml(displayResponse(command, result))}</div>
                             </div>
                         `;
                     }).join('')}
                 </div>
             `).join('');
+        }
+
+        function latestExchangeTimestamp(session) {
+            const pair = recentCommandResponsePairs(session)[0];
+            return pair?.result?.Timestamp || pair?.command?.Timestamp || session.endedAt || session.startedAt;
+        }
+
+        function latestExchangeTime(session) {
+            return new Date(latestExchangeTimestamp(session) || 0).getTime() || 0;
+        }
+
+        function recentCommandResponsePairs(session) {
+            return commandResponsePairs(session)
+                .slice()
+                .sort((a, b) => new Date((b.result?.Timestamp || b.command.Timestamp) || 0) - new Date((a.result?.Timestamp || a.command.Timestamp) || 0));
         }
 
         function renderBars(targetId, data, color = 'cyan', prefix = '') {

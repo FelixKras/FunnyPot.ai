@@ -971,7 +971,7 @@
                     if (ip) summary.ScansByIp[ip] = (summary.ScansByIp[ip] || 0) + 1;
                 }
 
-                if (event.Event === 'auth_attempt') {
+                if (event.Event === 'auth_attempt' || event.Event === 'harvested_credential') {
                     summary.TotalScanAttempts++;
                     if (data.Username) summary.TopUsernames[data.Username] = (summary.TopUsernames[data.Username] || 0) + 1;
                     if (data.Password) summary.TopPasswords[data.Password] = (summary.TopPasswords[data.Password] || 0) + 1;
@@ -1183,7 +1183,7 @@
         function countCredentialField(events, field) {
             const counts = {};
             for (const event of events) {
-                if (event.Event !== 'auth_attempt') continue;
+                if (event.Event !== 'auth_attempt' && event.Event !== 'harvested_credential') continue;
                 const value = event.Data?.[field];
                 if (!value) continue;
                 counts[value] = (counts[value] || 0) + 1;

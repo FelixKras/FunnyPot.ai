@@ -915,7 +915,8 @@
                 ]);
 
                 const retainedSummary = summarizeEvents(events);
-                sessionModels = buildSessions(events);
+                const activityEvents = events.filter(isActivityEvent);
+                sessionModels = buildSessions(activityEvents);
                 renderPerformance(stats, retainedSummary, events, sessionModels);
                 renderBars('eventBars', retainedSummary.EventCounts || {}, 'cyan');
                 renderCredentialStats(retainedSummary, events);
@@ -982,6 +983,10 @@
 
             summary.UniqueScanIps = Object.keys(summary.ScansByIp).length;
             return summary;
+        }
+
+        function isActivityEvent(event) {
+            return event.Event !== 'auth_attempt' && event.Event !== 'harvested_credential';
         }
 
         function latestTimestamp(events) {
@@ -1750,9 +1755,8 @@
 
         function fallbackCommandResponse(command) {
             const text = String(command || '').toLowerCase();
-            if (/rm\s+-rf|mkfs|dd\s+if=|:\(\)\{|chmod\s+777|\btftp\b|\bwget\b|\bcurl\b/.test(text)) {
-                return 'Operation not allowed - connection terminated.';
-            }
+            if (/\bwget\b|\bcurl\b|\btftp\b|\bchmod\b|\bchown\b|\bchattr\b|authorized_keys|\.ssh/.test(text)) return 'Command completed.';
+            if (/rm\s+-rf\s+\/$|mkfs|dd\s+if=|:\(\)\{/.test(text)) return 'bash: permission denied';
             if (/^exit$|^logout$/.test(text.trim())) return 'Connection closed.';
             return 'Response was not retained for this interrupted interaction.';
         }

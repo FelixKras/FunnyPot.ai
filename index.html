@@ -906,41 +906,38 @@
             return text.split('\n').filter(Boolean).map(line => JSON.parse(line));
         }
 
+        async function fetchEventDatabase() {
+            try {
+                return await fetchJsonl('data/events.jsonl');
+            } catch (error) {
+                return fetchJsonl('data/harvest.jsonl');
+            }
+        }
+
+        async function fetchEventSummary() {
+            try {
+                return await fetchJson('data/events_summary.json');
+            } catch (error) {
+                return fetchJson('data/harvest_summary.json');
+            }
+        }
+
         async function loadDashboard() {
             try {
-                const [stats, summary, events] = await Promise.all([
+                const [stats, summary] = await Promise.all([
                     fetchJson('global_stats.json'),
-                    fetchJson('data/harvest_summary.json'),
-                    fetchJsonl('data/harvest.jsonl')
+                    fetchEventSummary()
                 ]);
 
-                const retainedSummary = summarizeEvents(events);
-                const activityEvents = events.filter(isActivityEvent);
-                sessionModels = buildSessions(activityEvents);
-                renderPerformance(stats, retainedSummary, events, sessionModels);
-                renderBars('eventBars', retainedSummary.EventCounts || {}, 'cyan');
-                renderCredentialStats(retainedSummary, events);
-                renderGeography(retainedSummary);
-                renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
-                renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
-                renderTimeOfDay(events);
-                renderAttemptTypes(sessionModels);
-                renderUploadBars(events);
-                renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
-                renderActivityFreshness(summary, stats, retainedSummary);
-                renderActivitySummary(retainedSummary, events, sessionModels);
-                renderCommandHistory(sessionModels);
-                renderLatestExchanges(sessionModels);
-                renderSessions(sessionModels);
-                renderGhostedSessions(sessionModels);
-                renderHighRiskActivity(sessionModels);
-                renderMitreNarrative(sessionModels);
+                renderDashboard(stats, summary, []);
                 setupTabs();
                 setupFloatingTooltips();
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('dataStatus').textContent = `${fmt.format(retainedSummary.TotalEvents)} retained events`;
+                document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || 0)} indexed events`;
                 document.getElementById('lastUpdated').textContent = fmtTime(summary.LastUpdated || stats.LastUpdated);
+
+                hydrateEventDetails(stats, summary);
             } catch (error) {
                 console.error('Failed to load dashboard data:', error);
                 document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
@@ -948,6 +945,45 @@
                 const freshness = document.getElementById('activityFreshness');
                 if (freshness) freshness.textContent = `Status: failed to load telemetry (${error.message})`;
             }
+        }
+
+        function renderDashboard(stats, summary, events) {
+            const retainedSummary = events.length ? summarizeEvents(events) : summary;
+            const activityEvents = events.filter(isActivityEvent);
+            sessionModels = buildSessions(activityEvents);
+            renderPerformance(stats, retainedSummary, events, sessionModels);
+            renderBars('eventBars', retainedSummary.EventCounts || {}, 'cyan');
+            renderCredentialStats(retainedSummary, events);
+            renderGeography(retainedSummary);
+            renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
+            renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
+            renderTimeOfDay(events);
+            renderAttemptTypes(sessionModels);
+            renderUploadBars(events);
+            renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
+            renderActivityFreshness(summary, stats, retainedSummary);
+            renderActivitySummary(retainedSummary, events, sessionModels);
+            renderCommandHistory(sessionModels);
+            renderLatestExchanges(sessionModels);
+            renderSessions(sessionModels);
+            renderGhostedSessions(sessionModels);
+            renderHighRiskActivity(sessionModels);
+            renderMitreNarrative(sessionModels);
+        }
+
+        function hydrateEventDetails(stats, summary) {
+            const start = () => fetchEventDatabase()
+                .then(events => {
+                    renderDashboard(stats, summary, events);
+                    document.getElementById('dataStatus').textContent = `${fmt.format(events.length)} retained events`;
+                })
+                .catch(error => {
+                    console.warn('Detailed event database unavailable:', error);
+                    document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || 0)} indexed events; details unavailable`;
+                });
+
+            if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
+            else setTimeout(start, 0);
         }
 
         function summarizeEvents(events) {
@@ -1109,8 +1145,8 @@
             setText('totalSessions', fmt.format(summary.EventCounts?.shell_session_end || 0));
             setText('connections', fmt.format(summary.EventCounts?.session_start || 0));
             setText('authAttempts', fmt.format(summary.EventCounts?.auth_attempt || 0));
-            setText('commands', fmt.format(commands.length));
-            setText('meanEngagement', sec(average(sessions.map(s => s.durationSeconds))));
+            setText('commands', fmt.format(commands.length || stats.TotalMessages || 0));
+            setText('meanEngagement', sessions.length ? sec(average(sessions.map(s => s.durationSeconds))) : sec(stats.MeanEngagementSeconds));
             setText('uniqueScanIps', fmt.format(summary.UniqueScanIps || 0));
             setText('shellOpens', fmt.format(summary.TotalShells || 0));
             setText('avgResponse', `${fmt.format(Math.round(avgResponse))}ms`);
@@ -1749,16 +1785,12 @@
         }
 
         function displayResponse(command, result) {
-            if (result?.Response) return result.Response;
+            if (result && Object.prototype.hasOwnProperty.call(result, 'Response')) return result.Response || '(no output)';
             return fallbackCommandResponse(command.Command || '');
         }
 
         function fallbackCommandResponse(command) {
-            const text = String(command || '').toLowerCase();
-            if (/\bwget\b|\bcurl\b|\btftp\b|\bchmod\b|\bchown\b|\bchattr\b|authorized_keys|\.ssh/.test(text)) return 'Command completed.';
-            if (/rm\s+-rf\s+\/$|mkfs|dd\s+if=|:\(\)\{/.test(text)) return 'bash: permission denied';
-            if (/^exit$|^logout$/.test(text.trim())) return 'Connection closed.';
-            return 'Response was not retained for this interrupted interaction.';
+            return '(response not recorded)';
         }
 
         function mostCommonBehavior(sessions) {

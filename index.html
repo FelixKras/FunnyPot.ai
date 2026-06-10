@@ -1343,10 +1343,7 @@
 
         function renderLatestExchanges(sessions) {
             const target = document.getElementById('latestExchanges');
-            const recent = uniqueSessions(sessions
-                .filter(session => session.commands.length)
-                .sort((a, b) => latestExchangeTime(b) - latestExchangeTime(a) || riskScore(b) - riskScore(a)), session => `${behaviorType(session)}:${normalizeCommandSignature(representativeCommand(session))}`)
-                .slice(0, 5);
+            const recent = spotlightSessions(sessions, 8).filter(session => session.commands.length);
 
             if (!recent.length) {
                 target.innerHTML = '<div class="empty">No command exchanges yet. Attackers authenticated, looked around, and vanished.</div>';
@@ -1357,9 +1354,9 @@
                 <div class="exchange-session">
                     <div class="exchange-title">
                         <span>Session: ${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</span>
-                        <span class="muted">Latest: ${fmtTime(latestExchangeTimestamp(session))} · User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
+                        <span class="muted">${escapeHtml(sessionRef(session))} · Latest: ${fmtTime(latestExchangeTimestamp(session))} · User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
                     </div>
-                    ${recentCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
+                    ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
                         return `
                             <div class="exchange-line">
                                 <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
@@ -1388,6 +1385,19 @@
             return commandResponsePairs(session)
                 .slice()
                 .sort((a, b) => new Date((b.result?.Timestamp || b.command.Timestamp) || 0) - new Date((a.result?.Timestamp || a.command.Timestamp) || 0));
+        }
+
+        function previewCommandResponsePairs(session) {
+            const recent = recentCommandResponsePairs(session);
+            const pinned = [];
+            const pin = predicate => {
+                const pair = recent.find(item => !pinned.includes(item) && predicate(item));
+                if (pair) pinned.push(pair);
+            };
+            const representative = representativeCommand(session);
+            if (representative) pin(pair => pair.command.Command === representative);
+            pin(pair => /^top(?:\s|$)/i.test(String(pair.command.Command || '').trim()));
+            return [...pinned, ...recent.filter(pair => !pinned.includes(pair))];
         }
 
         function renderBars(targetId, data, color = 'cyan', prefix = '') {
@@ -1441,7 +1451,7 @@
         function renderCommandHistory(sessions) {
             const target = document.getElementById('commandHistory');
             if (!target) return;
-            const groups = commandPatternGroups(sessions);
+            const groups = commandPatternGroups(spotlightSessions(sessions, 8));
             const entries = Object.entries(groups).filter(([, items]) => items.length);
             if (!entries.length) {
                 target.innerHTML = '<div class="empty">No command patterns yet.</div>';
@@ -1450,11 +1460,11 @@
 
             target.innerHTML = entries.map(([category, items]) => {
                 const uniqueItems = uniqueCommandItems(items);
-                const samples = uniqueItems.slice(0, 5).map(item => `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(item.command.Command)}</div>`).join('');
+                const samples = uniqueItems.slice(0, 5).map(item => `<div><div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(item.command.Command)}</div><div class="history-meta">${escapeHtml(sessionRef(item.session))}</div></div>`).join('');
                 return `
                     <div class="history-item">
                         <div class="history-title">${escapeHtml(category)}</div>
-                        <div class="history-meta">${fmt.format(uniqueItems.length)} unique command${uniqueItems.length === 1 ? '' : 's'} observed</div>
+                        <div class="history-meta">${fmt.format(uniqueItems.length)} unique spotlight command${uniqueItems.length === 1 ? '' : 's'} observed</div>
                         <div class="pattern-samples">${samples}</div>
                     </div>
                 `;
@@ -1507,17 +1517,14 @@
                 return;
             }
 
-            target.innerHTML = uniqueSessions(sessions
-                .slice()
-                .sort((a, b) => riskScore(b) - riskScore(a) || b.commands.length - a.commands.length), session => `${behaviorType(session)}:${normalizeCommandSignature(representativeCommand(session))}`)
-                .slice(0, 8)
+            target.innerHTML = spotlightSessions(sessions, 8)
                 .map(session => {
                 const representative = representativeCommand(session);
                 return `
                     <div class="session-card session-row" data-session-id="${escapeAttr(session.id)}">
                         <div class="session-card-title">${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</div>
                         <div class="story-text">${escapeHtml(behaviorStory(session))}</div>
-                        <div class="session-card-meta">User ${escapeHtml(session.username)} · ${fmt.format(session.commands.length)} commands · ${sec(session.durationSeconds)} · ${riskBadge(session)}</div>
+                        <div class="session-card-meta">${escapeHtml(sessionRef(session))} · User ${escapeHtml(session.username)} · ${fmt.format(session.commands.length)} commands · ${sec(session.durationSeconds)} · ${riskBadge(session)}</div>
                         ${representative ? `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(representative)}</div>` : ''}
                         <div class="session-card-actions"><span>${renderBadges([...session.tactics].slice(0, 2), 'purple') || '<span class="muted">no MITRE tactic</span>'}</span><span class="muted">details</span></div>
                     </div>
@@ -1527,6 +1534,21 @@
             target.querySelectorAll('.session-row').forEach(row => {
                 row.addEventListener('click', () => selectSession(row.dataset.sessionId));
             });
+        }
+
+        function spotlightSessions(sessions, limit) {
+            return uniqueSessions(sessions
+                .slice()
+                .sort((a, b) => riskScore(b) - riskScore(a) || b.commands.length - a.commands.length), session => `${behaviorType(session)}:${normalizeCommandSignature(representativeCommand(session))}`)
+                .slice(0, limit);
+        }
+
+        function sessionRef(session) {
+            return `session ${shortSessionId(session)} @ ${fmtTime(session.startedAt)}`;
+        }
+
+        function shortSessionId(session) {
+            return String(session.id || session.sessionKey || 'unknown').slice(0, 8);
         }
 
         function renderGhostedSessions(sessions) {
@@ -1548,7 +1570,7 @@
         function renderHighRiskActivity(sessions) {
             const target = document.getElementById('highRiskActivity');
             if (!target) return;
-            const findings = sessions
+            const findings = spotlightSessions(sessions, 8)
                 .filter(session => riskLabel(session) === 'high' || session.binaryAttempts || session.uploads.length || session.payloadUrls.size || session.persistence.size)
                 .sort((a, b) => riskScore(b) - riskScore(a))
                 .filter((session, index, list) => list.findIndex(item => `${highRiskTitle(item)}:${normalizeCommandSignature(representativeCommand(item))}` === `${highRiskTitle(session)}:${normalizeCommandSignature(representativeCommand(session))}`) === index)
@@ -1560,7 +1582,7 @@
             target.innerHTML = findings.map(session => `
                 <div class="finding-card">
                     <div class="session-card-title">${escapeHtml(highRiskTitle(session))}</div>
-                    <div class="session-card-meta">${riskBadge(session)} · ${fmt.format(session.binaryAttempts)} tooling signal${session.binaryAttempts === 1 ? '' : 's'} · ${fmt.format(session.uploads.length)} upload event${session.uploads.length === 1 ? '' : 's'}</div>
+                    <div class="session-card-meta">${escapeHtml(sessionRef(session))} · ${riskBadge(session)} · ${fmt.format(session.binaryAttempts)} tooling signal${session.binaryAttempts === 1 ? '' : 's'} · ${fmt.format(session.uploads.length)} upload event${session.uploads.length === 1 ? '' : 's'}</div>
                     <div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(representativeCommand(session) || summarizeNotableCommands([]))}</div>
                 </div>
             `).join('');
@@ -1569,7 +1591,8 @@
         function renderMitreNarrative(sessions) {
             const target = document.getElementById('mitreNarrative');
             if (!target) return;
-            const tactics = summarizeTactics(sessions);
+            const visibleSessions = spotlightSessions(sessions, 8);
+            const tactics = summarizeTactics(visibleSessions);
             const entries = Object.entries(tactics).sort((a, b) => b[1] - a[1]);
             if (!entries.length) {
                 target.innerHTML = '<div class="empty">No MITRE behavior yet.</div>';
@@ -1579,7 +1602,7 @@
                 <div class="finding-card">
                     <div class="session-card-title">${escapeHtml(tactic)}</div>
                     <div class="session-card-meta">Observed in ${fmt.format(count)} command${count === 1 ? '' : 's'}.</div>
-                    <div class="story-text">${escapeHtml(mitreExplanation(tactic, sessions))}</div>
+                    <div class="story-text">${escapeHtml(mitreExplanation(tactic, visibleSessions))}</div>
                 </div>
             `).join('');
         }

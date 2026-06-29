@@ -916,9 +916,6 @@
                         <h2 class="section-title">Attacker Exchange</h2>
                         <span class="muted">Command and response transcript details</span>
                     </div>
-                    <div class="grid metrics activity-summary-grid" id="exchangeSummaryCards"></div>
-                </section>
-                <section class="section">
                     <div class="panel">
                         <h3>Command Exchange Details</h3>
                         <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
@@ -1013,7 +1010,6 @@
             renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
             renderActivityFreshness(summary, stats, retainedSummary);
             renderActivitySummary(retainedSummary, events, sessionModels);
-            renderExchangeSummary(retainedSummary, sessionModels);
             renderCommandHistory(sessionModels);
             renderLatestExchanges(sessionModels);
             renderSessions(sessionModels);
@@ -1438,26 +1434,6 @@
                     }).join('')}
                 </div>
             `).join('');
-        }
-
-        function renderExchangeSummary(summary, sessions) {
-            const target = document.getElementById('exchangeSummaryCards');
-            if (!target) return;
-            const sessionsWithCommands = sessions.filter(session => session.commands.length);
-            const commandCount = summary.EventCounts?.command || sessions.reduce((sum, session) => sum + session.commands.length, 0);
-            const responseCount = summary.EventCounts?.command_result || sessions.reduce((sum, session) => sum + session.results.length, 0);
-            const failedResponses = sessions.reduce((sum, session) => sum + session.failedCommands, 0);
-            const avgLatency = average(flattenCommands(sessions).map(item => item.command.CommandSequenceLatencyMs).filter(value => value !== undefined && value !== null));
-            const responseCoverage = commandCount ? pct(responseCount / commandCount) : '0%';
-
-            target.innerHTML = [
-                summaryMetric('Exchange Sessions', sessionsWithCommands.length, 'Sessions with commands'),
-                summaryMetric('Commands', commandCount, 'Attacker inputs'),
-                summaryMetric('Responses', responseCount, `${responseCoverage} command coverage`),
-                summaryMetric('Failed Responses', failedResponses, 'FunnyPot marked failures'),
-                summaryMetric('Avg Command Gap', `${fmt.format(Math.round(avgLatency))}ms`, 'Observed sequence latency'),
-                summaryMetric('Top Behavior', mostCommonBehavior(sessionsWithCommands), 'Most common exchange type')
-            ].join('');
         }
 
         function exchangeDetail(label, value) {

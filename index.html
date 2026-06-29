@@ -270,6 +270,10 @@
             border-top-color: var(--line);
         }
 
+        .metric .tooltip-box {
+            display: none;
+        }
+
         .session-analysis .tooltip-box {
             left: auto;
             right: 0;
@@ -2021,6 +2025,18 @@
             tooltip.dataset.ready = 'true';
             let activeTrigger = null;
 
+            document.querySelectorAll('.tooltip-trigger').forEach(trigger => {
+                const inlineTooltip = trigger.querySelector('.tooltip-box');
+                if (!trigger.dataset.tooltip && inlineTooltip?.textContent) {
+                    trigger.dataset.tooltip = inlineTooltip.textContent.trim();
+                }
+                if (trigger.dataset.tooltip && !trigger.hasAttribute('tabindex')) {
+                    trigger.setAttribute('tabindex', '0');
+                    trigger.setAttribute('role', trigger.tagName === 'BUTTON' ? 'button' : 'img');
+                    trigger.setAttribute('aria-label', trigger.getAttribute('aria-label') || 'Metric explanation');
+                }
+            });
+
             function show(trigger) {
                 const text = trigger.dataset.tooltip;
                 if (!text) return;
@@ -2050,15 +2066,15 @@
             }
 
             document.addEventListener('mouseover', event => {
-                const trigger = event.target.closest('[data-tooltip]');
+                const trigger = event.target.closest('.tooltip-trigger[data-tooltip]');
                 if (trigger) show(trigger);
             });
             document.addEventListener('focusin', event => {
-                const trigger = event.target.closest('[data-tooltip]');
+                const trigger = event.target.closest('.tooltip-trigger[data-tooltip]');
                 if (trigger) show(trigger);
             });
             document.addEventListener('click', event => {
-                const trigger = event.target.closest('[data-tooltip]');
+                const trigger = event.target.closest('.tooltip-trigger[data-tooltip]');
                 if (trigger) {
                     event.stopPropagation();
                     activeTrigger === trigger ? hide() : show(trigger);
@@ -2067,10 +2083,10 @@
                 }
             });
             document.addEventListener('mouseout', event => {
-                if (event.target.closest('[data-tooltip]') && !event.relatedTarget?.closest('.floating-tooltip')) hide();
+                if (event.target.closest('.tooltip-trigger[data-tooltip]') && !event.relatedTarget?.closest('.floating-tooltip')) hide();
             });
             document.addEventListener('focusout', event => {
-                if (event.target.closest('[data-tooltip]')) hide();
+                if (event.target.closest('.tooltip-trigger[data-tooltip]')) hide();
             });
             window.addEventListener('scroll', () => { if (activeTrigger) positionTooltip(activeTrigger); }, true);
             window.addEventListener('resize', () => { if (activeTrigger) positionTooltip(activeTrigger); });

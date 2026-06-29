@@ -528,7 +528,7 @@
         .exchange-feed {
             display: grid;
             gap: 12px;
-            max-height: 680px;
+            max-height: 780px;
             overflow: auto;
             padding-right: 8px;
         }
@@ -549,12 +549,48 @@
             margin-bottom: 8px;
         }
 
+        .exchange-details {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+            margin: 10px 0 12px;
+        }
+
+        .exchange-detail {
+            border: 1px solid rgba(72, 223, 255, 0.12);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.025);
+            padding: 8px;
+            min-width: 0;
+        }
+
+        .exchange-detail-label {
+            color: var(--muted);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .exchange-detail-value {
+            color: var(--text);
+            font-weight: 800;
+            margin-top: 4px;
+            overflow-wrap: anywhere;
+        }
+
         .exchange-line {
             display: grid;
             grid-template-columns: 110px 1fr;
             gap: 10px;
             padding: 8px 0;
             border-top: 1px solid rgba(38, 54, 70, 0.7);
+        }
+
+        .exchange-line-meta {
+            color: var(--muted);
+            font-size: 0.78rem;
+            margin-top: 5px;
+            line-height: 1.4;
         }
 
         .exchange-role {
@@ -671,6 +707,7 @@
             .hero { align-items: flex-start; flex-direction: column; }
             .hero-visual { min-width: 0; width: 100%; }
             .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .exchange-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .bar-row { grid-template-columns: 1fr; gap: 5px; }
             .session-summary-grid { grid-template-columns: 1fr; }
             table { min-width: 900px; }
@@ -734,6 +771,7 @@
                 <button class="tab-button" data-tab="credentials" type="button">Credentials</button>
                 <button class="tab-button" data-tab="geography" type="button">Geography</button>
                 <button class="tab-button" data-tab="activity" type="button">Attacker Activity</button>
+                <button class="tab-button" data-tab="exchange" type="button">Attacker Exchange</button>
             </div>
 
             <div class="tab-panel active" data-tab-panel="overview">
@@ -818,12 +856,7 @@
                     </div>
                     <div class="grid metrics activity-summary-grid" id="activitySummaryCards"></div>
                 </section>
-                <section class="section grid insight-grid">
-                    <div class="panel">
-                        <h3>Attacker Command Exchange</h3>
-                        <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
-                        <div class="muted" style="margin-top:12px;">Some commands may not have a recorded response if the session ended early or the interaction was interrupted.</div>
-                    </div>
+                <section class="section">
                     <div class="panel">
                         <h3>Behavior Story Cards</h3>
                         <div class="session-summary-grid" id="sessionSummaryCards"><div class="empty">No attacker sessions yet.</div></div>
@@ -873,6 +906,23 @@
                             <h3>Commands</h3>
                             <div id="commandList" class="command-list"></div>
                         </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-panel" data-tab-panel="exchange">
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Attacker Exchange</h2>
+                        <span class="muted">Command and response transcript details</span>
+                    </div>
+                    <div class="grid metrics activity-summary-grid" id="exchangeSummaryCards"></div>
+                </section>
+                <section class="section">
+                    <div class="panel">
+                        <h3>Command Exchange Details</h3>
+                        <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
+                        <div class="muted" style="margin-top:12px;">Some commands may not have a recorded response if the session ended early or the interaction was interrupted.</div>
                     </div>
                 </section>
             </div>
@@ -963,6 +1013,7 @@
             renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
             renderActivityFreshness(summary, stats, retainedSummary);
             renderActivitySummary(retainedSummary, events, sessionModels);
+            renderExchangeSummary(retainedSummary, sessionModels);
             renderCommandHistory(sessionModels);
             renderLatestExchanges(sessionModels);
             renderSessions(sessionModels);
@@ -1356,20 +1407,81 @@
                         <span>Session: ${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</span>
                         <span class="muted">${escapeHtml(sessionRef(session))} · Latest: ${fmtTime(latestExchangeTimestamp(session))} · User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
                     </div>
+                    <div class="exchange-details">
+                        ${exchangeDetail('Remote', session.remote)}
+                        ${exchangeDetail('Duration', sec(session.durationSeconds))}
+                        ${exchangeDetail('Auth Attempts', session.authAttempts.length)}
+                        ${exchangeDetail('Commands / Responses', `${session.commands.length} / ${session.results.length}`)}
+                        ${exchangeDetail('Client', session.client || session.sshBanner || '-')}
+                        ${exchangeDetail('Failure Ratio', pct(session.commands.length ? session.failedCommands / session.commands.length : 0))}
+                        ${exchangeDetail('Top Tools', summarizeTools(session).join(', ') || 'none')}
+                        ${exchangeDetail('Notable Flow', summarizeNotableCommands(session.commands.map(command => command.Command).filter(Boolean)))}
+                    </div>
                     ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
                         return `
                             <div class="exchange-line">
                                 <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
-                                <div class="terminal-line">${escapeHtml(command.Command)}</div>
+                                <div>
+                                    <div class="terminal-line">${escapeHtml(command.Command)}</div>
+                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(command, result))}</div>
+                                    <div>${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector && command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent && command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
+                                </div>
                             </div>
                             <div class="exchange-line">
                                 <div class="exchange-role">funny-pot&gt;<div class="exchange-time">${fmtTime(result?.Timestamp || command.Timestamp)}</div></div>
-                                <div class="terminal-line terminal-response">${escapeHtml(displayResponse(command, result))}</div>
+                                <div>
+                                    <div class="terminal-line terminal-response">${escapeHtml(displayResponse(command, result))}</div>
+                                    <div class="exchange-line-meta">${escapeHtml(responseExchangeMeta(result))}</div>
+                                </div>
                             </div>
                         `;
                     }).join('')}
                 </div>
             `).join('');
+        }
+
+        function renderExchangeSummary(summary, sessions) {
+            const target = document.getElementById('exchangeSummaryCards');
+            if (!target) return;
+            const sessionsWithCommands = sessions.filter(session => session.commands.length);
+            const commandCount = summary.EventCounts?.command || sessions.reduce((sum, session) => sum + session.commands.length, 0);
+            const responseCount = summary.EventCounts?.command_result || sessions.reduce((sum, session) => sum + session.results.length, 0);
+            const failedResponses = sessions.reduce((sum, session) => sum + session.failedCommands, 0);
+            const avgLatency = average(flattenCommands(sessions).map(item => item.command.CommandSequenceLatencyMs).filter(value => value !== undefined && value !== null));
+            const responseCoverage = commandCount ? pct(responseCount / commandCount) : '0%';
+
+            target.innerHTML = [
+                summaryMetric('Exchange Sessions', sessionsWithCommands.length, 'Sessions with commands'),
+                summaryMetric('Commands', commandCount, 'Attacker inputs'),
+                summaryMetric('Responses', responseCount, `${responseCoverage} command coverage`),
+                summaryMetric('Failed Responses', failedResponses, 'FunnyPot marked failures'),
+                summaryMetric('Avg Command Gap', `${fmt.format(Math.round(avgLatency))}ms`, 'Observed sequence latency'),
+                summaryMetric('Top Behavior', mostCommonBehavior(sessionsWithCommands), 'Most common exchange type')
+            ].join('');
+        }
+
+        function exchangeDetail(label, value) {
+            return `<div class="exchange-detail"><div class="exchange-detail-label">${escapeHtml(label)}</div><div class="exchange-detail-value">${escapeHtml(String(value ?? '-'))}</div></div>`;
+        }
+
+        function commandExchangeMeta(command, result) {
+            const parts = [
+                `message #${command.MessageNumber ?? '-'}`,
+                isBinaryAttempt(command) ? 'binary/tooling' : 'text',
+                `category ${commandCategory(command)}`,
+                `complexity ${formatNumber(command.SemanticComplexity)}`,
+                `AVP ${formatNumber(command.AssetValuePerceptionScore)}`,
+            ];
+            if (command.CommandSequenceLatencyMs !== undefined && command.CommandSequenceLatencyMs !== null) parts.push(`gap ${fmt.format(command.CommandSequenceLatencyMs)}ms`);
+            if (result) parts.push(result.FailedCommand ? 'response failed' : 'response ok');
+            return parts.join(' / ');
+        }
+
+        function responseExchangeMeta(result) {
+            if (!result) return 'No response record was captured for this command.';
+            const duration = result.ResponseDurationMs !== undefined && result.ResponseDurationMs !== null ? `${fmt.format(result.ResponseDurationMs)}ms` : 'unknown duration';
+            const status = result.FailedCommand ? 'failed command simulation' : 'generated response';
+            return `${status} / ${duration}`;
         }
 
         function latestExchangeTimestamp(session) {

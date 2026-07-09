@@ -1446,25 +1446,41 @@
         }
 
         function commandExchangeMeta(command, result) {
+            const complexity = Number(command.SemanticComplexity);
+            const assetValue = Number(command.AssetValuePerceptionScore);
             const parts = [
-                `exchange #${command.MessageNumber ?? '-'}`,
-                isBinaryAttempt(command) ? 'binary/tooling' : 'text',
-                `category ${commandCategory(command)}`,
-                `complexity ${formatNumber(command.SemanticComplexity)}`,
-                `AVP ${formatNumber(command.AssetValuePerceptionScore)}`,
+                `Step ${command.MessageNumber ?? '-'}`,
+                isBinaryAttempt(command) ? 'Tool or payload activity' : 'Plain shell command',
+                `Intent: ${commandCategory(command)}`,
+                `Sophistication: ${scoreLabel(complexity)} (${formatNumber(complexity)}/10)`,
+                `Target value: ${scoreLabel(assetValue)} (${formatNumber(assetValue)}/10)`,
             ];
-            if (command.ShellMessageNumber && command.ShellMessageNumber !== command.MessageNumber) parts.push(`shell msg #${command.ShellMessageNumber}`);
-            if (command.CommandSequenceLatencyMs !== undefined && command.CommandSequenceLatencyMs !== null) parts.push(`gap ${fmt.format(command.CommandSequenceLatencyMs)}ms`);
-            if (result) parts.push(result.FailedCommand ? 'response failed' : 'response ok');
+            if (command.CommandSequenceLatencyMs !== undefined && command.CommandSequenceLatencyMs !== null) parts.push(`Time since previous command: ${formatDurationMs(command.CommandSequenceLatencyMs)}`);
+            parts.push(result ? 'Reply captured' : 'No reply captured');
             return parts.join(' / ');
         }
 
         function responseExchangeMeta(result) {
             if (!result) return 'No response record was captured for this command.';
-            const duration = result.ResponseDurationMs !== undefined && result.ResponseDurationMs !== null ? `${fmt.format(result.ResponseDurationMs)}ms` : 'unknown duration';
-            const status = result.FailedCommand ? 'failed command simulation' : 'generated response';
-            const model = result.LlmModel ? `model ${result.LlmModel}` : 'model static/local';
-            return `${status} / ${duration} / ${model}`;
+            const duration = result.ResponseDurationMs !== undefined && result.ResponseDurationMs !== null ? formatDurationMs(result.ResponseDurationMs) : 'unknown time';
+            const status = result.FailedCommand ? 'Simulated a realistic command failure' : 'Simulated output generated';
+            const model = result.LlmModel ? `Model: ${result.LlmModel}` : 'Source: static/local response';
+            return `${status} in ${duration} / ${model}`;
+        }
+
+        function scoreLabel(value) {
+            const score = Number(value);
+            if (!Number.isFinite(score)) return 'unknown';
+            if (score >= 7) return 'high';
+            if (score >= 4) return 'moderate';
+            return 'low';
+        }
+
+        function formatDurationMs(value) {
+            const ms = Number(value);
+            if (!Number.isFinite(ms)) return '-';
+            if (ms >= 1000) return `${formatNumber(ms / 1000)}s`;
+            return `${fmt.format(ms)}ms`;
         }
 
         function summarizeModels(session) {
@@ -1772,15 +1788,12 @@
             }
 
             target.innerHTML = commandResponsePairs(session).map(({ command, result }) => {
-                const exchangeNumber = command.MessageNumber ?? '-';
-                const rawMessage = command.ShellMessageNumber && command.ShellMessageNumber !== command.MessageNumber ? ` / shell msg #${command.ShellMessageNumber}` : '';
-                const model = result?.LlmModel ? ` / model ${result.LlmModel}` : '';
                 return `
                     <div class="command">
                         <div>${escapeHtml(command.Command)}</div>
                         <div class="muted" style="margin-top:8px;">
-                            exchange #${exchangeNumber}${rawMessage} / ${isBinaryAttempt(command) ? 'binary/tooling' : 'text'} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
-                            ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms${model}` : ''}
+                            ${escapeHtml(commandExchangeMeta(command, result))}
+                            ${result ? `<br>${escapeHtml(responseExchangeMeta(result))}` : ''}
                         </div>
                         <div style="margin-top:6px;">${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                         ${result?.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}
@@ -1806,7 +1819,7 @@
                         'Accepted Auth': authAccepted,
                         'Rejected Auth': authRejected,
                         'Command Failure Ratio': pct(session.commands.length ? session.failedCommands / session.commands.length : 0),
-                        'Max AVP Score': session.avpMax,
+                        'Highest Target Value Score': session.avpMax,
                         'Semantic Drift': session.semanticDriftMax,
                         'Turing Multiplier': formatNumber(session.turingMax),
                         'Binary Attempts': session.binaryAttempts,

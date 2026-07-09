@@ -1461,7 +1461,8 @@
             if (!result) return 'No response record was captured for this command.';
             const duration = result.ResponseDurationMs !== undefined && result.ResponseDurationMs !== null ? `${fmt.format(result.ResponseDurationMs)}ms` : 'unknown duration';
             const status = result.FailedCommand ? 'failed command simulation' : 'generated response';
-            return `${status} / ${duration}`;
+            const model = result.LlmModel ? `model ${result.LlmModel}` : 'model static/local';
+            return `${status} / ${duration} / ${model}`;
         }
 
         function latestExchangeTimestamp(session) {
@@ -1836,7 +1837,7 @@
         function describeEvent(item) {
             const data = item.data || {};
             if (item.type === 'command') return `command <strong>${escapeHtml(data.Command)}</strong>`;
-            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} ${escapeHtml(data.Command)} / ${data.ResponseDurationMs}ms${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
+            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} ${escapeHtml(data.Command)} / ${data.ResponseDurationMs}ms${data.LlmModel ? ` / ${escapeHtml(data.LlmModel)}` : ''}${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
             if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;

@@ -1414,16 +1414,17 @@
                         ${exchangeDetail('Commands / Responses', `${session.commands.length} / ${session.results.length}`)}
                         ${exchangeDetail('Client', session.client || session.sshBanner || '-')}
                         ${exchangeDetail('Failure Ratio', pct(session.commands.length ? session.failedCommands / session.commands.length : 0))}
+                        ${exchangeDetail('LLM Models', summarizeModels(session))}
                         ${exchangeDetail('Top Tools', summarizeTools(session).join(', ') || 'none')}
                         ${exchangeDetail('Notable Flow', summarizeNotableCommands(session.commands.map(command => command.Command).filter(Boolean)))}
                     </div>
-                    ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
+                    ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result, exchangeNumber }) => {
                         return `
                             <div class="exchange-line">
                                 <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
                                 <div>
                                     <div class="terminal-line">${escapeHtml(command.Command)}</div>
-                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(command, result))}</div>
+                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(command, result, exchangeNumber))}</div>
                                     <div>${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector && command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent && command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                                 </div>
                             </div>
@@ -1444,14 +1445,15 @@
             return `<div class="exchange-detail"><div class="exchange-detail-label">${escapeHtml(label)}</div><div class="exchange-detail-value">${escapeHtml(String(value ?? '-'))}</div></div>`;
         }
 
-        function commandExchangeMeta(command, result) {
+        function commandExchangeMeta(command, result, exchangeNumber) {
             const parts = [
-                `message #${command.MessageNumber ?? '-'}`,
+                `exchange #${exchangeNumber ?? command.MessageNumber ?? '-'}`,
                 isBinaryAttempt(command) ? 'binary/tooling' : 'text',
                 `category ${commandCategory(command)}`,
                 `complexity ${formatNumber(command.SemanticComplexity)}`,
                 `AVP ${formatNumber(command.AssetValuePerceptionScore)}`,
             ];
+            if (exchangeNumber && command.MessageNumber && command.MessageNumber !== exchangeNumber) parts.push(`shell msg #${command.MessageNumber}`);
             if (command.CommandSequenceLatencyMs !== undefined && command.CommandSequenceLatencyMs !== null) parts.push(`gap ${fmt.format(command.CommandSequenceLatencyMs)}ms`);
             if (result) parts.push(result.FailedCommand ? 'response failed' : 'response ok');
             return parts.join(' / ');
@@ -1465,6 +1467,13 @@
             return `${status} / ${duration} / ${model}`;
         }
 
+        function summarizeModels(session) {
+            const models = [...new Set((session.results || [])
+                .map(result => result.LlmModel)
+                .filter(Boolean))];
+            return models.length ? models.join(', ') : 'static/local';
+        }
+
         function latestExchangeTimestamp(session) {
             const pair = recentCommandResponsePairs(session)[0];
             return pair?.result?.Timestamp || pair?.command?.Timestamp || session.endedAt || session.startedAt;
@@ -1475,7 +1484,7 @@
         }
 
         function recentCommandResponsePairs(session) {
-            return commandResponsePairs(session)
+            return commandResponsePairs(session).map((pair, index) => ({ ...pair, exchangeNumber: index + 1 }))
                 .slice()
                 .sort((a, b) => new Date((b.result?.Timestamp || b.command.Timestamp) || 0) - new Date((a.result?.Timestamp || a.command.Timestamp) || 0));
         }
@@ -1769,13 +1778,16 @@
                 return;
             }
 
-            target.innerHTML = commandResponsePairs(session).map(({ command, result }) => {
+            target.innerHTML = commandResponsePairs(session).map(({ command, result }, index) => {
+                const exchangeNumber = index + 1;
+                const rawMessage = command.MessageNumber && command.MessageNumber !== exchangeNumber ? ` / shell msg #${command.MessageNumber}` : '';
+                const model = result?.LlmModel ? ` / model ${result.LlmModel}` : '';
                 return `
                     <div class="command">
                         <div>${escapeHtml(command.Command)}</div>
                         <div class="muted" style="margin-top:8px;">
-                            #${command.MessageNumber} / ${isBinaryAttempt(command) ? 'binary/tooling' : 'text'} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
-                            ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms` : ''}
+                            exchange #${exchangeNumber}${rawMessage} / ${isBinaryAttempt(command) ? 'binary/tooling' : 'text'} / complexity ${command.SemanticComplexity} / AVP ${command.AssetValuePerceptionScore} / latency ${command.CommandSequenceLatencyMs ?? '-'}ms
+                            ${result ? `/ ${result.FailedCommand ? 'failed' : 'ok'} / response ${result.ResponseDurationMs}ms${model}` : ''}
                         </div>
                         <div style="margin-top:6px;">${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                         ${result?.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}

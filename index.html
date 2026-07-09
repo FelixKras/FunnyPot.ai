@@ -940,7 +940,13 @@
         let selectedSessionId = null;
 
         const fmt = new Intl.NumberFormat();
-        const fmtTime = value => value ? new Date(value).toLocaleString() : '-';
+        const fmtTime = value => {
+            if (!value) return '-';
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return '-';
+            const pad = (number, size = 2) => String(number).padStart(size, '0');
+            return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}.${pad(date.getMilliseconds(), 3)}`;
+        };
         const pct = value => `${Math.round((value || 0) * 100)}%`;
         const sec = value => `${Math.round(value || 0)}s`;
 
@@ -1463,9 +1469,29 @@
         function responseExchangeMeta(result) {
             if (!result) return 'No response record was captured for this command.';
             const duration = result.ResponseDurationMs !== undefined && result.ResponseDurationMs !== null ? formatDurationMs(result.ResponseDurationMs) : 'unknown time';
+            const source = responseSourceLabel(result.ResponseSource, result.LlmModel);
+            if (String(result.ResponseSource || '').toLowerCase() === 'cache') {
+                const model = result.LlmModel ? `Original model: ${result.LlmModel}` : 'Original source: unknown';
+                return `Served from response cache in ${duration} / ${model}`;
+            }
             const status = result.FailedCommand ? 'Simulated a realistic command failure' : 'Simulated output generated';
-            const model = result.LlmModel ? `Model: ${result.LlmModel}` : 'Source: static/local response';
-            return `${status} in ${duration} / ${model}`;
+            return `${status} in ${duration} / Source: ${source}`;
+        }
+
+        function responseSourceLabel(source, model) {
+            const normalized = String(source || '').trim().toLowerCase();
+            if (normalized === 'cache') return 'response cache';
+            if (normalized === 'llm') return model ? `LLM (${model})` : 'LLM';
+            if (normalized === 'static response') return 'static response library';
+            if (normalized === 'built-in') return 'built-in shell simulation';
+            if (normalized === 'local fallback') return 'local fallback simulation';
+            if (normalized === 'rate limit fallback') return 'rate-limit fallback';
+            if (normalized === 'scp upload') return 'SCP upload handler';
+            if (normalized === 'scp') return 'SCP handler';
+            if (normalized === 'input validation') return 'input validation';
+            if (normalized === 'internal error') return 'internal error handler';
+            if (normalized) return source;
+            return model ? `LLM (${model})` : 'static/local response';
         }
 
         function scoreLabel(value) {
@@ -1855,7 +1881,7 @@
         function describeEvent(item) {
             const data = item.data || {};
             if (item.type === 'command') return `command <strong>${escapeHtml(data.Command)}</strong>`;
-            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('ok', 'green')} ${escapeHtml(data.Command)} / ${data.ResponseDurationMs}ms${data.LlmModel ? ` / ${escapeHtml(data.LlmModel)}` : ''}${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
+            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('reply', 'green')} ${escapeHtml(data.Command)} / ${escapeHtml(responseExchangeMeta(data))}${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
             if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;

@@ -1490,16 +1490,9 @@
         }
 
         function previewCommandResponsePairs(session) {
-            const recent = recentCommandResponsePairs(session);
-            const pinned = [];
-            const pin = predicate => {
-                const pair = recent.find(item => !pinned.includes(item) && predicate(item));
-                if (pair) pinned.push(pair);
-            };
-            const representative = representativeCommand(session);
-            if (representative) pin(pair => pair.command.Command === representative);
-            pin(pair => /^top(?:\s|$)/i.test(String(pair.command.Command || '').trim()));
-            return [...pinned, ...recent.filter(pair => !pinned.includes(pair))];
+            return recentCommandResponsePairs(session)
+                .slice(0, 5)
+                .sort(compareExchangePairs);
         }
 
         function renderBars(targetId, data, color = 'cyan', prefix = '') {
@@ -2140,21 +2133,34 @@
             if (session._commandResponsePairs) return session._commandResponsePairs;
             const results = session.results
                 .slice()
-                .sort((a, b) => new Date(a.Timestamp || 0) - new Date(b.Timestamp || 0));
+                .sort(compareExchangeEvents);
             const used = new Set();
             const commands = session.commands
                 .slice()
-                .sort((a, b) => new Date(a.Timestamp || 0) - new Date(b.Timestamp || 0));
+                .sort(compareExchangeEvents);
 
             session._commandResponsePairs = commands.map((command, index) => {
                 const commandTime = new Date(command.Timestamp || 0);
                 const nextCommandTime = commands[index + 1]?.Timestamp ? new Date(commands[index + 1].Timestamp) : null;
                 let resultIndex = results.findIndex((result, candidateIndex) =>
                     !used.has(candidateIndex)
-                    && result.Command === command.Command
-                    && new Date(result.Timestamp || 0) >= commandTime
-                    && (!nextCommandTime || new Date(result.Timestamp || 0) < nextCommandTime)
+                    && command.ExchangeId
+                    && result.ExchangeId === command.ExchangeId
                 );
+                if (resultIndex < 0 && command.MessageNumber !== undefined && command.MessageNumber !== null) {
+                    resultIndex = results.findIndex((result, candidateIndex) =>
+                        !used.has(candidateIndex)
+                        && numericExchangeNumber(result) === numericExchangeNumber(command)
+                    );
+                }
+                if (resultIndex < 0) {
+                    resultIndex = results.findIndex((result, candidateIndex) =>
+                        !used.has(candidateIndex)
+                        && result.Command === command.Command
+                        && new Date(result.Timestamp || 0) >= commandTime
+                        && (!nextCommandTime || new Date(result.Timestamp || 0) < nextCommandTime)
+                    );
+                }
                 if (resultIndex < 0) {
                     resultIndex = results.findIndex((result, candidateIndex) =>
                         !used.has(candidateIndex)
@@ -2175,6 +2181,24 @@
             });
 
             return session._commandResponsePairs;
+        }
+
+        function compareExchangePairs(a, b) {
+            return compareExchangeEvents(a.command, b.command);
+        }
+
+        function compareExchangeEvents(a, b) {
+            const aExchange = numericExchangeNumber(a);
+            const bExchange = numericExchangeNumber(b);
+            if (aExchange !== null && bExchange !== null && aExchange !== bExchange) return aExchange - bExchange;
+            if (aExchange !== null && bExchange === null) return -1;
+            if (aExchange === null && bExchange !== null) return 1;
+            return new Date(a.Timestamp || 0) - new Date(b.Timestamp || 0);
+        }
+
+        function numericExchangeNumber(event) {
+            const value = Number(event?.MessageNumber);
+            return Number.isFinite(value) ? value : null;
         }
 
         function isBinaryAttempt(command) {

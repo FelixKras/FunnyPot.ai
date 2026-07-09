@@ -1418,13 +1418,13 @@
                         ${exchangeDetail('Top Tools', summarizeTools(session).join(', ') || 'none')}
                         ${exchangeDetail('Notable Flow', summarizeNotableCommands(session.commands.map(command => command.Command).filter(Boolean)))}
                     </div>
-                    ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result, exchangeNumber }) => {
+                    ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
                         return `
                             <div class="exchange-line">
                                 <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
                                 <div>
                                     <div class="terminal-line">${escapeHtml(command.Command)}</div>
-                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(command, result, exchangeNumber))}</div>
+                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(command, result))}</div>
                                     <div>${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector && command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent && command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                                 </div>
                             </div>
@@ -1445,15 +1445,15 @@
             return `<div class="exchange-detail"><div class="exchange-detail-label">${escapeHtml(label)}</div><div class="exchange-detail-value">${escapeHtml(String(value ?? '-'))}</div></div>`;
         }
 
-        function commandExchangeMeta(command, result, exchangeNumber) {
+        function commandExchangeMeta(command, result) {
             const parts = [
-                `exchange #${exchangeNumber ?? command.MessageNumber ?? '-'}`,
+                `exchange #${command.MessageNumber ?? '-'}`,
                 isBinaryAttempt(command) ? 'binary/tooling' : 'text',
                 `category ${commandCategory(command)}`,
                 `complexity ${formatNumber(command.SemanticComplexity)}`,
                 `AVP ${formatNumber(command.AssetValuePerceptionScore)}`,
             ];
-            if (exchangeNumber && command.MessageNumber && command.MessageNumber !== exchangeNumber) parts.push(`shell msg #${command.MessageNumber}`);
+            if (command.ShellMessageNumber && command.ShellMessageNumber !== command.MessageNumber) parts.push(`shell msg #${command.ShellMessageNumber}`);
             if (command.CommandSequenceLatencyMs !== undefined && command.CommandSequenceLatencyMs !== null) parts.push(`gap ${fmt.format(command.CommandSequenceLatencyMs)}ms`);
             if (result) parts.push(result.FailedCommand ? 'response failed' : 'response ok');
             return parts.join(' / ');
@@ -1484,7 +1484,7 @@
         }
 
         function recentCommandResponsePairs(session) {
-            return commandResponsePairs(session).map((pair, index) => ({ ...pair, exchangeNumber: index + 1 }))
+            return commandResponsePairs(session)
                 .slice()
                 .sort((a, b) => new Date((b.result?.Timestamp || b.command.Timestamp) || 0) - new Date((a.result?.Timestamp || a.command.Timestamp) || 0));
         }
@@ -1778,9 +1778,9 @@
                 return;
             }
 
-            target.innerHTML = commandResponsePairs(session).map(({ command, result }, index) => {
-                const exchangeNumber = index + 1;
-                const rawMessage = command.MessageNumber && command.MessageNumber !== exchangeNumber ? ` / shell msg #${command.MessageNumber}` : '';
+            target.innerHTML = commandResponsePairs(session).map(({ command, result }) => {
+                const exchangeNumber = command.MessageNumber ?? '-';
+                const rawMessage = command.ShellMessageNumber && command.ShellMessageNumber !== command.MessageNumber ? ` / shell msg #${command.ShellMessageNumber}` : '';
                 const model = result?.LlmModel ? ` / model ${result.LlmModel}` : '';
                 return `
                     <div class="command">

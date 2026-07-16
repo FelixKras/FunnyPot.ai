@@ -1438,7 +1438,7 @@
                                 <div class="exchange-role">funny-pot&gt;<div class="exchange-time">${fmtTime(result?.Timestamp || command.Timestamp)}</div></div>
                                 <div>
                                     <div class="terminal-line terminal-response">${escapeHtml(displayResponse(command, result))}</div>
-                                    <div class="exchange-line-meta">${escapeHtml(responseExchangeMeta(result))}</div>
+                                    <div class="exchange-line-meta">${responseCacheBadge(result)}${escapeHtml(responseExchangeMeta(result))}</div>
                                 </div>
                             </div>
                         `;
@@ -1478,6 +1478,12 @@
             return `${status} in ${duration} / Source: ${source}`;
         }
 
+        function responseCacheBadge(result) {
+            return String(result?.ResponseSource || '').trim().toLowerCase() === 'cache'
+                ? `${badge('cached response', 'amber')} `
+                : '';
+        }
+
         function responseSourceLabel(source, model) {
             const normalized = String(source || '').trim().toLowerCase();
             if (normalized === 'cache') return 'response cache';
@@ -1485,6 +1491,8 @@
             if (normalized === 'static response') return 'static response library';
             if (normalized === 'built-in') return 'built-in shell simulation';
             if (normalized === 'local fallback') return 'local fallback simulation';
+            if (normalized === 'local frequent response') return 'quality-controlled local response';
+            if (normalized === 'local host profile') return 'synthetic host profile';
             if (normalized === 'rate limit fallback') return 'rate-limit fallback';
             if (normalized === 'scp upload') return 'SCP upload handler';
             if (normalized === 'scp') return 'SCP handler';
@@ -1819,7 +1827,7 @@
                         <div>${escapeHtml(command.Command)}</div>
                         <div class="muted" style="margin-top:8px;">
                             ${escapeHtml(commandExchangeMeta(command, result))}
-                            ${result ? `<br>${escapeHtml(responseExchangeMeta(result))}` : ''}
+                            ${result ? `<br>${responseCacheBadge(result)}${escapeHtml(responseExchangeMeta(result))}` : ''}
                         </div>
                         <div style="margin-top:6px;">${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                         ${result?.Response ? `<div class="response-output">${escapeHtml(result.Response)}</div>` : ''}
@@ -1881,7 +1889,7 @@
         function describeEvent(item) {
             const data = item.data || {};
             if (item.type === 'command') return `command <strong>${escapeHtml(data.Command)}</strong>`;
-            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('reply', 'green')} ${escapeHtml(data.Command)} / ${escapeHtml(responseExchangeMeta(data))}${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
+            if (item.type === 'command_result') return `${data.FailedCommand ? badge('failed', 'red') : badge('reply', 'green')} ${responseCacheBadge(data)}${escapeHtml(data.Command)} / ${escapeHtml(responseExchangeMeta(data))}${data.Response ? `<div class="response-output">${escapeHtml(data.Response)}</div>` : ''}`;
             if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;

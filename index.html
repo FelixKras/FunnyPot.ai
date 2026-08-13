@@ -1400,7 +1400,10 @@
 
         function renderLatestExchanges(sessions) {
             const target = document.getElementById('latestExchanges');
-            const recent = spotlightSessions(sessions, 8).filter(session => session.commands.length);
+            const recent = sessions
+                .filter(session => session.commands.length)
+                .sort((a, b) => latestExchangeTime(b) - latestExchangeTime(a))
+                .slice(0, 8);
 
             if (!recent.length) {
                 target.innerHTML = '<div class="empty">No command exchanges yet. Attackers authenticated, looked around, and vanished.</div>';

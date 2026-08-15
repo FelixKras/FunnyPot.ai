@@ -564,6 +564,194 @@
             cursor: pointer;
         }
 
+        .exchange-hud {
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(72, 223, 255, 0.07), transparent 42%),
+                linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)),
+                #0a1118;
+            border-color: rgba(72, 223, 255, 0.28);
+        }
+
+        .exchange-hud::before,
+        .exchange-hud::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            border: 1px solid rgba(53, 255, 122, 0.2);
+        }
+
+        .exchange-hud::before {
+            inset: 10px;
+            border-right: 0;
+            border-bottom: 0;
+            clip-path: polygon(0 0, 18% 0, 18% 1px, 0 1px, 0 18%, 1px 18%, 1px 0);
+        }
+
+        .exchange-hud::after {
+            right: 10px;
+            bottom: 10px;
+            width: 42px;
+            height: 42px;
+            border-left: 0;
+            border-top: 0;
+        }
+
+        .hud-kicker {
+            color: var(--green);
+            font: 800 0.7rem/1.2 "SFMono-Regular", Consolas, monospace;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .hud-title-row {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .hud-title-row h3 {
+            color: #fff;
+            font-size: clamp(1.2rem, 2vw, 1.7rem);
+            letter-spacing: -0.03em;
+        }
+
+        .hud-readout {
+            color: var(--cyan);
+            font: 700 0.74rem/1.4 "SFMono-Regular", Consolas, monospace;
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        .hud-stats {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .hud-stat {
+            min-height: 86px;
+            padding: 11px;
+            border: 1px solid rgba(72, 223, 255, 0.16);
+            border-radius: 10px;
+            background: rgba(3, 10, 16, 0.68);
+        }
+
+        .hud-stat-label {
+            color: var(--muted);
+            font-size: 0.66rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .hud-stat-value {
+            display: block;
+            margin-top: 8px;
+            color: #fff;
+            font: 850 1.22rem/1 "SFMono-Regular", Consolas, monospace;
+        }
+
+        .hud-stat-note {
+            display: block;
+            margin-top: 6px;
+            color: var(--cyan);
+            font-size: 0.68rem;
+        }
+
+        .hud-main-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.6fr);
+            gap: 12px;
+        }
+
+        .attack-map {
+            position: relative;
+            min-height: 360px;
+            overflow: hidden;
+            border: 1px solid rgba(72, 223, 255, 0.18);
+            border-radius: 12px;
+            background: #061018;
+        }
+
+        .attack-map svg { display: block; width: 100%; height: 100%; min-height: 360px; }
+        .map-label {
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--cyan);
+            font: 700 0.68rem "SFMono-Regular", Consolas, monospace;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .map-legend {
+            position: absolute;
+            right: 12px;
+            bottom: 10px;
+            display: flex;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 0.7rem;
+        }
+
+        .map-legend span::before {
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 9px var(--red);
+        }
+
+        .map-legend span:last-child::before { background: var(--amber); box-shadow: 0 0 9px var(--amber); }
+
+        .hud-side-panel {
+            display: grid;
+            gap: 10px;
+            align-content: start;
+        }
+
+        .hud-signal {
+            padding: 12px;
+            border-left: 2px solid var(--cyan);
+            background: rgba(3, 10, 16, 0.68);
+        }
+
+        .hud-signal-label { color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .hud-signal-value { margin-top: 5px; color: #fff; font-weight: 800; overflow-wrap: anywhere; }
+        .hud-signal-meta { margin-top: 4px; color: var(--muted); font-size: 0.76rem; line-height: 1.35; }
+
+        .exchange-filters {
+            display: grid;
+            grid-template-columns: minmax(150px, 1.5fr) repeat(3, minmax(130px, 0.7fr)) minmax(150px, 0.9fr);
+            gap: 8px;
+            margin: 16px 0 14px;
+            padding: 10px;
+            border: 1px solid rgba(167, 139, 250, 0.24);
+            border-radius: 12px;
+            background: rgba(167, 139, 250, 0.055);
+        }
+
+        .hud-control { min-width: 0; }
+        .hud-control label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .hud-control input, .hud-control select {
+            width: 100%;
+            border: 1px solid rgba(72, 223, 255, 0.25);
+            border-radius: 7px;
+            background: #0b151e;
+            color: var(--text);
+            padding: 8px 9px;
+            font: inherit;
+        }
+
+        .hud-control input:focus, .hud-control select:focus { outline: 1px solid var(--green); border-color: var(--green); }
+
         .exchange-session {
             background: #071018;
             border: 1px solid #193040;
@@ -731,6 +919,9 @@
         @media (max-width: 1100px) {
             .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .insight-grid, .details-layout { grid-template-columns: 1fr; }
+            .hud-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .hud-main-grid { grid-template-columns: 1fr; }
+            .exchange-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
 
         @media (max-width: 720px) {
@@ -739,6 +930,9 @@
             .hero-visual { min-width: 0; width: 100%; }
             .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .exchange-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hud-stats, .exchange-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hud-title-row { align-items: flex-start; flex-direction: column; }
+            .hud-readout { text-align: left; }
             .bar-row { grid-template-columns: 1fr; gap: 5px; }
             .session-summary-grid { grid-template-columns: 1fr; }
             table { min-width: 900px; }
@@ -945,13 +1139,53 @@
                 <section class="section">
                     <div class="section-header">
                         <h2 class="section-title">Attacker Exchange</h2>
-                        <span class="muted">Command and response transcript details</span>
+                        <span class="muted">Signal intelligence / command telemetry / source geography</span>
                     </div>
-                    <div class="panel">
-                        <h3>Command Exchange Details</h3>
-                        <div class="exchange-toolbar">
-                            <span class="muted" id="exchangeCount">All command-bearing sessions</span>
-                            <label class="exchange-sort" for="exchangeSort">Sort by
+                    <div class="panel exchange-hud">
+                        <div class="hud-title-row">
+                            <div>
+                                <div class="hud-kicker">// intrusion telemetry / live retained archive</div>
+                                <h3>ATTACK SURFACE // EXCHANGE MATRIX</h3>
+                            </div>
+                            <div class="hud-readout" id="exchangeReadout">AWAITING EVENT HYDRATION<br>MAP LINK: PENDING</div>
+                        </div>
+                        <div class="hud-stats" id="exchangeHudStats"></div>
+                        <div class="hud-main-grid">
+                            <div class="attack-map" id="attackMap">
+                                <div class="map-label">Origin vectors / UTC projection</div>
+                                <div class="empty">Resolving attack origins...</div>
+                                <div class="map-legend"><span>high signal</span><span>medium signal</span></div>
+                            </div>
+                            <div class="hud-side-panel" id="exchangeHudSignals"></div>
+                        </div>
+                        <div class="exchange-filters" role="search" aria-label="Filter attacker exchanges">
+                            <div class="hud-control">
+                                <label for="exchangeQuery">Search IP / user / command</label>
+                                <input id="exchangeQuery" type="search" placeholder="e.g. curl, root, 203.0.113.4">
+                            </div>
+                            <div class="hud-control">
+                                <label for="exchangeBehavior">Behavior signature</label>
+                                <select id="exchangeBehavior"><option value="all">All signatures</option></select>
+                            </div>
+                            <div class="hud-control">
+                                <label for="exchangeEngagement">Minimum commands</label>
+                                <select id="exchangeEngagement">
+                                    <option value="0">Any engagement</option>
+                                    <option value="1">1+ command</option>
+                                    <option value="3">3+ commands</option>
+                                    <option value="10">10+ commands</option>
+                                </select>
+                            </div>
+                            <div class="hud-control">
+                                <label for="exchangeRisk">Minimum risk</label>
+                                <select id="exchangeRisk">
+                                    <option value="0">All risk levels</option>
+                                    <option value="25">Medium and above</option>
+                                    <option value="60">High only</option>
+                                </select>
+                            </div>
+                            <div class="hud-control">
+                                <label for="exchangeSort">Order matrix by</label>
                                 <select id="exchangeSort">
                                     <option value="newest">Newest exchange</option>
                                     <option value="commands">Most commands</option>
@@ -961,10 +1195,13 @@
                                     <option value="type">Behavior type</option>
                                     <option value="remote">Remote endpoint</option>
                                 </select>
-                            </label>
+                            </div>
+                        </div>
+                        <div class="exchange-toolbar">
+                            <span class="muted" id="exchangeCount">All command-bearing sessions</span>
+                            <span class="muted">Some commands may not have a recorded response if the session ended early.</span>
                         </div>
                         <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
-                        <div class="muted" style="margin-top:12px;">Some commands may not have a recorded response if the session ended early or the interaction was interrupted.</div>
                     </div>
                 </section>
             </div>
@@ -979,6 +1216,8 @@
         const DATA_BASE = 'https://raw.githubusercontent.com/FelixKras/FunnyPot.ai/data';
         let sessionModels = [];
         let selectedSessionId = null;
+        let exchangeSort = 'newest';
+        const exchangeFilters = { query: '', behavior: 'all', minCommands: 0, minRisk: 0 };
 
         const fmt = new Intl.NumberFormat();
         const fmtTime = value => {
@@ -1063,7 +1302,9 @@
             renderActivityFreshness(summary, stats, retainedSummary);
             renderActivitySummary(retainedSummary, events, sessionModels);
             renderCommandHistory(sessionModels);
+            renderExchangeHud(sessionModels);
             renderLatestExchanges(sessionModels);
+            hydrateExchangeGeography(sessionModels);
             renderSessions(sessionModels);
             renderGhostedSessions(sessionModels);
             renderHighRiskActivity(sessionModels);
@@ -1348,13 +1589,19 @@
         }
 
         function setupExchangeSorting() {
-            const control = document.getElementById('exchangeSort');
-            if (!control || control.dataset.ready) return;
-            control.dataset.ready = 'true';
-            control.value = exchangeSort;
-            control.addEventListener('change', () => {
-                exchangeSort = control.value;
-                renderLatestExchanges(sessionModels);
+            const controls = {
+                exchangeSort: value => { exchangeSort = value; },
+                exchangeQuery: value => { exchangeFilters.query = value.toLowerCase().trim(); },
+                exchangeBehavior: value => { exchangeFilters.behavior = value; },
+                exchangeEngagement: value => { exchangeFilters.minCommands = Number(value) || 0; },
+                exchangeRisk: value => { exchangeFilters.minRisk = Number(value) || 0; },
+            };
+            Object.entries(controls).forEach(([id, update]) => {
+                const control = document.getElementById(id);
+                if (!control || control.dataset.ready) return;
+                control.dataset.ready = 'true';
+                control.addEventListener('input', () => { update(control.value); renderExchangeHud(sessionModels); renderLatestExchanges(sessionModels); });
+                control.addEventListener('change', () => { update(control.value); renderExchangeHud(sessionModels); renderLatestExchanges(sessionModels); });
             });
         }
 
@@ -1390,7 +1637,7 @@
 
         async function resolveIpLocation(ip) {
             if (ip === 'unknown' || ip.startsWith('10.') || ip.startsWith('192.168.') || /^172\.(1[6-9]|2\d|3[01])\./.test(ip)) {
-                return { country: 'Private/Unknown', region: 'Private/Unknown' };
+                return { country: 'Private/Unknown', region: 'Private/Unknown', latitude: null, longitude: null };
             }
 
             const cached = readGeoCache(ip);
@@ -1399,6 +1646,8 @@
             const location = await resolveIpWhoIs(ip) || await resolveIpInfo(ip) || {
                 country: 'Unknown',
                 region: 'Unknown',
+                latitude: null,
+                longitude: null,
             };
             writeGeoCache(ip, location);
             return location;
@@ -1412,7 +1661,7 @@
                 if (!data.success) return null;
                 const country = data.country || data.country_code || 'Unknown';
                 const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
-                return { country, region };
+                return { country, region, latitude: Number(data.latitude), longitude: Number(data.longitude) };
             } catch {
                 return null;
             }
@@ -1426,7 +1675,10 @@
                 if (data.error) return null;
                 const country = data.country || 'Unknown';
                 const region = [data.region, data.city].filter(Boolean).join(' / ') || country;
-                return { country, region };
+                const coordinates = String(data.loc || '').split(',').map(Number);
+                const latitude = coordinates.length === 2 ? coordinates[0] : null;
+                const longitude = coordinates.length === 2 ? coordinates[1] : null;
+                return { country, region, latitude, longitude };
             } catch {
                 return null;
             }
@@ -1451,11 +1703,124 @@
             } catch { }
         }
 
+        function filteredExchangeSessions(sessions) {
+            const query = exchangeFilters.query;
+            return sessions.filter(session => {
+                if (!session.commands.length || session.commands.length < exchangeFilters.minCommands || riskScore(session) < exchangeFilters.minRisk) return false;
+                if (exchangeFilters.behavior !== 'all' && behaviorType(session) !== exchangeFilters.behavior) return false;
+                if (!query) return true;
+                const haystack = [
+                    session.remote,
+                    session.username,
+                    session.client,
+                    behaviorType(session),
+                    ...session.commands.map(command => command.Command),
+                ].join(' ').toLowerCase();
+                return haystack.includes(query);
+            });
+        }
+
+        function renderExchangeHud(sessions) {
+            const filtered = filteredExchangeSessions(sessions);
+            const commands = filtered.flatMap(session => session.commands);
+            const results = filtered.flatMap(session => session.results);
+            const responseCoverage = commands.length ? results.length / commands.length : 0;
+            const binary = filtered.reduce((total, session) => total + session.binaryAttempts, 0);
+            const riskTotal = filtered.reduce((total, session) => total + riskScore(session), 0);
+            const peakHour = peakCommandHour(commands);
+            const stats = [
+                ['Sessions in scope', filtered.length, `${sessions.filter(session => session.commands.length).length} total exchanges`],
+                ['Command volume', fmt.format(commands.length), `${fmt.format(uniqueValues(commands.map(command => command.Command)).length)} unique inputs`],
+                ['Reply coverage', pct(responseCoverage), `${fmt.format(results.length)} replies correlated`],
+                ['Risk load', fmt.format(riskTotal), `${fmt.format(filtered.filter(session => riskScore(session) >= 60).length)} high-risk sessions`],
+                ['Tooling signals', fmt.format(binary), `${fmt.format(filtered.filter(session => session.binaryAttempts).length)} sessions with payload behavior`],
+                ['Peak UTC hour', peakHour === null ? '-' : `${String(peakHour).padStart(2, '0')}:00`, 'highest command density'],
+            ];
+            const statsTarget = document.getElementById('exchangeHudStats');
+            if (statsTarget) statsTarget.innerHTML = stats.map(([label, value, note]) => `
+                <div class="hud-stat"><span class="hud-stat-label">${escapeHtml(label)}</span><strong class="hud-stat-value">${escapeHtml(String(value))}</strong><span class="hud-stat-note">${escapeHtml(note)}</span></div>
+            `).join('');
+
+            const behaviorTarget = document.getElementById('exchangeBehavior');
+            if (behaviorTarget) {
+                const current = exchangeFilters.behavior;
+                const types = [...new Set(sessions.filter(session => session.commands.length).map(behaviorType))].sort();
+                behaviorTarget.innerHTML = '<option value="all">All signatures</option>' + types.map(type => `<option value="${escapeAttr(type)}">${escapeHtml(type)}</option>`).join('');
+                behaviorTarget.value = types.includes(current) ? current : 'all';
+                exchangeFilters.behavior = behaviorTarget.value;
+            }
+
+            const readout = document.getElementById('exchangeReadout');
+            if (readout) readout.innerHTML = `${filtered.length ? 'FILTERED TELEMETRY ONLINE' : 'NO MATCHING TELEMETRY'}<br>MAP LINK: ${filtered.some(session => Number.isFinite(Number(session.location?.latitude))) ? 'LOCKED' : 'RESOLVING'}`;
+            renderExchangeSignals(filtered, commands);
+            renderAttackMap(filtered);
+        }
+
+        function renderExchangeSignals(sessions, commands) {
+            const target = document.getElementById('exchangeHudSignals');
+            if (!target) return;
+            const topBehavior = topValues(sessions.map(behaviorType), 1)[0] || 'none detected';
+            const topRemote = topValues(sessions.map(session => session.remote), 1)[0] || 'no source lock';
+            const topCommand = topValues(commands.map(command => String(command.Command || '').trim()), 1)[0] || 'no command lock';
+            const tactics = topValues(commands.flatMap(command => mitreTactics(command.MitreAttackTechniques)), 3);
+            target.innerHTML = [
+                ['Dominant signature', topBehavior, `${sessions.length} sessions in current filter`],
+                ['Most active source', topRemote, 'source endpoint with highest session count'],
+                ['Command fingerprint', shorten(topCommand, 62), 'most repeated raw input'],
+                ['MITRE signal stack', tactics.join(' / ') || 'unclassified', 'observed technique families'],
+            ].map(([label, value, meta]) => `<div class="hud-signal"><div class="hud-signal-label">${escapeHtml(label)}</div><div class="hud-signal-value">${escapeHtml(value)}</div><div class="hud-signal-meta">${escapeHtml(meta)}</div></div>`).join('');
+        }
+
+        function renderAttackMap(sessions) {
+            const target = document.getElementById('attackMap');
+            if (!target) return;
+            const points = sessions
+                .map(session => ({ session, latitude: Number(session.location?.latitude), longitude: Number(session.location?.longitude) }))
+                .filter(point => Number.isFinite(point.latitude) && Number.isFinite(point.longitude));
+            const pointMarkup = points.map(({ session, latitude, longitude }) => {
+                const x = ((longitude + 180) / 360 * 1000).toFixed(2);
+                const y = ((90 - latitude) / 180 * 480).toFixed(2);
+                const radius = Math.min(11, 4 + Math.sqrt(session.commands.length));
+                const color = riskScore(session) >= 60 ? '#ff647c' : riskScore(session) >= 25 ? '#ffcc66' : '#48dfff';
+                return `<path d="M ${x} ${y} Q 500 240 500 240" fill="none" stroke="${color}" stroke-width="0.8" opacity="0.28"/><circle cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}" opacity="0.18"><title>${escapeHtml(session.remote)} / ${escapeHtml(behaviorType(session))}</title></circle><circle cx="${x}" cy="${y}" r="2.2" fill="${color}"><title>${escapeHtml(session.remote)} / ${fmt.format(session.commands.length)} commands</title></circle>`;
+            }).join('');
+            target.innerHTML = `<div class="map-label">Origin vectors / UTC projection</div><svg viewBox="0 0 1000 480" role="img" aria-label="Map of attacker origin points">
+                <defs><pattern id="hudGrid" width="50" height="40" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 40" fill="none" stroke="#183040" stroke-width="1" opacity="0.65"/></pattern><filter id="pointGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                <rect width="1000" height="480" fill="url(#hudGrid)"/>
+                <path d="M78 150 L110 115 168 96 218 115 244 151 226 176 250 211 225 245 188 231 170 268 131 255 119 218 83 194 91 167 Z M272 285 L306 291 327 331 311 382 282 365 273 326 Z M435 126 L484 106 523 121 552 112 598 130 627 119 679 145 720 149 763 177 817 182 861 216 842 246 784 234 751 253 704 238 660 260 618 242 575 255 537 230 499 240 468 205 438 190 410 156 Z M702 292 L736 278 770 298 783 335 759 366 729 348 710 318 Z" fill="#10212b" stroke="#275263" stroke-width="2" opacity="0.95"/>
+                <circle cx="500" cy="240" r="7" fill="#35ff7a" opacity="0.2" filter="url(#pointGlow)"/><circle cx="500" cy="240" r="3" fill="#35ff7a"/><text x="512" y="244" fill="#8292a2" font-size="11" font-family="Consolas, monospace">HONEYPOT</text>
+                <g filter="url(#pointGlow)">${pointMarkup}</g>
+            </svg><div class="map-legend"><span>high signal</span><span>medium signal</span></div>${points.length ? '' : '<div class="empty">No resolved source coordinates in the current filter.</div>'}`;
+        }
+
+        async function hydrateExchangeGeography(sessions) {
+            const ips = [...new Set(sessions.map(session => remoteIp(session.remote)).filter(Boolean))];
+            if (!ips.length) return;
+            const locations = await Promise.all(ips.map(resolveIpLocation));
+            const byIp = new Map(ips.map((ip, index) => [ip, locations[index]]));
+            sessions.forEach(session => { session.location = byIp.get(remoteIp(session.remote)) || null; });
+            if (sessions === sessionModels) renderExchangeHud(sessionModels);
+        }
+
+        function uniqueValues(values) {
+            return [...new Set(values.filter(Boolean))];
+        }
+
+        function peakCommandHour(commands) {
+            if (!commands.length) return null;
+            const counts = {};
+            commands.forEach(command => {
+                const date = new Date(command.Timestamp || 0);
+                if (!Number.isNaN(date.getTime())) counts[date.getUTCHours()] = (counts[date.getUTCHours()] || 0) + 1;
+            });
+            return Object.entries(counts).sort((a, b) => b[1] - a[1] || Number(a[0]) - Number(b[0]))[0]?.[0] ?? null;
+        }
+
         function renderLatestExchanges(sessions) {
             const target = document.getElementById('latestExchanges');
-            const exchanges = sessions.filter(session => session.commands.length);
+            const exchanges = filteredExchangeSessions(sessions);
             const count = document.getElementById('exchangeCount');
-            if (count) count.textContent = `${fmt.format(exchanges.length)} session${exchanges.length === 1 ? '' : 's'} · ${fmt.format(exchanges.reduce((total, session) => total + session.commands.length, 0))} commands · all exchanges shown`;
+            if (count) count.textContent = `${fmt.format(exchanges.length)} session${exchanges.length === 1 ? '' : 's'} · ${fmt.format(exchanges.reduce((total, session) => total + session.commands.length, 0))} commands shown`;
             const recent = exchanges.slice().sort(compareExchangeSessions);
 
             if (!recent.length) {

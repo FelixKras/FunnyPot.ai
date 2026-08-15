@@ -995,7 +995,6 @@
                 <button class="tab-button active" data-tab="overview" type="button">Overview</button>
                 <button class="tab-button" data-tab="credentials" type="button">Credentials</button>
                 <button class="tab-button" data-tab="geography" type="button">Geography</button>
-                <button class="tab-button" data-tab="activity" type="button">Attacker Activity</button>
                 <button class="tab-button" data-tab="exchange" type="button">Attacker Exchange</button>
             </div>
 
@@ -1069,68 +1068,6 @@
                     <div class="panel">
                         <h3>Top Source IPs</h3>
                         <div class="bars" id="ipBars"></div>
-                    </div>
-                </section>
-            </div>
-
-            <div class="tab-panel" data-tab-panel="activity">
-                <section class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">Attacker Behavior</h2>
-                        <span class="muted" id="activityFreshness">Loading telemetry freshness...</span>
-                    </div>
-                    <div class="grid metrics activity-summary-grid" id="activitySummaryCards"></div>
-                </section>
-                <section class="section">
-                    <div class="panel">
-                        <h3>Behavior Story Cards</h3>
-                        <div class="session-summary-grid" id="sessionSummaryCards"><div class="empty">No attacker sessions yet.</div></div>
-                    </div>
-                </section>
-                <section class="section grid insight-grid">
-                    <div class="panel">
-                        <h3>Command Patterns</h3>
-                        <div class="command-history" id="commandHistory"><div class="empty">No command patterns yet.</div></div>
-                    </div>
-                    <div class="panel">
-                        <h3>Ghosted Sessions</h3>
-                        <p class="muted">Commandless sessions are successful shell openings where the attacker disconnected before issuing a command. They often indicate scanner behavior, credential-validation automation, or low-engagement bots.</p>
-                        <div class="ghost-grid" id="ghostedSessions"><div class="empty">No ghosted sessions yet.</div></div>
-                    </div>
-                </section>
-                <section class="section grid insight-grid">
-                    <div class="panel">
-                        <h3>High-Risk Activity</h3>
-                        <div class="finding-list" id="highRiskActivity"><div class="empty">No high-risk activity yet.</div></div>
-                    </div>
-                    <div class="panel">
-                        <h3>MITRE Behavior Mapping</h3>
-                        <div class="finding-list" id="mitreNarrative"><div class="empty">No MITRE behavior yet.</div></div>
-                    </div>
-                </section>
-                <section class="section" id="sessionDetailsSection" style="display:none;">
-                    <div class="section-header">
-                        <h2 class="section-title">Session Details</h2>
-                        <span class="muted" id="selectedSessionLabel">Select a session</span>
-                    </div>
-                    <div class="details-layout">
-                        <div class="panel">
-                            <h3>Profile</h3>
-                            <div id="profileKv" class="kv"></div>
-                            <div style="height:16px"></div>
-                            <h3>Signals</h3>
-                            <div id="signals"></div>
-                        </div>
-                        <div class="panel">
-                            <h3>Timeline</h3>
-                            <div id="sessionTimeline" class="timeline"></div>
-                            <div style="height:16px"></div>
-                            <h3>Auth Attempts</h3>
-                            <div id="authTimeline" class="timeline"></div>
-                            <div style="height:16px"></div>
-                            <h3>Commands</h3>
-                            <div id="commandList" class="command-list"></div>
-                        </div>
                     </div>
                 </section>
             </div>
@@ -1299,16 +1236,9 @@
             renderAttemptTypes(sessionModels);
             renderUploadBars(events);
             renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
-            renderActivityFreshness(summary, stats, retainedSummary);
-            renderActivitySummary(retainedSummary, events, sessionModels);
-            renderCommandHistory(sessionModels);
             renderExchangeHud(sessionModels);
             renderLatestExchanges(sessionModels);
             hydrateExchangeGeography(sessionModels);
-            renderSessions(sessionModels);
-            renderGhostedSessions(sessionModels);
-            renderHighRiskActivity(sessionModels);
-            renderMitreNarrative(sessionModels);
         }
 
         function hydrateEventDetails(stats, summary) {
@@ -1557,8 +1487,8 @@
         function renderCredentialStats(summary, events) {
             const usernames = Object.keys(summary.TopUsernames || {}).length ? summary.TopUsernames : countCredentialField(events, 'Username');
             const passwords = Object.keys(summary.TopPasswords || {}).length ? summary.TopPasswords : countCredentialField(events, 'Password');
-            renderBars('usernameBars', takeTop(usernames, 12), 'cyan');
-            renderBars('passwordBars', takeTop(passwords, 12), 'amber');
+            renderBars('usernameBars', takeTop(usernames, 50), 'cyan');
+            renderBars('passwordBars', takeTop(passwords, 50), 'amber');
         }
 
         function countCredentialField(events, field) {
@@ -1726,6 +1656,7 @@
             const results = filtered.flatMap(session => session.results);
             const responseCoverage = commands.length ? results.length / commands.length : 0;
             const binary = filtered.reduce((total, session) => total + session.binaryAttempts, 0);
+            const gpuProspectors = filtered.filter(isGpuProspector).length;
             const riskTotal = filtered.reduce((total, session) => total + riskScore(session), 0);
             const peakHour = peakCommandHour(commands);
             const stats = [
@@ -1734,6 +1665,7 @@
                 ['Reply coverage', pct(responseCoverage), `${fmt.format(results.length)} replies correlated`],
                 ['Risk load', fmt.format(riskTotal), `${fmt.format(filtered.filter(session => riskScore(session) >= 60).length)} high-risk sessions`],
                 ['Tooling signals', fmt.format(binary), `${fmt.format(filtered.filter(session => session.binaryAttempts).length)} sessions with payload behavior`],
+                ['GPU probes', fmt.format(gpuProspectors), 'hardware / miner reconnaissance'],
                 ['Peak UTC hour', peakHour === null ? '-' : `${String(peakHour).padStart(2, '0')}:00`, 'highest command density'],
             ];
             const statsTarget = document.getElementById('exchangeHudStats');
@@ -1777,20 +1709,33 @@
             const points = sessions
                 .map(session => ({ session, latitude: Number(session.location?.latitude), longitude: Number(session.location?.longitude) }))
                 .filter(point => Number.isFinite(point.latitude) && Number.isFinite(point.longitude));
+            const labelledPoints = new Set(points.slice().sort((a, b) => b.session.commands.length - a.session.commands.length).slice(0, 12).map(point => point.session.id));
             const pointMarkup = points.map(({ session, latitude, longitude }) => {
                 const x = ((longitude + 180) / 360 * 1000).toFixed(2);
                 const y = ((90 - latitude) / 180 * 480).toFixed(2);
                 const radius = Math.min(11, 4 + Math.sqrt(session.commands.length));
-                const color = riskScore(session) >= 60 ? '#ff647c' : riskScore(session) >= 25 ? '#ffcc66' : '#48dfff';
-                return `<path d="M ${x} ${y} Q 500 240 500 240" fill="none" stroke="${color}" stroke-width="0.8" opacity="0.28"/><circle cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}" opacity="0.18"><title>${escapeHtml(session.remote)} / ${escapeHtml(behaviorType(session))}</title></circle><circle cx="${x}" cy="${y}" r="2.2" fill="${color}"><title>${escapeHtml(session.remote)} / ${fmt.format(session.commands.length)} commands</title></circle>`;
+                const color = isGpuProspector(session) ? '#a78bfa' : riskScore(session) >= 60 ? '#ff647c' : riskScore(session) >= 25 ? '#ffcc66' : '#48dfff';
+                const label = session.location?.country || session.remote;
+                const labelX = Math.min(930, Number(x) + 8);
+                const labelY = Math.max(18, Number(y) - 8);
+                const textLabel = labelledPoints.has(session.id) ? `<text class="map-source-label" x="${labelX}" y="${labelY}">${escapeHtml(shorten(label, 18))}</text>` : '';
+                return `<path d="M ${x} ${y} Q 500 240 500 240" fill="none" stroke="${color}" stroke-width="0.8" opacity="0.28"/><circle cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}" opacity="0.18"><title>${escapeHtml(session.remote)} / ${escapeHtml(session.location?.region || 'Unknown region')} / ${escapeHtml(behaviorType(session))}</title></circle><circle cx="${x}" cy="${y}" r="2.2" fill="${color}"><title>${escapeHtml(session.remote)} / ${fmt.format(session.commands.length)} commands</title></circle>${textLabel}`;
             }).join('');
             target.innerHTML = `<div class="map-label">Origin vectors / UTC projection</div><svg viewBox="0 0 1000 480" role="img" aria-label="Map of attacker origin points">
                 <defs><pattern id="hudGrid" width="50" height="40" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 40" fill="none" stroke="#183040" stroke-width="1" opacity="0.65"/></pattern><filter id="pointGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
                 <rect width="1000" height="480" fill="url(#hudGrid)"/>
-                <path d="M78 150 L110 115 168 96 218 115 244 151 226 176 250 211 225 245 188 231 170 268 131 255 119 218 83 194 91 167 Z M272 285 L306 291 327 331 311 382 282 365 273 326 Z M435 126 L484 106 523 121 552 112 598 130 627 119 679 145 720 149 763 177 817 182 861 216 842 246 784 234 751 253 704 238 660 260 618 242 575 255 537 230 499 240 468 205 438 190 410 156 Z M702 292 L736 278 770 298 783 335 759 366 729 348 710 318 Z" fill="#10212b" stroke="#275263" stroke-width="2" opacity="0.95"/>
+                <g fill="#10212b" stroke="#275263" stroke-width="2" opacity="0.95">
+                    <path d="M80 135 L105 105 150 92 177 105 207 100 245 126 261 158 244 177 251 202 222 219 207 251 177 239 151 254 126 234 99 230 88 205 67 188 79 164 Z"/>
+                    <path d="M260 82 L282 72 298 85 290 111 272 119 260 105 Z"/>
+                    <path d="M301 241 L337 253 359 286 351 326 333 365 307 394 286 373 292 334 275 304 281 272 Z"/>
+                    <path d="M438 124 L464 108 494 111 514 126 546 116 568 130 607 124 641 140 674 137 703 153 738 157 764 176 806 181 840 204 871 215 858 240 824 244 795 232 766 248 734 237 702 253 669 247 639 262 608 245 577 254 550 238 518 244 494 225 467 224 450 201 428 184 417 153 Z"/>
+                    <path d="M583 265 L607 273 619 301 609 333 590 353 574 329 577 296 Z"/>
+                    <path d="M710 299 L739 289 771 304 789 333 779 359 751 366 729 347 709 327 Z"/>
+                    <path d="M838 325 L859 321 873 334 861 349 842 343 Z"/>
+                </g>
                 <circle cx="500" cy="240" r="7" fill="#35ff7a" opacity="0.2" filter="url(#pointGlow)"/><circle cx="500" cy="240" r="3" fill="#35ff7a"/><text x="512" y="244" fill="#8292a2" font-size="11" font-family="Consolas, monospace">HONEYPOT</text>
                 <g filter="url(#pointGlow)">${pointMarkup}</g>
-            </svg><div class="map-legend"><span>high signal</span><span>medium signal</span></div>${points.length ? '' : '<div class="empty">No resolved source coordinates in the current filter.</div>'}`;
+            </svg><div class="map-legend"><span>high signal</span><span>medium signal</span><span class="gpu">GPU probe</span></div>${points.length ? '' : '<div class="empty">No resolved source coordinates in the current filter.</div>'}`;
         }
 
         async function hydrateExchangeGeography(sessions) {
@@ -2354,6 +2299,7 @@
 
         function behaviorType(session) {
             if (isGhostedSession(session)) return 'Ghosted session';
+            if (isGpuProspector(session)) return 'GPU prospector';
             if (session.uploads.length || session.payloadUrls.size || session.binaryAttempts) return 'Payload attempt';
             if (session.persistence.size) return 'Persistence attempt';
             if (session.commands.some(command => commandCategory(command) === 'Network probing')) return 'Network probing';
@@ -2362,9 +2308,18 @@
             return session.commands.length ? 'Shell interaction' : 'Connection probing';
         }
 
+        function isGpuProspector(session) {
+            const text = [
+                session.username,
+                ...session.commands.map(command => command.Command),
+            ].join(' ').toLowerCase();
+            return /\b(nvidia-smi|rocm-smi|cuda|opencl|lspci[^\n]*(vga|3d)|gpu|xmrig|cpuminer|ethminer|nbminer|hashrate|stratum|cryptonight|kawpow|miner|mining)\b/.test(text);
+        }
+
         function behaviorStory(session) {
             const user = session.username || 'unknown user';
             if (isGhostedSession(session)) return `Ghosted session. ${user} authenticated successfully, opened a shell, and disconnected before issuing commands.`;
+            if (isGpuProspector(session)) return `GPU prospector activity detected. The attacker queried hardware, compute tooling, mining processes, or pool-oriented signals before deciding whether the host could support monetized workloads.`;
             if (session.uploads.length || session.payloadUrls.size || session.binaryAttempts) return `Payload attempt detected. The attacker used ${user} and tried tooling, transfer, upload, or executable-style shell activity.`;
             if (session.persistence.size) return `Persistence-oriented behavior. The attacker moved beyond discovery and attempted foothold setup.`;
             if (session.commands.length) return `${behaviorType(session)} observed. The attacker opened a shell, ran ${session.commands.length} command${session.commands.length === 1 ? '' : 's'}, and received ${session.results.length} FunnyPot response${session.results.length === 1 ? '' : 's'}.`;

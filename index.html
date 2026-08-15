@@ -537,6 +537,33 @@
             padding-right: 8px;
         }
 
+        .exchange-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 10px 0 14px;
+        }
+
+        .exchange-sort {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .exchange-sort select {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--panel-2);
+            color: var(--text);
+            padding: 8px 10px;
+            font: inherit;
+            cursor: pointer;
+        }
+
         .exchange-session {
             background: #071018;
             border: 1px solid #193040;
@@ -922,6 +949,20 @@
                     </div>
                     <div class="panel">
                         <h3>Command Exchange Details</h3>
+                        <div class="exchange-toolbar">
+                            <span class="muted" id="exchangeCount">All command-bearing sessions</span>
+                            <label class="exchange-sort" for="exchangeSort">Sort by
+                                <select id="exchangeSort">
+                                    <option value="newest">Newest exchange</option>
+                                    <option value="commands">Most commands</option>
+                                    <option value="length">Longest transcript</option>
+                                    <option value="duration">Longest session</option>
+                                    <option value="risk">Highest risk</option>
+                                    <option value="type">Behavior type</option>
+                                    <option value="remote">Remote endpoint</option>
+                                </select>
+                            </label>
+                        </div>
                         <div class="exchange-feed" id="latestExchanges"><div class="empty">No command exchanges yet.</div></div>
                         <div class="muted" style="margin-top:12px;">Some commands may not have a recorded response if the session ended early or the interaction was interrupted.</div>
                     </div>
@@ -988,6 +1029,7 @@
 
                 renderDashboard(stats, summary, []);
                 setupTabs();
+                setupExchangeSorting();
                 setupFloatingTooltips();
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
@@ -1305,6 +1347,17 @@
             });
         }
 
+        function setupExchangeSorting() {
+            const control = document.getElementById('exchangeSort');
+            if (!control || control.dataset.ready) return;
+            control.dataset.ready = 'true';
+            control.value = exchangeSort;
+            control.addEventListener('change', () => {
+                exchangeSort = control.value;
+                renderLatestExchanges(sessionModels);
+            });
+        }
+
         async function renderGeography(summary) {
             const ipCounts = takeTop(summary.ScansByIp || {}, 50);
             renderBars('ipBars', takeTop(ipCounts, 15), 'cyan');
@@ -1400,10 +1453,10 @@
 
         function renderLatestExchanges(sessions) {
             const target = document.getElementById('latestExchanges');
-            const recent = sessions
-                .filter(session => session.commands.length)
-                .sort((a, b) => latestExchangeTime(b) - latestExchangeTime(a))
-                .slice(0, 8);
+            const exchanges = sessions.filter(session => session.commands.length);
+            const count = document.getElementById('exchangeCount');
+            if (count) count.textContent = `${fmt.format(exchanges.length)} session${exchanges.length === 1 ? '' : 's'} · ${fmt.format(exchanges.reduce((total, session) => total + session.commands.length, 0))} commands · all exchanges shown`;
+            const recent = exchanges.slice().sort(compareExchangeSessions);
 
             if (!recent.length) {
                 target.innerHTML = '<div class="empty">No command exchanges yet. Attackers authenticated, looked around, and vanished.</div>';
@@ -1427,7 +1480,7 @@
                         ${exchangeDetail('Top Tools', summarizeTools(session).join(', ') || 'none')}
                         ${exchangeDetail('Notable Flow', summarizeNotableCommands(session.commands.map(command => command.Command).filter(Boolean)))}
                     </div>
-                    ${previewCommandResponsePairs(session).slice(0, 5).map(({ command, result }) => {
+                    ${recentCommandResponsePairs(session).sort(compareExchangePairs).map(({ command, result }) => {
                         return `
                             <div class="exchange-line">
                                 <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
@@ -1448,6 +1501,31 @@
                     }).join('')}
                 </div>
             `).join('');
+        }
+
+        function compareExchangeSessions(a, b) {
+            switch (exchangeSort) {
+                case 'commands':
+                    return b.commands.length - a.commands.length || latestExchangeTime(b) - latestExchangeTime(a);
+                case 'length':
+                    return transcriptLength(b) - transcriptLength(a) || latestExchangeTime(b) - latestExchangeTime(a);
+                case 'duration':
+                    return b.durationSeconds - a.durationSeconds || latestExchangeTime(b) - latestExchangeTime(a);
+                case 'risk':
+                    return riskScore(b) - riskScore(a) || latestExchangeTime(b) - latestExchangeTime(a);
+                case 'type':
+                    return behaviorType(a).localeCompare(behaviorType(b)) || latestExchangeTime(b) - latestExchangeTime(a);
+                case 'remote':
+                    return String(a.remote).localeCompare(String(b.remote)) || latestExchangeTime(b) - latestExchangeTime(a);
+                case 'newest':
+                default:
+                    return latestExchangeTime(b) - latestExchangeTime(a);
+            }
+        }
+
+        function transcriptLength(session) {
+            return recentCommandResponsePairs(session).reduce((total, { command, result }) =>
+                total + String(command.Command || '').length + String(displayResponse(command, result) || '').length, 0);
         }
 
         function exchangeDetail(label, value) {

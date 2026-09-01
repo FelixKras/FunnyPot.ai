@@ -1310,7 +1310,7 @@
                     if (ip) summary.ScansByIp[ip] = (summary.ScansByIp[ip] || 0) + 1;
                 }
 
-                if (event.Event === 'auth_attempt' || event.Event === 'harvested_credential') {
+                if (event.Event === 'auth_attempt') {
                     summary.TotalScanAttempts++;
                     if (data.Username) summary.TopUsernames[data.Username] = (summary.TopUsernames[data.Username] || 0) + 1;
                     if (data.Password) summary.TopPasswords[data.Password] = (summary.TopPasswords[data.Password] || 0) + 1;
@@ -1324,7 +1324,7 @@
         }
 
         function isActivityEvent(event) {
-            return event.Event !== 'auth_attempt' && event.Event !== 'harvested_credential';
+            return event.Event !== 'auth_attempt';
         }
 
         function latestTimestamp(events) {
@@ -1378,10 +1378,10 @@
 
             for (const event of events) {
                 const data = event.Data || {};
-                const id = data.SessionKey || data.ShellSessionId || 'unknown';
+                const id = event.SessionId || data.SessionKey || data.ShellSessionId || 'unknown';
                 const model = ensure(id);
-                model.sessionKey = data.SessionKey || model.sessionKey;
-                model.shellSessionId = data.ShellSessionId || model.shellSessionId;
+                model.sessionKey = event.SessionId || data.SessionKey || model.sessionKey;
+                model.shellSessionId = event.ChannelId || data.ShellSessionId || model.shellSessionId;
                 model.remote = data.RemoteEndpoint || model.remote;
                 model.username = data.Username || model.username;
                 model.client = data.ClientVersion || model.client;
@@ -1392,10 +1392,10 @@
                 if (data.DurationSeconds) model.durationSeconds = Math.max(model.durationSeconds, data.DurationSeconds);
                 if (data.TimeToCompromiseMs) model.timeToCompromiseMs = Math.max(model.timeToCompromiseMs, data.TimeToCompromiseMs);
 
-                model.timeline.push({ type: event.Event, timestamp: data.Timestamp || event.Timestamp, data });
+                model.timeline.push({ type: event.Event, timestamp: data.Timestamp || event.Timestamp, sequence: event.Sequence, data });
 
                 if (event.Event === 'auth_attempt') {
-                    model.authAttempts.push(data);
+                    model.authAttempts.push({ ...data, Timestamp: event.Timestamp, Sequence: event.Sequence });
                 }
 
                 if (event.Event === 'command') {
@@ -1453,7 +1453,7 @@
             setText('shellOpens', fmt.format(summary.TotalShells || 0));
             setText('avgResponse', `${fmt.format(Math.round(avgResponse))}ms`);
             setText('blockedOps', fmt.format(0));
-            setText('harvestedCreds', fmt.format(summary.EventCounts?.harvested_credential || 0));
+            setText('harvestedCreds', fmt.format(summary.EventCounts?.auth_attempt || 0));
             setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
             setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));
             setText('textAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.textAttempts, 0)));
@@ -1526,7 +1526,7 @@
         function countCredentialField(events, field) {
             const counts = {};
             for (const event of events) {
-                if (event.Event !== 'auth_attempt' && event.Event !== 'harvested_credential') continue;
+                if (event.Event !== 'auth_attempt') continue;
                 const value = event.Data?.[field];
                 if (!value) continue;
                 counts[value] = (counts[value] || 0) + 1;
@@ -2263,12 +2263,11 @@
 
             target.innerHTML = session.authAttempts.map(attempt => `
                 <div class="timeline-item">
-                    <div class="timeline-time">${fmtTime(attempt.Timestamp)} / attempt ${attempt.AttemptNumber}</div>
+                    <div class="timeline-time">${fmtTime(attempt.Timestamp)} / attempt ${attempt.ConnectionAttemptNumber || attempt.Sequence}</div>
                     <div class="timeline-body">
                         ${badge(attempt.Accepted ? 'accepted' : 'rejected', attempt.Accepted ? 'green' : 'red')}
                         ${badge(attempt.AcceptanceReason || 'unknown', 'cyan')}
                         user <strong>${escapeHtml(attempt.Username)}</strong> via ${escapeHtml(attempt.AuthMethod)}
-                        <br><span class="muted">entropy ${formatNumber(attempt.CredentialEntropy)} / mutation distance ${attempt.PreviousCredentialDistance}</span>
                     </div>
                 </div>
             `).join('');
@@ -2365,7 +2364,6 @@
             if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;
-            if (item.type === 'harvested_credential') return `credential harvested for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected') return renderUpload({ ...data, EventType: item.type });
             return escapeHtml(data.Event || item.type);
         }

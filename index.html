@@ -1465,33 +1465,56 @@
         function renderDashboard(stats, summary, events, threatIntel = window.cachedThreatIntel, prebuiltSessions = window.cachedPrebuiltSessions) {
             const retainedSummary = events.length ? summarizeEvents(events) : summary;
             if (prebuiltSessions && prebuiltSessions.length) {
-                sessionModels = prebuiltSessions.map(s => ({
-                    ...s,
-                    id: s.SessionId,
-                    sessionKey: s.SessionId,
-                    remote: s.RemoteEndpoint || s.RemoteIp,
-                    username: s.Username,
-                    client: s.ClientVersion,
-                    startedAt: s.StartedAt,
-                    endedAt: s.EndedAt,
-                    durationSeconds: s.DurationSeconds,
-                    commands: s.Commands || [],
-                    results: (s.Commands || []).map(c => ({
-                        Response: c.Response,
-                        ResponseDurationMs: c.ResponseDurationMs,
-                        FailedCommand: c.FailedCommand,
-                        LlmModel: c.LlmModel,
-                        ResponseSource: c.ResponseSource,
-                        Timestamp: c.Timestamp,
-                        ExchangeId: c.ExchangeId
-                    })),
-                    tactics: new Set(s.TacticsObserved || []),
-                    payloadUrls: new Set(s.PayloadUrls || []),
-                    egressTargets: new Set(),
-                    persistence: new Set(s.PersistenceVectors || []),
-                    binaryAttempts: (s.PayloadUrls || []).length + (s.PersistenceVectors || []).length,
-                    authAttempts: s.AuthAttempts || []
-                }));
+                sessionModels = prebuiltSessions.map(s => {
+                    const timeline = [];
+                    if (s.StartedAt) timeline.push({ type: 'session_start', timestamp: s.StartedAt, data: { RemoteEndpoint: s.RemoteEndpoint, ClientVersion: s.ClientVersion, SshBanner: s.SshBanner } });
+                    (s.AuthAttempts || []).forEach(a => timeline.push({ type: 'auth_attempt', timestamp: a.Timestamp || s.StartedAt, data: { Username: a.Username, Password: a.Password, Accepted: a.Accepted } }));
+                    if (s.ShellOpened) timeline.push({ type: 'shell_session_start', timestamp: s.StartedAt, data: { Username: s.Username, TimeToCompromiseMs: s.TimeToCompromiseMs } });
+                    (s.Commands || []).forEach(c => {
+                        timeline.push({ type: 'command', timestamp: c.Timestamp, sequence: c.Sequence, data: { Command: c.Command, MitreAttackTechniques: c.MitreTactics } });
+                        if (c.Response) timeline.push({ type: 'command_result', timestamp: c.Timestamp, sequence: (c.Sequence || 0) + 1, data: { Command: c.Command, Response: c.Response, FailedCommand: c.FailedCommand, LlmModel: c.LlmModel, ResponseSource: c.ResponseSource, ResponseDurationMs: c.ResponseDurationMs } });
+                    });
+                    if (s.EndedAt) timeline.push({ type: 'session_end', timestamp: s.EndedAt, data: { DurationSeconds: s.DurationSeconds } });
+
+                    return {
+                        ...s,
+                        id: s.SessionId,
+                        sessionKey: s.SessionId,
+                        shellSessionId: s.SessionId,
+                        remote: s.RemoteEndpoint || s.RemoteIp || 'unknown',
+                        username: s.Username || 'unknown',
+                        client: s.ClientVersion || 'unknown',
+                        sshBanner: s.SshBanner || '',
+                        startedAt: s.StartedAt,
+                        endedAt: s.EndedAt,
+                        durationSeconds: s.DurationSeconds || 0,
+                        timeToCompromiseMs: s.TimeToCompromiseMs || 0,
+                        authAttempts: s.AuthAttempts || [],
+                        commands: s.Commands || [],
+                        results: (s.Commands || []).map(c => ({
+                            Response: c.Response,
+                            ResponseDurationMs: c.ResponseDurationMs,
+                            FailedCommand: c.FailedCommand,
+                            LlmModel: c.LlmModel,
+                            ResponseSource: c.ResponseSource,
+                            Timestamp: c.Timestamp,
+                            ExchangeId: c.ExchangeId,
+                            Command: c.Command
+                        })),
+                        timeline,
+                        tactics: new Set(s.TacticsObserved || []),
+                        payloadUrls: new Set(s.PayloadUrls || []),
+                        egressTargets: new Set(),
+                        persistence: new Set(s.PersistenceVectors || []),
+                        avpMax: s.RiskScore || 0,
+                        semanticDriftMax: 0,
+                        turingMax: 0,
+                        failedCommands: (s.Commands || []).filter(c => c.FailedCommand).length,
+                        binaryAttempts: (s.PayloadUrls || []).length + (s.PersistenceVectors || []).length,
+                        textAttempts: (s.Commands || []).length,
+                        uploads: []
+                    };
+                });
             } else {
                 const activityEvents = events.filter(isActivityEvent);
                 sessionModels = buildSessions(activityEvents);
@@ -2892,22 +2915,24 @@
         }
 
         function hasShellOpen(session) {
-            return session.timeline.some(item => item.type === 'shell_session_start') || session.authAttempts.some(attempt => attempt.Accepted);
+            return Boolean(session.ShellOpened)
+                || (session.timeline || []).some(item => item.type === 'shell_session_start')
+                || (session.authAttempts || []).some(attempt => attempt.Accepted);
         }
 
         function isGhostedSession(session) {
-            return hasShellOpen(session) && !session.commands.length;
+            return hasShellOpen(session) && !(session.commands || []).length;
         }
 
         function behaviorType(session) {
             if (isGhostedSession(session)) return 'Ghosted session';
             if (isGpuProspector(session)) return 'GPU prospector';
-            if (session.uploads.length || session.payloadUrls.size || session.binaryAttempts) return 'Payload attempt';
-            if (session.persistence.size) return 'Persistence attempt';
-            if (session.commands.some(command => commandCategory(command) === 'Network probing')) return 'Network probing';
-            if (session.commands.some(command => commandCategory(command) === 'Discovery')) return 'Recon behavior';
-            if (session.authAttempts.length && !session.commands.length) return 'Credential validation';
-            return session.commands.length ? 'Shell interaction' : 'Connection probing';
+            if ((session.uploads || []).length || (session.payloadUrls?.size || 0) || session.binaryAttempts) return 'Payload attempt';
+            if (session.persistence?.size) return 'Persistence attempt';
+            if ((session.commands || []).some(command => commandCategory(command) === 'Network probing')) return 'Network probing';
+            if ((session.commands || []).some(command => commandCategory(command) === 'Discovery')) return 'Recon behavior';
+            if ((session.authAttempts || []).length && !(session.commands || []).length) return 'Credential validation';
+            return (session.commands || []).length ? 'Shell interaction' : 'Connection probing';
         }
 
         function isGpuProspector(session) {

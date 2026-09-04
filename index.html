@@ -1392,21 +1392,6 @@
             return response.json();
         }
 
-        async function fetchJsonl(path) {
-            const response = await fetch(`${DATA_BASE}/${path}?_t=${Date.now()}`, { cache: 'no-store' });
-            if (!response.ok) throw new Error(`${path}: ${response.status}`);
-            const text = await response.text();
-            return text.split('\n').filter(Boolean).map(line => JSON.parse(line));
-        }
-
-        async function fetchEventDatabase() {
-            try {
-                return await fetchJsonl('data/events.jsonl');
-            } catch (error) {
-                return fetchJsonl('data/harvest.jsonl');
-            }
-        }
-
         async function fetchEventSummary() {
             try {
                 return await fetchJson('data/events_summary.json');
@@ -1451,8 +1436,6 @@
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || 0)} indexed events`;
                 document.getElementById('lastUpdated').textContent = fmtTime(summary.LastUpdated || stats.LastUpdated);
-
-                hydrateEventDetails(stats, summary, threatIntel, prebuiltSessions);
             } catch (error) {
                 console.error('Failed to load dashboard data:', error);
                 document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
@@ -1466,21 +1449,56 @@
             const retainedSummary = events.length ? summarizeEvents(events) : summary;
             if (prebuiltSessions && prebuiltSessions.length) {
                 sessionModels = prebuiltSessions.map(s => {
-                    const timeline = [];
-                    if (s.StartedAt) timeline.push({ type: 'session_start', timestamp: s.StartedAt, data: { RemoteEndpoint: s.RemoteEndpoint, ClientVersion: s.ClientVersion, SshBanner: s.SshBanner } });
-                    (s.AuthAttempts || []).forEach(a => timeline.push({ type: 'auth_attempt', timestamp: a.Timestamp || s.StartedAt, data: { Username: a.Username, Password: a.Password, Accepted: a.Accepted } }));
-                    if (s.ShellOpened) timeline.push({ type: 'shell_session_start', timestamp: s.StartedAt, data: { Username: s.Username, TimeToCompromiseMs: s.TimeToCompromiseMs } });
-                    (s.Commands || []).forEach(c => {
-                        timeline.push({ type: 'command', timestamp: c.Timestamp, sequence: c.Sequence, data: { Command: c.Command, MitreAttackTechniques: c.MitreTactics } });
-                        if (c.Response) timeline.push({ type: 'command_result', timestamp: c.Timestamp, sequence: (c.Sequence || 0) + 1, data: { Command: c.Command, Response: c.Response, FailedCommand: c.FailedCommand, LlmModel: c.LlmModel, ResponseSource: c.ResponseSource, ResponseDurationMs: c.ResponseDurationMs } });
-                    });
-                    if (s.EndedAt) timeline.push({ type: 'session_end', timestamp: s.EndedAt, data: { DurationSeconds: s.DurationSeconds } });
+                    const commands = (s.Commands || []).map(command => ({
+                        ...command,
+                        MitreAttackTechniques: command.MitreAttackTechniques || command.MitreTactics || [],
+                        PayloadUrls: command.PayloadUrls || [],
+                        EgressTargets: command.EgressTargets || [],
+                        PersistenceVector: command.PersistenceVector || 'none',
+                        TunnelingIntent: command.TunnelingIntent || 'none',
+                    }));
+                    const results = commands.filter(structuredCommandHasResponse).map(command => ({
+                        Response: command.Response,
+                        ResponseDurationMs: command.ResponseDurationMs,
+                        FailedCommand: command.FailedCommand,
+                        LlmModel: command.LlmModel,
+                        ResponseSource: command.ResponseSource,
+                        Timestamp: command.ResponseTimestamp || null,
+                        ExchangeId: command.ExchangeId,
+                        MessageNumber: command.MessageNumber,
+                        ShellMessageNumber: command.ShellMessageNumber,
+                        Command: command.Command,
+                    }));
+                    const timeline = (s.Timeline || []).map(item => ({
+                        type: item.Event,
+                        timestamp: item.Timestamp,
+                        sequence: item.Sequence,
+                        channelId: item.ChannelId,
+                        exchangeId: item.ExchangeId,
+                        data: item.Data || {},
+                    }));
+                    if (!timeline.length) {
+                        if (s.StartedAt) timeline.push({ type: 'session_start', timestamp: s.StartedAt, data: { RemoteEndpoint: s.RemoteEndpoint, ClientVersion: s.ClientVersion, SshBanner: s.SshBanner } });
+                        (s.AuthAttempts || []).forEach(attempt => timeline.push({ type: 'auth_attempt', timestamp: attempt.Timestamp, data: attempt }));
+                        commands.forEach(command => {
+                            timeline.push({ type: 'command', timestamp: command.Timestamp, sequence: command.Sequence, exchangeId: command.ExchangeId, data: command });
+                            if (structuredCommandHasResponse(command)) timeline.push({ type: 'command_result', timestamp: command.ResponseTimestamp || null, exchangeId: command.ExchangeId, data: command });
+                        });
+                        if (s.EndedAt) timeline.push({ type: 'session_end', timestamp: s.EndedAt, data: { DurationSeconds: s.DurationSeconds } });
+                    }
+                    const uploads = timeline
+                        .filter(item => item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected')
+                        .map(item => ({ ...item.data, Timestamp: item.timestamp, EventType: item.type }));
+                    const payloadUrls = new Set([...(s.PayloadUrls || []), ...commands.flatMap(command => command.PayloadUrls)]);
+                    const egressTargets = new Set(commands.flatMap(command => command.EgressTargets));
+                    const persistence = new Set([...(s.PersistenceVectors || []), ...commands.map(command => command.PersistenceVector).filter(value => value && value !== 'none')]);
+                    const shellStart = timeline.find(item => item.type === 'shell_session_start');
 
                     return {
                         ...s,
                         id: s.SessionId,
                         sessionKey: s.SessionId,
-                        shellSessionId: s.SessionId,
+                        shellSessionId: shellStart?.channelId || '',
                         remote: s.RemoteEndpoint || s.RemoteIp || 'unknown',
                         username: s.Username || 'unknown',
                         client: s.ClientVersion || 'unknown',
@@ -1490,29 +1508,21 @@
                         durationSeconds: s.DurationSeconds || 0,
                         timeToCompromiseMs: s.TimeToCompromiseMs || 0,
                         authAttempts: s.AuthAttempts || [],
-                        commands: s.Commands || [],
-                        results: (s.Commands || []).map(c => ({
-                            Response: c.Response,
-                            ResponseDurationMs: c.ResponseDurationMs,
-                            FailedCommand: c.FailedCommand,
-                            LlmModel: c.LlmModel,
-                            ResponseSource: c.ResponseSource,
-                            Timestamp: c.Timestamp,
-                            ExchangeId: c.ExchangeId,
-                            Command: c.Command
-                        })),
+                        commands,
+                        results,
                         timeline,
-                        tactics: new Set(s.TacticsObserved || []),
-                        payloadUrls: new Set(s.PayloadUrls || []),
-                        egressTargets: new Set(),
-                        persistence: new Set(s.PersistenceVectors || []),
-                        avpMax: s.RiskScore || 0,
+                        tactics: new Set(s.TacticsObserved || commands.flatMap(command => mitreTactics(command.MitreAttackTechniques))),
+                        payloadUrls,
+                        egressTargets,
+                        persistence,
+                        avpMax: Math.max(0, ...commands.map(command => Number(command.AssetValuePerceptionScore) || 0)),
+                        publishedRiskScore: Number.isFinite(Number(s.RiskScore)) ? Number(s.RiskScore) : null,
                         semanticDriftMax: 0,
                         turingMax: 0,
-                        failedCommands: (s.Commands || []).filter(c => c.FailedCommand).length,
-                        binaryAttempts: (s.PayloadUrls || []).length + (s.PersistenceVectors || []).length,
-                        textAttempts: (s.Commands || []).length,
-                        uploads: []
+                        failedCommands: results.filter(result => result.FailedCommand).length,
+                        binaryAttempts: commands.filter(isBinaryAttempt).length + uploads.filter(upload => upload.EventType === 'scp_upload_captured').length,
+                        textAttempts: commands.length,
+                        uploads,
                     };
                 });
             } else {
@@ -1525,27 +1535,20 @@
             renderGeography(threatIntel || retainedSummary);
             renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
             renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
-            renderTimeOfDay(events);
-            renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
+            renderTimeOfDay(events, sessionModels);
+            renderBars('commonCommandBars', summarizeCommonCommands(events, threatIntel), 'cyan');
             renderTopAttackerCommands(events, threatIntel, 10);
             renderExchangeHud(sessionModels);
             renderLatestExchanges(sessionModels);
             hydrateExchangeGeography(sessionModels);
         }
 
-        function hydrateEventDetails(stats, summary, threatIntel, prebuiltSessions) {
-            const start = () => fetchEventDatabase()
-                .then(events => {
-                    renderDashboard(stats, summary, events, threatIntel, prebuiltSessions);
-                    document.getElementById('dataStatus').textContent = `${fmt.format(events.length)} retained events`;
-                })
-                .catch(error => {
-                    console.warn('Detailed event database unavailable:', error);
-                    document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || 0)} indexed events; details unavailable`;
-                });
-
-            if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
-            else setTimeout(start, 0);
+        function structuredCommandHasResponse(command) {
+            return command.HasResponse === true
+                || Boolean(command.ResponseTimestamp || command.ResponseSource || command.LlmModel)
+                || Number(command.ResponseDurationMs) > 0
+                || command.FailedCommand === true
+                || String(command.Response || '').length > 0;
         }
 
         function summarizeEvents(events) {
@@ -1565,15 +1568,12 @@
                 const data = event.Data || {};
                 summary.EventCounts[event.Event] = (summary.EventCounts[event.Event] || 0) + 1;
 
-                if (event.Event === 'session_start') {
-                    const ip = remoteIp(data.RemoteEndpoint);
-                    if (ip) summary.ScansByIp[ip] = (summary.ScansByIp[ip] || 0) + 1;
-                }
-
                 if (event.Event === 'auth_attempt') {
                     summary.TotalScanAttempts++;
                     if (data.Username) summary.TopUsernames[data.Username] = (summary.TopUsernames[data.Username] || 0) + 1;
                     if (data.Password) summary.TopPasswords[data.Password] = (summary.TopPasswords[data.Password] || 0) + 1;
+                    const ip = remoteIp(data.RemoteEndpoint);
+                    if (ip) summary.ScansByIp[ip] = (summary.ScansByIp[ip] || 0) + 1;
                 }
 
                 if (event.Event === 'shell_session_start') summary.TotalShells++;
@@ -1625,6 +1625,7 @@
                         persistence: new Set(),
                         sshBanner: '',
                         avpMax: 0,
+                        publishedRiskScore: null,
                         semanticDriftMax: 0,
                         turingMax: 0,
                         failedCommands: 0,
@@ -1712,9 +1713,13 @@
         }
 
         function renderPerformance(stats, summary, events, sessions) {
-            const commands = events.filter(event => event.Event === 'command');
-            const results = events.filter(event => event.Event === 'command_result');
-            const avgResponse = average(results.map(event => event.Data?.ResponseDurationMs || 0));
+            const commands = events.length
+                ? events.filter(event => event.Event === 'command')
+                : sessions.flatMap(session => session.commands || []);
+            const results = events.length
+                ? events.filter(event => event.Event === 'command_result').map(event => event.Data || {})
+                : sessions.flatMap(session => session.results || []);
+            const avgResponse = average(results.map(result => result.ResponseDurationMs || 0));
 
             setText('totalSessions', fmt.format(summary.EventCounts?.shell_session_end || 0));
             setText('connections', fmt.format(summary.EventCounts?.session_start || 0));
@@ -1729,12 +1734,14 @@
             setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));
         }
 
-        function renderTimeOfDay(events) {
+        function renderTimeOfDay(events, sessions) {
             const target = document.getElementById('hourGrid');
             if (!target) return;
             const counts = Array.from({ length: 24 }, () => 0);
-            for (const event of events) {
-                const timestamp = event.Data?.Timestamp || event.Timestamp;
+            const activity = events.length
+                ? events.map(event => event.Data?.Timestamp || event.Timestamp)
+                : sessions.flatMap(session => (session.commands || []).map(command => command.Timestamp));
+            for (const timestamp of activity) {
                 if (!timestamp) continue;
                 const date = new Date(timestamp);
                 if (!Number.isNaN(date.getTime())) counts[date.getUTCHours()]++;
@@ -1742,7 +1749,7 @@
 
             const max = Math.max(...counts, 1);
             target.innerHTML = counts.map((count, hour) => `
-                <div class="hour" title="${hour}:00 UTC / ${fmt.format(count)} events">
+                <div class="hour" title="${hour}:00 UTC / ${fmt.format(count)} activity records">
                     <div class="hour-bar" style="height:${Math.max(4, count / max * 150)}px"></div>
                     <div class="hour-label">${String(hour).padStart(2, '0')}</div>
                 </div>
@@ -1951,7 +1958,7 @@
             }).join('');
         }
 
-        function summarizeCommonCommands(events) {
+        function summarizeCommonCommands(events, threatIntel) {
             const counts = {};
             for (const event of events) {
                 if (event.Event !== 'command') continue;
@@ -1959,6 +1966,7 @@
                 if (!command) continue;
                 counts[command] = (counts[command] || 0) + 1;
             }
+            if (!events.length && threatIntel?.FrequentCommands) return takeTop(threatIntel.FrequentCommands, 15);
             return takeTop(counts, 15);
         }
 
@@ -3023,6 +3031,7 @@
         }
 
         function riskScore(session) {
+            if (Number.isFinite(session.publishedRiskScore)) return session.publishedRiskScore;
             return session.avpMax + session.tactics.size * 12 + session.payloadUrls.size * 10 + session.egressTargets.size * 10 + session.failedCommands * 2 + (session.authAttempts.some(a => a.Accepted) ? 10 : 0);
         }
 

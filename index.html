@@ -461,6 +461,82 @@
             border-radius: inherit;
         }
 
+        .command-intel-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .command-intel-row {
+            display: grid;
+            grid-template-columns: 36px 1fr minmax(140px, 220px);
+            align-items: center;
+            gap: 16px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .command-intel-row:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(72, 223, 255, 0.25);
+        }
+
+        .command-intel-rank {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .command-intel-main {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .command-intel-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .command-intel-code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            background: #080d12;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            word-break: break-all;
+        }
+
+        .command-intel-objective {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .command-intel-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .command-intel-stats .bar-track {
+            width: 100%;
+        }
+
+        .command-intel-count {
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -1054,6 +1130,8 @@
             .hud-title-row { align-items: flex-start; flex-direction: column; }
             .hud-readout { text-align: left; }
             .bar-row { grid-template-columns: 1fr; gap: 5px; }
+            .command-intel-row { grid-template-columns: 1fr; gap: 8px; }
+            .command-intel-stats { align-items: stretch; }
             .session-summary-grid { grid-template-columns: 1fr; }
             table { min-width: 900px; }
             .table-scroll { overflow-x: auto; }
@@ -1167,6 +1245,16 @@
                     <div class="panel">
                         <h3>SSH Banners</h3>
                         <div class="bars" id="bannerBars"></div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Top Attacker Commands & Tactical Objectives</h2>
+                        <span class="muted">Top post-compromise commands observed across sessions, classified by inferred threat objective and MITRE ATT&CK technique</span>
+                    </div>
+                    <div class="panel" style="padding: 1.25rem;">
+                        <div id="topCommandsList" class="command-intel-list"></div>
                     </div>
                 </section>
             </div>
@@ -1327,14 +1415,35 @@
             }
         }
 
+        async function fetchThreatIntel() {
+            try {
+                return await fetchJson('data/threat_intel.json');
+            } catch (error) {
+                return null;
+            }
+        }
+
+        async function fetchStructuredSessions() {
+            try {
+                return await fetchJson('data/sessions.json');
+            } catch (error) {
+                return null;
+            }
+        }
+
         async function loadDashboard() {
             try {
-                const [stats, summary] = await Promise.all([
+                const [stats, summary, threatIntel, prebuiltSessions] = await Promise.all([
                     fetchJson('global_stats.json'),
-                    fetchEventSummary()
+                    fetchEventSummary(),
+                    fetchThreatIntel(),
+                    fetchStructuredSessions()
                 ]);
 
-                renderDashboard(stats, summary, []);
+                window.cachedThreatIntel = threatIntel;
+                window.cachedPrebuiltSessions = prebuiltSessions;
+
+                renderDashboard(stats, summary, [], threatIntel, prebuiltSessions);
                 setupTabs();
                 setupExchangeSorting();
                 setupFloatingTooltips();
@@ -1343,7 +1452,7 @@
                 document.getElementById('dataStatus').textContent = `${fmt.format(summary.TotalEvents || 0)} indexed events`;
                 document.getElementById('lastUpdated').textContent = fmtTime(summary.LastUpdated || stats.LastUpdated);
 
-                hydrateEventDetails(stats, summary);
+                hydrateEventDetails(stats, summary, threatIntel, prebuiltSessions);
             } catch (error) {
                 console.error('Failed to load dashboard data:', error);
                 document.getElementById('loading').textContent = `Failed to load dashboard data: ${error.message}`;
@@ -1353,27 +1462,58 @@
             }
         }
 
-        function renderDashboard(stats, summary, events) {
+        function renderDashboard(stats, summary, events, threatIntel = window.cachedThreatIntel, prebuiltSessions = window.cachedPrebuiltSessions) {
             const retainedSummary = events.length ? summarizeEvents(events) : summary;
-            const activityEvents = events.filter(isActivityEvent);
-            sessionModels = buildSessions(activityEvents);
+            if (prebuiltSessions && prebuiltSessions.length) {
+                sessionModels = prebuiltSessions.map(s => ({
+                    ...s,
+                    id: s.SessionId,
+                    sessionKey: s.SessionId,
+                    remote: s.RemoteEndpoint || s.RemoteIp,
+                    username: s.Username,
+                    client: s.ClientVersion,
+                    startedAt: s.StartedAt,
+                    endedAt: s.EndedAt,
+                    durationSeconds: s.DurationSeconds,
+                    commands: s.Commands || [],
+                    results: (s.Commands || []).map(c => ({
+                        Response: c.Response,
+                        ResponseDurationMs: c.ResponseDurationMs,
+                        FailedCommand: c.FailedCommand,
+                        LlmModel: c.LlmModel,
+                        ResponseSource: c.ResponseSource,
+                        Timestamp: c.Timestamp,
+                        ExchangeId: c.ExchangeId
+                    })),
+                    tactics: new Set(s.TacticsObserved || []),
+                    payloadUrls: new Set(s.PayloadUrls || []),
+                    egressTargets: new Set(),
+                    persistence: new Set(s.PersistenceVectors || []),
+                    binaryAttempts: (s.PayloadUrls || []).length + (s.PersistenceVectors || []).length,
+                    authAttempts: s.AuthAttempts || []
+                }));
+            } else {
+                const activityEvents = events.filter(isActivityEvent);
+                sessionModels = buildSessions(activityEvents);
+            }
             renderPerformance(stats, retainedSummary, events, sessionModels);
             renderBars('eventBars', retainedSummary.EventCounts || {}, 'cyan');
-            renderCredentialStats(retainedSummary, events);
-            renderGeography(retainedSummary);
+            renderCredentialStats(threatIntel || retainedSummary, events);
+            renderGeography(threatIntel || retainedSummary);
             renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
             renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
             renderTimeOfDay(events);
             renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
+            renderTopAttackerCommands(events, threatIntel, 10);
             renderExchangeHud(sessionModels);
             renderLatestExchanges(sessionModels);
             hydrateExchangeGeography(sessionModels);
         }
 
-        function hydrateEventDetails(stats, summary) {
+        function hydrateEventDetails(stats, summary, threatIntel, prebuiltSessions) {
             const start = () => fetchEventDatabase()
                 .then(events => {
-                    renderDashboard(stats, summary, events);
+                    renderDashboard(stats, summary, events, threatIntel, prebuiltSessions);
                     document.getElementById('dataStatus').textContent = `${fmt.format(events.length)} retained events`;
                 })
                 .catch(error => {
@@ -1586,6 +1726,208 @@
             `).join('');
         }
 
+        function inferCommandObjective(cmd) {
+            const c = String(cmd || '').toLowerCase().trim();
+            if (/^(id|whoami|w|logname)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Identify current user privileges, groups, and security context',
+                    tactic: 'Discovery',
+                    tech: 'T1033',
+                    color: 'purple'
+                };
+            }
+            if (/^uname(\s|$)/.test(c)) {
+                return {
+                    objective: 'Determine Linux kernel version, OS release, and CPU architecture',
+                    tactic: 'Discovery',
+                    tech: 'T1082',
+                    color: 'purple'
+                };
+            }
+            if (/cat\s+.*(passwd|shadow|master\.passwd)/.test(c)) {
+                return {
+                    objective: 'Enumerate local user accounts, service accounts, and login shells',
+                    tactic: 'Credential Access',
+                    tech: 'T1087.001',
+                    color: 'red'
+                };
+            }
+            if (/cat\s+.*(cpuinfo|meminfo|version|issue|.*release)/.test(c) || /^(lscpu|lshw|free)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Profile host hardware capabilities, RAM, and distribution baseline',
+                    tactic: 'Discovery',
+                    tech: 'T1082',
+                    color: 'purple'
+                };
+            }
+            if (/^(ps|top|htop)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Inspect running processes, background services, and security monitors',
+                    tactic: 'Discovery',
+                    tech: 'T1057',
+                    color: 'purple'
+                };
+            }
+            if (/^(netstat|ss|lsof|arp)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Identify listening network services, open ports, and active connections',
+                    tactic: 'Discovery',
+                    tech: 'T1049',
+                    color: 'purple'
+                };
+            }
+            if (/^(ip\s+a|ifconfig|route|ip\s+r)/.test(c)) {
+                return {
+                    objective: 'Map local network interfaces, subnets, and default gateway routing',
+                    tactic: 'Discovery',
+                    tech: 'T1016',
+                    color: 'purple'
+                };
+            }
+            if (/(curl|wget|tftp|ftp|fetch|scp|sftp)\b/.test(c)) {
+                return {
+                    objective: 'Download external payload, staging script, or crypto-mining binary',
+                    tactic: 'Command & Control',
+                    tech: 'T1105',
+                    color: 'red'
+                };
+            }
+            if (/chmod\s+(\+x|[0-7]{3,4})/.test(c)) {
+                return {
+                    objective: 'Grant execution permissions to staged dropped binaries or scripts',
+                    tactic: 'Defense Evasion',
+                    tech: 'T1222',
+                    color: 'cyan'
+                };
+            }
+            if (/crontab|(\/etc\/cron)/.test(c)) {
+                return {
+                    objective: 'Inspect or establish recurring persistence via scheduled cron jobs',
+                    tactic: 'Persistence',
+                    tech: 'T1053.003',
+                    color: 'amber'
+                };
+            }
+            if (/(\.ssh\/authorized_keys|ssh-copy-id)/.test(c)) {
+                return {
+                    objective: 'Plant attacker public SSH key for permanent backdoor authentication',
+                    tactic: 'Persistence',
+                    tech: 'T1098.004',
+                    color: 'amber'
+                };
+            }
+            if (/^(ls|dir|find|locate)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Enumerate directories, discover sensitive files, and check permissions',
+                    tactic: 'Discovery',
+                    tech: 'T1083',
+                    color: 'purple'
+                };
+            }
+            if (/^(history|cat\s+.*history)/.test(c)) {
+                return {
+                    objective: 'Search bash history for previously executed commands and credentials',
+                    tactic: 'Credential Access',
+                    tech: 'T1552.003',
+                    color: 'amber'
+                };
+            }
+            if (/^(iptables|ufw|firewall-cmd)/.test(c)) {
+                return {
+                    objective: 'Check host firewall filtering rules and inbound/outbound restrictions',
+                    tactic: 'Discovery',
+                    tech: 'T1562.004',
+                    color: 'purple'
+                };
+            }
+            if (/^(df|du|mount|lsblk)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Inspect mounted filesystems, disk utilization, and storage partitions',
+                    tactic: 'Discovery',
+                    tech: 'T1082',
+                    color: 'purple'
+                };
+            }
+            if (/^(uptime)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Measure system uptime and evaluate host stability and administrator activity',
+                    tactic: 'Discovery',
+                    tech: 'T1082',
+                    color: 'purple'
+                };
+            }
+            if (/which\s+|whereis\s+/.test(c)) {
+                return {
+                    objective: 'Verify availability of administrative tools, compilers, and interpreters',
+                    tactic: 'Discovery',
+                    tech: 'T1082',
+                    color: 'purple'
+                };
+            }
+            if (/^(exit|quit|logout)(\s|$)/.test(c)) {
+                return {
+                    objective: 'Gracefully terminate interactive session after objective attempt',
+                    tactic: 'Defense Evasion',
+                    tech: 'T1070',
+                    color: 'green'
+                };
+            }
+            return {
+                objective: 'Interactive shell command execution and environment probing',
+                tactic: 'Execution',
+                tech: 'T1059.004',
+                color: 'cyan'
+            };
+        }
+
+        function renderTopAttackerCommands(events, threatIntel, limit = 10) {
+            const target = document.getElementById('topCommandsList');
+            if (!target) return;
+            const counts = {};
+            for (const event of events) {
+                if (event.Event !== 'command') continue;
+                const command = String(event.Data?.Command || '').trim();
+                if (!command) continue;
+                counts[command] = (counts[command] || 0) + 1;
+            }
+            if (threatIntel?.FrequentCommands) {
+                for (const [cmd, count] of Object.entries(threatIntel.FrequentCommands)) {
+                    counts[cmd] = Math.max(counts[cmd] || 0, count);
+                }
+            }
+            const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+            if (!sorted.length) {
+                target.innerHTML = '<div class="empty">No post-compromise commands observed in the current telemetry stream yet.</div>';
+                return;
+            }
+            const totalCommands = Object.values(counts).reduce((a, b) => a + b, 0);
+            const top = sorted.slice(0, limit);
+            const max = top[0][1] || 1;
+            target.innerHTML = top.map(([command, count], idx) => {
+                const meta = inferCommandObjective(command);
+                const percent = totalCommands ? Math.round((count / totalCommands) * 100) : 0;
+                const barWidth = Math.max(6, Math.round((count / max) * 100));
+                return `
+                    <div class="command-intel-row">
+                        <div class="command-intel-rank">#${idx + 1}</div>
+                        <div class="command-intel-main">
+                            <div class="command-intel-header">
+                                <span class="command-intel-code">${escapeHtml(command)}</span>
+                                ${badge(meta.tech || meta.tactic, meta.color)}
+                            </div>
+                            <div class="command-intel-objective">
+                                <strong>Objective:</strong> ${escapeHtml(meta.objective)}
+                            </div>
+                        </div>
+                        <div class="command-intel-stats">
+                            <div class="bar-track"><div class="bar-fill" style="width:${barWidth}%;"></div></div>
+                            <div class="command-intel-count"><strong>${fmt.format(count)}</strong> <span class="muted">(${percent}% of commands)</span></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function summarizeCommonCommands(events) {
             const counts = {};
             for (const event of events) {
@@ -1598,8 +1940,12 @@
         }
 
         function renderCredentialStats(summary, events) {
-            const usernames = Object.keys(summary.TopUsernames || {}).length ? summary.TopUsernames : countCredentialField(events, 'Username');
-            const passwords = Object.keys(summary.TopPasswords || {}).length ? summary.TopPasswords : countCredentialField(events, 'Password');
+            const usernames = Object.keys(summary.Usernames || summary.TopUsernames || {}).length
+                ? (summary.Usernames || summary.TopUsernames)
+                : countCredentialField(events, 'Username');
+            const passwords = Object.keys(summary.Passwords || summary.TopPasswords || {}).length
+                ? (summary.Passwords || summary.TopPasswords)
+                : countCredentialField(events, 'Password');
             renderBars('usernameBars', takeTop(usernames, 50), 'cyan');
             renderBars('passwordBars', takeTop(passwords, 50), 'amber');
         }
@@ -1649,7 +1995,7 @@
         }
 
         async function renderGeography(summary) {
-            const ipCounts = takeTop(summary.ScansByIp || {}, 50);
+            const ipCounts = takeTop(summary.SourceIps || summary.ScansByIp || {}, 50);
             renderBars('ipBars', takeTop(ipCounts, 15), 'cyan');
 
             const ips = Object.keys(ipCounts);

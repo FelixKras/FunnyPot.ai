@@ -183,6 +183,91 @@
             box-shadow: 0 12px 38px rgba(0, 0, 0, 0.28);
         }
 
+        .project-intro {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(440px, 1.1fr);
+            gap: 28px;
+            align-items: center;
+            padding: clamp(22px, 3vw, 36px);
+            border: 1px solid rgba(72, 223, 255, 0.28);
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 12% 12%, rgba(53, 255, 122, 0.09), transparent 38%),
+                linear-gradient(135deg, rgba(17, 24, 32, 0.98), rgba(10, 17, 23, 0.94));
+            box-shadow: 0 18px 54px rgba(0, 0, 0, 0.32);
+            overflow: hidden;
+        }
+
+        .project-kicker {
+            color: var(--green);
+            font-size: 0.76rem;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .project-intro h2 {
+            margin-top: 10px;
+            max-width: 720px;
+            color: #fff;
+            font-size: clamp(1.65rem, 3vw, 2.7rem);
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+        }
+
+        .project-lead {
+            margin: 16px 0 0;
+            color: #afbdca;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        .project-points {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 9px;
+            margin-top: 22px;
+        }
+
+        .project-point {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.025);
+            color: var(--muted);
+            font-size: 0.76rem;
+            line-height: 1.4;
+        }
+
+        .project-point strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
+            font-size: 0.82rem;
+        }
+
+        .project-visual {
+            margin: 0;
+        }
+
+        .project-visual img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(72, 223, 255, 0.2);
+            border-radius: 18px;
+            background: #080d12;
+            box-shadow: 0 18px 42px rgba(0,0,0,0.38);
+        }
+
+        .project-visual figcaption {
+            margin-top: 9px;
+            color: var(--muted);
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.72rem;
+            text-align: center;
+        }
+
         .metric {
             min-height: 124px;
             padding: 18px;
@@ -951,6 +1036,7 @@
         @media (max-width: 1100px) {
             .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .insight-grid, .details-layout { grid-template-columns: 1fr; }
+            .project-intro { grid-template-columns: 1fr; }
             .hud-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .hud-main-grid { grid-template-columns: 1fr; }
             .exchange-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -960,6 +1046,8 @@
             .container { width: min(100% - 20px, 1440px); padding-top: 18px; }
             .hero { align-items: flex-start; flex-direction: column; }
             .hero-visual { min-width: 0; width: 100%; }
+            .project-intro { padding: 20px; }
+            .project-points { grid-template-columns: 1fr; }
             .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .exchange-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .hud-stats, .exchange-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1031,28 +1119,39 @@
             </div>
 
             <div class="tab-panel active" data-tab-panel="overview">
+                <section class="section project-intro" aria-labelledby="projectIntroTitle">
+                    <div>
+                        <div class="project-kicker">Deception that produces intelligence</div>
+                        <h2 id="projectIntroTitle">Keep attackers talking. Turn every move into evidence.</h2>
+                        <p class="project-lead">FunnyPot is an AI-powered SSH honeypot that presents a convincing synthetic Linux host, captures what happens after authentication, and transforms raw commands into explainable attacker journeys. It helps security researchers see the intent behind the traffic—not just another failed login.</p>
+                        <div class="project-points" aria-label="FunnyPot capabilities">
+                            <div class="project-point"><strong>Engage</strong>Adaptive shell responses sustain realistic post-compromise interaction.</div>
+                            <div class="project-point"><strong>Understand</strong>Session cadence, command intent, MITRE tactics, and risk signals reveal behavior.</div>
+                            <div class="project-point"><strong>Retain</strong>Structured telemetry preserves a searchable evidence trail for research and analysis.</div>
+                        </div>
+                    </div>
+                    <figure class="project-visual">
+                        <img src="assets/funnypot-attack-flow.gif" width="900" height="400" alt="Animated FunnyPot flow showing an attacker SSH connection entering the deception gateway, interacting with a synthetic Linux shell, and producing retained threat intelligence.">
+                        <figcaption>SSH probe → synthetic interaction → retained threat intelligence</figcaption>
+                    </figure>
+                </section>
                 <section class="section">
                     <div class="section-header">
                         <h2 class="section-title">Honeypot Performance</h2>
                         <span class="muted">Simulation health, token use, and engagement</span>
                     </div>
                     <div class="grid metrics">
-                        <div class="metric"><div class="metric-label">Closed Shell Sessions<span class="tooltip-trigger">?<span class="tooltip-box">Shell sessions that completed gracefully (shell_session_end events). Does not count sessions that were abruptly terminated.</span></span></div><div class="metric-value" id="totalSessions">0</div><div class="metric-note">Completed interactive shells</div></div>
+                        <div class="metric"><div class="metric-label">Shell Closes<span class="tooltip-trigger">?<span class="tooltip-box">Shell or exec channels for which FunnyPot recorded a shell_session_end event, including client exits, disconnects, idle timeouts, and handled errors. Compare with Shell Opens to spot active sessions or missing end telemetry.</span></span></div><div class="metric-value" id="totalSessions">0</div><div class="metric-note">Recorded channel endings</div></div>
                         <div class="metric"><div class="metric-label">SSH Connections<span class="tooltip-trigger">?<span class="tooltip-box">Raw TCP connections that reached the SSH protocol layer (session_start events). Includes connections that may never attempt authentication.</span></span></div><div class="metric-value" id="connections">0</div><div class="metric-note">Raw accepted connections</div></div>
                         <div class="metric"><div class="metric-label">Auth Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Password or key authentication attempts observed. Not all connections reach this stage — many are port scans or protocol probes.</span></span></div><div class="metric-value" id="authAttempts">0</div><div class="metric-note">Credential attempts observed</div></div>
                         <div class="metric"><div class="metric-label">Commands<span class="tooltip-trigger">?<span class="tooltip-box">Commands sent by attackers after successful shell access. Includes both text commands and binary/tooling attempts.</span></span></div><div class="metric-value" id="commands">0</div><div class="metric-note">Attacker command inputs</div></div>
                         <div class="metric"><div class="metric-label">Mean Connection<span class="tooltip-trigger">?<span class="tooltip-box">Average duration from TCP connection established to shell session closed. Lower values may indicate quick reconnaissance or failed interactions.</span></span></div><div class="metric-value" id="meanEngagement">0s</div><div class="metric-note">Average SSH connection lifetime</div></div>
                         <div class="metric"><div class="metric-label">Unique Source IPs<span class="tooltip-trigger">?<span class="tooltip-box">Distinct IP addresses that opened SSH connections. Authentication attempts are counted separately.</span></span></div><div class="metric-value" id="uniqueScanIps">0</div><div class="metric-note">Distinct connection sources</div></div>
-                        <div class="metric"><div class="metric-label">Shell Opens<span class="tooltip-trigger">?<span class="tooltip-box">Interactive shell sessions that started (shell_session_start events). Each successful auth that triggers shell creation increments this.</span></span></div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Interactive shells started</div></div>
+                        <div class="metric"><div class="metric-label">Shell Opens<span class="tooltip-trigger">?<span class="tooltip-box">Shell or exec channels that started (shell_session_start events). This is a lifecycle-start metric; it is intentionally separate from Shell Closes.</span></span></div><div class="metric-value" id="shellOpens">0</div><div class="metric-note">Channels started</div></div>
                         <div class="metric"><div class="metric-label">Response Time<span class="tooltip-trigger">?<span class="tooltip-box">Average latency from receiving a command to sending the LLM-generated response. Includes LLM inference + response formatting time.</span></span></div><div class="metric-value" id="avgResponse">0ms</div><div class="metric-note">Average LLM response latency</div></div>
-                        <div class="metric"><div class="metric-label">Blocked Ops<span class="tooltip-trigger">?<span class="tooltip-box">Dangerous operations that were rejected or sanitized before execution. Includes destructive commands, privilege escalation, and persistence attempts.</span></span></div><div class="metric-value" id="blockedOps">0</div><div class="metric-note">Rejected dangerous operations</div></div>
                         <div class="metric"><div class="metric-label">Harvested Creds<span class="tooltip-trigger">?<span class="tooltip-box">Credentials captured after passing the harvest threshold. After N failed attempts, auth is accepted and credentials are logged for tracking.</span></span></div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
                         <div class="metric"><div class="metric-label">Events<span class="tooltip-trigger">?<span class="tooltip-box">Total JSONL telemetry records in the current data branch. Each event (session_start, auth_attempt, command, etc.) counts as one event.</span></span></div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
                         <div class="metric"><div class="metric-label">Binary Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Commands involving payloads, downloads, encoding, tunneling, or persistence tooling. Indicates serious exploitation intent.</span></span></div><div class="metric-value" id="binaryAttempts">0</div><div class="metric-note">Payload/tool execution signals</div></div>
-                        <div class="metric"><div class="metric-label">Text Commands<span class="tooltip-trigger">?<span class="tooltip-box">Plain text commands used for reconnaissance, system enumeration, or simple shell interactions. Lower risk than binary attempts.</span></span></div><div class="metric-value" id="textAttempts">0</div><div class="metric-note">Recon and shell text activity</div></div>
-                        <div class="metric"><div class="metric-label">Captured Uploads<span class="tooltip-trigger">?<span class="tooltip-box">SCP uploads accepted by the honeypot and written to the configured uploads directory.</span></span></div><div class="metric-value" id="capturedUploads">0</div><div class="metric-note">Binary files saved</div></div>
-                        <div class="metric"><div class="metric-label">Upload Bytes<span class="tooltip-trigger">?<span class="tooltip-box">Total bytes written for captured SCP uploads. Uploads over 5 MB are rejected before transfer.</span></span></div><div class="metric-value" id="uploadBytes">0 B</div><div class="metric-note">Stored binary volume</div></div>
-                        <div class="metric"><div class="metric-label">Rejected Uploads<span class="tooltip-trigger">?<span class="tooltip-box">SCP uploads rejected by policy, usually because the announced file size exceeded the 5 MB limit.</span></span></div><div class="metric-value" id="rejectedUploads">0</div><div class="metric-note">Oversize or invalid transfers</div></div>
                     </div>
                 </section>
 
@@ -1265,8 +1364,6 @@
             renderBars('tacticBars', summarizeTactics(sessionModels), 'purple', 'MITRE');
             renderBars('bannerBars', summarizeBanners(sessionModels), 'amber', 'Banner');
             renderTimeOfDay(events);
-            renderAttemptTypes(sessionModels);
-            renderUploadBars(events);
             renderBars('commonCommandBars', summarizeCommonCommands(events), 'cyan');
             renderExchangeHud(sessionModels);
             renderLatestExchanges(sessionModels);
@@ -1369,7 +1466,6 @@
                         turingMax: 0,
                         failedCommands: 0,
                         binaryAttempts: 0,
-                        textAttempts: 0,
                         uploads: [],
                     });
                 }
@@ -1408,7 +1504,6 @@
                     };
                     model.commands.push(commandEntry);
                     if (isBinaryAttempt(commandEntry)) model.binaryAttempts++;
-                    else model.textAttempts++;
                     model.avpMax = Math.max(model.avpMax, commandEntry.AssetValuePerceptionScore || 0);
                     mitreTactics(commandEntry.MitreAttackTechniques).forEach(value => model.tactics.add(value));
                     (commandEntry.PayloadUrls || []).forEach(value => model.payloadUrls.add(value));
@@ -1466,18 +1561,9 @@
             setText('uniqueScanIps', fmt.format(summary.UniqueScanIps || 0));
             setText('shellOpens', fmt.format(summary.TotalShells || 0));
             setText('avgResponse', `${fmt.format(Math.round(avgResponse))}ms`);
-            setText('blockedOps', fmt.format(0));
             setText('harvestedCreds', fmt.format(summary.EventCounts?.auth_attempt || 0));
             setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
             setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));
-            setText('textAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.textAttempts, 0)));
-            setText('capturedUploads', fmt.format(uploadEvents(events, 'scp_upload_captured').length));
-            setText('uploadBytes', formatBytes(uploadEvents(events, 'scp_upload_captured').reduce((sum, event) => sum + (event.Data?.Bytes || 0), 0)));
-            setText('rejectedUploads', fmt.format(uploadEvents(events, 'scp_upload_rejected').length));
-        }
-
-        function uploadEvents(events, type) {
-            return events.filter(event => event.Event === type);
         }
 
         function renderTimeOfDay(events) {
@@ -1498,25 +1584,6 @@
                     <div class="hour-label">${String(hour).padStart(2, '0')}</div>
                 </div>
             `).join('');
-        }
-
-        function renderAttemptTypes(sessions) {
-            renderBars('attemptTypeBars', {
-                'binary/tooling attempts': sessions.reduce((sum, session) => sum + session.binaryAttempts, 0),
-                'text-only commands': sessions.reduce((sum, session) => sum + session.textAttempts, 0),
-            });
-        }
-
-        function renderUploadBars(events) {
-            const counts = {};
-            for (const event of events) {
-                if (event.Event !== 'scp_upload_captured' && event.Event !== 'scp_upload_rejected') continue;
-                const data = event.Data || {};
-                const status = event.Event === 'scp_upload_captured' ? 'captured' : 'rejected';
-                const filename = data.Filename || 'unknown file';
-                counts[`${status}: ${filename}`] = (counts[`${status}: ${filename}`] || 0) + 1;
-            }
-            renderBars('uploadBars', takeTop(counts, 12), 'amber');
         }
 
         function summarizeCommonCommands(events) {
@@ -1871,7 +1938,7 @@
             target.innerHTML = recent.map(session => `
                 <div class="exchange-session">
                     <div class="exchange-title">
-                        <span>Session: ${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</span>
+                        <span>Session: ${escapeHtml(behaviorType(session))} · ${escapeHtml(interactionProfile(session))} ${analysisTooltip(session)}</span>
                         <span class="muted">${escapeHtml(sessionRef(session))} · Latest: ${fmtTime(latestExchangeTimestamp(session))} · User: ${escapeHtml(session.username)} · Risk: ${escapeHtml(riskLabel(session))}</span>
                     </div>
                     <div class="exchange-details">
@@ -1879,6 +1946,10 @@
                         ${exchangeDetail('Duration', sec(session.durationSeconds))}
                         ${exchangeDetail('Auth Attempts', session.authAttempts.length)}
                         ${exchangeDetail('Commands / Responses', `${session.commands.length} / ${session.results.length}`)}
+                        ${exchangeDetail('Interaction Profile', interactionProfile(session))}
+                        ${exchangeDetail('Time To First Command', formatDurationMs(sessionTimingMetrics(session).firstCommandDelayMs))}
+                        ${exchangeDetail('Median Attacker Response', formatDurationMs(sessionTimingMetrics(session).medianMs))}
+                        ${exchangeDetail('Rapid Reply Share', formatTimingShare(sessionTimingMetrics(session).rapidShare, sessionTimingMetrics(session).sampleCount))}
                         ${exchangeDetail('Client', session.client || session.sshBanner || '-')}
                         ${exchangeDetail('Failure Ratio', pct(session.commands.length ? session.failedCommands / session.commands.length : 0))}
                         ${exchangeDetail('LLM Models', summarizeModels(session))}
@@ -1891,7 +1962,7 @@
                                 <div class="exchange-role">attacker$<div class="exchange-time">${fmtTime(command.Timestamp)}</div></div>
                                 <div>
                                     <div class="terminal-line">${escapeHtml(command.Command)}</div>
-                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(command, result))}</div>
+                                    <div class="exchange-line-meta">${escapeHtml(commandExchangeMeta(session, command, result))}</div>
                                     <div>${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector && command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent && command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
                                 </div>
                             </div>
@@ -1937,7 +2008,8 @@
             return `<div class="exchange-detail"><div class="exchange-detail-label">${escapeHtml(label)}</div><div class="exchange-detail-value">${escapeHtml(String(value ?? '-'))}</div></div>`;
         }
 
-        function commandExchangeMeta(command, result) {
+        function commandExchangeMeta(session, command, result) {
+            const timing = sessionTimingMetrics(session);
             const complexity = Number(command.SemanticComplexity);
             const assetValue = Number(command.AssetValuePerceptionScore);
             const parts = [
@@ -1947,7 +2019,15 @@
                 `Sophistication: ${scoreLabel(complexity)} (${formatNumber(complexity)}/10)`,
                 `Target value: ${scoreLabel(assetValue)} (${formatNumber(assetValue)}/10)`,
             ];
-            if (command.CommandSequenceLatencyMs !== undefined && command.CommandSequenceLatencyMs !== null) parts.push(`Time since previous command: ${formatDurationMs(command.CommandSequenceLatencyMs)}`);
+            const attackerResponseMs = command.AttackerResponseTimeMs ?? command.CommandSequenceLatencyMs;
+            if (attackerResponseMs !== undefined && attackerResponseMs !== null) {
+                parts.push(`Attacker response time: ${formatDurationMs(attackerResponseMs)}`);
+            } else {
+                const firstCommand = commandResponsePairs(session).slice().sort(compareExchangePairs)[0]?.command;
+                parts.push(firstCommand === command && timing.firstCommandDelayMs !== null
+                    ? `Time to first command: ${formatDurationMs(timing.firstCommandDelayMs)}`
+                    : 'Attacker response time: unavailable');
+            }
             parts.push(result ? 'Reply captured' : 'No reply captured');
             return parts.join(' / ');
         }
@@ -1997,10 +2077,91 @@
         }
 
         function formatDurationMs(value) {
+            if (value === null || value === undefined || value === '') return '-';
             const ms = Number(value);
             if (!Number.isFinite(ms)) return '-';
             if (ms >= 1000) return `${formatNumber(ms / 1000)}s`;
             return `${fmt.format(ms)}ms`;
+        }
+
+        function sessionTimingMetrics(session) {
+            if (session._timingMetrics) return session._timingMetrics;
+            const orderedPairs = commandResponsePairs(session).slice().sort(compareExchangePairs);
+            const orderedCommands = orderedPairs.map(pair => pair.command);
+            const shellOpenedAt = (session.timeline || [])
+                .filter(item => item.type === 'shell_session_start' && item.timestamp)
+                .map(item => new Date(item.timestamp).getTime())
+                .filter(Number.isFinite)
+                .sort((a, b) => a - b)[0];
+            const firstCommandAt = orderedCommands[0]?.Timestamp ? new Date(orderedCommands[0].Timestamp).getTime() : null;
+            const firstCommandDelayMs = Number.isFinite(shellOpenedAt) && Number.isFinite(firstCommandAt)
+                ? Math.max(0, firstCommandAt - shellOpenedAt)
+                : null;
+            const responseTimes = orderedCommands
+                .map((command, index) => {
+                    const recorded = command.AttackerResponseTimeMs ?? command.CommandSequenceLatencyMs;
+                    if (recorded !== null && recorded !== undefined && recorded !== '') return recorded;
+                    if (index === 0) return null;
+                    const previousResultAt = orderedPairs[index - 1]?.result?.Timestamp;
+                    const commandAt = command.Timestamp;
+                    if (!previousResultAt || !commandAt) return null;
+                    const derived = new Date(commandAt).getTime() - new Date(previousResultAt).getTime();
+                    if (!Number.isFinite(derived) || derived < 0) return null;
+                    command.AttackerResponseTimeMs = derived;
+                    return derived;
+                })
+                .filter(value => value !== null && value !== undefined && value !== '')
+                .map(Number)
+                .filter(value => Number.isFinite(value) && value >= 0)
+                .sort((a, b) => a - b);
+            const sampleCount = responseTimes.length;
+            if (!sampleCount) {
+                session._timingMetrics = { responseTimes, sampleCount: 0, firstCommandDelayMs, medianMs: null, minMs: null, maxMs: null, rapidShare: 0, variability: null, automationHintShare: 0 };
+                return session._timingMetrics;
+            }
+
+            const middle = Math.floor(sampleCount / 2);
+            const medianMs = sampleCount % 2
+                ? responseTimes[middle]
+                : (responseTimes[middle - 1] + responseTimes[middle]) / 2;
+            const meanMs = average(responseTimes);
+            const variance = average(responseTimes.map(value => (value - meanMs) ** 2));
+            const hintedCommands = (session.commands || []).filter(command => command.ActorAutomationHint === 'automation').length;
+            session._timingMetrics = {
+                responseTimes,
+                sampleCount,
+                firstCommandDelayMs,
+                medianMs,
+                minMs: responseTimes[0],
+                maxMs: responseTimes[sampleCount - 1],
+                rapidShare: responseTimes.filter(value => value <= 500).length / sampleCount,
+                variability: meanMs > 0 ? Math.sqrt(variance) / meanMs : 0,
+                automationHintShare: hintedCommands / Math.max((session.commands || []).length, 1),
+            };
+            return session._timingMetrics;
+        }
+
+        function interactionProfile(session) {
+            const timing = sessionTimingMetrics(session);
+            const isExecChannel = (session.timeline || []).some(item => item.type === 'shell_session_start' && item.data?.State === 'ExecOpened');
+            if (isExecChannel || (timing.firstCommandDelayMs !== null && timing.firstCommandDelayMs <= 250 && session.commands.length > 0)) return 'Script-like cadence';
+            if (timing.sampleCount < 2) return 'Insufficient cadence data';
+            if (timing.automationHintShare >= 0.5 || (timing.rapidShare >= 0.75 && timing.medianMs <= 750)) return 'Script-like cadence';
+
+            const commands = session.commands || [];
+            const averageCommandLength = average(commands.map(command => String(command.Command || '').length));
+            const averageComplexity = average(commands.map(command => Number(command.SemanticComplexity) || 0));
+            if (timing.medianMs <= 8000 && (averageCommandLength >= 40 || averageComplexity >= 4) && timing.variability <= 0.8) return 'Agent-like cadence';
+            if (timing.medianMs >= 1500 && (timing.variability >= 0.3 || timing.medianMs >= 5000)) return 'Human-like cadence';
+            return 'Mixed/uncertain cadence';
+        }
+
+        function formatTimingShare(value, sampleCount) {
+            return sampleCount ? pct(value) : '-';
+        }
+
+        function timingRange(metrics) {
+            return metrics.sampleCount ? `${formatDurationMs(metrics.minMs)} – ${formatDurationMs(metrics.maxMs)}` : '-';
         }
 
         function summarizeModels(session) {
@@ -2153,7 +2314,7 @@
                 const representative = representativeCommand(session);
                 return `
                     <div class="session-card session-row" data-session-id="${escapeAttr(session.id)}">
-                        <div class="session-card-title">${escapeHtml(behaviorType(session))} ${analysisTooltip(session)}</div>
+                        <div class="session-card-title">${escapeHtml(behaviorType(session))} · ${escapeHtml(interactionProfile(session))} ${analysisTooltip(session)}</div>
                         <div class="story-text">${escapeHtml(behaviorStory(session))}</div>
                         <div class="session-card-meta">${escapeHtml(sessionRef(session))} · User ${escapeHtml(session.username)} · ${fmt.format(session.commands.length)} commands · ${sec(session.durationSeconds)} · ${riskBadge(session)}</div>
                         ${representative ? `<div class="terminal-line"><span class="terminal-prompt">attacker$</span> ${escapeHtml(representative)}</div>` : ''}
@@ -2311,7 +2472,7 @@
                     <div class="command">
                         <div>${escapeHtml(command.Command)}</div>
                         <div class="muted" style="margin-top:8px;">
-                            ${escapeHtml(commandExchangeMeta(command, result))}
+                            ${escapeHtml(commandExchangeMeta(session, command, result))}
                             ${result ? `<br>${responseCacheBadge(result)}${escapeHtml(responseExchangeMeta(result))}` : ''}
                         </div>
                         <div style="margin-top:6px;">${renderBadges(mitreTactics(command.MitreAttackTechniques), 'purple')}${command.PersistenceVector !== 'none' ? badge(command.PersistenceVector, 'amber') : ''}${command.TunnelingIntent !== 'none' ? badge(command.TunnelingIntent, 'red') : ''}</div>
@@ -2328,13 +2489,19 @@
             const egress = [...session.egressTargets];
             const persistence = [...session.persistence];
             const tactics = [...session.tactics];
-            const capturedUploads = session.uploads.filter(upload => upload.EventType === 'scp_upload_captured');
-            const rejectedUploads = session.uploads.filter(upload => upload.EventType === 'scp_upload_rejected');
+            const timing = sessionTimingMetrics(session);
 
             document.getElementById('signals').innerHTML = `
                 <div class="kv">
                     ${kvRows({
                         'Risk': riskLabel(session),
+                        'Interaction Profile': interactionProfile(session),
+                        'Time To First Command': formatDurationMs(timing.firstCommandDelayMs),
+                        'Attacker Response Samples': timing.sampleCount,
+                        'Median Attacker Response': formatDurationMs(timing.medianMs),
+                        'Attacker Response Range': timingRange(timing),
+                        'Rapid Reply Share (≤500ms)': formatTimingShare(timing.rapidShare, timing.sampleCount),
+                        'Cadence Variability': timing.variability === null ? '-' : formatNumber(timing.variability),
                         'Accepted Auth': authAccepted,
                         'Rejected Auth': authRejected,
                         'Command Failure Ratio': pct(session.commands.length ? session.failedCommands / session.commands.length : 0),
@@ -2342,10 +2509,6 @@
                         'Semantic Drift': session.semanticDriftMax,
                         'Turing Multiplier': formatNumber(session.turingMax),
                         'Binary Attempts': session.binaryAttempts,
-                        'Text Commands': session.textAttempts,
-                        'Captured Uploads': capturedUploads.length,
-                        'Upload Bytes': formatBytes(capturedUploads.reduce((sum, upload) => sum + (upload.Bytes || 0), 0)),
-                        'Rejected Uploads': rejectedUploads.length,
                     })}
                 </div>
                 <div style="height:16px"></div>
@@ -2515,6 +2678,7 @@
             const commands = session.commands.map(command => String(command.Command || '').trim()).filter(Boolean);
             const notable = summarizeNotableCommands(commands);
             const failures = summarizeFailures(session);
+            const timing = sessionTimingMetrics(session);
             const signals = [];
             if (accepted) signals.push('accepted auth');
             if (session.payloadUrls.size) signals.push(`${session.payloadUrls.size} payload URL${session.payloadUrls.size === 1 ? '' : 's'}`);
@@ -2526,6 +2690,8 @@
             return [
                 `Observed tools: ${tools.length ? tools.join(', ') : 'none beyond basic shell builtins'}`,
                 `Command pattern: ${notable}`,
+                `Interaction profile: ${interactionProfile(session)} (timing-based estimate, not verified identity)`,
+                `Attacker cadence: ${timing.sampleCount ? `${formatDurationMs(timing.medianMs)} median response across ${timing.sampleCount} samples` : 'insufficient response-time samples'}`,
                 `Signals: ${signals.length ? signals.join(', ') : 'short low-noise interaction with no payloads'}`,
                 `Failure clues: ${failures}`,
                 `Assessment: ${session.commands.length} command${session.commands.length === 1 ? '' : 's'}, ${session.binaryAttempts} tooling/payload attempt${session.binaryAttempts === 1 ? '' : 's'}, ${riskLabel(session)} risk`

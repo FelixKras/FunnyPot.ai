@@ -1399,21 +1399,35 @@
                 }
 
                 if (event.Event === 'command') {
-                    model.commands.push(data);
-                    if (isBinaryAttempt(data)) model.binaryAttempts++;
+                    const commandEntry = {
+                        ...data,
+                        Timestamp: data.Timestamp || event.Timestamp,
+                        Sequence: event.Sequence,
+                        ExchangeId: event.ExchangeId || data.ExchangeId,
+                        SessionId: event.SessionId || data.SessionKey,
+                    };
+                    model.commands.push(commandEntry);
+                    if (isBinaryAttempt(commandEntry)) model.binaryAttempts++;
                     else model.textAttempts++;
-                    model.avpMax = Math.max(model.avpMax, data.AssetValuePerceptionScore || 0);
-                    mitreTactics(data.MitreAttackTechniques).forEach(value => model.tactics.add(value));
-                    (data.PayloadUrls || []).forEach(value => model.payloadUrls.add(value));
-                    (data.EgressTargets || []).forEach(value => model.egressTargets.add(value));
-                    if (data.PersistenceVector && data.PersistenceVector !== 'none') model.persistence.add(data.PersistenceVector);
+                    model.avpMax = Math.max(model.avpMax, commandEntry.AssetValuePerceptionScore || 0);
+                    mitreTactics(commandEntry.MitreAttackTechniques).forEach(value => model.tactics.add(value));
+                    (commandEntry.PayloadUrls || []).forEach(value => model.payloadUrls.add(value));
+                    (commandEntry.EgressTargets || []).forEach(value => model.egressTargets.add(value));
+                    if (commandEntry.PersistenceVector && commandEntry.PersistenceVector !== 'none') model.persistence.add(commandEntry.PersistenceVector);
                 }
 
                 if (event.Event === 'command_result') {
-                    model.results.push(data);
-                    if (data.FailedCommand) model.failedCommands++;
-                    model.semanticDriftMax = Math.max(model.semanticDriftMax, data.SemanticDrift || 0);
-                    model.turingMax = Math.max(model.turingMax, data.TuringMultiplier || 0);
+                    const resultEntry = {
+                        ...data,
+                        Timestamp: data.Timestamp || event.Timestamp,
+                        Sequence: event.Sequence,
+                        ExchangeId: event.ExchangeId || data.ExchangeId,
+                        SessionId: event.SessionId || data.SessionKey,
+                    };
+                    model.results.push(resultEntry);
+                    if (resultEntry.FailedCommand) model.failedCommands++;
+                    model.semanticDriftMax = Math.max(model.semanticDriftMax, resultEntry.SemanticDrift || 0);
+                    model.turingMax = Math.max(model.turingMax, resultEntry.TuringMultiplier || 0);
                 }
 
                 if (event.Event === 'scp_upload_captured' || event.Event === 'scp_upload_rejected') {

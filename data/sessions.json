@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 5540,
-    "CommandCount": 2,
+    "TimeToCompromiseMs": 10863,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -44,17 +44,33 @@
         "ExchangeId": "9bde2f6ba1954afb:000002",
         "Command": "uptime -p",
         "Timestamp": "2026-09-07T18:40:59.7713199Z",
-        "Response": "",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
         "ResponseDurationMs": 0,
         "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
         "MitreTactics": [
           "Execution",
           "Discovery"
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "9bde2f6ba1954afb:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T18:41:05.0942755Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -63,7 +79,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "8c89812ee3814303",

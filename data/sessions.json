@@ -1,5 +1,54 @@
 [
   {
+    "SessionId": "e500d82159d441d7",
+    "StartedAt": "2026-09-07T18:17:14.1862845Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "195.178.110.218:47636",
+    "RemoteIp": "195.178.110.218",
+    "Username": "validator",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "validator",
+        "Password": "root",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T18:17:14.4899011Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 448,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "e500d82159d441d7:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T18:17:14.6358282Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "325e9aff0a054063",
     "StartedAt": "2026-09-07T18:15:47.8775826Z",
     "EndedAt": "2026-09-07T18:16:28.1074919Z",

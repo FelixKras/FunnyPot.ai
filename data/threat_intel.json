@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-09-07T23:51:30.4973545Z",
+  "LastUpdated": "2026-09-07T23:51:36.1877481Z",
   "TotalUniqueUsernames": 530,
   "TotalUniquePasswords": 1012,
   "TotalUniqueSourceIps": 645,
-  "TotalUniqueCommands": 76,
+  "TotalUniqueCommands": 77,
   "Usernames": {
     "root": 4406,
     "admin": 1406,
@@ -138,7 +138,7 @@
     "sepolia": 2,
     "avalanche": 4,
     "solv": 16,
-    "ubuntu": 125,
+    "ubuntu": 126,
     "trading": 6,
     "trader": 10,
     "tradingbot": 2,
@@ -541,7 +541,7 @@
     "admin": 376,
     "12345": 237,
     "letmein123": 2,
-    "ubuntu": 67,
+    "ubuntu": 68,
     "debian": 64,
     "centos": 80,
     "123123": 1864,
@@ -2195,7 +2195,7 @@
     "20.65.219.65": 4,
     "205.210.31.253": 2,
     "88.181.232.245": 4,
-    "102.220.160.191": 7
+    "102.220.160.191": 12
   },
   "FrequentCommands": {
     "id": 4,
@@ -2273,6 +2273,7 @@
     "chmod \u002Bx /tmp/stage2.sh": 1,
     "/bin/./uname -s -v -n -r -m": 142,
     "uptime -p": 129,
-    "lspci | grep VGA | cut -f5- -d \u0027 \u0027": 108
+    "lspci | grep VGA | cut -f5- -d \u0027 \u0027": 108,
+    "c1=$(uname -s -v -n -r 2\u003E/dev/null); c1=${c1:-Unknown}; c2=$(grep \u0022model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d \u0027 \u0027 -f3- | awk \u0027{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10}\u0027 | head -1); c2=${c2:-Unknown}; c3=$(nproc --all 2\u003E/dev/null); c3=${c3:-Unknown}; echo \u0022$c1|$c2|$c3\u0022": 1
   }
 }

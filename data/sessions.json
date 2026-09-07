@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 417,
-    "CommandCount": 1,
+    "TimeToCompromiseMs": 5667,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -38,6 +38,23 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "cf425339f45749c6:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T18:24:46.1400995Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
       }
     ],
     "TacticsObserved": [
@@ -46,7 +63,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 34
   },
   {
     "SessionId": "19d6e8f6fbdc4232",

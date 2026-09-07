@@ -1,5 +1,54 @@
 [
   {
+    "SessionId": "601efd30098d446d",
+    "StartedAt": "2026-09-07T20:04:26.8434511Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "195.178.110.218:54924",
+    "RemoteIp": "195.178.110.218",
+    "Username": "scylla",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "scylla",
+        "Password": "scylla",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:04:27.1411836Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 443,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "601efd30098d446d:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:04:27.2882923Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "dc662727c6044386",
     "StartedAt": "2026-09-07T20:02:53.2412013Z",
     "EndedAt": "2026-09-07T20:03:33.4860197Z",

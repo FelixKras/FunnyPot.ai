@@ -1,9 +1,1150 @@
 [
   {
-    "SessionId": "ba2dbc4bd08645bd",
-    "StartedAt": "2026-09-07T20:15:19.981413Z",
+    "SessionId": "6c08f688291e4e11",
+    "StartedAt": "2026-09-07T20:37:19.5895536Z",
     "EndedAt": null,
     "DurationSeconds": 0,
+    "RemoteEndpoint": "195.178.110.218:45080",
+    "RemoteIp": "195.178.110.218",
+    "Username": "deployer",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "deployer",
+        "Password": "deployer",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:37:19.9029319Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 5791,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "6c08f688291e4e11:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:37:20.053576Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "6c08f688291e4e11:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:37:25.3815036Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 34
+  },
+  {
+    "SessionId": "99c826f2c7d24b95",
+    "StartedAt": "2026-09-07T20:35:41.9829139Z",
+    "EndedAt": "2026-09-07T20:36:22.1235773Z",
+    "DurationSeconds": 40.14,
+    "RemoteEndpoint": "195.178.110.218:35958",
+    "RemoteIp": "195.178.110.218",
+    "Username": "deploy",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "deploy",
+        "Password": "deploy",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:35:42.2994749Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11610,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "99c826f2c7d24b95:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:35:42.4433388Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "99c826f2c7d24b95:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:35:48.0173176Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "99c826f2c7d24b95:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:35:53.59447Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "942e875a377b4ed3",
+    "StartedAt": "2026-09-07T20:34:03.4076142Z",
+    "EndedAt": "2026-09-07T20:34:43.6305078Z",
+    "DurationSeconds": 40.22,
+    "RemoteEndpoint": "195.178.110.218:35816",
+    "RemoteIp": "195.178.110.218",
+    "Username": "addhost",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "addhost",
+        "Password": "addhost",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:34:03.6974116Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11267,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "942e875a377b4ed3:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:34:03.8516176Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "942e875a377b4ed3:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:34:09.2561048Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "942e875a377b4ed3:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:34:14.6758622Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "d3aa3a0e7fe04756",
+    "StartedAt": "2026-09-07T20:32:30.5801633Z",
+    "EndedAt": "2026-09-07T20:33:10.8008405Z",
+    "DurationSeconds": 40.22,
+    "RemoteEndpoint": "195.178.110.218:38324",
+    "RemoteIp": "195.178.110.218",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "aa123456",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:32:31.0179582Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11521,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "d3aa3a0e7fe04756:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:32:31.1837666Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "d3aa3a0e7fe04756:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:32:36.7782268Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "d3aa3a0e7fe04756:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:32:42.1020262Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "e6a32d44a90745ae",
+    "StartedAt": "2026-09-07T20:30:58.2419117Z",
+    "EndedAt": "2026-09-07T20:31:38.5373128Z",
+    "DurationSeconds": 40.3,
+    "RemoteEndpoint": "195.178.110.218:40648",
+    "RemoteIp": "195.178.110.218",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "admin",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:30:58.5473936Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11136,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "e6a32d44a90745ae:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:30:58.6955711Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "e6a32d44a90745ae:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:31:04.3094094Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "e6a32d44a90745ae:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:31:09.3795417Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "04646090d2654737",
+    "StartedAt": "2026-09-07T20:29:24.0638816Z",
+    "EndedAt": "2026-09-07T20:30:04.3433442Z",
+    "DurationSeconds": 40.28,
+    "RemoteEndpoint": "195.178.110.218:54254",
+    "RemoteIp": "195.178.110.218",
+    "Username": "root",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "admin",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:29:24.3588129Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11884,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "04646090d2654737:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:29:24.5151841Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "04646090d2654737:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:29:30.1025335Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "04646090d2654737:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:29:35.9492767Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "35b641d4004346a2",
+    "StartedAt": "2026-09-07T20:28:46.1765419Z",
+    "EndedAt": "2026-09-07T20:28:46.1771375Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "42.116.229.217:34837",
+    "RemoteIp": "42.116.229.217",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "f82b9c17a8b14bc1",
+    "StartedAt": "2026-09-07T20:27:49.8173407Z",
+    "EndedAt": "2026-09-07T20:28:30.0422741Z",
+    "DurationSeconds": 40.22,
+    "RemoteEndpoint": "195.178.110.218:42354",
+    "RemoteIp": "195.178.110.218",
+    "Username": "user",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "user",
+        "Password": "admin",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:27:50.1125609Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11240,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "f82b9c17a8b14bc1:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:27:50.2531052Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "f82b9c17a8b14bc1:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:27:55.6280563Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "f82b9c17a8b14bc1:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:28:01.059004Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "8ee155485dd44290",
+    "StartedAt": "2026-09-07T20:26:19.5006475Z",
+    "EndedAt": "2026-09-07T20:26:59.7200614Z",
+    "DurationSeconds": 40.22,
+    "RemoteEndpoint": "195.178.110.218:54516",
+    "RemoteIp": "195.178.110.218",
+    "Username": "admin",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "123",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:26:19.7786367Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 10785,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "8ee155485dd44290:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:26:19.917887Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "8ee155485dd44290:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:26:25.1698874Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "8ee155485dd44290:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:26:30.2872877Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "21501b993e4d4440",
+    "StartedAt": "2026-09-07T20:24:49.6659505Z",
+    "EndedAt": "2026-09-07T20:25:29.9775742Z",
+    "DurationSeconds": 40.31,
+    "RemoteEndpoint": "195.178.110.218:54260",
+    "RemoteIp": "195.178.110.218",
+    "Username": "user",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "user",
+        "Password": "user123",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:24:49.9463877Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11736,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "21501b993e4d4440:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:24:50.080557Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "21501b993e4d4440:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:25:01.4027151Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 34
+  },
+  {
+    "SessionId": "dd3129e10e994598",
+    "StartedAt": "2026-09-07T20:23:12.7194702Z",
+    "EndedAt": "2026-09-07T20:23:52.958752Z",
+    "DurationSeconds": 40.24,
+    "RemoteEndpoint": "195.178.110.218:41524",
+    "RemoteIp": "195.178.110.218",
+    "Username": "user123",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "user123",
+        "Password": "user123",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:23:13.0014643Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11299,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "dd3129e10e994598:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:23:13.1370387Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "dd3129e10e994598:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:23:18.593838Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "dd3129e10e994598:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:23:24.0197755Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "1b2f7790732c48c7",
+    "StartedAt": "2026-09-07T20:21:34.5232729Z",
+    "EndedAt": "2026-09-07T20:22:14.7625142Z",
+    "DurationSeconds": 40.24,
+    "RemoteEndpoint": "195.178.110.218:58296",
+    "RemoteIp": "195.178.110.218",
+    "Username": "root123",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root123",
+        "Password": "root123",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:21:34.8242155Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11225,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "1b2f7790732c48c7:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:21:34.9711994Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "1b2f7790732c48c7:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:21:40.4728018Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "1b2f7790732c48c7:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:21:45.7494384Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "1c66882311a24647",
+    "StartedAt": "2026-09-07T20:19:59.3931972Z",
+    "EndedAt": "2026-09-07T20:20:39.6947529Z",
+    "DurationSeconds": 40.3,
+    "RemoteEndpoint": "195.178.110.218:57962",
+    "RemoteIp": "195.178.110.218",
+    "Username": "admin123",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin123",
+        "Password": "admin123",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:19:59.6902209Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 10884,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "1c66882311a24647:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:19:59.8356697Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "1c66882311a24647:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:20:05.4663521Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 34
+  },
+  {
+    "SessionId": "e924762813b74e37",
+    "StartedAt": "2026-09-07T20:18:28.4599818Z",
+    "EndedAt": "2026-09-07T20:19:08.690512Z",
+    "DurationSeconds": 40.23,
+    "RemoteEndpoint": "195.178.110.218:52414",
+    "RemoteIp": "195.178.110.218",
+    "Username": "test123",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "test123",
+        "Password": "test123",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:18:28.7391432Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11290,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "e924762813b74e37:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:18:28.8725745Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "e924762813b74e37:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:18:34.3296343Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "e924762813b74e37:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:18:39.7515821Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "3b26e941f9fa4979",
+    "StartedAt": "2026-09-07T20:17:35.2222644Z",
+    "EndedAt": "2026-09-07T20:17:37.357423Z",
+    "DurationSeconds": 2.14,
+    "RemoteEndpoint": "41.23.70.156:49042",
+    "RemoteIp": "41.23.70.156",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "aee7b0f7da574540",
+    "StartedAt": "2026-09-07T20:16:54.0428727Z",
+    "EndedAt": "2026-09-07T20:17:34.2795563Z",
+    "DurationSeconds": 40.24,
+    "RemoteEndpoint": "195.178.110.218:38194",
+    "RemoteIp": "195.178.110.218",
+    "Username": "test",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "test",
+        "Password": "test1234",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T20:16:54.3183746Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11403,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "aee7b0f7da574540:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T20:16:54.4570938Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "aee7b0f7da574540:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T20:17:00.223426Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "aee7b0f7da574540:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:17:05.4469728Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "ba2dbc4bd08645bd",
+    "StartedAt": "2026-09-07T20:15:19.981413Z",
+    "EndedAt": "2026-09-07T20:16:00.2211312Z",
+    "DurationSeconds": 40.24,
     "RemoteEndpoint": "195.178.110.218:37160",
     "RemoteIp": "195.178.110.218",
     "Username": "root",
@@ -19,8 +1160,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 6310,
-    "CommandCount": 2,
+    "TimeToCompromiseMs": 11562,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -55,6 +1196,22 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "ba2dbc4bd08645bd:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T20:15:31.5448432Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -63,7 +1220,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "f12c945d53e24ed1",

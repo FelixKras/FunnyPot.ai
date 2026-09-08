@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 6278,
-    "CommandCount": 2,
+    "TimeToCompromiseMs": 11848,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -55,6 +55,22 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "c15ea5fdf9a34cdf:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-08T04:13:19.3027998Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -63,7 +79,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "a2d2fde9d96745a0",

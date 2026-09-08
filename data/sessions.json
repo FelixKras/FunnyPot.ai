@@ -1,9 +1,1464 @@
 [
   {
-    "SessionId": "1630d85364a44ea4",
-    "StartedAt": "2026-09-07T21:23:15.1965239Z",
+    "SessionId": "54ec293b4bc342b4",
+    "StartedAt": "2026-09-08T00:01:39.771449Z",
     "EndedAt": null,
     "DurationSeconds": 0,
+    "RemoteEndpoint": "102.220.160.191:55074",
+    "RemoteIp": "102.220.160.191",
+    "Username": "root",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "inspur123",
+        "Accepted": true,
+        "Timestamp": "2026-09-08T00:01:41.5271851Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 7899,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "54ec293b4bc342b4:000001",
+        "Command": "c1=$(uname -s -v -n -r 2\u003E/dev/null); c1=${c1:-Unknown}; c2=$(grep \u0022model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d \u0027 \u0027 -f3- | awk \u0027{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10}\u0027 | head -1); c2=${c2:-Unknown}; c3=$(nproc --all 2\u003E/dev/null); c3=${c3:-Unknown}; echo \u0022$c1|$c2|$c3\u0022",
+        "Timestamp": "2026-09-08T00:01:42.3459969Z",
+        "Response": "GNU/Linux omegablack #1 SMP Mon Jan 16 16:22:28 UTC 2012 2.6.32-5-amd64|Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz|2",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "54ec293b4bc342b4:000002",
+        "Command": "printf \u0027%s\\n%s\\n\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 | passwd || printf \u0027%s\\n%s\\n%s\\n\u0027 \u0027inspur123\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 | passwd",
+        "Timestamp": "2026-09-08T00:01:47.671527Z",
+        "Response": "Changing password for root.\r\nNew password: Retype new password: passwd: Authentication token manipulation error",
+        "ResponseDurationMs": 1855,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 24
+  },
+  {
+    "SessionId": "75a9d2394ca74b28",
+    "StartedAt": "2026-09-08T00:00:14.352573Z",
+    "EndedAt": "2026-09-08T00:00:14.3568623Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "186.121.144.102:40852",
+    "RemoteIp": "186.121.144.102",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "824609206358448c",
+    "StartedAt": "2026-09-07T23:59:26.2672324Z",
+    "EndedAt": "2026-09-07T23:59:26.2678379Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "186.121.144.102:49812",
+    "RemoteIp": "186.121.144.102",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "740c233d66814f49",
+    "StartedAt": "2026-09-07T23:56:35.9807426Z",
+    "EndedAt": "2026-09-07T23:56:46.8316309Z",
+    "DurationSeconds": 10.85,
+    "RemoteEndpoint": "102.220.160.191:38084",
+    "RemoteIp": "102.220.160.191",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "123456",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:56:36.5207141Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 6524,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "740c233d66814f49:000001",
+        "Command": "c1=$(uname -s -v -n -r 2\u003E/dev/null); c1=${c1:-Unknown}; c2=$(grep \u0022model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d \u0027 \u0027 -f3- | awk \u0027{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10}\u0027 | head -1); c2=${c2:-Unknown}; c3=$(nproc --all 2\u003E/dev/null); c3=${c3:-Unknown}; echo \u0022$c1|$c2|$c3\u0022",
+        "Timestamp": "2026-09-07T23:56:37.1195813Z",
+        "Response": "GNU/Linux omegablack #1 SMP Mon Jan 16 16:22:28 UTC 2012 2.6.32-5-amd64|Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz|2",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "740c233d66814f49:000002",
+        "Command": "printf \u0027%s\\n%s\\n\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 | passwd || printf \u0027%s\\n%s\\n%s\\n\u0027 \u0027123456\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 | passwd",
+        "Timestamp": "2026-09-07T23:56:42.5062434Z",
+        "Response": "Changing password for ubuntu.\r\nCurrent password: New password: Retype new password: passwd: Authentication token manipulation error\r\nChanging password for ubuntu.\r\nCurrent password: New password: Retype new password: passwd: Authentication token manipulation error",
+        "ResponseDurationMs": 6998,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 24
+  },
+  {
+    "SessionId": "16652721fe6a44f4",
+    "StartedAt": "2026-09-07T23:55:00.4077091Z",
+    "EndedAt": "2026-09-07T23:55:03.4150216Z",
+    "DurationSeconds": 3.01,
+    "RemoteEndpoint": "176.119.150.178:51190",
+    "RemoteIp": "176.119.150.178",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "fZZo!K7Ewi0#L5q%",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:55:02.2859535Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "8a54338b69314c44",
+    "StartedAt": "2026-09-07T23:54:55.5212198Z",
+    "EndedAt": "2026-09-07T23:54:58.3972975Z",
+    "DurationSeconds": 2.88,
+    "RemoteEndpoint": "176.119.150.178:51187",
+    "RemoteIp": "176.119.150.178",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "ubuntu",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:54:57.1946727Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "e14852ad49624d83",
+    "StartedAt": "2026-09-07T23:51:29.5851855Z",
+    "EndedAt": "2026-09-07T23:51:40.4843363Z",
+    "DurationSeconds": 10.9,
+    "RemoteEndpoint": "102.220.160.191:49736",
+    "RemoteIp": "102.220.160.191",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "ubuntu",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:51:31.1363425Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 10874,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "e14852ad49624d83:000001",
+        "Command": "c1=$(uname -s -v -n -r 2\u003E/dev/null); c1=${c1:-Unknown}; c2=$(grep \u0022model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d \u0027 \u0027 -f3- | awk \u0027{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10}\u0027 | head -1); c2=${c2:-Unknown}; c3=$(nproc --all 2\u003E/dev/null); c3=${c3:-Unknown}; echo \u0022$c1|$c2|$c3\u0022",
+        "Timestamp": "2026-09-07T23:51:33.4941023Z",
+        "Response": "GNU/Linux omegablack #1 SMP Mon Jan 16 16:22:28 UTC 2012 2.6.32-5-amd64|Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz|2",
+        "ResponseDurationMs": 1858,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "e14852ad49624d83:000002",
+        "Command": "printf \u0027%s\\n%s\\n\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 | passwd || printf \u0027%s\\n%s\\n%s\\n\u0027 \u0027ubuntu\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 \u0027fZZo!K7Ewi0#L5q%\u0027 | passwd",
+        "Timestamp": "2026-09-07T23:51:40.4608215Z",
+        "Response": "Changing password for ubuntu.\r\n(current) UNIX password: New password: Retype new password: passwd: Authentication token manipulation error\r\nChanging password for ubuntu.\r\n(current) UNIX password: New password: Retype new password: passwd: Authentication token manipulation error",
+        "ResponseDurationMs": 1539,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 24
+  },
+  {
+    "SessionId": "2af1041ff48d4aea",
+    "StartedAt": "2026-09-07T23:46:19.7007507Z",
+    "EndedAt": "2026-09-07T23:46:23.1155121Z",
+    "DurationSeconds": 3.41,
+    "RemoteEndpoint": "102.220.160.191:57746",
+    "RemoteIp": "102.220.160.191",
+    "Username": "ubuntu",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "123456",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:46:20.9262135Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "4006b7f3c1b5434b",
+    "StartedAt": "2026-09-07T23:41:12.289716Z",
+    "EndedAt": "2026-09-07T23:41:15.1058017Z",
+    "DurationSeconds": 2.82,
+    "RemoteEndpoint": "102.220.160.191:50010",
+    "RemoteIp": "102.220.160.191",
+    "Username": "root",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "123456",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:41:14.7880329Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "c2d2e6463e584d30",
+    "StartedAt": "2026-09-07T23:34:48.2116503Z",
+    "EndedAt": "2026-09-07T23:34:48.2170296Z",
+    "DurationSeconds": 0.01,
+    "RemoteEndpoint": "88.181.232.245:13026",
+    "RemoteIp": "88.181.232.245",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "58dffe299d664524",
+    "StartedAt": "2026-09-07T23:32:38.1632385Z",
+    "EndedAt": "2026-09-07T23:32:38.1654406Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "88.181.232.245:12447",
+    "RemoteIp": "88.181.232.245",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "2de286adabe74ad2",
+    "StartedAt": "2026-09-07T23:12:54.026268Z",
+    "EndedAt": "2026-09-07T23:12:54.3347087Z",
+    "DurationSeconds": 0.31,
+    "RemoteEndpoint": "205.210.31.253:51576",
+    "RemoteIp": "205.210.31.253",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "5b1cd62dc8bc42cc",
+    "StartedAt": "2026-09-07T23:08:21.0139665Z",
+    "EndedAt": "2026-09-07T23:08:21.4765902Z",
+    "DurationSeconds": 0.46,
+    "RemoteEndpoint": "176.53.159.198:17238",
+    "RemoteIp": "176.53.159.198",
+    "Username": "support",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:08:21.3849003Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:08:21.3854155Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:08:21.3857229Z"
+      },
+      {
+        "Username": "support",
+        "Password": "qwerty",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:08:21.3858404Z"
+      },
+      {
+        "Username": "support",
+        "Password": "password",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:08:21.3859717Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "8bff5b72894046c6",
+    "StartedAt": "2026-09-07T23:07:25.3752761Z",
+    "EndedAt": "2026-09-07T23:07:28.085602Z",
+    "DurationSeconds": 2.71,
+    "RemoteEndpoint": "20.65.219.65:60388",
+    "RemoteIp": "20.65.219.65",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "ce637e9fe1504855",
+    "StartedAt": "2026-09-07T23:07:24.3778083Z",
+    "EndedAt": "2026-09-07T23:07:25.2167195Z",
+    "DurationSeconds": 0.84,
+    "RemoteEndpoint": "20.65.219.65:60378",
+    "RemoteIp": "20.65.219.65",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "3925402e65cc4ff8",
+    "StartedAt": "2026-09-07T23:07:06.8736033Z",
+    "EndedAt": "2026-09-07T23:07:07.339928Z",
+    "DurationSeconds": 0.47,
+    "RemoteEndpoint": "176.53.159.197:21144",
+    "RemoteIp": "176.53.159.197",
+    "Username": "support",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:07:07.2483833Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456",
+        "Accepted": false,
+        "Timestamp": "2026-09-07T23:07:07.2488232Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:07:07.2494079Z"
+      },
+      {
+        "Username": "support",
+        "Password": "qwerty",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:07:07.2496366Z"
+      },
+      {
+        "Username": "support",
+        "Password": "password",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T23:07:07.2497462Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "18de75107ae64575",
+    "StartedAt": "2026-09-07T23:04:26.2062862Z",
+    "EndedAt": "2026-09-07T23:05:04.710442Z",
+    "DurationSeconds": 38.5,
+    "RemoteEndpoint": "2.57.121.112:21360",
+    "RemoteIp": "2.57.121.112",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "3ad784048238429c",
+    "StartedAt": "2026-09-07T22:58:35.3954813Z",
+    "EndedAt": "2026-09-07T22:58:35.3958862Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "203.221.99.184:55244",
+    "RemoteIp": "203.221.99.184",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "97f436081e2c4f88",
+    "StartedAt": "2026-09-07T22:58:11.8443322Z",
+    "EndedAt": "2026-09-07T22:58:11.8449511Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "203.221.99.184:56094",
+    "RemoteIp": "203.221.99.184",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "a50b44e58a044aa1",
+    "StartedAt": "2026-09-07T22:34:46.4982424Z",
+    "EndedAt": "2026-09-07T22:34:46.8046114Z",
+    "DurationSeconds": 0.31,
+    "RemoteEndpoint": "47.101.137.46:52672",
+    "RemoteIp": "47.101.137.46",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "fe8d87c4e69743f0",
+    "StartedAt": "2026-09-07T22:34:27.4503332Z",
+    "EndedAt": "2026-09-07T22:34:27.4509038Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "82.102.245.41:38452",
+    "RemoteIp": "82.102.245.41",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "0ad6d7870cd34702",
+    "StartedAt": "2026-09-07T22:29:41.9543035Z",
+    "EndedAt": "2026-09-07T22:29:41.9548512Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "82.102.245.41:38840",
+    "RemoteIp": "82.102.245.41",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "8858af1a83be42a0",
+    "StartedAt": "2026-09-07T22:29:05.7150182Z",
+    "EndedAt": "2026-09-07T22:29:05.7153583Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "88.148.49.11:34578",
+    "RemoteIp": "88.148.49.11",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "f3161d7fa09e4c50",
+    "StartedAt": "2026-09-07T22:26:31.2901344Z",
+    "EndedAt": "2026-09-07T22:26:32.1005734Z",
+    "DurationSeconds": 0.81,
+    "RemoteEndpoint": "186.148.85.8:49536",
+    "RemoteIp": "186.148.85.8",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "2ae4431790e84606",
+    "StartedAt": "2026-09-07T22:25:21.2371426Z",
+    "EndedAt": "2026-09-07T22:25:21.2377273Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "88.148.49.11:57466",
+    "RemoteIp": "88.148.49.11",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "37942a7a35c64f49",
+    "StartedAt": "2026-09-07T22:24:39.6620485Z",
+    "EndedAt": "2026-09-07T22:25:09.6633929Z",
+    "DurationSeconds": 30,
+    "RemoteEndpoint": "60.186.122.122:47985",
+    "RemoteIp": "60.186.122.122",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "041badefdfd04e70",
+    "StartedAt": "2026-09-07T22:20:44.0384603Z",
+    "EndedAt": "2026-09-07T22:20:46.5986938Z",
+    "DurationSeconds": 2.56,
+    "RemoteEndpoint": "205.210.31.91:63236",
+    "RemoteIp": "205.210.31.91",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "5e87b149dba348bf",
+    "StartedAt": "2026-09-07T22:08:47.9314004Z",
+    "EndedAt": "2026-09-07T22:08:48.8704596Z",
+    "DurationSeconds": 0.94,
+    "RemoteEndpoint": "62.60.130.253:4788",
+    "RemoteIp": "62.60.130.253",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "715f85a6a40e4558",
+    "StartedAt": "2026-09-07T22:06:55.8033184Z",
+    "EndedAt": "2026-09-07T22:07:29.3917372Z",
+    "DurationSeconds": 33.59,
+    "RemoteEndpoint": "14.17.59.195:59334",
+    "RemoteIp": "14.17.59.195",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "8af6c163544143d6",
+    "StartedAt": "2026-09-07T22:06:53.8582905Z",
+    "EndedAt": "2026-09-07T22:06:55.4144965Z",
+    "DurationSeconds": 1.56,
+    "RemoteEndpoint": "14.17.59.195:58320",
+    "RemoteIp": "14.17.59.195",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "29c7cc66a5874c80",
+    "StartedAt": "2026-09-07T22:05:14.9385065Z",
+    "EndedAt": "2026-09-07T22:05:14.9390739Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "102.157.192.42:37088",
+    "RemoteIp": "102.157.192.42",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "49bd7f35c2604c30",
+    "StartedAt": "2026-09-07T22:04:20.6678059Z",
+    "EndedAt": "2026-09-07T22:04:20.6685781Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "181.85.211.150:32048",
+    "RemoteIp": "181.85.211.150",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "fdc74b94df634262",
+    "StartedAt": "2026-09-07T22:03:38.9977414Z",
+    "EndedAt": "2026-09-07T22:03:38.9983735Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "181.85.211.150:19326",
+    "RemoteIp": "181.85.211.150",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "55720013a1de4650",
+    "StartedAt": "2026-09-07T21:57:49.9660146Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "139.19.117.197:38498",
+    "RemoteIp": "139.19.117.197",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "714ee7b4229c4eb4",
+    "StartedAt": "2026-09-07T21:42:42.6855443Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "176.53.159.199:45232",
+    "RemoteIp": "176.53.159.199",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "245b2735d10c4a65",
+    "StartedAt": "2026-09-07T21:34:26.2869406Z",
+    "EndedAt": "2026-09-07T21:35:06.5854107Z",
+    "DurationSeconds": 40.3,
+    "RemoteEndpoint": "195.178.110.218:54576",
+    "RemoteIp": "195.178.110.218",
+    "Username": "rbac",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "rbac",
+        "Password": "password",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:34:26.6815559Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11794,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "245b2735d10c4a65:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T21:34:26.8557585Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "245b2735d10c4a65:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T21:34:32.7569382Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "245b2735d10c4a65:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T21:34:38.0823699Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "bbf8edc263c044a9",
+    "StartedAt": "2026-09-07T21:32:47.147515Z",
+    "EndedAt": "2026-09-07T21:33:27.4548876Z",
+    "DurationSeconds": 40.31,
+    "RemoteEndpoint": "195.178.110.218:42396",
+    "RemoteIp": "195.178.110.218",
+    "Username": "rbac",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "rbac",
+        "Password": "rbac",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:32:47.427239Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 10479,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "bbf8edc263c044a9:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T21:32:47.5622379Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "bbf8edc263c044a9:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T21:32:52.6096555Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "bbf8edc263c044a9:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T21:32:57.6281439Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "c96b961024c24866",
+    "StartedAt": "2026-09-07T21:31:08.4388631Z",
+    "EndedAt": "2026-09-07T21:31:48.6847207Z",
+    "DurationSeconds": 40.25,
+    "RemoteEndpoint": "195.178.110.218:52448",
+    "RemoteIp": "195.178.110.218",
+    "Username": "fortigate",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "fortigate",
+        "Password": "fortigate",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:31:08.759067Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11293,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "c96b961024c24866:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T21:31:08.9146344Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "c96b961024c24866:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T21:31:14.4146658Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "c96b961024c24866:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T21:31:19.7328904Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "ba95e2127ab040c4",
+    "StartedAt": "2026-09-07T21:29:09.0551567Z",
+    "EndedAt": "2026-09-07T21:29:44.8518251Z",
+    "DurationSeconds": 35.8,
+    "RemoteEndpoint": "2.57.121.112:31640",
+    "RemoteIp": "2.57.121.112",
+    "Username": "tommie",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "tommie",
+        "Password": "tommie",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:29:09.422924Z"
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "67cceb51414e4b2e",
+    "StartedAt": "2026-09-07T21:28:03.2964141Z",
+    "EndedAt": "2026-09-07T21:28:43.542749Z",
+    "DurationSeconds": 40.25,
+    "RemoteEndpoint": "195.178.110.218:48214",
+    "RemoteIp": "195.178.110.218",
+    "Username": "vyatta",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "vyatta",
+        "Password": "vyatta",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:28:03.5786757Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 12014,
+    "CommandCount": 2,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "67cceb51414e4b2e:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T21:28:03.7146355Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "67cceb51414e4b2e:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T21:28:09.1573602Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 34
+  },
+  {
+    "SessionId": "ece0573ced874cce",
+    "StartedAt": "2026-09-07T21:26:25.9143357Z",
+    "EndedAt": "2026-09-07T21:27:06.1153566Z",
+    "DurationSeconds": 40.2,
+    "RemoteEndpoint": "195.178.110.218:44156",
+    "RemoteIp": "195.178.110.218",
+    "Username": "vyos",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "vyos",
+        "Password": "vyos",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:26:26.3504588Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11473,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "ece0573ced874cce:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T21:26:26.4935212Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "ece0573ced874cce:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T21:26:32.0094067Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "ece0573ced874cce:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T21:26:37.3888246Z",
+        "Response": "Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "1ea6dabeaa624a2c",
+    "StartedAt": "2026-09-07T21:24:48.5299096Z",
+    "EndedAt": "2026-09-07T21:25:28.7710748Z",
+    "DurationSeconds": 40.24,
+    "RemoteEndpoint": "195.178.110.218:56590",
+    "RemoteIp": "195.178.110.218",
+    "Username": "gns3",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "gns3",
+        "Password": "gns3",
+        "Accepted": true,
+        "Timestamp": "2026-09-07T21:24:48.8091092Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 11094,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "1ea6dabeaa624a2c:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-07T21:24:48.9474908Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "1ea6dabeaa624a2c:000002",
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-07T21:24:54.3006622Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ExchangeId": "1ea6dabeaa624a2c:000003",
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-07T21:24:59.6256418Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 36
+  },
+  {
+    "SessionId": "1630d85364a44ea4",
+    "StartedAt": "2026-09-07T21:23:15.1965239Z",
+    "EndedAt": "2026-09-07T21:23:55.4202319Z",
+    "DurationSeconds": 40.22,
     "RemoteEndpoint": "195.178.110.218:33288",
     "RemoteIp": "195.178.110.218",
     "Username": "root",

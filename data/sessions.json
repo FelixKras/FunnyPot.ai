@@ -1,5 +1,54 @@
 [
   {
+    "SessionId": "0e9b76d2bd2a4dab",
+    "StartedAt": "2026-09-08T07:49:24.495192Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "45.148.10.240:47182",
+    "RemoteIp": "45.148.10.240",
+    "Username": "root",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "abc123",
+        "Accepted": true,
+        "Timestamp": "2026-09-08T07:49:24.8014606Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 451,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "0e9b76d2bd2a4dab:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-08T07:49:24.9479506Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "fc744b4824794dc7",
     "StartedAt": "2026-09-08T07:47:32.2024174Z",
     "EndedAt": "2026-09-08T07:48:17.5223933Z",

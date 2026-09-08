@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 11281,
-    "CommandCount": 3,
+    "TimeToCompromiseMs": 16466,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -71,6 +71,22 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 16,
+        "ExchangeId": "6a914510b67a4a80:000004",
+        "Command": "lspci | grep VGA -c",
+        "Timestamp": "2026-09-08T06:16:02.2012269Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -79,7 +95,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "3691bba80a6f42b5",

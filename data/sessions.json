@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 12726,
-    "CommandCount": 3,
+    "TimeToCompromiseMs": 18769,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -61,6 +61,22 @@
         "ExchangeId": "82b940a21e944978:000003",
         "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
         "Timestamp": "2026-09-08T08:36:03.9609685Z",
+        "Response": "1",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 16,
+        "ExchangeId": "82b940a21e944978:000004",
+        "Command": "lspci | grep VGA -c",
+        "Timestamp": "2026-09-08T08:36:10.0033198Z",
         "Response": "",
         "ResponseDurationMs": 0,
         "FailedCommand": false,
@@ -79,7 +95,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "94e7587a64e74226",

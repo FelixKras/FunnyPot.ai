@@ -31,8 +31,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 8536,
-    "CommandCount": 2,
+    "TimeToCompromiseMs": 15604,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 6,
@@ -67,6 +67,23 @@
         ],
         "MitreTechnique": "T1016 System Network Configuration",
         "InferredObjective": "Map local network interfaces, subnets, and default gateway routing"
+      },
+      {
+        "Sequence": 14,
+        "ExchangeId": "e06da5d73f0e405e:000003",
+        "Command": "uname -a",
+        "Timestamp": "2026-09-08T13:55:42.764731Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
       }
     ],
     "TacticsObserved": [
@@ -76,7 +93,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 44
+    "RiskScore": 46
   },
   {
     "SessionId": "537e44d41fb046b8",

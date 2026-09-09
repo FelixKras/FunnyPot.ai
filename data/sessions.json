@@ -1,5 +1,54 @@
 [
   {
+    "SessionId": "f63fd65e377f461d",
+    "StartedAt": "2026-09-09T23:11:22.3308847Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "137.184.29.185:54828",
+    "RemoteIp": "137.184.29.185",
+    "Username": "fariborz",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "fariborz",
+        "Password": "fariborz",
+        "Accepted": true,
+        "Timestamp": "2026-09-09T23:11:23.0461369Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 1125,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "f63fd65e377f461d:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-09T23:11:23.4572525Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "c7389c3c6e814432",
     "StartedAt": "2026-09-09T23:10:18.2895403Z",
     "EndedAt": "2026-09-09T23:11:03.3746311Z",

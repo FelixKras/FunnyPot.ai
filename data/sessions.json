@@ -1,5 +1,52 @@
 [
   {
+    "SessionId": "d56376fc4685407c",
+    "StartedAt": "2026-09-09T13:02:54.6422496Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "102.220.160.191:18406",
+    "RemoteIp": "102.220.160.191",
+    "Username": "root",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "ruokouling",
+        "Accepted": true,
+        "Timestamp": "2026-09-09T13:02:56.4931811Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 2269,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "d56376fc4685407c:000001",
+        "Command": "c1=$(uname -s -v -n -r 2\u003E/dev/null); c1=${c1:-Unknown}; c2=$(grep \u0022model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d \u0027 \u0027 -f3- | awk \u0027{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10}\u0027 | head -1); c2=${c2:-Unknown}; c3=$(nproc --all 2\u003E/dev/null); c3=${c3:-Unknown}; echo \u0022$c1|$c2|$c3\u0022",
+        "Timestamp": "2026-09-09T13:02:56.9141309Z",
+        "Response": "GNU/Linux omegablack #1 SMP Mon Jan 16 16:22:28 UTC 2012 2.6.32-5-amd64|Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz|2",
+        "ResponseDurationMs": 81,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 22
+  },
+  {
     "SessionId": "d0258d76c2f0430e",
     "StartedAt": "2026-09-09T12:58:24.9983348Z",
     "EndedAt": "2026-09-09T12:58:26.9837569Z",

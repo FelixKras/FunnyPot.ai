@@ -2,8 +2,8 @@
   {
     "SessionId": "d56376fc4685407c",
     "StartedAt": "2026-09-09T13:02:54.6422496Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-09T13:03:05.5072944Z",
+    "DurationSeconds": 10.87,
     "RemoteEndpoint": "102.220.160.191:18406",
     "RemoteIp": "102.220.160.191",
     "Username": "root",
@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 2269,
-    "CommandCount": 1,
+    "TimeToCompromiseMs": 9756,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -37,6 +37,22 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "d56376fc4685407c:000002",
+        "Command": "printf \u0027%s\\n%s\\n\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 | passwd || printf \u0027%s\\n%s\\n%s\\n\u0027 \u0027ruokouling\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 | passwd",
+        "Timestamp": "2026-09-09T13:03:04.4001619Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
       }
     ],
     "TacticsObserved": [
@@ -44,7 +60,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 22
+    "RiskScore": 24
   },
   {
     "SessionId": "d0258d76c2f0430e",

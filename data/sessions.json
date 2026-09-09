@@ -1,5 +1,54 @@
 [
   {
+    "SessionId": "deb27455df8641c4",
+    "StartedAt": "2026-09-09T23:18:03.3934054Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "45.148.10.183:59686",
+    "RemoteIp": "45.148.10.183",
+    "Username": "flask",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "flask",
+        "Password": "flask",
+        "Accepted": true,
+        "Timestamp": "2026-09-09T23:18:03.6870692Z"
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 437,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ExchangeId": "deb27455df8641c4:000001",
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-09T23:18:03.8323175Z",
+        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "a2089061015745bb",
     "StartedAt": "2026-09-09T23:17:15.9109495Z",
     "EndedAt": "2026-09-09T23:17:50.9170811Z",

@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 1322,
-    "CommandCount": 1,
+    "TimeToCompromiseMs": 8898,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -37,6 +37,22 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ExchangeId": "ac4ea21d294649c0:000002",
+        "Command": "printf \u0027%s\\n%s\\n\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 | passwd || printf \u0027%s\\n%s\\n%s\\n\u0027 \u0027P@ssw0rd\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 | passwd",
+        "Timestamp": "2026-09-09T13:12:00.1924472Z",
+        "Response": "Changing password for root.\r\nCurrent password: New password: Retype new password: passwd: Authentication token manipulation error",
+        "ResponseDurationMs": 2048,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
       }
     ],
     "TacticsObserved": [
@@ -44,7 +60,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 22
+    "RiskScore": 24
   },
   {
     "SessionId": "aab9d94bfc4e4b7b",

@@ -31,8 +31,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 3692,
-    "CommandCount": 1,
+    "TimeToCompromiseMs": 11061,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 6,
@@ -50,15 +50,33 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 10,
+        "ExchangeId": "95c8c41cf4f34c70:000002",
+        "Command": "ifconfig",
+        "Timestamp": "2026-09-09T21:04:01.2034746Z",
+        "Response": "eth0      Link encap:Ethernet  HWaddr 00:16:3e:7a:4c:91  \r\n          inet addr:10.42.7.23  Bcast:10.42.7.255  Mask:255.255.255.0\r\n          inet6 addr: fe80::216:3eff:fe7a:4c91/64 Scope:Link\r\n          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1\r\n          RX packets:184729384 errors:0 dropped:127 overruns:0 frame:0\r\n          TX packets:162884921 errors:0 dropped:0 overruns:0 carrier:0\r\n          collisions:0 txqueuelen:1000 \r\n          RX bytes:24198374218 (22.5 GiB)  TX bytes:18743210987 (17.4 GiB)\r\n          Interrupt:17 \r\n\r\nlo        Link encap:Local Loopback  \r\n          inet addr:127.0.0.1  Mask:255.0.0.0\r\n          inet6 addr: ::1/128 Scope:Host\r\n          UP LOOPBACK RUNNING  MTU:16436  Metric:1\r\n          RX packets:9283741 errors:0 dropped:0 overruns:0 frame:0\r\n          TX packets:9283741 errors:0 dropped:0 overruns:0 carrier:0\r\n          collisions:0 txqueuelen:0 \r\n          RX bytes:734829104 (700.8 MiB)  TX bytes:734829104 (700.8 MiB)",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1016 System Network Configuration",
+        "InferredObjective": "Map local network interfaces, subnets, and default gateway routing"
       }
     ],
     "TacticsObserved": [
       "Execution",
-      "Reconnaissance"
+      "Reconnaissance",
+      "Discovery"
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 44
   },
   {
     "SessionId": "75b4725033714c35",

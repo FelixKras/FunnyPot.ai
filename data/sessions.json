@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 13962,
-    "CommandCount": 3,
+    "TimeToCompromiseMs": 21335,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -71,6 +71,22 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 16,
+        "ExchangeId": "effe404b5d4541d9:000004",
+        "Command": "lspci | grep VGA -c",
+        "Timestamp": "2026-09-09T23:47:04.1243586Z",
+        "Response": "1",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -79,7 +95,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "a8a5e477226e468e",

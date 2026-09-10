@@ -2,8 +2,8 @@
   {
     "SessionId": "61955f7d262e45df",
     "StartedAt": "2026-09-10T00:07:33.8766624Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-10T00:07:55.7959967Z",
+    "DurationSeconds": 21.92,
     "RemoteEndpoint": "45.148.10.183:59724",
     "RemoteIp": "45.148.10.183",
     "Username": "sybase",
@@ -19,8 +19,8 @@
       }
     ],
     "ShellOpened": true,
-    "TimeToCompromiseMs": 14824,
-    "CommandCount": 3,
+    "TimeToCompromiseMs": 21889,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -71,6 +71,22 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 16,
+        "ExchangeId": "61955f7d262e45df:000004",
+        "Command": "lspci | grep VGA -c",
+        "Timestamp": "2026-09-10T00:07:55.7671379Z",
+        "Response": "1",
+        "ResponseDurationMs": 0,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "MitreTactics": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -79,7 +95,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "a0500042a9984c13",

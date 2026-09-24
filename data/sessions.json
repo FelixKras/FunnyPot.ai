@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "7c6c936aec2842f1",
+    "StartedAt": "2026-09-24T21:18:01.5598317Z",
+    "EndedAt": "2026-09-24T21:18:34.4951477Z",
+    "DurationSeconds": 32.94,
+    "RemoteEndpoint": "81.56.218.3:37160",
+    "RemoteIp": "81.56.218.3",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-24T21:18:03.6940285Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-24T21:18:01.5598317Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "81.56.218.3:37160",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-24T21:18:03.6940285Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "81.56.218.3:37160",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "support",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-24T21:18:34.4951477Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "81.56.218.3:37160",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 32.9353167
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "51a47b0a328d4f5a",
     "StartedAt": "2026-09-24T21:14:54.1021446Z",
     "EndedAt": "2026-09-24T21:14:54.2524771Z",

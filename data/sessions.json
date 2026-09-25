@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "0bfd7334fedb4b02",
+    "StartedAt": "2026-09-25T14:02:40.1314018Z",
+    "EndedAt": "2026-09-25T14:03:10.6858578Z",
+    "DurationSeconds": 30.55,
+    "RemoteEndpoint": "176.53.159.196:10714",
+    "RemoteIp": "176.53.159.196",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 9,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T14:02:40.5016645Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T14:02:40.1314018Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:10714",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T14:02:40.5016645Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:10714",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 9,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T14:03:10.6858578Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:10714",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 30.5544562
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
     "SessionId": "c6e113ac6d3c44e8",
     "StartedAt": "2026-09-25T14:01:08.4313344Z",
     "EndedAt": "2026-09-25T14:01:38.9656812Z",

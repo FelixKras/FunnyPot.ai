@@ -2,15 +2,25 @@
   {
     "SessionId": "75f62af1b2ca4883",
     "StartedAt": "2026-09-25T21:42:05.5005606Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T21:42:41.7383532Z",
+    "DurationSeconds": 36.24,
     "RemoteEndpoint": "123.202.30.205:37816",
     "RemoteIp": "123.202.30.205",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "ubnt",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "ubnt",
+        "Password": "ubnt",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T21:42:07.8851072Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T21:42:05.5005606Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T21:42:07.8851072Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "123.202.30.205:37816",
+          "Username": "ubnt",
+          "AuthMethod": "password",
+          "Password": "ubnt",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T21:42:41.7383532Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "123.202.30.205:37816",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 36.2377927
         }
       }
     ],

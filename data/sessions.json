@@ -2,15 +2,25 @@
   {
     "SessionId": "621acb7aebfb4b48",
     "StartedAt": "2026-09-25T17:39:25.5229709Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T17:40:01.5640838Z",
+    "DurationSeconds": 36.04,
     "RemoteEndpoint": "62.171.133.1:33474",
     "RemoteIp": "62.171.133.1",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-paramiko_4.0.0",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "123123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T17:39:25.940352Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T17:39:25.5229709Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T17:39:25.940352Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:33474",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "123123",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T17:40:01.5640838Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:33474",
+          "ClientVersion": "SSH-2.0-paramiko_4.0.0",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 36.0411131
         }
       }
     ],

@@ -2518,19 +2518,48 @@
             return session._timingMetrics;
         }
 
-        function interactionProfile(session) {
+        function interactionEvidence(session) {
             const timing = sessionTimingMetrics(session);
-            const isExecChannel = (session.timeline || []).some(item => item.type === 'shell_session_start' && item.data?.State === 'ExecOpened');
-            if (isExecChannel || (timing.firstCommandDelayMs !== null && timing.firstCommandDelayMs <= 250 && session.commands.length > 0)) return 'Script-like cadence';
-            if (timing.sampleCount < 2) return 'Insufficient cadence data';
-            if (timing.automationHintShare >= 0.5 || (timing.rapidShare >= 0.75 && timing.medianMs <= 750)) return 'Script-like cadence';
+            const pairs = commandResponsePairs(session).slice().sort(compareExchangePairs);
+            const commands = pairs.map(pair => String(pair.command.Command || ''));
+            // Count shell operators outside quotes, not words such as URLs or quoted examples.
+            const chainCount = commands.reduce((total, text) => {
+                const unquoted = text.replace(/'(?:[^']*)'|"(?:\\.|[^"\\])*"/g, '');
+                return total + (unquoted.match(/&&|\|\||(?<!\|)\|(?!\|)|;(?!;)/g) || []).length;
+            }, 0);
+            let outputFollowUps = 0;
+            for (let i = 1; i < pairs.length; i++) {
+                const response = String(displayResponse(pairs[i - 1].command, pairs[i - 1].result) || '');
+                const next = commands[i].toLowerCase();
+                const tokens = (response.match(/\b[a-z][\w.-]{5,}\b/gi) || []).slice(0, 100);
+                if (response && tokens.some(token => !commands[i - 1].toLowerCase().includes(token.toLowerCase())
+                    && !/^(command|output|error|failed|success|permission|denied|unknown|directory)$/.test(token.toLowerCase())
+                    && new RegExp(`(^|[^\\w.-])${token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^\\w.-]|$)`, 'i').test(next))) outputFollowUps++;
+            }
+            const exec = (session.timeline || []).some(item => item.type === 'shell_session_start' && item.data?.State === 'ExecOpened');
+            const scores = { script: 0, harness: 0, handsOnKeyboard: 0 };
+            if (exec) scores.script += 2;
+            if (timing.firstCommandDelayMs !== null && timing.firstCommandDelayMs <= 250) scores.script++;
+            if (timing.sampleCount >= 2 && timing.rapidShare >= 0.75) scores.script += 2;
+            if (timing.automationHintShare >= 0.5 && commands.length >= 2) scores.script++;
+            if (chainCount >= 2) scores.script++;
+            if (outputFollowUps >= 2) scores.harness += 2;
+            if (outputFollowUps >= 1 && chainCount >= 1) scores.harness++;
+            if (timing.sampleCount >= 3 && timing.medianMs >= 1500 && timing.medianMs <= 30000) {
+                scores.handsOnKeyboard++;
+                if (timing.variability >= 0.3) scores.handsOnKeyboard++;
+            }
+            if (outputFollowUps) scores.handsOnKeyboard++;
+            const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const confidence = ranked[0][1] >= 3 && ranked[0][1] - ranked[1][1] >= 2 ? 'moderate' : 'low';
+            const labels = { script: 'Script-like', harness: 'LLM+harness-like', handsOnKeyboard: 'Hands-on-keyboard-like' };
+            const profile = ranked[0][1] >= 2 && ranked[0][1] > ranked[1][1] ? labels[ranked[0][0]] : 'Mixed/insufficient evidence';
+            return { profile, confidence, scores, chainCount, outputFollowUps };
+        }
 
-            const commands = session.commands || [];
-            const averageCommandLength = average(commands.map(command => String(command.Command || '').length));
-            const averageComplexity = average(commands.map(command => Number(command.SemanticComplexity) || 0));
-            if (timing.medianMs <= 8000 && (averageCommandLength >= 40 || averageComplexity >= 4) && timing.variability <= 0.8) return 'Agent-like cadence';
-            if (timing.medianMs >= 1500 && (timing.variability >= 0.3 || timing.medianMs >= 5000)) return 'Human-like cadence';
-            return 'Mixed/uncertain cadence';
+        function interactionProfile(session) {
+            const evidence = interactionEvidence(session);
+            return `${evidence.profile} (${evidence.confidence} confidence)`;
         }
 
         function formatTimingShare(value, sampleCount) {
@@ -2867,12 +2896,16 @@
             const persistence = [...session.persistence];
             const tactics = [...session.tactics];
             const timing = sessionTimingMetrics(session);
+            const interaction = interactionEvidence(session);
 
             document.getElementById('signals').innerHTML = `
                 <div class="kv">
                     ${kvRows({
                         'Risk': riskLabel(session),
                         'Interaction Profile': interactionProfile(session),
+                        'Evidence Scores (script / LLM+harness / hands-on-keyboard)': `${interaction.scores.script} / ${interaction.scores.harness} / ${interaction.scores.handsOnKeyboard}`,
+                        'Command Chain Operators': interaction.chainCount,
+                        'Possible Output-dependent Follow-ups': interaction.outputFollowUps,
                         'Time To First Command': formatDurationMs(timing.firstCommandDelayMs),
                         'Attacker Response Samples': timing.sampleCount,
                         'Median Attacker Response': formatDurationMs(timing.medianMs),
@@ -3059,6 +3092,7 @@
             const notable = summarizeNotableCommands(commands);
             const failures = summarizeFailures(session);
             const timing = sessionTimingMetrics(session);
+            const interaction = interactionEvidence(session);
             const signals = [];
             if (accepted) signals.push('accepted auth');
             if (session.payloadUrls.size) signals.push(`${session.payloadUrls.size} payload URL${session.payloadUrls.size === 1 ? '' : 's'}`);
@@ -3070,7 +3104,8 @@
             return [
                 `Observed tools: ${tools.length ? tools.join(', ') : 'none beyond basic shell builtins'}`,
                 `Command pattern: ${notable}`,
-                `Interaction profile: ${interactionProfile(session)} (timing-based estimate, not verified identity)`,
+                `Interaction profile: ${interactionProfile(session)} (heuristic behavior, not verified identity)`,
+                `Evidence scores (script / LLM+harness / hands-on-keyboard): ${interaction.scores.script} / ${interaction.scores.harness} / ${interaction.scores.handsOnKeyboard}; ${interaction.chainCount} chain operators; ${interaction.outputFollowUps} possible output-dependent follow-ups`,
                 `Attacker cadence: ${timing.sampleCount ? `${formatDurationMs(timing.medianMs)} median response across ${timing.sampleCount} samples` : 'insufficient response-time samples'}`,
                 `Signals: ${signals.length ? signals.join(', ') : 'short low-noise interaction with no payloads'}`,
                 `Failure clues: ${failures}`,

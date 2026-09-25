@@ -1,5 +1,121 @@
 [
   {
+    "SessionId": "ac37ab4b65b54e42",
+    "StartedAt": "2026-09-25T09:39:15.7092302Z",
+    "EndedAt": "2026-09-25T09:39:51.6664975Z",
+    "DurationSeconds": 35.96,
+    "RemoteEndpoint": "193.46.255.86:23528",
+    "RemoteIp": "193.46.255.86",
+    "Username": "ubnt",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubnt",
+        "Password": "ubnt",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T09:39:16.0561808Z"
+      },
+      {
+        "Username": "ubnt",
+        "Password": "ubnt1",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T09:39:16.1407097Z"
+      },
+      {
+        "Username": "ubnt",
+        "Password": "admin",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T09:39:16.2258088Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T09:39:15.7092302Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23528",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:39:16.0561808Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23528",
+          "Username": "ubnt",
+          "AuthMethod": "password",
+          "Password": "ubnt",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:39:16.1407097Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23528",
+          "Username": "ubnt",
+          "AuthMethod": "password",
+          "Password": "ubnt1",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:39:16.2258088Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23528",
+          "Username": "ubnt",
+          "AuthMethod": "password",
+          "Password": "admin",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:39:51.6664975Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23528",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 35.9572682
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
     "SessionId": "4c3fb40f1a2b44ef",
     "StartedAt": "2026-09-25T09:38:06.1960668Z",
     "EndedAt": "2026-09-25T09:38:46.4321967Z",

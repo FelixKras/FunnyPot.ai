@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "d16f10ce67ab41f0",
+    "StartedAt": "2026-09-25T21:55:25.0670795Z",
+    "EndedAt": "2026-09-25T21:56:01.9972159Z",
+    "DurationSeconds": 36.93,
+    "RemoteEndpoint": "192.42.116.19:50392",
+    "RemoteIp": "192.42.116.19",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-SSH-2.0-OpenSSH_9.3",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "RockYou!",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T21:55:31.6606374Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T21:55:25.0670795Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "192.42.116.19:50392",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T21:55:31.6606374Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "192.42.116.19:50392",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "RockYou!",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T21:56:01.9972159Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "192.42.116.19:50392",
+          "ClientVersion": "SSH-2.0-SSH-2.0-OpenSSH_9.3",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 36.9301365
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "93dba111baa74a5a",
     "StartedAt": "2026-09-25T21:54:47.4827047Z",
     "EndedAt": "2026-09-25T21:55:24.0925206Z",
@@ -246720,76 +246790,6 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "Disconnected",
           "DurationSeconds": 0.760636
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "79c94acb86f94b68",
-    "StartedAt": "2026-09-01T09:14:58.3278516Z",
-    "EndedAt": "2026-09-01T09:15:32.7463959Z",
-    "DurationSeconds": 34.42,
-    "RemoteEndpoint": "35.187.231.181:55236",
-    "RemoteIp": "35.187.231.181",
-    "Username": "root",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": false,
-    "AuthAttempts": [
-      {
-        "Username": "root",
-        "Password": "root",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 1,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-09-01T09:15:02.109257Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-01T09:14:58.3278516Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "35.187.231.181:55236",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-01T09:15:02.109257Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "35.187.231.181:55236",
-          "Username": "root",
-          "AuthMethod": "password",
-          "Password": "root",
-          "ConnectionAttemptNumber": 1,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-09-01T09:15:32.7463959Z",
-        "Event": "session_end",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "35.187.231.181:55236",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-          "State": "Disconnected",
-          "DurationSeconds": 34.4185444
         }
       }
     ],

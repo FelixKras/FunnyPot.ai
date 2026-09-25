@@ -2,15 +2,25 @@
   {
     "SessionId": "5820bfb473194261",
     "StartedAt": "2026-09-25T13:27:15.0978119Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T13:28:12.2489425Z",
+    "DurationSeconds": 57.15,
     "RemoteEndpoint": "138.226.239.233:58042",
     "RemoteIp": "138.226.239.233",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-libssh_0.10.5",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "supportAtlanta",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T13:27:16.5787504Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T13:27:15.0978119Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-09-25T13:27:16.5787504Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "138.226.239.233:58042",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "supportAtlanta",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T13:28:12.2489425Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "138.226.239.233:58042",
+          "ClientVersion": "SSH-2.0-libssh_0.10.5",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 57.1511309
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "d9a251bd48334dc1",

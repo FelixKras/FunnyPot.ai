@@ -83,6 +83,40 @@
             "Discovery"
           ]
         }
+      },
+      {
+        "Timestamp": "2026-09-25T10:33:33.3516371Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "3cf901a1-28b7-4dd5-85e4-329bd43960b4",
+        "ExchangeId": "a3d896ea007d4f09:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:33624",
+          "Username": "bot1",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/bin/./uname -s -v -n -r -m",
+          "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T10:33:33.3532739Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "3cf901a1-28b7-4dd5-85e4-329bd43960b4",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:33624",
+          "Username": "bot1",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 0.6094904
+        }
       }
     ],
     "ShellOpened": true,
@@ -108,20 +142,20 @@
         "ReconnaissanceProbe": "none",
         "SemanticComplexity": 6,
         "AssetValuePerceptionScore": 8,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "",
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T10:33:33.3516371Z",
+        "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
         "ResponseDurationMs": 0,
         "PromptTokens": 0,
         "CompletionTokens": 0,
         "BlockedOperation": false,
         "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
         "HallucinationFeedback": false,
         "StandardErrorRatio": 0,
         "SemanticDrift": 0,
-        "TuringMultiplier": 0,
+        "TuringMultiplier": 0.2,
         "MitreAttackTechniques": [
           "Execution",
           "Discovery"

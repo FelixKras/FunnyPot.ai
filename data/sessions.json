@@ -1,5 +1,178 @@
 [
   {
+    "SessionId": "3cb0af7685a74799",
+    "StartedAt": "2026-09-25T12:36:25.1405508Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "195.178.110.218:48866",
+    "RemoteIp": "195.178.110.218",
+    "Username": "snip",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "snip",
+        "Password": "snip",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 136,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T12:36:25.552793Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T12:36:25.1405508Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:48866",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T12:36:25.552793Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:48866",
+          "Username": "snip",
+          "AuthMethod": "password",
+          "Password": "snip",
+          "ConnectionAttemptNumber": 136,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T12:36:25.7592852Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "b2f0b2d0-c41b-4a8c-b437-1aefd0726824",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:48866",
+          "Username": "snip",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecOpened",
+          "DurationSeconds": 0.6187345,
+          "TimeToCompromiseMs": 618
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T12:36:25.7624697Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "b2f0b2d0-c41b-4a8c-b437-1aefd0726824",
+        "ExchangeId": "3cb0af7685a74799:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:48866",
+          "Username": "snip",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/bin/./uname -s -v -n -r -m",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T12:36:25.7646905Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "b2f0b2d0-c41b-4a8c-b437-1aefd0726824",
+        "ExchangeId": "3cb0af7685a74799:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:48866",
+          "Username": "snip",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/bin/./uname -s -v -n -r -m",
+          "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T12:36:25.7666687Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "b2f0b2d0-c41b-4a8c-b437-1aefd0726824",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:48866",
+          "Username": "snip",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecCompleted",
+          "DurationSeconds": 0.6261185
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 618,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "b2f0b2d0-c41b-4a8c-b437-1aefd0726824",
+        "ExchangeId": "3cb0af7685a74799:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-25T12:36:25.7624697Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T12:36:25.7646905Z",
+        "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "a42eee2b08ce40a6",
     "StartedAt": "2026-09-25T12:34:46.8108686Z",
     "EndedAt": "2026-09-25T12:35:27.0313238Z",

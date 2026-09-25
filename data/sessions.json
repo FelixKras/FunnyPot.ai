@@ -2,15 +2,61 @@
   {
     "SessionId": "0c4191f587264d50",
     "StartedAt": "2026-09-25T02:12:02.5576301Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T02:12:07.426356Z",
+    "DurationSeconds": 4.87,
     "RemoteEndpoint": "176.53.159.197:57604",
     "RemoteIp": "176.53.159.197",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-sshcustom_0.1",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T02:12:02.9339922Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T02:12:07.3273686Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:07.3356104Z"
+      },
+      {
+        "Username": "support",
+        "Password": "qwerty",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 4,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:07.3360696Z"
+      },
+      {
+        "Username": "support",
+        "Password": "password",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 5,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:07.3391417Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T02:12:02.5576301Z",
@@ -22,6 +68,88 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:02.9339922Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "support",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3273686Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3356104Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3360696Z",
+        "Event": "auth_attempt",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "qwerty",
+          "ConnectionAttemptNumber": 4,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3391417Z",
+        "Event": "auth_attempt",
+        "Sequence": 6,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "password",
+          "ConnectionAttemptNumber": 5,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.426356Z",
+        "Event": "session_end",
+        "Sequence": 7,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "ClientVersion": "SSH-2.0-sshcustom_0.1",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 4.8687261
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +159,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "59fa4092b0794f30",

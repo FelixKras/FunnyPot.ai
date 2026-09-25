@@ -117,11 +117,82 @@
           "State": "ExecCompleted",
           "DurationSeconds": 0.5870868
         }
+      },
+      {
+        "Timestamp": "2026-09-25T09:49:09.2430402Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "23ca8e39-ac0f-47bd-8c5e-ee88d4e03dc4",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:51488",
+          "Username": "dolphinscheduler",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 8.3734884,
+          "TimeToCompromiseMs": 8373
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:49:09.2474667Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "23ca8e39-ac0f-47bd-8c5e-ee88d4e03dc4",
+        "ExchangeId": "0c47cb325a6d40dd:000002",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:51488",
+          "Username": "dolphinscheduler",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "uptime -p",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:49:09.2477127Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "23ca8e39-ac0f-47bd-8c5e-ee88d4e03dc4",
+        "ExchangeId": "0c47cb325a6d40dd:000002",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:51488",
+          "Username": "dolphinscheduler",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "uptime -p",
+          "Response": "up 172 days, 10 hours, 36 minutes",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.52
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:49:09.2495261Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "23ca8e39-ac0f-47bd-8c5e-ee88d4e03dc4",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:51488",
+          "Username": "dolphinscheduler",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 8.379974
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 583,
-    "CommandCount": 1,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -162,6 +233,46 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "23ca8e39-ac0f-47bd-8c5e-ee88d4e03dc4",
+        "ExchangeId": "0c47cb325a6d40dd:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "uptime -p",
+        "Timestamp": "2026-09-25T09:49:09.2474667Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T09:49:09.2477127Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.52,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
       }
     ],
     "TacticsObserved": [
@@ -170,7 +281,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 34
   },
   {
     "SessionId": "983ff7a60aea413b",

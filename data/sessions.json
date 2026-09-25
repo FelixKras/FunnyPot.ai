@@ -2,15 +2,25 @@
   {
     "SessionId": "1b25421fb1ab4ce6",
     "StartedAt": "2026-09-25T15:08:35.8167777Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T15:09:11.3526429Z",
+    "DurationSeconds": 35.54,
     "RemoteEndpoint": "77.90.185.17:58206",
     "RemoteIp": "77.90.185.17",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-OpenSSH_8.4p1 Debian-5\u002Bdeb11u3",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "supportAtlanta",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T15:08:36.394123Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T15:08:35.8167777Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T15:08:36.394123Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.17:58206",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "supportAtlanta",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T15:09:11.3526429Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.17:58206",
+          "ClientVersion": "SSH-2.0-OpenSSH_8.4p1 Debian-5\u002Bdeb11u3",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 35.5358655
         }
       }
     ],

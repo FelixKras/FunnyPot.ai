@@ -1,9 +1,4019 @@
 [
   {
-    "SessionId": "8c934658eb184217",
-    "StartedAt": "2026-09-25T01:46:32.5215484Z",
+    "SessionId": "42938e7f35bb44f6",
+    "StartedAt": "2026-09-25T08:49:13.3163233Z",
     "EndedAt": null,
     "DurationSeconds": 0,
+    "RemoteEndpoint": "176.53.159.196:46496",
+    "RemoteIp": "176.53.159.196",
+    "Username": "unknown",
+    "ClientVersion": "pending",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T08:49:13.3163233Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:46496",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "ff34544f65834bed",
+    "StartedAt": "2026-09-25T08:34:16.5907073Z",
+    "EndedAt": "2026-09-25T08:35:00.3451541Z",
+    "DurationSeconds": 43.75,
+    "RemoteEndpoint": "2.57.121.112:25678",
+    "RemoteIp": "2.57.121.112",
+    "Username": "paulo",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "paulo",
+        "Password": "paulo",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T08:34:17.2680142Z"
+      },
+      {
+        "Username": "paulo",
+        "Password": "paulo1",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T08:34:25.0012257Z"
+      },
+      {
+        "Username": "paulo",
+        "Password": "paulo123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T08:34:25.0859728Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T08:34:16.5907073Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:25678",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:34:17.2680142Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:25678",
+          "Username": "paulo",
+          "AuthMethod": "password",
+          "Password": "paulo",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:34:25.0012257Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:25678",
+          "Username": "paulo",
+          "AuthMethod": "password",
+          "Password": "paulo1",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:34:25.0859728Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:25678",
+          "Username": "paulo",
+          "AuthMethod": "password",
+          "Password": "paulo123",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:35:00.3451541Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:25678",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 43.7544512
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "7d4a4e80e4254ebe",
+    "StartedAt": "2026-09-25T08:11:25.8996148Z",
+    "EndedAt": "2026-09-25T08:12:06.6053711Z",
+    "DurationSeconds": 40.71,
+    "RemoteEndpoint": "193.46.255.86:12988",
+    "RemoteIp": "193.46.255.86",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "admin",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T08:11:26.2917524Z"
+      },
+      {
+        "Username": "admin",
+        "Password": "ruijie@123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T08:11:31.1718332Z"
+      },
+      {
+        "Username": "admin",
+        "Password": "theboss",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T08:11:31.2547461Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T08:11:25.8996148Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:11:26.2917524Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "admin",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:11:31.1718332Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "ruijie@123",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:11:31.2547461Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "theboss",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:12:06.6053711Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 40.7057571
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "c3e741ac56044d76",
+    "StartedAt": "2026-09-25T08:02:21.6576307Z",
+    "EndedAt": "2026-09-25T08:02:21.65809Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "95.174.115.182:51026",
+    "RemoteIp": "95.174.115.182",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T08:02:21.6576307Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "95.174.115.182:51026",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:02:21.65809Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "95.174.115.182:51026",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0004602
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "2bbab0cd46d14c63",
+    "StartedAt": "2026-09-25T07:58:41.4597963Z",
+    "EndedAt": "2026-09-25T07:58:41.4862642Z",
+    "DurationSeconds": 0.03,
+    "RemoteEndpoint": "95.174.115.182:46000",
+    "RemoteIp": "95.174.115.182",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:58:41.4597963Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "95.174.115.182:46000",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:58:41.4862642Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "95.174.115.182:46000",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0264689
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "4be8c64f24084b3e",
+    "StartedAt": "2026-09-25T07:51:41.1320248Z",
+    "EndedAt": "2026-09-25T07:51:41.2324357Z",
+    "DurationSeconds": 0.1,
+    "RemoteEndpoint": "139.19.117.130:40282",
+    "RemoteIp": "139.19.117.130",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:51:41.1320248Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "139.19.117.130:40282",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:51:41.2324357Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "139.19.117.130:40282",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.1004129
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "ca8caa1bda3d4798",
+    "StartedAt": "2026-09-25T07:44:44.7356174Z",
+    "EndedAt": "2026-09-25T07:44:44.7367382Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "65.49.1.80:4614",
+    "RemoteIp": "65.49.1.80",
+    "Username": "unknown",
+    "ClientVersion": "GET / HTTP/1.1",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:44:44.7356174Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "65.49.1.80:4614",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:44:44.7367382Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "65.49.1.80:4614",
+          "ClientVersion": "GET / HTTP/1.1",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0011211
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "e08a5586f3b849dd",
+    "StartedAt": "2026-09-25T07:43:00.6884885Z",
+    "EndedAt": "2026-09-25T07:43:00.6957448Z",
+    "DurationSeconds": 0.01,
+    "RemoteEndpoint": "190.18.171.218:57096",
+    "RemoteIp": "190.18.171.218",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:43:00.6884885Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "190.18.171.218:57096",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:43:00.6957448Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "190.18.171.218:57096",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0072566
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "028948b4c98441db",
+    "StartedAt": "2026-09-25T07:19:48.8743115Z",
+    "EndedAt": "2026-09-25T07:19:48.8752933Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "181.22.155.255:35620",
+    "RemoteIp": "181.22.155.255",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:19:48.8743115Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "181.22.155.255:35620",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:19:48.8752933Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "181.22.155.255:35620",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0009826
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "3b812be08978449e",
+    "StartedAt": "2026-09-25T07:18:25.9705573Z",
+    "EndedAt": "2026-09-25T07:18:25.9721474Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "181.22.155.255:54618",
+    "RemoteIp": "181.22.155.255",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:18:25.9705573Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "181.22.155.255:54618",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:18:25.9721474Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "181.22.155.255:54618",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0015904
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "c6cad4af19eb4282",
+    "StartedAt": "2026-09-25T07:13:19.4706757Z",
+    "EndedAt": "2026-09-25T07:13:19.4713937Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "73.91.122.63:40562",
+    "RemoteIp": "73.91.122.63",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:13:19.4706757Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "73.91.122.63:40562",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:13:19.4713937Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "73.91.122.63:40562",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0007182
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "d26ad4d78ef74022",
+    "StartedAt": "2026-09-25T07:11:47.632929Z",
+    "EndedAt": "2026-09-25T07:11:47.6335694Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "73.91.122.63:38787",
+    "RemoteIp": "73.91.122.63",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:11:47.632929Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "73.91.122.63:38787",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:11:47.6335694Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "73.91.122.63:38787",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006407
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "e420fc8f1d824054",
+    "StartedAt": "2026-09-25T07:07:00.6565441Z",
+    "EndedAt": "2026-09-25T07:07:01.0700945Z",
+    "DurationSeconds": 0.41,
+    "RemoteEndpoint": "193.47.62.69:40688",
+    "RemoteIp": "193.47.62.69",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-PUTTY",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:07:00.6565441Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.47.62.69:40688",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:07:01.0700945Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.47.62.69:40688",
+          "ClientVersion": "SSH-2.0-PUTTY",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.4135519
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "5ec728dd1ecb4369",
+    "StartedAt": "2026-09-25T07:06:02.3781882Z",
+    "EndedAt": "2026-09-25T07:06:02.3787784Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "186.22.16.5:63965",
+    "RemoteIp": "186.22.16.5",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:06:02.3781882Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "186.22.16.5:63965",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:06:02.3787784Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "186.22.16.5:63965",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0005905
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "74c16f1dc4394692",
+    "StartedAt": "2026-09-25T07:01:36.1741343Z",
+    "EndedAt": "2026-09-25T07:01:41.5512636Z",
+    "DurationSeconds": 5.38,
+    "RemoteEndpoint": "176.53.159.196:39716",
+    "RemoteIp": "176.53.159.196",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T07:01:36.6286953Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T07:01:36.1741343Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:39716",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:01:36.6286953Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:39716",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T07:01:41.5512636Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:39716",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 5.3771299
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "cd663762553e4a27",
+    "StartedAt": "2026-09-25T06:40:18.5338713Z",
+    "EndedAt": "2026-09-25T06:40:18.6148797Z",
+    "DurationSeconds": 0.08,
+    "RemoteEndpoint": "92.118.39.71:55188",
+    "RemoteIp": "92.118.39.71",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:40:18.5338713Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "92.118.39.71:55188",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:40:18.6148797Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "92.118.39.71:55188",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0810093
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "7baeda8f2c2d4c2b",
+    "StartedAt": "2026-09-25T06:39:06.5833159Z",
+    "EndedAt": "2026-09-25T06:39:47.2660245Z",
+    "DurationSeconds": 40.68,
+    "RemoteEndpoint": "193.46.255.86:23638",
+    "RemoteIp": "193.46.255.86",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:39:07.0213613Z"
+      },
+      {
+        "Username": "support",
+        "Password": "support@123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:39:11.9411499Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T06:39:12.0188805Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:39:06.5833159Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23638",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:39:07.0213613Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23638",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "support",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:39:11.9411499Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23638",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "support@123",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:39:12.0188805Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23638",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:39:47.2660245Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:23638",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 40.6827091
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "2070bb3e23dd4d5d",
+    "StartedAt": "2026-09-25T06:33:34.9597713Z",
+    "EndedAt": "2026-09-25T06:33:35.3972149Z",
+    "DurationSeconds": 0.44,
+    "RemoteEndpoint": "176.53.159.196:41930",
+    "RemoteIp": "176.53.159.196",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:33:35.3112378Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:33:34.9597713Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:41930",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:33:35.3112378Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:41930",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:33:35.3972149Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:41930",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.4374437
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "f26a00798b5048ae",
+    "StartedAt": "2026-09-25T06:32:33.3941091Z",
+    "EndedAt": "2026-09-25T06:32:33.3945211Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "45.70.238.26:35012",
+    "RemoteIp": "45.70.238.26",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:32:33.3941091Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "45.70.238.26:35012",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:32:33.3945211Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "45.70.238.26:35012",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0004121
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "7e09f59b995846b8",
+    "StartedAt": "2026-09-25T06:32:13.8193083Z",
+    "EndedAt": "2026-09-25T06:32:13.8200224Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "45.70.238.28:34158",
+    "RemoteIp": "45.70.238.28",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:32:13.8193083Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "45.70.238.28:34158",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:32:13.8200224Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "45.70.238.28:34158",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0007142
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "c23a43ba108546ab",
+    "StartedAt": "2026-09-25T06:31:14.172765Z",
+    "EndedAt": "2026-09-25T06:31:54.3609429Z",
+    "DurationSeconds": 40.19,
+    "RemoteEndpoint": "2.57.121.112:30874",
+    "RemoteIp": "2.57.121.112",
+    "Username": "octavius",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "octavius",
+        "Password": "octavius",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:31:14.5282345Z"
+      },
+      {
+        "Username": "octavius",
+        "Password": "octavius1",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:31:19.0267238Z"
+      },
+      {
+        "Username": "octavius",
+        "Password": "octavius123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T06:31:19.111526Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:31:14.172765Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:14.5282345Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "Username": "octavius",
+          "AuthMethod": "password",
+          "Password": "octavius",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:19.0267238Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "Username": "octavius",
+          "AuthMethod": "password",
+          "Password": "octavius1",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:19.111526Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "Username": "octavius",
+          "AuthMethod": "password",
+          "Password": "octavius123",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:54.3609429Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 40.1881781
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "a3ced738c2944708",
+    "StartedAt": "2026-09-25T06:20:13.3338085Z",
+    "EndedAt": "2026-09-25T06:20:13.334133Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "190.61.43.220:40090",
+    "RemoteIp": "190.61.43.220",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:20:13.3338085Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "190.61.43.220:40090",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:20:13.334133Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "190.61.43.220:40090",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0003246
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "a7edadb08dfb4a55",
+    "StartedAt": "2026-09-25T06:09:41.1464915Z",
+    "EndedAt": "2026-09-25T06:09:41.3112141Z",
+    "DurationSeconds": 0.16,
+    "RemoteEndpoint": "66.132.172.38:55972",
+    "RemoteIp": "66.132.172.38",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:09:41.1464915Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "66.132.172.38:55972",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:09:41.3112141Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "66.132.172.38:55972",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.1647227
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "30a81cce3f744760",
+    "StartedAt": "2026-09-25T06:01:37.3285563Z",
+    "EndedAt": "2026-09-25T06:01:37.3378281Z",
+    "DurationSeconds": 0.01,
+    "RemoteEndpoint": "190.61.43.220:47046",
+    "RemoteIp": "190.61.43.220",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T06:01:37.3285563Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "190.61.43.220:47046",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:01:37.3378281Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "190.61.43.220:47046",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0092719
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "4fde800488804719",
+    "StartedAt": "2026-09-25T05:54:38.5530785Z",
+    "EndedAt": "2026-09-25T05:55:09.3244708Z",
+    "DurationSeconds": 30.77,
+    "RemoteEndpoint": "193.46.255.86:39706",
+    "RemoteIp": "193.46.255.86",
+    "Username": "probe",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "probe",
+        "Password": "",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T05:54:38.9637449Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:54:38.5530785Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:39706",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:54:38.9637449Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:39706",
+          "Username": "probe",
+          "AuthMethod": "password",
+          "Password": "",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:55:09.3244708Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:39706",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 30.7713924
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "82c4c1f86a21405d",
+    "StartedAt": "2026-09-25T05:52:44.1638328Z",
+    "EndedAt": "2026-09-25T05:52:48.8704179Z",
+    "DurationSeconds": 4.71,
+    "RemoteEndpoint": "176.53.159.196:15816",
+    "RemoteIp": "176.53.159.196",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T05:52:44.5306479Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:52:44.1638328Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:15816",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:52:44.5306479Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:15816",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:52:48.8704179Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:15816",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 4.7065853
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "0894f61863f84d2f",
+    "StartedAt": "2026-09-25T05:39:10.2685794Z",
+    "EndedAt": "2026-09-25T05:39:10.2689956Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "189.161.175.69:59100",
+    "RemoteIp": "189.161.175.69",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:39:10.2685794Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "189.161.175.69:59100",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:39:10.2689956Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "189.161.175.69:59100",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0004162
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "e87ebd774af54831",
+    "StartedAt": "2026-09-25T05:38:47.9687798Z",
+    "EndedAt": "2026-09-25T05:38:51.4628554Z",
+    "DurationSeconds": 3.49,
+    "RemoteEndpoint": "189.161.175.69:43264",
+    "RemoteIp": "189.161.175.69",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:38:47.9687798Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "189.161.175.69:43264",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:38:51.4628554Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "189.161.175.69:43264",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 3.4940757
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "7a0c2b2700ac423b",
+    "StartedAt": "2026-09-25T05:38:41.9510434Z",
+    "EndedAt": "2026-09-25T05:38:42.1874812Z",
+    "DurationSeconds": 0.24,
+    "RemoteEndpoint": "143.198.216.98:58888",
+    "RemoteIp": "143.198.216.98",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:38:41.9510434Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "143.198.216.98:58888",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:38:42.1874812Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "143.198.216.98:58888",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.236438
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "9496d398740544a5",
+    "StartedAt": "2026-09-25T05:31:51.7951942Z",
+    "EndedAt": "2026-09-25T05:31:51.891781Z",
+    "DurationSeconds": 0.1,
+    "RemoteEndpoint": "93.123.109.6:13136",
+    "RemoteIp": "93.123.109.6",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:31:51.7951942Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "93.123.109.6:13136",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:31:51.891781Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "93.123.109.6:13136",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.096587
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "429fb08284ea4072",
+    "StartedAt": "2026-09-25T05:09:14.7395216Z",
+    "EndedAt": "2026-09-25T05:09:14.83787Z",
+    "DurationSeconds": 0.1,
+    "RemoteEndpoint": "77.90.185.16:65105",
+    "RemoteIp": "77.90.185.16",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T05:09:14.7395216Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.16:65105",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T05:09:14.83787Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.16:65105",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0983486
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "a1801862f1874c5d",
+    "StartedAt": "2026-09-25T04:40:11.6500332Z",
+    "EndedAt": "2026-09-25T04:40:12.0127659Z",
+    "DurationSeconds": 0.36,
+    "RemoteEndpoint": "77.239.124.130:60310",
+    "RemoteIp": "77.239.124.130",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:40:11.6500332Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "77.239.124.130:60310",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:40:12.0127659Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.239.124.130:60310",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.3627329
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "f804a7e483f04f91",
+    "StartedAt": "2026-09-25T04:34:50.915482Z",
+    "EndedAt": "2026-09-25T04:34:53.2238867Z",
+    "DurationSeconds": 2.31,
+    "RemoteEndpoint": "198.235.24.3:64992",
+    "RemoteIp": "198.235.24.3",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-ZGrab ZGrab SSH Survey",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:34:50.915482Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "198.235.24.3:64992",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:34:53.2238867Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "198.235.24.3:64992",
+          "ClientVersion": "SSH-2.0-ZGrab ZGrab SSH Survey",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 2.308405
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "8f24e3b6b155426b",
+    "StartedAt": "2026-09-25T04:29:52.7933307Z",
+    "EndedAt": "2026-09-25T04:30:26.0649303Z",
+    "DurationSeconds": 33.27,
+    "RemoteEndpoint": "64.62.197.167:25030",
+    "RemoteIp": "64.62.197.167",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:29:52.7933307Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "64.62.197.167:25030",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:30:26.0649303Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "64.62.197.167:25030",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 33.2715998
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "2eb70f20e1174836",
+    "StartedAt": "2026-09-25T04:27:12.4419629Z",
+    "EndedAt": "2026-09-25T04:27:12.6700601Z",
+    "DurationSeconds": 0.23,
+    "RemoteEndpoint": "64.62.197.178:32077",
+    "RemoteIp": "64.62.197.178",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:27:12.4419629Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "64.62.197.178:32077",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:27:12.6700601Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "64.62.197.178:32077",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.2280973
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "cfafa605dfe3486c",
+    "StartedAt": "2026-09-25T04:24:54.490197Z",
+    "EndedAt": "2026-09-25T04:24:54.5683498Z",
+    "DurationSeconds": 0.08,
+    "RemoteEndpoint": "2.57.122.209:52752",
+    "RemoteIp": "2.57.122.209",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:24:54.490197Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "2.57.122.209:52752",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:24:54.5683498Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.122.209:52752",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.078153
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "5360c8caf8f7469c",
+    "StartedAt": "2026-09-25T04:11:50.7179533Z",
+    "EndedAt": "2026-09-25T04:12:42.1086043Z",
+    "DurationSeconds": 51.39,
+    "RemoteEndpoint": "120.48.0.142:39962",
+    "RemoteIp": "120.48.0.142",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "web",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T04:12:10.0322017Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:11:50.7179533Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "120.48.0.142:39962",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:12:10.0322017Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "120.48.0.142:39962",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "web",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:12:42.1086043Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "120.48.0.142:39962",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 51.3906512
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "221ee1499b474212",
+    "StartedAt": "2026-09-25T04:11:15.1292856Z",
+    "EndedAt": "2026-09-25T04:11:50.4958483Z",
+    "DurationSeconds": 35.37,
+    "RemoteEndpoint": "120.48.0.142:57234",
+    "RemoteIp": "120.48.0.142",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "ubuntu",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T04:11:16.360762Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T04:11:15.1292856Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "120.48.0.142:57234",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:11:16.360762Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "120.48.0.142:57234",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "ubuntu",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T04:11:50.4958483Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "120.48.0.142:57234",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 35.3665629
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "5a5a445c00894fc9",
+    "StartedAt": "2026-09-25T03:55:55.2171545Z",
+    "EndedAt": "2026-09-25T03:55:55.2178256Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "186.22.225.114:52185",
+    "RemoteIp": "186.22.225.114",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:55:55.2171545Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "186.22.225.114:52185",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:55:55.2178256Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "186.22.225.114:52185",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006713
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "1565eba7faa44282",
+    "StartedAt": "2026-09-25T03:55:34.3889052Z",
+    "EndedAt": "2026-09-25T03:55:34.3894367Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "186.22.225.114:55177",
+    "RemoteIp": "186.22.225.114",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:55:34.3889052Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "186.22.225.114:55177",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:55:34.3894367Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "186.22.225.114:55177",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0005318
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "cd1fa20a75fc4be4",
+    "StartedAt": "2026-09-25T03:32:26.3588641Z",
+    "EndedAt": "2026-09-25T03:32:26.359238Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "72.213.143.39:52633",
+    "RemoteIp": "72.213.143.39",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:32:26.3588641Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "72.213.143.39:52633",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:32:26.359238Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "72.213.143.39:52633",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0003739
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "d58146ab0c5a4341",
+    "StartedAt": "2026-09-25T03:30:37.2596178Z",
+    "EndedAt": "2026-09-25T03:30:37.260348Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "72.213.143.39:46634",
+    "RemoteIp": "72.213.143.39",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:30:37.2596178Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "72.213.143.39:46634",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:30:37.260348Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "72.213.143.39:46634",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0007304
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "6cfa9b959a8c454d",
+    "StartedAt": "2026-09-25T03:21:14.0470865Z",
+    "EndedAt": "2026-09-25T03:21:14.123603Z",
+    "DurationSeconds": 0.08,
+    "RemoteEndpoint": "2.57.122.238:50096",
+    "RemoteIp": "2.57.122.238",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:21:14.0470865Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "2.57.122.238:50096",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:21:14.123603Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.122.238:50096",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0765166
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "ae25b50bfa79456c",
+    "StartedAt": "2026-09-25T03:18:23.2333974Z",
+    "EndedAt": "2026-09-25T03:18:23.2341499Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "217.199.148.242:36714",
+    "RemoteIp": "217.199.148.242",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:18:23.2333974Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "217.199.148.242:36714",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:18:23.2341499Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "217.199.148.242:36714",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0007526
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "ceca60ab85cc4e36",
+    "StartedAt": "2026-09-25T03:12:53.8919627Z",
+    "EndedAt": "2026-09-25T03:12:53.8925038Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "217.199.148.242:10185",
+    "RemoteIp": "217.199.148.242",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:12:53.8919627Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "217.199.148.242:10185",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:12:53.8925038Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "217.199.148.242:10185",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0005412
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "671c79cf6d0d4696",
+    "StartedAt": "2026-09-25T03:10:14.7892169Z",
+    "EndedAt": "2026-09-25T03:10:14.7903216Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "91.211.134.166:1527",
+    "RemoteIp": "91.211.134.166",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:10:14.7892169Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "91.211.134.166:1527",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:10:14.7903216Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "91.211.134.166:1527",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0011048
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "59d900f41745431f",
+    "StartedAt": "2026-09-25T03:00:09.7185031Z",
+    "EndedAt": "2026-09-25T03:00:09.7191486Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "91.211.134.166:60270",
+    "RemoteIp": "91.211.134.166",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T03:00:09.7185031Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "91.211.134.166:60270",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T03:00:09.7191486Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "91.211.134.166:60270",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006457
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "daed6145a66b4e03",
+    "StartedAt": "2026-09-25T02:50:10.7395428Z",
+    "EndedAt": "2026-09-25T02:50:10.740233Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "101.57.25.85:1528",
+    "RemoteIp": "101.57.25.85",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:50:10.7395428Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "101.57.25.85:1528",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:50:10.740233Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "101.57.25.85:1528",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006903
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "24ab459f075143c9",
+    "StartedAt": "2026-09-25T02:49:30.543205Z",
+    "EndedAt": "2026-09-25T02:49:30.5436428Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "101.57.25.85:1521",
+    "RemoteIp": "101.57.25.85",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:49:30.543205Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "101.57.25.85:1521",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:49:30.5436428Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "101.57.25.85:1521",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0004379
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "6b5e5d2d0b394fcf",
+    "StartedAt": "2026-09-25T02:39:08.6270505Z",
+    "EndedAt": "2026-09-25T02:39:08.6276629Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "138.59.173.18:47774",
+    "RemoteIp": "138.59.173.18",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:39:08.6270505Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "138.59.173.18:47774",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:39:08.6276629Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "138.59.173.18:47774",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006125
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "a24030b613574797",
+    "StartedAt": "2026-09-25T02:36:41.4744938Z",
+    "EndedAt": "2026-09-25T02:36:41.4751279Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "138.59.173.18:43718",
+    "RemoteIp": "138.59.173.18",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:36:41.4744938Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "138.59.173.18:43718",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:36:41.4751279Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "138.59.173.18:43718",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006342
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "b81dc870eaa74bea",
+    "StartedAt": "2026-09-25T02:26:13.3844817Z",
+    "EndedAt": "2026-09-25T02:26:13.5663053Z",
+    "DurationSeconds": 0.18,
+    "RemoteEndpoint": "206.189.99.174:46192",
+    "RemoteIp": "206.189.99.174",
+    "Username": "unknown",
+    "ClientVersion": "OpenSSH_8.5",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:26:13.3844817Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "206.189.99.174:46192",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:26:13.5663053Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "206.189.99.174:46192",
+          "ClientVersion": "OpenSSH_8.5",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.1818238
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "2abfa675fdf940d2",
+    "StartedAt": "2026-09-25T02:12:14.2727449Z",
+    "EndedAt": "2026-09-25T02:12:14.7178561Z",
+    "DurationSeconds": 0.45,
+    "RemoteEndpoint": "176.53.159.198:63962",
+    "RemoteIp": "176.53.159.198",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-sshcustom_0.1",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T02:12:14.625789Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T02:12:14.6260625Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:14.6302123Z"
+      },
+      {
+        "Username": "support",
+        "Password": "qwerty",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 4,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:14.6322994Z"
+      },
+      {
+        "Username": "support",
+        "Password": "password",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 5,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:14.6349639Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:12:14.2727449Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:14.625789Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "support",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:14.6260625Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:14.6302123Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:14.6322994Z",
+        "Event": "auth_attempt",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "qwerty",
+          "ConnectionAttemptNumber": 4,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:14.6349639Z",
+        "Event": "auth_attempt",
+        "Sequence": 6,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "password",
+          "ConnectionAttemptNumber": 5,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:14.7178561Z",
+        "Event": "session_end",
+        "Sequence": 7,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.198:63962",
+          "ClientVersion": "SSH-2.0-sshcustom_0.1",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.4451113
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "0c4191f587264d50",
+    "StartedAt": "2026-09-25T02:12:02.5576301Z",
+    "EndedAt": "2026-09-25T02:12:07.426356Z",
+    "DurationSeconds": 4.87,
+    "RemoteEndpoint": "176.53.159.197:57604",
+    "RemoteIp": "176.53.159.197",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-sshcustom_0.1",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "support",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T02:12:02.9339922Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T02:12:07.3273686Z"
+      },
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:07.3356104Z"
+      },
+      {
+        "Username": "support",
+        "Password": "qwerty",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 4,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:07.3360696Z"
+      },
+      {
+        "Username": "support",
+        "Password": "password",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 5,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T02:12:07.3391417Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T02:12:02.5576301Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:02.9339922Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "support",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3273686Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3356104Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3360696Z",
+        "Event": "auth_attempt",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "qwerty",
+          "ConnectionAttemptNumber": 4,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.3391417Z",
+        "Event": "auth_attempt",
+        "Sequence": 6,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "password",
+          "ConnectionAttemptNumber": 5,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T02:12:07.426356Z",
+        "Event": "session_end",
+        "Sequence": 7,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.197:57604",
+          "ClientVersion": "SSH-2.0-sshcustom_0.1",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 4.8687261
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "59fa4092b0794f30",
+    "StartedAt": "2026-09-25T01:59:44.7922412Z",
+    "EndedAt": "2026-09-25T01:59:44.7928887Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "194.242.98.249:40482",
+    "RemoteIp": "194.242.98.249",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T01:59:44.7922412Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "194.242.98.249:40482",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:59:44.7928887Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "194.242.98.249:40482",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006476
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "0ec354122c154a78",
+    "StartedAt": "2026-09-25T01:59:17.9137092Z",
+    "EndedAt": "2026-09-25T01:59:17.9143279Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "194.242.98.249:48236",
+    "RemoteIp": "194.242.98.249",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T01:59:17.9137092Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "194.242.98.249:48236",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:59:17.9143279Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "194.242.98.249:48236",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0006188
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "09843e2ab42a4e73",
+    "StartedAt": "2026-09-25T01:49:43.8110687Z",
+    "EndedAt": "2026-09-25T01:50:31.4541339Z",
+    "DurationSeconds": 47.64,
+    "RemoteEndpoint": "195.178.110.228:58590",
+    "RemoteIp": "195.178.110.228",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "321",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 60,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T01:49:44.5940528Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T01:49:43.8110687Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:44.5940528Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "321",
+          "ConnectionAttemptNumber": 60,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:45.0264618Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "db8db4e6-3256-4bc1-9a8e-57948bcfa674",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 1.2153932,
+          "TimeToCompromiseMs": 1215
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:45.0296331Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "db8db4e6-3256-4bc1-9a8e-57948bcfa674",
+        "ExchangeId": "09843e2ab42a4e73:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ncpu_model=$( { lscpu 2\u003E/dev/null | awk -F: \u0027/Model name/ {print $2}\u0027; grep -m1 -E \u0022^model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; grep -m1 -E \u0022^Hardware\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; cat /proc/device-tree/model 2\u003E/dev/null; } | sed \u0027/^$/d; /unknown/d; s/^[[:space:]]*//; s/[[:space:]]*$//; s/ AArch64 Processor$//; s/ Processor$//; s/ CPU$//\u0027 | head -1 )\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\nlast_output=$(last 2\u003E/dev/null)\nfilter_output=$( ( export LANG=C LC_ALL=C; echo \u0027===SHELL_BEHAVIOR===\u0027; printf \u0027path_err=\u0027; ( ./xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027cmd_err=\u0027; ( xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027execute_err=\u0027; out=$(bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/usr/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(busybox sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261 || sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); esac; esac; esac; printf \u0027%s\u0027 \u0022$out\u0022 | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; echo \u0027===DONE===\u0027 ) 2\u003E\u00261 )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022CPU_MODEL:$cpu_model\u0022\necho \u0022GPU:$gpu_info\u0022\necho \u0022LAST:$last_output\u0022\necho \u0022FILTER:$filter_output\u0022",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 918,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:45.0340535Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "db8db4e6-3256-4bc1-9a8e-57948bcfa674",
+        "ExchangeId": "09843e2ab42a4e73:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ncpu_model=$( { lscpu 2\u003E/dev/null | awk -F: \u0027/Model name/ {print $2}\u0027; grep -m1 -E \u0022^model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; grep -m1 -E \u0022^Hardware\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; cat /proc/device-tree/model 2\u003E/dev/null; } | sed \u0027/^$/d; /unknown/d; s/^[[:space:]]*//; s/[[:space:]]*$//; s/ AArch64 Processor$//; s/ Processor$//; s/ CPU$//\u0027 | head -1 )\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\nlast_output=$(last 2\u003E/dev/null)\nfilter_output=$( ( export LANG=C LC_ALL=C; echo \u0027===SHELL_BEHAVIOR===\u0027; printf \u0027path_err=\u0027; ( ./xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027cmd_err=\u0027; ( xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027execute_err=\u0027; out=$(bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/usr/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(busybox sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261 || sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); esac; esac; esac; printf \u0027%s\u0027 \u0022$out\u0022 | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; echo \u0027===DONE===\u0027 ) 2\u003E\u00261 )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022CPU_MODEL:$cpu_model\u0022\necho \u0022GPU:$gpu_info\u0022\necho \u0022LAST:$last_output\u0022\necho \u0022FILTER:$filter_output\u0022",
+          "Response": "UNAME:Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64 GNU/Linux\r\nARCH:x86_64\r\nUPTIME:14922454.32 29844908.64\r\nCPUS:2\r\nCPU_MODEL:Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\nGPU:00:02.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]\r\nLAST:root     pts/0        203.0.113.42     Tue Jun 18 09:41   still logged in\r\nremote   pts/1        198.51.100.17    Tue Jun 18 08:12 - 08:47  (00:35)\r\nsecretOps pts/2        10.10.4.23       Mon Jun 17 22:03 - 23:18  (01:15)\r\n\r\nwtmp begins Tue Jan  2 14:22:18 2024\r\nFILTER:===SHELL_BEHAVIOR===\r\npath_err=bash: ./xxxxxx: No such file or directory\r\ncmd_err=bash: line 1: xxxxxx: command not found\r\nexecute_err=xxxxxx\r\n===DONE===",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:45.0366827Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "db8db4e6-3256-4bc1-9a8e-57948bcfa674",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 1.2256142
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:52.152232Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "a8653ab1-dec9-4b2a-9b82-32c4cabc9624",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 8.3411638,
+          "TimeToCompromiseMs": 8341
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:52.1527846Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "a8653ab1-dec9-4b2a-9b82-32c4cabc9624",
+        "ExchangeId": "09843e2ab42a4e73:000002",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u0027321\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027321\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 141,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:52.1591495Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "a8653ab1-dec9-4b2a-9b82-32c4cabc9624",
+        "ExchangeId": "09843e2ab42a4e73:000002",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u0027321\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027321\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "Response": "Sorry, I can\u2019t simulate executing commands on a real or fictional server.",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.35
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:52.1615853Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "a8653ab1-dec9-4b2a-9b82-32c4cabc9624",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 8.3505169
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:59.1470898Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "a7cfcc85-1441-4518-adca-7103016f47f8",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 15.3360217,
+          "TimeToCompromiseMs": 15336
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:59.1515039Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "a7cfcc85-1441-4518-adca-7103016f47f8",
+        "ExchangeId": "09843e2ab42a4e73:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u0027321\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027321\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 141,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:59.1542552Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "a7cfcc85-1441-4518-adca-7103016f47f8",
+        "ExchangeId": "09843e2ab42a4e73:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u0027321\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027321\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "Response": "Sorry, I can\u2019t simulate executing commands on a real or fictional server.",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.72
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:59.1611145Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "a7cfcc85-1441-4518-adca-7103016f47f8",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 15.3500461
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:50:31.4541339Z",
+        "Event": "session_end",
+        "Sequence": 15,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58590",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 47.6430655
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 1215,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "db8db4e6-3256-4bc1-9a8e-57948bcfa674",
+        "ExchangeId": "09843e2ab42a4e73:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ncpu_model=$( { lscpu 2\u003E/dev/null | awk -F: \u0027/Model name/ {print $2}\u0027; grep -m1 -E \u0022^model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; grep -m1 -E \u0022^Hardware\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; cat /proc/device-tree/model 2\u003E/dev/null; } | sed \u0027/^$/d; /unknown/d; s/^[[:space:]]*//; s/[[:space:]]*$//; s/ AArch64 Processor$//; s/ Processor$//; s/ CPU$//\u0027 | head -1 )\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\nlast_output=$(last 2\u003E/dev/null)\nfilter_output=$( ( export LANG=C LC_ALL=C; echo \u0027===SHELL_BEHAVIOR===\u0027; printf \u0027path_err=\u0027; ( ./xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027cmd_err=\u0027; ( xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027execute_err=\u0027; out=$(bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/usr/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(busybox sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261 || sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); esac; esac; esac; printf \u0027%s\u0027 \u0022$out\u0022 | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; echo \u0027===DONE===\u0027 ) 2\u003E\u00261 )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022CPU_MODEL:$cpu_model\u0022\necho \u0022GPU:$gpu_info\u0022\necho \u0022LAST:$last_output\u0022\necho \u0022FILTER:$filter_output\u0022",
+        "Timestamp": "2026-09-25T01:49:45.0296331Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 918,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T01:49:45.0340535Z",
+        "Response": "UNAME:Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64 GNU/Linux\r\nARCH:x86_64\r\nUPTIME:14922454.32 29844908.64\r\nCPUS:2\r\nCPU_MODEL:Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\nGPU:00:02.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]\r\nLAST:root     pts/0        203.0.113.42     Tue Jun 18 09:41   still logged in\r\nremote   pts/1        198.51.100.17    Tue Jun 18 08:12 - 08:47  (00:35)\r\nsecretOps pts/2        10.10.4.23       Mon Jun 17 22:03 - 23:18  (01:15)\r\n\r\nwtmp begins Tue Jan  2 14:22:18 2024\r\nFILTER:===SHELL_BEHAVIOR===\r\npath_err=bash: ./xxxxxx: No such file or directory\r\ncmd_err=bash: line 1: xxxxxx: command not found\r\nexecute_err=xxxxxx\r\n===DONE===",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "a8653ab1-dec9-4b2a-9b82-32c4cabc9624",
+        "ExchangeId": "09843e2ab42a4e73:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "echo \u0027321\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027321\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+        "Timestamp": "2026-09-25T01:49:52.1527846Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 141,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T01:49:52.1591495Z",
+        "Response": "Sorry, I can\u2019t simulate executing commands on a real or fictional server.",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.35,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "a7cfcc85-1441-4518-adca-7103016f47f8",
+        "ExchangeId": "09843e2ab42a4e73:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "echo \u0027321\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027321\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+        "Timestamp": "2026-09-25T01:49:59.1515039Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 141,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T01:49:59.1542552Z",
+        "Response": "Sorry, I can\u2019t simulate executing commands on a real or fictional server.",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.72,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 26
+  },
+  {
+    "SessionId": "713092dc99be4b39",
+    "StartedAt": "2026-09-25T01:48:09.1236803Z",
+    "EndedAt": "2026-09-25T01:49:00.630263Z",
+    "DurationSeconds": 51.51,
+    "RemoteEndpoint": "195.178.110.228:55622",
+    "RemoteIp": "195.178.110.228",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "21",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 59,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T01:48:09.8733036Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T01:48:09.1236803Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:09.8733036Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "21",
+          "ConnectionAttemptNumber": 59,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:10.4497052Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "341bf34d-4b3f-46c9-9810-f191a541e973",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 1.326025,
+          "TimeToCompromiseMs": 1326
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:10.4528321Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "341bf34d-4b3f-46c9-9810-f191a541e973",
+        "ExchangeId": "713092dc99be4b39:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ncpu_model=$( { lscpu 2\u003E/dev/null | awk -F: \u0027/Model name/ {print $2}\u0027; grep -m1 -E \u0022^model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; grep -m1 -E \u0022^Hardware\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; cat /proc/device-tree/model 2\u003E/dev/null; } | sed \u0027/^$/d; /unknown/d; s/^[[:space:]]*//; s/[[:space:]]*$//; s/ AArch64 Processor$//; s/ Processor$//; s/ CPU$//\u0027 | head -1 )\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\nlast_output=$(last 2\u003E/dev/null)\nfilter_output=$( ( export LANG=C LC_ALL=C; echo \u0027===SHELL_BEHAVIOR===\u0027; printf \u0027path_err=\u0027; ( ./xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027cmd_err=\u0027; ( xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027execute_err=\u0027; out=$(bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/usr/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(busybox sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261 || sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); esac; esac; esac; printf \u0027%s\u0027 \u0022$out\u0022 | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; echo \u0027===DONE===\u0027 ) 2\u003E\u00261 )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022CPU_MODEL:$cpu_model\u0022\necho \u0022GPU:$gpu_info\u0022\necho \u0022LAST:$last_output\u0022\necho \u0022FILTER:$filter_output\u0022",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 918,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:10.4600097Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "341bf34d-4b3f-46c9-9810-f191a541e973",
+        "ExchangeId": "713092dc99be4b39:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ncpu_model=$( { lscpu 2\u003E/dev/null | awk -F: \u0027/Model name/ {print $2}\u0027; grep -m1 -E \u0022^model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; grep -m1 -E \u0022^Hardware\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; cat /proc/device-tree/model 2\u003E/dev/null; } | sed \u0027/^$/d; /unknown/d; s/^[[:space:]]*//; s/[[:space:]]*$//; s/ AArch64 Processor$//; s/ Processor$//; s/ CPU$//\u0027 | head -1 )\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\nlast_output=$(last 2\u003E/dev/null)\nfilter_output=$( ( export LANG=C LC_ALL=C; echo \u0027===SHELL_BEHAVIOR===\u0027; printf \u0027path_err=\u0027; ( ./xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027cmd_err=\u0027; ( xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027execute_err=\u0027; out=$(bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/usr/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(busybox sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261 || sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); esac; esac; esac; printf \u0027%s\u0027 \u0022$out\u0022 | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; echo \u0027===DONE===\u0027 ) 2\u003E\u00261 )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022CPU_MODEL:$cpu_model\u0022\necho \u0022GPU:$gpu_info\u0022\necho \u0022LAST:$last_output\u0022\necho \u0022FILTER:$filter_output\u0022",
+          "Response": "UNAME:Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64 GNU/Linux\r\nARCH:x86_64\r\nUPTIME:14922454.32 29844908.64\r\nCPUS:2\r\nCPU_MODEL:Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\nGPU:00:02.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]\r\nLAST:root     pts/0        203.0.113.42     Tue Jun 18 09:41   still logged in\r\nremote   pts/1        198.51.100.17    Tue Jun 18 08:12 - 08:47  (00:35)\r\nsecretOps pts/2        10.10.4.23       Mon Jun 17 22:03 - 23:18  (01:15)\r\n\r\nwtmp begins Tue Jan  2 14:22:18 2024\r\nFILTER:===SHELL_BEHAVIOR===\r\npath_err=bash: ./xxxxxx: No such file or directory\r\ncmd_err=bash: line 1: xxxxxx: command not found\r\nexecute_err=xxxxxx\r\n===DONE===",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:10.4615352Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "341bf34d-4b3f-46c9-9810-f191a541e973",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 1.337855
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:17.5324364Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "2538fc4f-e303-4cdc-917d-3512fab6a040",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 8.4087565,
+          "TimeToCompromiseMs": 8408
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:17.5330383Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "2538fc4f-e303-4cdc-917d-3512fab6a040",
+        "ExchangeId": "713092dc99be4b39:000002",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u002721\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u002721\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 141,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:17.539703Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "2538fc4f-e303-4cdc-917d-3512fab6a040",
+        "ExchangeId": "713092dc99be4b39:000002",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u002721\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u002721\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "Response": "sudo: 3 incorrect password attempts.",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.29
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:17.5415897Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "2538fc4f-e303-4cdc-917d-3512fab6a040",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 8.4179095
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:24.5067088Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "a764ea50-c2de-4be7-8ce9-feff867f7a2d",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 15.3830288,
+          "TimeToCompromiseMs": 15383
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:24.5072545Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "a764ea50-c2de-4be7-8ce9-feff867f7a2d",
+        "ExchangeId": "713092dc99be4b39:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u002721\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u002721\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 141,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:24.5140488Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "a764ea50-c2de-4be7-8ce9-feff867f7a2d",
+        "ExchangeId": "713092dc99be4b39:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u002721\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u002721\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "Response": "sudo: 3 incorrect password attempts.",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.72
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:48:24.5143363Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "a764ea50-c2de-4be7-8ce9-feff867f7a2d",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "Username": "admin",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 15.3906561
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:49:00.630263Z",
+        "Event": "session_end",
+        "Sequence": 15,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:55622",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 51.5065828
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 1326,
+    "CommandCount": 3,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "341bf34d-4b3f-46c9-9810-f191a541e973",
+        "ExchangeId": "713092dc99be4b39:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ncpu_model=$( { lscpu 2\u003E/dev/null | awk -F: \u0027/Model name/ {print $2}\u0027; grep -m1 -E \u0022^model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; grep -m1 -E \u0022^Hardware\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d: -f2-; cat /proc/device-tree/model 2\u003E/dev/null; } | sed \u0027/^$/d; /unknown/d; s/^[[:space:]]*//; s/[[:space:]]*$//; s/ AArch64 Processor$//; s/ Processor$//; s/ CPU$//\u0027 | head -1 )\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\nlast_output=$(last 2\u003E/dev/null)\nfilter_output=$( ( export LANG=C LC_ALL=C; echo \u0027===SHELL_BEHAVIOR===\u0027; printf \u0027path_err=\u0027; ( ./xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027cmd_err=\u0027; ( xxxxxx 2\u003E\u00261 || true ) | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; printf \u0027execute_err=\u0027; out=$(bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(/usr/bin/bash -c \u0027printf \u0022#!/bin/bash\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); case \u0022$out\u0022 in *xxxxxx*) ;; *) out=$(busybox sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261 || sh -c \u0027printf \u0022#!/bin/sh\\necho \\\u0022xxxxxx\\\u0022\\n\u0022 \u003E filter \u0026\u0026 chmod \u002Bx filter \u0026\u0026 ./filter \u0026\u0026 rm -rf filter\u0027 2\u003E\u00261); esac; esac; esac; printf \u0027%s\u0027 \u0022$out\u0022 | ( head -c 250 2\u003E/dev/null || busybox head -c 250 2\u003E/dev/null || dd bs=250 count=1 2\u003E/dev/null ) | ( tr -d \u0027\\n\u0027 2\u003E/dev/null || busybox tr -d \u0027\\n\u0027 2\u003E/dev/null || cat ); printf \u0027\\n\u0027; echo \u0027===DONE===\u0027 ) 2\u003E\u00261 )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022CPU_MODEL:$cpu_model\u0022\necho \u0022GPU:$gpu_info\u0022\necho \u0022LAST:$last_output\u0022\necho \u0022FILTER:$filter_output\u0022",
+        "Timestamp": "2026-09-25T01:48:10.4528321Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 918,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T01:48:10.4600097Z",
+        "Response": "UNAME:Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64 GNU/Linux\r\nARCH:x86_64\r\nUPTIME:14922454.32 29844908.64\r\nCPUS:2\r\nCPU_MODEL:Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\nGPU:00:02.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] RS780M [Radeon HD 3200 Graphics]\r\nLAST:root     pts/0        203.0.113.42     Tue Jun 18 09:41   still logged in\r\nremote   pts/1        198.51.100.17    Tue Jun 18 08:12 - 08:47  (00:35)\r\nsecretOps pts/2        10.10.4.23       Mon Jun 17 22:03 - 23:18  (01:15)\r\n\r\nwtmp begins Tue Jan  2 14:22:18 2024\r\nFILTER:===SHELL_BEHAVIOR===\r\npath_err=bash: ./xxxxxx: No such file or directory\r\ncmd_err=bash: line 1: xxxxxx: command not found\r\nexecute_err=xxxxxx\r\n===DONE===",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "2538fc4f-e303-4cdc-917d-3512fab6a040",
+        "ExchangeId": "713092dc99be4b39:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "echo \u002721\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u002721\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+        "Timestamp": "2026-09-25T01:48:17.5330383Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 141,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T01:48:17.539703Z",
+        "Response": "sudo: 3 incorrect password attempts.",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.29,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "a764ea50-c2de-4be7-8ce9-feff867f7a2d",
+        "ExchangeId": "713092dc99be4b39:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "echo \u002721\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u002721\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+        "Timestamp": "2026-09-25T01:48:24.5072545Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 141,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T01:48:24.5140488Z",
+        "Response": "sudo: 3 incorrect password attempts.",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.72,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 26
+  },
+  {
+    "SessionId": "8c934658eb184217",
+    "StartedAt": "2026-09-25T01:46:32.5215484Z",
+    "EndedAt": "2026-09-25T01:47:25.4706548Z",
+    "DurationSeconds": 52.95,
     "RemoteEndpoint": "195.178.110.228:52636",
     "RemoteIp": "195.178.110.228",
     "Username": "admin",
@@ -250,6 +4260,18 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ExecCompleted",
           "DurationSeconds": 16.0027868
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T01:47:25.4706548Z",
+        "Event": "session_end",
+        "Sequence": 15,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:52636",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 52.9491066
         }
       }
     ],

@@ -1,5 +1,144 @@
 [
   {
+    "SessionId": "7f4fbc648c294475",
+    "StartedAt": "2026-09-25T11:33:49.6659286Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "195.178.110.218:38564",
+    "RemoteIp": "195.178.110.218",
+    "Username": "ubuntu",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubuntu",
+        "Password": "qwer1234",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 98,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T11:33:50.0752826Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-09-25T11:33:49.6659286Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:38564",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T11:33:50.0752826Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:38564",
+          "Username": "ubuntu",
+          "AuthMethod": "password",
+          "Password": "qwer1234",
+          "ConnectionAttemptNumber": 98,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T11:33:50.2792604Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "2306605f-b568-4313-9e32-70bb75aeecab",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:38564",
+          "Username": "ubuntu",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 0.613332,
+          "TimeToCompromiseMs": 613
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T11:33:50.2824869Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "2306605f-b568-4313-9e32-70bb75aeecab",
+        "ExchangeId": "7f4fbc648c294475:000001",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:38564",
+          "Username": "ubuntu",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/bin/./uname -s -v -n -r -m",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 613,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "2306605f-b568-4313-9e32-70bb75aeecab",
+        "ExchangeId": "7f4fbc648c294475:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-09-25T11:33:50.2824869Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": false,
+        "ResponseTimestamp": null,
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "f72dc83831b94b91",
     "StartedAt": "2026-09-25T11:32:13.0156211Z",
     "EndedAt": "2026-09-25T11:32:53.2647051Z",

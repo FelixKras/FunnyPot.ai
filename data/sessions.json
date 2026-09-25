@@ -188,11 +188,79 @@
           "State": "ExecCompleted",
           "DurationSeconds": 7.7571371
         }
+      },
+      {
+        "Timestamp": "2026-09-25T09:36:55.67314Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "0923c38c-44c9-4867-8ab2-7135d2e546e7",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:42834",
+          "Username": "ubuntu",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 15.2565426,
+          "TimeToCompromiseMs": 15256
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:36:55.677764Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "0923c38c-44c9-4867-8ab2-7135d2e546e7",
+        "ExchangeId": "e22762ecf4c44be6:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:42834",
+          "Username": "ubuntu",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 14,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:36:55.6915537Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "0923c38c-44c9-4867-8ab2-7135d2e546e7",
+        "ExchangeId": "e22762ecf4c44be6:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:42834",
+          "Username": "ubuntu",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+          "Response": "ASPEED Technology, Inc. ASPEED Graphics Family",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 11,
+          "TuringMultiplier": 1.47
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T09:36:55.6956707Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "0923c38c-44c9-4867-8ab2-7135d2e546e7",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.218:42834",
+          "Username": "ubuntu",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 15.2790722
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 484,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -273,6 +341,45 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "0923c38c-44c9-4867-8ab2-7135d2e546e7",
+        "ExchangeId": "e22762ecf4c44be6:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
+        "Timestamp": "2026-09-25T09:36:55.677764Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 14,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-09-25T09:36:55.6915537Z",
+        "Response": "ASPEED Technology, Inc. ASPEED Graphics Family",
+        "ResponseDurationMs": 11,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.47,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -281,7 +388,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "089aca20146240e1",

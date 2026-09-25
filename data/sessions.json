@@ -2,15 +2,43 @@
   {
     "SessionId": "7d4a4e80e4254ebe",
     "StartedAt": "2026-09-25T08:11:25.8996148Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T08:12:06.6053711Z",
+    "DurationSeconds": 40.71,
     "RemoteEndpoint": "193.46.255.86:12988",
     "RemoteIp": "193.46.255.86",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "admin",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T08:11:26.2917524Z"
+      },
+      {
+        "Username": "admin",
+        "Password": "ruijie@123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T08:11:31.1718332Z"
+      },
+      {
+        "Username": "admin",
+        "Password": "theboss",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T08:11:31.2547461Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T08:11:25.8996148Z",
@@ -22,6 +50,60 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-09-25T08:11:26.2917524Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "admin",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:11:31.1718332Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "ruijie@123",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:11:31.2547461Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "theboss",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T08:12:06.6053711Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:12988",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 40.7057571
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +113,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "c3e741ac56044d76",

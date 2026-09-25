@@ -2,15 +2,43 @@
   {
     "SessionId": "c23a43ba108546ab",
     "StartedAt": "2026-09-25T06:31:14.172765Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T06:31:54.3609429Z",
+    "DurationSeconds": 40.19,
     "RemoteEndpoint": "2.57.121.112:30874",
     "RemoteIp": "2.57.121.112",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "octavius",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "octavius",
+        "Password": "octavius",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:31:14.5282345Z"
+      },
+      {
+        "Username": "octavius",
+        "Password": "octavius1",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T06:31:19.0267238Z"
+      },
+      {
+        "Username": "octavius",
+        "Password": "octavius123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-09-25T06:31:19.111526Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T06:31:14.172765Z",
@@ -22,6 +50,60 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:14.5282345Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "Username": "octavius",
+          "AuthMethod": "password",
+          "Password": "octavius",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:19.0267238Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "Username": "octavius",
+          "AuthMethod": "password",
+          "Password": "octavius1",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:19.111526Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "Username": "octavius",
+          "AuthMethod": "password",
+          "Password": "octavius123",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T06:31:54.3609429Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:30874",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 40.1881781
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +113,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "a3ced738c2944708",

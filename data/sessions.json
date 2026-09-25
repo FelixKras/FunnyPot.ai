@@ -2,15 +2,25 @@
   {
     "SessionId": "a72a38d4e022483e",
     "StartedAt": "2026-09-25T21:32:14.4324629Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-09-25T21:32:54.0582633Z",
+    "DurationSeconds": 39.63,
     "RemoteEndpoint": "5.188.95.19:37414",
     "RemoteIp": "5.188.95.19",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "Xpon@Olt9417#",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-09-25T21:32:19.8097484Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-09-25T21:32:14.4324629Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T21:32:19.8097484Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "5.188.95.19:37414",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "Xpon@Olt9417#",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-09-25T21:32:54.0582633Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "5.188.95.19:37414",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 39.6258006
         }
       }
     ],

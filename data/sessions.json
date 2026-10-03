@@ -1,5 +1,224 @@
 [
   {
+    "SessionId": "142edea846984857",
+    "StartedAt": "2026-10-03T11:46:31.5332007Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "84.12.127.189:50928",
+    "RemoteIp": "84.12.127.189",
+    "Username": "ftpuser",
+    "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ftpuser",
+        "Password": "test",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-03T11:46:33.8110104Z"
+      },
+      {
+        "Username": "ftpuser",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-03T11:46:34.0497532Z"
+      },
+      {
+        "Username": "ftpuser",
+        "Password": "ubuntu",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-03T11:46:34.3216675Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-03T11:46:31.5332007Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:33.8110104Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "AuthMethod": "password",
+          "Password": "test",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:34.0497532Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:34.3216675Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "AuthMethod": "password",
+          "Password": "ubuntu",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:34.8844535Z",
+        "Event": "shell_session_start",
+        "Sequence": 5,
+        "ChannelId": "5e240e43-ea38-4370-874e-5c5a7542a3c2",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 3.3513138,
+          "TimeToCompromiseMs": 3351
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:34.902102Z",
+        "Event": "command",
+        "Sequence": 6,
+        "ChannelId": "5e240e43-ea38-4370-874e-5c5a7542a3c2",
+        "ExchangeId": "142edea846984857:000001",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/ip cloud print",
+          "ActorAutomationHint": "unknown",
+          "ReconnaissanceProbe": "mikrotik_routeros_probe",
+          "SemanticComplexity": 3,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Reconnaissance"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:34.9327018Z",
+        "Event": "command_result",
+        "Sequence": 7,
+        "ChannelId": "5e240e43-ea38-4370-874e-5c5a7542a3c2",
+        "ExchangeId": "142edea846984857:000001",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/ip cloud print",
+          "Response": "bash: /ip: No such file or directory",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 6,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:34.9372813Z",
+        "Event": "shell_session_end",
+        "Sequence": 8,
+        "ChannelId": "5e240e43-ea38-4370-874e-5c5a7542a3c2",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 3.4040824
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 3351,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 6,
+        "ChannelId": "5e240e43-ea38-4370-874e-5c5a7542a3c2",
+        "ExchangeId": "142edea846984857:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "/ip cloud print",
+        "Timestamp": "2026-10-03T11:46:34.902102Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "mikrotik_routeros_probe",
+        "SemanticComplexity": 3,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-03T11:46:34.9327018Z",
+        "Response": "bash: /ip: No such file or directory",
+        "ResponseDurationMs": 6,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Reconnaissance"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Reconnaissance"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "7c42239fef4e412b",
     "StartedAt": "2026-10-03T11:45:47.2152851Z",
     "EndedAt": "2026-10-03T11:45:47.5681062Z",
@@ -247115,52 +247334,6 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "Disconnected",
           "DurationSeconds": 2.7023815
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "192dc1c30cfd47e3",
-    "StartedAt": "2026-09-01T10:25:52.9635464Z",
-    "EndedAt": "2026-09-01T10:25:54.2903408Z",
-    "DurationSeconds": 1.33,
-    "RemoteEndpoint": "95.153.108.140:41898",
-    "RemoteIp": "95.153.108.140",
-    "Username": "unknown",
-    "ClientVersion": "unknown",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-01T10:25:52.9635464Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "95.153.108.140:41898",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-01T10:25:54.2903408Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "95.153.108.140:41898",
-          "ClientVersion": "unknown",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 1.3267945
         }
       }
     ],

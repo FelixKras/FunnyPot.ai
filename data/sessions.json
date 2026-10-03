@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "070b8578f7d544aa",
+    "StartedAt": "2026-10-03T16:52:17.0285714Z",
+    "EndedAt": "2026-10-03T16:52:52.8415708Z",
+    "DurationSeconds": 35.81,
+    "RemoteEndpoint": "193.46.255.86:21392",
+    "RemoteIp": "193.46.255.86",
+    "Username": "ubnt",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ubnt",
+        "Password": "ubnt",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 5,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-03T16:52:17.3807163Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-03T16:52:17.0285714Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:21392",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T16:52:17.3807163Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:21392",
+          "Username": "ubnt",
+          "AuthMethod": "password",
+          "Password": "ubnt",
+          "ConnectionAttemptNumber": 5,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T16:52:52.8415708Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:21392",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 35.8129997
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
     "SessionId": "a57f40838e61402b",
     "StartedAt": "2026-10-03T16:51:23.5041585Z",
     "EndedAt": "2026-10-03T16:51:23.5500143Z",
@@ -248846,75 +248916,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 10
-  },
-  {
-    "SessionId": "d8c8de87f6ff41a6",
-    "StartedAt": "2026-09-04T06:59:52.5063767Z",
-    "EndedAt": "2026-09-04T07:00:26.4863082Z",
-    "DurationSeconds": 33.98,
-    "RemoteEndpoint": "118.121.203.170:37942",
-    "RemoteIp": "118.121.203.170",
-    "Username": "root",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [
-      {
-        "Username": "root",
-        "Password": "kusa",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 2,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-09-04T06:59:55.8367832Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-04T06:59:52.5063767Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "118.121.203.170:37942",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-04T06:59:55.8367832Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "118.121.203.170:37942",
-          "Username": "root",
-          "AuthMethod": "password",
-          "Password": "kusa",
-          "ConnectionAttemptNumber": 2,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-09-04T07:00:26.4863082Z",
-        "Event": "session_end",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "118.121.203.170:37942",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "Disconnected",
-          "DurationSeconds": 33.9799318
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
   }
 ]

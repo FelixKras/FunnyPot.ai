@@ -2,15 +2,25 @@
   {
     "SessionId": "1e9d8cead2554f86",
     "StartedAt": "2026-10-03T23:55:23.7383223Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-03T23:56:00.0950121Z",
+    "DurationSeconds": 36.36,
     "RemoteEndpoint": "179.190.192.46:37216",
     "RemoteIp": "179.190.192.46",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "admin",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-03T23:55:26.0529255Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-03T23:55:23.7383223Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T23:55:26.0529255Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "179.190.192.46:37216",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "admin",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T23:56:00.0950121Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "179.190.192.46:37216",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 36.35669
         }
       }
     ],

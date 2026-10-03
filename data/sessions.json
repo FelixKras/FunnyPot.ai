@@ -2,16 +2,37 @@
   {
     "SessionId": "f355d5fab7f94949",
     "StartedAt": "2026-10-03T08:41:24.5513302Z",
-    "EndedAt": null,
+    "EndedAt": "2026-10-03T08:40:00.5396771Z",
     "DurationSeconds": 0,
     "RemoteEndpoint": "116.110.210.128:42644",
     "RemoteIp": "116.110.210.128",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-AsyncSSH_2.1.0",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-03T08:41:25.767085Z"
+      }
+    ],
     "Timeline": [
+      {
+        "Timestamp": "2026-10-03T08:40:00.5396771Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "116.110.210.128:42644",
+          "ClientVersion": "SSH-2.0-AsyncSSH_2.1.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected"
+        }
+      },
       {
         "Timestamp": "2026-10-03T08:41:24.5513302Z",
         "Event": "session_start",
@@ -21,6 +42,20 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T08:41:25.767085Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "116.110.210.128:42644",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
         }
       }
     ],

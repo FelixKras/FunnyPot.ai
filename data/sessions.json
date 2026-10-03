@@ -2,15 +2,25 @@
   {
     "SessionId": "ae97439d289544b8",
     "StartedAt": "2026-10-03T12:23:31.0957987Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-03T12:24:07.1679333Z",
+    "DurationSeconds": 36.07,
     "RemoteEndpoint": "77.90.185.17:60858",
     "RemoteIp": "77.90.185.17",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-OpenSSH_8.4p1 Debian-5\u002Bdeb11u3",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "supportAtlanta",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-03T12:23:31.7488237Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-03T12:23:31.0957987Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T12:23:31.7488237Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.17:60858",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "supportAtlanta",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T12:24:07.1679333Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.17:60858",
+          "ClientVersion": "SSH-2.0-OpenSSH_8.4p1 Debian-5\u002Bdeb11u3",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 36.0724996
         }
       }
     ],

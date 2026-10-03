@@ -234,11 +234,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 12.4738896
         }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:52.6465551Z",
+        "Event": "shell_session_start",
+        "Sequence": 13,
+        "ChannelId": "c2c2bb72-8a40-4196-8a5c-a17416337c85",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 21.1133572,
+          "TimeToCompromiseMs": 21113
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:52.6496448Z",
+        "Event": "command",
+        "Sequence": 14,
+        "ChannelId": "c2c2bb72-8a40-4196-8a5c-a17416337c85",
+        "ExchangeId": "142edea846984857:000003",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:52.6512985Z",
+        "Event": "command_result",
+        "Sequence": 15,
+        "ChannelId": "c2c2bb72-8a40-4196-8a5c-a17416337c85",
+        "ExchangeId": "142edea846984857:000003",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.57
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:46:52.6528008Z",
+        "Event": "shell_session_end",
+        "Sequence": 16,
+        "ChannelId": "c2c2bb72-8a40-4196-8a5c-a17416337c85",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 21.1196022
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 3351,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 6,
@@ -319,6 +389,46 @@
         ],
         "MitreTechnique": "T1016 System Network Configuration",
         "InferredObjective": "Map local network interfaces, subnets, and default gateway routing"
+      },
+      {
+        "Sequence": 14,
+        "ChannelId": "c2c2bb72-8a40-4196-8a5c-a17416337c85",
+        "ExchangeId": "142edea846984857:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-10-03T11:46:52.6496448Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-03T11:46:52.6512985Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.57,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
       }
     ],
     "TacticsObserved": [
@@ -328,7 +438,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 44
+    "RiskScore": 46
   },
   {
     "SessionId": "7c42239fef4e412b",

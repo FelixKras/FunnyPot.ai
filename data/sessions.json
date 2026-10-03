@@ -371,11 +371,82 @@
           "State": "ExecCompleted",
           "DurationSeconds": 30.0080967
         }
+      },
+      {
+        "Timestamp": "2026-10-03T11:47:10.6510458Z",
+        "Event": "shell_session_start",
+        "Sequence": 21,
+        "ChannelId": "a8103143-5f5f-428f-9149-33938b3649c0",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 39.117848,
+          "TimeToCompromiseMs": 39117
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:47:10.6514511Z",
+        "Event": "command",
+        "Sequence": 22,
+        "ChannelId": "a8103143-5f5f-428f-9149-33938b3649c0",
+        "ExchangeId": "142edea846984857:000005",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "ps | grep \u0027[Mm]iner\u0027",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:47:10.6562417Z",
+        "Event": "command_result",
+        "Sequence": 23,
+        "ChannelId": "a8103143-5f5f-428f-9149-33938b3649c0",
+        "ExchangeId": "142edea846984857:000005",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "ps | grep \u0027[Mm]iner\u0027",
+          "Response": "  1837 ?        S      12:41 /usr/bin/minerd --url=stratum\u002Btcp://pool.example.net:3333 --user=worker01 --pass=x\r\n  2714 ?        S      08:17 /tmp/.cache/cpuminer -o stratum\u002Btcp://pool.example.net:3333 -u worker01",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.61
+        }
+      },
+      {
+        "Timestamp": "2026-10-03T11:47:10.657683Z",
+        "Event": "shell_session_end",
+        "Sequence": 24,
+        "ChannelId": "a8103143-5f5f-428f-9149-33938b3649c0",
+        "Data": {
+          "RemoteEndpoint": "84.12.127.189:50928",
+          "Username": "ftpuser",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 39.1244845
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 3351,
-    "CommandCount": 4,
+    "CommandCount": 5,
     "Commands": [
       {
         "Sequence": 6,
@@ -535,6 +606,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 22,
+        "ChannelId": "a8103143-5f5f-428f-9149-33938b3649c0",
+        "ExchangeId": "142edea846984857:000005",
+        "MessageNumber": 5,
+        "ShellMessageNumber": 1,
+        "Command": "ps | grep \u0027[Mm]iner\u0027",
+        "Timestamp": "2026-10-03T11:47:10.6514511Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-03T11:47:10.6562417Z",
+        "Response": "  1837 ?        S      12:41 /usr/bin/minerd --url=stratum\u002Btcp://pool.example.net:3333 --user=worker01 --pass=x\r\n  2714 ?        S      08:17 /tmp/.cache/cpuminer -o stratum\u002Btcp://pool.example.net:3333 -u worker01",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.61,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
       }
     ],
     "TacticsObserved": [
@@ -544,7 +655,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 48
+    "RiskScore": 50
   },
   {
     "SessionId": "7c42239fef4e412b",

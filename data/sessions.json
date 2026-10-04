@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "667a453711fb403e",
+    "StartedAt": "2026-10-04T02:20:35.2347113Z",
+    "EndedAt": "2026-10-04T02:21:16.4589541Z",
+    "DurationSeconds": 41.22,
+    "RemoteEndpoint": "2.57.121.25:29572",
+    "RemoteIp": "2.57.121.25",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "bmw320",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 14,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-04T02:20:41.0062802Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-04T02:20:35.2347113Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:29572",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T02:20:41.0062802Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:29572",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "bmw320",
+          "ConnectionAttemptNumber": 14,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T02:21:16.4589541Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:29572",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 41.2242429
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
     "SessionId": "abde241969294d2b",
     "StartedAt": "2026-10-04T02:20:31.7917866Z",
     "EndedAt": "2026-10-04T02:20:35.0471534Z",
@@ -242345,52 +242415,6 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "Disconnected",
           "DurationSeconds": 1.6531803
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "3c33bb2dd1324381",
-    "StartedAt": "2026-09-04T10:52:23.072745Z",
-    "EndedAt": "2026-09-04T10:52:24.1804052Z",
-    "DurationSeconds": 1.11,
-    "RemoteEndpoint": "36.64.33.82:47708",
-    "RemoteIp": "36.64.33.82",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-OpenSSH_7.4",
-    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-04T10:52:23.072745Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "36.64.33.82:47708",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-04T10:52:24.1804052Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "36.64.33.82:47708",
-          "ClientVersion": "SSH-2.0-OpenSSH_7.4",
-          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-          "State": "Disconnected",
-          "DurationSeconds": 1.1076604
         }
       }
     ],

@@ -2,15 +2,25 @@
   {
     "SessionId": "9724a710c44f469e",
     "StartedAt": "2026-10-04T03:36:20.1817963Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-04T03:37:01.4589773Z",
+    "DurationSeconds": 41.28,
     "RemoteEndpoint": "193.46.255.86:36978",
     "RemoteIp": "193.46.255.86",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "abcd1234",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 13,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-04T03:36:20.5545388Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-04T03:36:20.1817963Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-04T03:36:20.5545388Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:36978",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "abcd1234",
+          "ConnectionAttemptNumber": 13,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T03:37:01.4589773Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:36978",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 41.2771814
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "183b4e335a9648cd",

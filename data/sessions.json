@@ -2,15 +2,25 @@
   {
     "SessionId": "d6c276377df9466d",
     "StartedAt": "2026-10-04T00:18:09.512695Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-04T00:18:45.8929764Z",
+    "DurationSeconds": 36.38,
     "RemoteEndpoint": "119.158.183.191:44729",
     "RemoteIp": "119.158.183.191",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "user",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "user",
+        "Password": "user",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-04T00:18:11.77986Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-04T00:18:09.512695Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T00:18:11.77986Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "119.158.183.191:44729",
+          "Username": "user",
+          "AuthMethod": "password",
+          "Password": "user",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T00:18:45.8929764Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "119.158.183.191:44729",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 36.3802817
         }
       }
     ],

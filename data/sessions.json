@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "23d972476ffc46ce",
+    "StartedAt": "2026-10-04T01:01:19.9366299Z",
+    "EndedAt": "2026-10-04T01:01:53.5739854Z",
+    "DurationSeconds": 33.64,
+    "RemoteEndpoint": "61.83.177.88:49556",
+    "RemoteIp": "61.83.177.88",
+    "Username": "telecomadmin",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "telecomadmin",
+        "Password": "admintelecom",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-04T01:01:22.7236196Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-04T01:01:19.9366299Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "61.83.177.88:49556",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T01:01:22.7236196Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "61.83.177.88:49556",
+          "Username": "telecomadmin",
+          "AuthMethod": "password",
+          "Password": "admintelecom",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T01:01:53.5739854Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "61.83.177.88:49556",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 33.6373557
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "cf7efc8bc88e4209",
     "StartedAt": "2026-10-04T00:58:39.9297307Z",
     "EndedAt": "2026-10-04T00:59:15.8302832Z",
@@ -247125,51 +247195,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 26
-  },
-  {
-    "SessionId": "2d88876e683e4a09",
-    "StartedAt": "2026-09-04T10:32:11.7444337Z",
-    "EndedAt": "2026-09-04T10:32:12.583247Z",
-    "DurationSeconds": 0.84,
-    "RemoteEndpoint": "65.20.143.19:49308",
-    "RemoteIp": "65.20.143.19",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-OpenSSH_7.4",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-04T10:32:11.7444337Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "65.20.143.19:49308",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-04T10:32:12.583247Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "65.20.143.19:49308",
-          "ClientVersion": "SSH-2.0-OpenSSH_7.4",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 0.8388134
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
   }
 ]

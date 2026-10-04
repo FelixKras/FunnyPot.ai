@@ -2,15 +2,25 @@
   {
     "SessionId": "78038ed688584f00",
     "StartedAt": "2026-10-04T00:25:38.52694Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-04T00:26:15.0942608Z",
+    "DurationSeconds": 36.57,
     "RemoteEndpoint": "118.45.146.238:43392",
     "RemoteIp": "118.45.146.238",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "Xpon@Olt9417#",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-04T00:25:41.4306368Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-04T00:25:38.52694Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T00:25:41.4306368Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "118.45.146.238:43392",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "Xpon@Olt9417#",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T00:26:15.0942608Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "118.45.146.238:43392",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 36.567321
         }
       }
     ],

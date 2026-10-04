@@ -2,15 +2,25 @@
   {
     "SessionId": "70de96e30c074a2d",
     "StartedAt": "2026-10-04T00:32:47.9309683Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-04T00:33:23.9465612Z",
+    "DurationSeconds": 36.02,
     "RemoteEndpoint": "41.249.134.34:57094",
     "RemoteIp": "41.249.134.34",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "ubnt",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "ubnt",
+        "Password": "ubnt",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-04T00:32:48.7025913Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-04T00:32:47.9309683Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T00:32:48.7025913Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "41.249.134.34:57094",
+          "Username": "ubnt",
+          "AuthMethod": "password",
+          "Password": "ubnt",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-04T00:33:23.9465612Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "41.249.134.34:57094",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 36.015593
         }
       }
     ],

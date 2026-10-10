@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "183ccce89e4249ed",
+    "StartedAt": "2026-10-10T22:21:20.4387115Z",
+    "EndedAt": "2026-10-10T22:21:23.6593587Z",
+    "DurationSeconds": 3.22,
+    "RemoteEndpoint": "154.18.197.29:50914",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T22:21:20.4387115Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:50914",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T22:21:23.6593587Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:50914",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 3.2206474
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "7a3d399eae11434f",
     "StartedAt": "2026-10-10T22:21:07.5882679Z",
     "EndedAt": "2026-10-10T22:21:10.7075567Z",
@@ -224070,114 +224116,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 10
-  },
-  {
-    "SessionId": "ac4ea21d294649c0",
-    "StartedAt": "2026-09-09T13:11:51.2922641Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
-    "RemoteEndpoint": "102.220.160.191:46720",
-    "RemoteIp": "102.220.160.191",
-    "Username": "root",
-    "ClientVersion": "pending",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "root",
-        "Password": "P@ssw0rd",
-        "AuthMethod": "",
-        "ConnectionAttemptNumber": 0,
-        "Accepted": true,
-        "AcceptanceReason": "",
-        "Timestamp": "2026-09-09T13:11:52.0833383Z"
-      }
-    ],
-    "Timeline": [],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 8898,
-    "CommandCount": 2,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": null,
-        "ExchangeId": "ac4ea21d294649c0:000001",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "c1=$(uname -s -v -n -r 2\u003E/dev/null); c1=${c1:-Unknown}; c2=$(grep \u0022model name\u0022 /proc/cpuinfo 2\u003E/dev/null | cut -d \u0027 \u0027 -f3- | awk \u0027{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10}\u0027 | head -1); c2=${c2:-Unknown}; c3=$(nproc --all 2\u003E/dev/null); c3=${c3:-Unknown}; echo \u0022$c1|$c2|$c3\u0022",
-        "Timestamp": "2026-09-09T13:11:52.6159911Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "GNU/Linux omegablack #1 SMP Mon Jan 16 16:22:28 UTC 2012 2.6.32-5-amd64|Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz|2",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1082 System Information Discovery",
-        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
-      },
-      {
-        "Sequence": 8,
-        "ChannelId": null,
-        "ExchangeId": "ac4ea21d294649c0:000002",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "printf \u0027%s\\n%s\\n\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 | passwd || printf \u0027%s\\n%s\\n%s\\n\u0027 \u0027P@ssw0rd\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 \u0027otG@O8!#Iz7qlF5L\u0027 | passwd",
-        "Timestamp": "2026-09-09T13:12:00.1924472Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "Changing password for root.\r\nCurrent password: New password: Retype new password: passwd: Authentication token manipulation error",
-        "ResponseDurationMs": 2048,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "llm",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1087.001 Local Accounts",
-        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 24
   }
 ]

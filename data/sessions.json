@@ -1,5 +1,177 @@
 [
   {
+    "SessionId": "e5df7b6fe7a84710",
+    "StartedAt": "2026-10-10T14:18:39.2710408Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "221.207.55.165:54892",
+    "RemoteIp": "221.207.55.165",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "1qaz@WSX",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 6,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-10T14:18:45.7672503Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T14:18:39.2710408Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:54892",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:18:45.7672503Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:54892",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "1qaz@WSX",
+          "ConnectionAttemptNumber": 6,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:18:46.2540251Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "16ed3acc-20b8-4ece-9b95-160ff12c6889",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:54892",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 6.9829865,
+          "TimeToCompromiseMs": 6982
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:18:46.2578146Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "16ed3acc-20b8-4ece-9b95-160ff12c6889",
+        "ExchangeId": "e5df7b6fe7a84710:000001",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:54892",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:18:46.2606139Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "16ed3acc-20b8-4ece-9b95-160ff12c6889",
+        "ExchangeId": "e5df7b6fe7a84710:000001",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:54892",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:18:46.2628767Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "16ed3acc-20b8-4ece-9b95-160ff12c6889",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:54892",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 6.9918368
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 6982,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "16ed3acc-20b8-4ece-9b95-160ff12c6889",
+        "ExchangeId": "e5df7b6fe7a84710:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-10-10T14:18:46.2578146Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T14:18:46.2606139Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "56440114d42a42e6",
     "StartedAt": "2026-10-10T14:18:08.720272Z",
     "EndedAt": "2026-10-10T14:18:38.7218298Z",
@@ -248692,27 +248864,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 10
-  },
-  {
-    "SessionId": "74afb14d74fc4b23",
-    "StartedAt": "2026-09-07T16:26:40.7123365Z",
-    "EndedAt": "2026-09-07T16:26:40.7129607Z",
-    "DurationSeconds": 0,
-    "RemoteEndpoint": "181.91.86.247:1069",
-    "RemoteIp": "181.91.86.247",
-    "Username": "unknown",
-    "ClientVersion": "pending",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
   }
 ]

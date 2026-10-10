@@ -608,11 +608,80 @@
           "State": "ExecCompleted",
           "DurationSeconds": 68.5741935
         }
+      },
+      {
+        "Timestamp": "2026-10-10T16:07:42.5575373Z",
+        "Event": "shell_session_start",
+        "Sequence": 35,
+        "ChannelId": "7e3a88ac-0ade-4e6a-b469-cf4997afe9cb",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 77.3428336,
+          "TimeToCompromiseMs": 77342
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:07:42.5719787Z",
+        "Event": "command",
+        "Sequence": 36,
+        "ChannelId": "7e3a88ac-0ade-4e6a-b469-cf4997afe9cb",
+        "ExchangeId": "38ab171ab04240f8:000009",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "MessageNumber": 9,
+          "ShellMessageNumber": 1,
+          "Command": "cd /dev/shm || cd /tmp || cd /var/run || cd /mnt || cd /root || cd / \u0026\u0026 cat \u003E netai",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 45,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:07:42.578901Z",
+        "Event": "command_result",
+        "Sequence": 37,
+        "ChannelId": "7e3a88ac-0ade-4e6a-b469-cf4997afe9cb",
+        "ExchangeId": "38ab171ab04240f8:000009",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "MessageNumber": 9,
+          "ShellMessageNumber": 1,
+          "Command": "cd /dev/shm || cd /tmp || cd /var/run || cd /mnt || cd /root || cd / \u0026\u0026 cat \u003E netai",
+          "Response": "cat: netai: Permission denied",
+          "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.95
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:07:42.5811636Z",
+        "Event": "shell_session_end",
+        "Sequence": 38,
+        "ChannelId": "7e3a88ac-0ade-4e6a-b469-cf4997afe9cb",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 77.3664576
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 4444,
-    "CommandCount": 8,
+    "CommandCount": 9,
     "Commands": [
       {
         "Sequence": 4,
@@ -931,6 +1000,45 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 36,
+        "ChannelId": "7e3a88ac-0ade-4e6a-b469-cf4997afe9cb",
+        "ExchangeId": "38ab171ab04240f8:000009",
+        "MessageNumber": 9,
+        "ShellMessageNumber": 1,
+        "Command": "cd /dev/shm || cd /tmp || cd /var/run || cd /mnt || cd /root || cd / \u0026\u0026 cat \u003E netai",
+        "Timestamp": "2026-10-10T16:07:42.5719787Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 45,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T16:07:42.578901Z",
+        "Response": "cat: netai: Permission denied",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.95,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
       }
     ],
     "TacticsObserved": [
@@ -942,7 +1050,7 @@
     "PersistenceVectors": [
       "cron"
     ],
-    "RiskScore": 71
+    "RiskScore": 73
   },
   {
     "SessionId": "36e99669611140e7",

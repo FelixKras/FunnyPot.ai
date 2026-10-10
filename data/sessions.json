@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "b84dfd9a844e45d7",
+    "StartedAt": "2026-10-10T18:22:07.0178799Z",
+    "EndedAt": "2026-10-10T18:22:37.7958541Z",
+    "DurationSeconds": 30.78,
+    "RemoteEndpoint": "77.239.124.130:12166",
+    "RemoteIp": "77.239.124.130",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T18:22:07.0178799Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "77.239.124.130:12166",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T18:22:37.7958541Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.239.124.130:12166",
+          "ClientVersion": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 30.7779744
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "c871442d2d704177",
     "StartedAt": "2026-10-10T18:21:06.9496716Z",
     "EndedAt": "2026-10-10T18:21:45.0557613Z",
@@ -251863,116 +251909,6 @@
         "MitreAttackTechniques": [],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution",
-      "Discovery"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 34
-  },
-  {
-    "SessionId": "e500d82159d441d7",
-    "StartedAt": "2026-09-07T18:17:14.1862845Z",
-    "EndedAt": "2026-09-07T18:17:54.5099664Z",
-    "DurationSeconds": 40.32,
-    "RemoteEndpoint": "195.178.110.218:47636",
-    "RemoteIp": "195.178.110.218",
-    "Username": "validator",
-    "ClientVersion": "pending",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "validator",
-        "Password": "root",
-        "AuthMethod": "",
-        "ConnectionAttemptNumber": 0,
-        "Accepted": true,
-        "AcceptanceReason": "",
-        "Timestamp": "2026-09-07T18:17:14.4899011Z"
-      }
-    ],
-    "Timeline": [],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 10702,
-    "CommandCount": 2,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": null,
-        "ExchangeId": "e500d82159d441d7:000001",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "/bin/./uname -s -v -n -r -m",
-        "Timestamp": "2026-09-07T18:17:14.6358282Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 12,
-        "ChannelId": null,
-        "ExchangeId": "e500d82159d441d7:000003",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
-        "Timestamp": "2026-09-07T18:17:24.8892685Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1083 File and Directory Discovery",
-        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [

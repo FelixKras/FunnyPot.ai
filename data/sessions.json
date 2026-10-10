@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "0a6178103f6b45fc",
+    "StartedAt": "2026-10-10T16:27:50.156126Z",
+    "EndedAt": "2026-10-10T16:28:23.6109323Z",
+    "DurationSeconds": 33.45,
+    "RemoteEndpoint": "121.99.190.167:35153",
+    "RemoteIp": "121.99.190.167",
+    "Username": "ec2-user",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "ec2-user",
+        "Password": "=z9@tu$X@cUtuN\u002B",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-10T16:27:52.7241534Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T16:27:50.156126Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "121.99.190.167:35153",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:27:52.7241534Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "121.99.190.167:35153",
+          "Username": "ec2-user",
+          "AuthMethod": "password",
+          "Password": "=z9@tu$X@cUtuN\u002B",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:28:23.6109323Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "121.99.190.167:35153",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 33.4548065
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "e781c0202fa94be4",
     "StartedAt": "2026-10-10T16:24:45.4191902Z",
     "EndedAt": "2026-10-10T16:24:45.4309531Z",
@@ -253209,115 +253279,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 36
-  },
-  {
-    "SessionId": "736a85d62531428b",
-    "StartedAt": "2026-09-07T17:45:33.9926707Z",
-    "EndedAt": "2026-09-07T17:46:14.2905152Z",
-    "DurationSeconds": 40.3,
-    "RemoteEndpoint": "195.178.110.218:46310",
-    "RemoteIp": "195.178.110.218",
-    "Username": "ubuntu",
-    "ClientVersion": "pending",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "ubuntu",
-        "Password": "qwer1234",
-        "AuthMethod": "",
-        "ConnectionAttemptNumber": 0,
-        "Accepted": true,
-        "AcceptanceReason": "",
-        "Timestamp": "2026-09-07T17:45:34.2783429Z"
-      }
-    ],
-    "Timeline": [],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 10478,
-    "CommandCount": 2,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": null,
-        "ExchangeId": "736a85d62531428b:000001",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "/bin/./uname -s -v -n -r -m",
-        "Timestamp": "2026-09-07T17:45:34.414306Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 8,
-        "ChannelId": null,
-        "ExchangeId": "736a85d62531428b:000002",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "uptime -p",
-        "Timestamp": "2026-09-07T17:45:39.6590132Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1082 System Information Discovery",
-        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution",
-      "Discovery"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 34
   }
 ]

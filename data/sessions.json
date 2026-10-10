@@ -544,11 +544,84 @@
           "State": "ExecCompleted",
           "DurationSeconds": 71.3709204
         }
+      },
+      {
+        "Timestamp": "2026-10-10T15:16:10.0241665Z",
+        "Event": "shell_session_start",
+        "Sequence": 31,
+        "ChannelId": "a038f6fc-c728-427d-ba8e-ab8bfa580605",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 80.4546541,
+          "TimeToCompromiseMs": 80454
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:16:10.0289899Z",
+        "Event": "command",
+        "Sequence": 32,
+        "ChannelId": "a038f6fc-c728-427d-ba8e-ab8bfa580605",
+        "ExchangeId": "921d8895a79c4865:000008",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "ps aux | grep netai | grep -v grep | wc -l",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 18,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:16:10.9897378Z",
+        "Event": "command_result",
+        "Sequence": 33,
+        "ChannelId": "a038f6fc-c728-427d-ba8e-ab8bfa580605",
+        "ExchangeId": "921d8895a79c4865:000008",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "ps aux | grep netai | grep -v grep | wc -l",
+          "Response": "0",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 960,
+          "PromptTokens": 3611,
+          "CompletionTokens": 5,
+          "TuringMultiplier": 1.91
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:16:10.9925001Z",
+        "Event": "shell_session_end",
+        "Sequence": 34,
+        "ChannelId": "a038f6fc-c728-427d-ba8e-ab8bfa580605",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 81.4229845
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 6823,
-    "CommandCount": 7,
+    "CommandCount": 8,
     "Commands": [
       {
         "Sequence": 4,
@@ -828,6 +901,46 @@
         ],
         "MitreTechnique": "T1057 Process Discovery",
         "InferredObjective": "Inspect running processes, background services, and security monitors"
+      },
+      {
+        "Sequence": 32,
+        "ChannelId": "a038f6fc-c728-427d-ba8e-ab8bfa580605",
+        "ExchangeId": "921d8895a79c4865:000008",
+        "MessageNumber": 8,
+        "ShellMessageNumber": 1,
+        "Command": "ps aux | grep netai | grep -v grep | wc -l",
+        "Timestamp": "2026-10-10T15:16:10.0289899Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 18,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T15:16:10.9897378Z",
+        "Response": "0",
+        "ResponseDurationMs": 960,
+        "PromptTokens": 3611,
+        "CompletionTokens": 5,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "llm",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.91,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
       }
     ],
     "TacticsObserved": [
@@ -840,7 +953,7 @@
       "cron",
       "systemd"
     ],
-    "RiskScore": 84
+    "RiskScore": 86
   },
   {
     "SessionId": "608dec10f3b14a63",

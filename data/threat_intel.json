@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-10T15:16:08.2487242Z",
+  "LastUpdated": "2026-10-10T15:16:11.9141402Z",
   "TotalUniqueUsernames": 621,
   "TotalUniquePasswords": 1179,
   "TotalUniqueSourceIps": 1110,
-  "TotalUniqueCommands": 169,
+  "TotalUniqueCommands": 170,
   "Usernames": {
     "root": 4793,
     "admin": 1545,
@@ -2888,7 +2888,7 @@
     "46.36.216.132": 6,
     "188.241.62.230": 3,
     "204.44.140.181": 3,
-    "90.231.215.250": 36,
+    "90.231.215.250": 40,
     "115.20.171.54": 3,
     "179.209.139.1": 3,
     "161.35.20.76": 3,
@@ -3089,6 +3089,7 @@
     "cd \u0022/tmp\u0022 \u0026\u0026 if [ ! -f \u0022w.sh\u0022 ]; then cat \u003E \u0022w.sh\u0022 \u0026\u0026 chmod \u002Bx w.sh; fi": 1,
     "CRON=\u0022$(crontab -l 2\u003E/dev/null || true)\u0022\necho \u0022$CRON\u0022 | grep -F \u0027/tmp/w.sh \u0022astats\u0022 \u0022netai\u0022 \u0022kstats\u0022 \u0022ssh 2 az\u0022\u0027 \u003E/dev/null 2\u003E\u00261 || \\\n  printf \u0027%s\\n%s\\n\u0027 \u0022@reboot  /tmp/w.sh \u0022astats\u0022 \u0022netai\u0022 \u0022kstats\u0022 \u0022ssh 2 az\u0022\u0022 \u00220 * * * * cd \u0022/tmp\u0022 \u0026\u0026 ./w.sh \u0022astats\u0022 \u0022netai\u0022 \u0022kstats\u0022 \u0022ssh 2 az\u0022\u0022 | (cat -; echo \u0022$CRON\u0022) | crontab -": 1,
     "sh -lc \u0027mkdir -p ~/.config/systemd/user \u0026\u0026 cat \u003E ~/.config/systemd/user/watcher-netai.service \u0026\u0026 systemctl --user daemon-reload \u0026\u0026 systemctl --user enable --now watcher-netai.service\u0027": 1,
-    "ps -eo pid,pcpu,comm --sort=-pcpu | head -n 10": 1
+    "ps -eo pid,pcpu,comm --sort=-pcpu | head -n 10": 1,
+    "ps aux | grep netai | grep -v grep | wc -l": 1
   }
 }

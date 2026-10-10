@@ -116,11 +116,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 1.5313088
         }
+      },
+      {
+        "Timestamp": "2026-10-10T14:22:03.7346627Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "a5b3bd50-e5e5-4e0a-9755-f3ba5fa43a5d",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:52132",
+          "Username": "moxa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 10.0801986,
+          "TimeToCompromiseMs": 10080
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:22:03.7484707Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "a5b3bd50-e5e5-4e0a-9755-f3ba5fa43a5d",
+        "ExchangeId": "f2392d64fddd4e23:000002",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:52132",
+          "Username": "moxa",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "cat /etc/passwd",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:22:03.7505261Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "a5b3bd50-e5e5-4e0a-9755-f3ba5fa43a5d",
+        "ExchangeId": "f2392d64fddd4e23:000002",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:52132",
+          "Username": "moxa",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "cat /etc/passwd",
+          "Response": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/bin/sh\nbin:x:2:2:bin:/bin:/bin/sh\nremote:x:1001:1001:,,,:/home/remote:/bin/bash\nsecretOps:x:1002:1002:,,,:/home/secretOps:/bin/bash",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.51
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:22:03.7519878Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "a5b3bd50-e5e5-4e0a-9755-f3ba5fa43a5d",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:52132",
+          "Username": "moxa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 10.0975198
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 1521,
-    "CommandCount": 1,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -161,6 +231,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "a5b3bd50-e5e5-4e0a-9755-f3ba5fa43a5d",
+        "ExchangeId": "f2392d64fddd4e23:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "cat /etc/passwd",
+        "Timestamp": "2026-10-10T14:22:03.7484707Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T14:22:03.7505261Z",
+        "Response": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/bin/sh\nbin:x:2:2:bin:/bin:/bin/sh\nremote:x:1001:1001:,,,:/home/remote:/bin/bash\nsecretOps:x:1002:1002:,,,:/home/secretOps:/bin/bash",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.51,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
       }
     ],
     "TacticsObserved": [
@@ -169,7 +279,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 34
   },
   {
     "SessionId": "e5df7b6fe7a84710",

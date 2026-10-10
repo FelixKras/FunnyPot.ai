@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "edd2ad8cb6fa48cc",
+    "StartedAt": "2026-10-10T23:02:12.4514794Z",
+    "EndedAt": "2026-10-10T23:02:15.8817219Z",
+    "DurationSeconds": 3.43,
+    "RemoteEndpoint": "154.18.197.29:60430",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T23:02:12.4514794Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:60430",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T23:02:15.8817219Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:60430",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 3.4302426
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "9260065eff254d19",
     "StartedAt": "2026-10-10T23:01:59.6884426Z",
     "EndedAt": "2026-10-10T23:02:02.7327051Z",
@@ -217959,115 +218005,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 38
-  },
-  {
-    "SessionId": "140e2648d9ff4d33",
-    "StartedAt": "2026-09-10T00:17:54.0958374Z",
-    "EndedAt": "2026-09-10T00:18:29.3035948Z",
-    "DurationSeconds": 35.21,
-    "RemoteEndpoint": "137.184.29.185:55258",
-    "RemoteIp": "137.184.29.185",
-    "Username": "mehrdad",
-    "ClientVersion": "pending",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "mehrdad",
-        "Password": "mehrdad",
-        "AuthMethod": "",
-        "ConnectionAttemptNumber": 0,
-        "Accepted": true,
-        "AcceptanceReason": "",
-        "Timestamp": "2026-09-10T00:17:54.9153795Z"
-      }
-    ],
-    "Timeline": [],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 7989,
-    "CommandCount": 2,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": null,
-        "ExchangeId": "140e2648d9ff4d33:000001",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "/bin/./uname -s -v -n -r -m",
-        "Timestamp": "2026-09-10T00:17:55.2770269Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "Linux omegablack 2.6.32-5-amd64 #1 SMP Mon Jan 16 16:22:28 UTC 2012 x86_64",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 8,
-        "ChannelId": null,
-        "ExchangeId": "140e2648d9ff4d33:000002",
-        "MessageNumber": 0,
-        "ShellMessageNumber": 0,
-        "Command": "uptime -p",
-        "Timestamp": "2026-09-10T00:18:02.0860989Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 0,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "up 172 days, 10 hours, 36 minutes",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
-        "MitreAttackTechniques": [],
-        "MitreTechnique": "T1082 System Information Discovery",
-        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution",
-      "Discovery"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 34
   }
 ]

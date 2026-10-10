@@ -6,11 +6,21 @@
     "DurationSeconds": 0,
     "RemoteEndpoint": "90.231.215.250:59012",
     "RemoteIp": "90.231.215.250",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "ec2-user",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ec2-user",
+        "Password": "=z9@tu$X@cUtuN\u002B",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-10T15:14:50.8033198Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-10T15:14:49.5695167Z",
@@ -22,16 +32,144 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-10T15:14:50.8033198Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "AuthMethod": "password",
+          "Password": "=z9@tu$X@cUtuN\u002B",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:14:56.3928964Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "5b619930-4947-4e1a-921a-a4615a27c523",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 6.8233822,
+          "TimeToCompromiseMs": 6823
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:14:56.3935051Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "5b619930-4947-4e1a-921a-a4615a27c523",
+        "ExchangeId": "921d8895a79c4865:000001",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:14:56.3982225Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "5b619930-4947-4e1a-921a-a4615a27c523",
+        "ExchangeId": "921d8895a79c4865:000001",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T15:14:56.4004909Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "5b619930-4947-4e1a-921a-a4615a27c523",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 6.8309749
+        }
       }
     ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 6823,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "5b619930-4947-4e1a-921a-a4615a27c523",
+        "ExchangeId": "921d8895a79c4865:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-10-10T15:14:56.3935051Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T15:14:56.3982225Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 32
   },
   {
     "SessionId": "608dec10f3b14a63",

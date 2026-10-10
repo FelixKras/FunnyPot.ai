@@ -268,11 +268,30 @@
           "State": "ExecCompleted",
           "DurationSeconds": 29.1187747
         }
+      },
+      {
+        "Timestamp": "2026-10-10T15:15:18.6884763Z",
+        "Event": "command",
+        "Sequence": 16,
+        "ChannelId": "82ecf3e6-eebc-4a38-bce8-44050f06776b",
+        "ExchangeId": "921d8895a79c4865:000004",
+        "Data": {
+          "RemoteEndpoint": "90.231.215.250:59012",
+          "Username": "ec2-user",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "cd \u0022/tmp\u0022 \u0026\u0026 if [ ! -f \u0022w.sh\u0022 ]; then cat \u003E \u0022w.sh\u0022 \u0026\u0026 chmod \u002Bx w.sh; fi",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 30,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 6823,
-    "CommandCount": 3,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -391,6 +410,45 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 16,
+        "ChannelId": "82ecf3e6-eebc-4a38-bce8-44050f06776b",
+        "ExchangeId": "921d8895a79c4865:000004",
+        "MessageNumber": 4,
+        "ShellMessageNumber": 1,
+        "Command": "cd \u0022/tmp\u0022 \u0026\u0026 if [ ! -f \u0022w.sh\u0022 ]; then cat \u003E \u0022w.sh\u0022 \u0026\u0026 chmod \u002Bx w.sh; fi",
+        "Timestamp": "2026-10-10T15:15:18.6884763Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 30,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": false,
+        "ResponseTimestamp": null,
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1222 File Permission Modification",
+        "InferredObjective": "Grant execution permissions to staged dropped binaries or scripts"
       }
     ],
     "TacticsObserved": [
@@ -399,7 +457,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "608dec10f3b14a63",

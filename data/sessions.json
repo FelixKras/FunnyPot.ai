@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "79d9a7803db145a0",
+    "StartedAt": "2026-10-10T23:58:43.5174845Z",
+    "EndedAt": "2026-10-10T23:58:46.6783945Z",
+    "DurationSeconds": 3.16,
+    "RemoteEndpoint": "154.18.197.29:56406",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T23:58:43.5174845Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:56406",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T23:58:46.6783945Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:56406",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 3.1609102
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "070501c7a0a04fe7",
     "StartedAt": "2026-10-10T23:58:31.3827622Z",
     "EndedAt": "2026-10-10T23:58:34.3365157Z",
@@ -197440,121 +197486,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 0
-  },
-  {
-    "SessionId": "ff34544f65834bed",
-    "StartedAt": "2026-09-25T08:34:16.5907073Z",
-    "EndedAt": "2026-09-25T08:35:00.3451541Z",
-    "DurationSeconds": 43.75,
-    "RemoteEndpoint": "2.57.121.112:25678",
-    "RemoteIp": "2.57.121.112",
-    "Username": "paulo",
-    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
-    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "paulo",
-        "Password": "paulo",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 1,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-09-25T08:34:17.2680142Z"
-      },
-      {
-        "Username": "paulo",
-        "Password": "paulo1",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 2,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-09-25T08:34:25.0012257Z"
-      },
-      {
-        "Username": "paulo",
-        "Password": "paulo123",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 3,
-        "Accepted": true,
-        "AcceptanceReason": "harvest_threshold",
-        "Timestamp": "2026-09-25T08:34:25.0859728Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-25T08:34:16.5907073Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "2.57.121.112:25678",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T08:34:17.2680142Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "2.57.121.112:25678",
-          "Username": "paulo",
-          "AuthMethod": "password",
-          "Password": "paulo",
-          "ConnectionAttemptNumber": 1,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T08:34:25.0012257Z",
-        "Event": "auth_attempt",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "2.57.121.112:25678",
-          "Username": "paulo",
-          "AuthMethod": "password",
-          "Password": "paulo1",
-          "ConnectionAttemptNumber": 2,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T08:34:25.0859728Z",
-        "Event": "auth_attempt",
-        "Sequence": 4,
-        "Data": {
-          "RemoteEndpoint": "2.57.121.112:25678",
-          "Username": "paulo",
-          "AuthMethod": "password",
-          "Password": "paulo123",
-          "ConnectionAttemptNumber": 3,
-          "Accepted": true,
-          "AcceptanceReason": "harvest_threshold"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T08:35:00.3451541Z",
-        "Event": "session_end",
-        "Sequence": 5,
-        "Data": {
-          "RemoteEndpoint": "2.57.121.112:25678",
-          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
-          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-          "State": "Disconnected",
-          "DurationSeconds": 43.7544512
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 10
   }
 ]

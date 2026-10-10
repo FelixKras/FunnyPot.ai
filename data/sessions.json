@@ -186,11 +186,79 @@
           "State": "ExecCompleted",
           "DurationSeconds": 10.1679429
         }
+      },
+      {
+        "Timestamp": "2026-10-10T14:39:06.4448955Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 19.1355959,
+          "TimeToCompromiseMs": 19135
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:39:06.4452814Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
+        "ExchangeId": "f2c6681dd10f4ab5:000003",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "passwd",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 1,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:39:06.4528214Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
+        "ExchangeId": "f2c6681dd10f4ab5:000003",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "passwd",
+          "Response": "Changing password for oracle.\r\n(current) UNIX password:",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:39:06.4543602Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 19.1450605
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 1621,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -271,6 +339,45 @@
         ],
         "MitreTechnique": "T1087.001 Local Accounts",
         "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
+        "ExchangeId": "f2c6681dd10f4ab5:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "passwd",
+        "Timestamp": "2026-10-10T14:39:06.4452814Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 1,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T14:39:06.4528214Z",
+        "Response": "Changing password for oracle.\r\n(current) UNIX password:",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1087.001 Local Accounts",
+        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
       }
     ],
     "TacticsObserved": [
@@ -279,7 +386,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "2dd425cd2e9b4713",

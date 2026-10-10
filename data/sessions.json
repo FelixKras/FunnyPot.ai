@@ -2,15 +2,25 @@
   {
     "SessionId": "58d5c75832524a96",
     "StartedAt": "2026-10-10T14:06:27.1465719Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-10T14:07:03.7790472Z",
+    "DurationSeconds": 36.63,
     "RemoteEndpoint": "221.207.55.165:34980",
     "RemoteIp": "221.207.55.165",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "oracle",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "oracle",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-10T14:06:29.9986822Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-10T14:06:27.1465719Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:06:29.9986822Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:34980",
+          "Username": "oracle",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:07:03.7790472Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:34980",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 36.6324755
         }
       }
     ],

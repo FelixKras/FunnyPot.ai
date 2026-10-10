@@ -6,11 +6,21 @@
     "DurationSeconds": 0,
     "RemoteEndpoint": "221.207.55.165:50310",
     "RemoteIp": "221.207.55.165",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "steam",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "steam",
+        "Password": "steam",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 8,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-10T14:28:31.3867107Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-10T14:28:30.3441355Z",
@@ -22,16 +32,144 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-10T14:28:31.3867107Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50310",
+          "Username": "steam",
+          "AuthMethod": "password",
+          "Password": "steam",
+          "ConnectionAttemptNumber": 8,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:28:37.0803645Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "363ab07e-2087-4e19-80bf-db067c8ca976",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50310",
+          "Username": "steam",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecOpened",
+          "DurationSeconds": 6.7362509,
+          "TimeToCompromiseMs": 6736
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:28:37.08295Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "363ab07e-2087-4e19-80bf-db067c8ca976",
+        "ExchangeId": "433435b12c4547a0:000001",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50310",
+          "Username": "steam",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:28:37.0855715Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "363ab07e-2087-4e19-80bf-db067c8ca976",
+        "ExchangeId": "433435b12c4547a0:000001",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50310",
+          "Username": "steam",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:28:37.0877487Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "363ab07e-2087-4e19-80bf-db067c8ca976",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50310",
+          "Username": "steam",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecCompleted",
+          "DurationSeconds": 6.7436145
+        }
       }
     ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 6736,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "363ab07e-2087-4e19-80bf-db067c8ca976",
+        "ExchangeId": "433435b12c4547a0:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-10-10T14:28:37.08295Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T14:28:37.0855715Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 32
   },
   {
     "SessionId": "f2392d64fddd4e23",

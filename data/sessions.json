@@ -251,11 +251,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 21.7105799
         }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:55.6538606Z",
+        "Event": "shell_session_start",
+        "Sequence": 15,
+        "ChannelId": "ab7d8510-2dea-412f-b89c-ea6ce749ecbb",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 30.4391572,
+          "TimeToCompromiseMs": 30439
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:55.6594088Z",
+        "Event": "command",
+        "Sequence": 16,
+        "ChannelId": "ab7d8510-2dea-412f-b89c-ea6ce749ecbb",
+        "ExchangeId": "38ab171ab04240f8:000004",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "cd \u0022/dev/shm\u0022 \u0026\u0026 if [ ! -f \u0022w.sh\u0022 ]; then cat \u003E \u0022w.sh\u0022 \u0026\u0026 chmod \u002Bx w.sh; fi",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 30,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:58.0450257Z",
+        "Event": "command_result",
+        "Sequence": 17,
+        "ChannelId": "ab7d8510-2dea-412f-b89c-ea6ce749ecbb",
+        "ExchangeId": "38ab171ab04240f8:000004",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "cd \u0022/dev/shm\u0022 \u0026\u0026 if [ ! -f \u0022w.sh\u0022 ]; then cat \u003E \u0022w.sh\u0022 \u0026\u0026 chmod \u002Bx w.sh; fi",
+          "Response": "#!/bin/bash\r\n# Simple miner script\r\nwhile true; do\r\n    sleep 1\r\ndone\r\nexit 0",
+          "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 2384,
+          "PromptTokens": 3801,
+          "CompletionTokens": 25,
+          "TuringMultiplier": 1.82
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:58.0455842Z",
+        "Event": "shell_session_end",
+        "Sequence": 18,
+        "ChannelId": "ab7d8510-2dea-412f-b89c-ea6ce749ecbb",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 32.8308785
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 4444,
-    "CommandCount": 3,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -374,6 +444,45 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 16,
+        "ChannelId": "ab7d8510-2dea-412f-b89c-ea6ce749ecbb",
+        "ExchangeId": "38ab171ab04240f8:000004",
+        "MessageNumber": 4,
+        "ShellMessageNumber": 1,
+        "Command": "cd \u0022/dev/shm\u0022 \u0026\u0026 if [ ! -f \u0022w.sh\u0022 ]; then cat \u003E \u0022w.sh\u0022 \u0026\u0026 chmod \u002Bx w.sh; fi",
+        "Timestamp": "2026-10-10T16:06:55.6594088Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 30,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T16:06:58.0450257Z",
+        "Response": "#!/bin/bash\r\n# Simple miner script\r\nwhile true; do\r\n    sleep 1\r\ndone\r\nexit 0",
+        "ResponseDurationMs": 2384,
+        "PromptTokens": 3801,
+        "CompletionTokens": 25,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+        "ResponseSource": "llm",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.82,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1222 File Permission Modification",
+        "InferredObjective": "Grant execution permissions to staged dropped binaries or scripts"
       }
     ],
     "TacticsObserved": [
@@ -382,7 +491,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "36e99669611140e7",

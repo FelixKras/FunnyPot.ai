@@ -1,5 +1,177 @@
 [
   {
+    "SessionId": "f2c6681dd10f4ab5",
+    "StartedAt": "2026-10-10T14:38:47.3093009Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "221.207.55.165:50984",
+    "RemoteIp": "221.207.55.165",
+    "Username": "ftp",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "ftp",
+        "Password": "ftp",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 12,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-10T14:38:48.3870922Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-10T14:38:47.3093009Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:38:48.3870922Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "AuthMethod": "password",
+          "Password": "ftp",
+          "ConnectionAttemptNumber": 12,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:38:48.9306486Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 1.6213488,
+          "TimeToCompromiseMs": 1621
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:38:48.9335912Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
+        "ExchangeId": "f2c6681dd10f4ab5:000001",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:38:48.9341535Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
+        "ExchangeId": "f2c6681dd10f4ab5:000001",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T14:38:48.9494934Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
+        "Data": {
+          "RemoteEndpoint": "221.207.55.165:50984",
+          "Username": "ftp",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 1.640198
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 1621,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
+        "ExchangeId": "f2c6681dd10f4ab5:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-10-10T14:38:48.9335912Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T14:38:48.9341535Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "2dd425cd2e9b4713",
     "StartedAt": "2026-10-10T14:38:18.552457Z",
     "EndedAt": "2026-10-10T14:38:23.551144Z",
@@ -250974,28 +251146,6 @@
     "Username": "unknown",
     "ClientVersion": "pending",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "6a6e148075b040bb",
-    "StartedAt": "2026-09-07T17:15:30.2328409Z",
-    "EndedAt": "2026-09-07T17:15:30.2332869Z",
-    "DurationSeconds": 0,
-    "RemoteEndpoint": "81.98.55.137:39970",
-    "RemoteIp": "81.98.55.137",
-    "Username": "unknown",
-    "ClientVersion": "pending",
-    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
     "AuthAccepted": false,
     "AuthAttempts": [],
     "Timeline": [],

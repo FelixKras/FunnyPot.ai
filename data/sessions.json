@@ -184,11 +184,78 @@
           "State": "ExecCompleted",
           "DurationSeconds": 13.0409111
         }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:46.9090803Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "d7da31d4-8b04-44f0-8c09-1a5f130f6ac1",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 21.6943765,
+          "TimeToCompromiseMs": 21694
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:46.9133645Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "d7da31d4-8b04-44f0-8c09-1a5f130f6ac1",
+        "ExchangeId": "38ab171ab04240f8:000003",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "cat /proc/cpuinfo | grep processor | wc -l",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 12,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:46.9136417Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "d7da31d4-8b04-44f0-8c09-1a5f130f6ac1",
+        "ExchangeId": "38ab171ab04240f8:000003",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "cat /proc/cpuinfo | grep processor | wc -l",
+          "Response": "96",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.46
+        }
+      },
+      {
+        "Timestamp": "2026-10-10T16:06:46.9252856Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "d7da31d4-8b04-44f0-8c09-1a5f130f6ac1",
+        "Data": {
+          "RemoteEndpoint": "129.222.172.38:40865",
+          "Username": "ec2-user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 21.7105799
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 4444,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -268,6 +335,45 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "d7da31d4-8b04-44f0-8c09-1a5f130f6ac1",
+        "ExchangeId": "38ab171ab04240f8:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "cat /proc/cpuinfo | grep processor | wc -l",
+        "Timestamp": "2026-10-10T16:06:46.9133645Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 12,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-10T16:06:46.9136417Z",
+        "Response": "96",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.46,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
       }
     ],
     "TacticsObserved": [
@@ -276,7 +382,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "36e99669611140e7",

@@ -256,11 +256,79 @@
           "State": "ExecCompleted",
           "DurationSeconds": 13.7880449
         }
+      },
+      {
+        "Timestamp": "2026-10-11T04:59:14.8318196Z",
+        "Event": "shell_session_start",
+        "Sequence": 15,
+        "ChannelId": "6d02a3f3-767a-490c-a8fb-e60c6769a3c6",
+        "Data": {
+          "RemoteEndpoint": "45.148.10.240:46774",
+          "Username": "ubuntu",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 20.1122821,
+          "TimeToCompromiseMs": 20112
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T04:59:14.8366205Z",
+        "Event": "command",
+        "Sequence": 16,
+        "ChannelId": "6d02a3f3-767a-490c-a8fb-e60c6769a3c6",
+        "ExchangeId": "4040a9fcdb0e41f3:000004",
+        "Data": {
+          "RemoteEndpoint": "45.148.10.240:46774",
+          "Username": "ubuntu",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "lspci | grep VGA -c",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 7,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T04:59:14.8420389Z",
+        "Event": "command_result",
+        "Sequence": 17,
+        "ChannelId": "6d02a3f3-767a-490c-a8fb-e60c6769a3c6",
+        "ExchangeId": "4040a9fcdb0e41f3:000004",
+        "Data": {
+          "RemoteEndpoint": "45.148.10.240:46774",
+          "Username": "ubuntu",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "lspci | grep VGA -c",
+          "Response": "1",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.24
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T04:59:14.8437218Z",
+        "Event": "shell_session_end",
+        "Sequence": 18,
+        "ChannelId": "6d02a3f3-767a-490c-a8fb-e60c6769a3c6",
+        "Data": {
+          "RemoteEndpoint": "45.148.10.240:46774",
+          "Username": "ubuntu",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 20.1241833
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 441,
-    "CommandCount": 3,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -380,6 +448,45 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 16,
+        "ChannelId": "6d02a3f3-767a-490c-a8fb-e60c6769a3c6",
+        "ExchangeId": "4040a9fcdb0e41f3:000004",
+        "MessageNumber": 4,
+        "ShellMessageNumber": 1,
+        "Command": "lspci | grep VGA -c",
+        "Timestamp": "2026-10-11T04:59:14.8366205Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-11T04:59:14.8420389Z",
+        "Response": "1",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.24,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -388,7 +495,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "50fb8f1278e74fad",

@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "5c8702290f694932",
+    "StartedAt": "2026-10-11T13:46:06.1325623Z",
+    "EndedAt": "2026-10-11T13:46:36.8546526Z",
+    "DurationSeconds": 30.72,
+    "RemoteEndpoint": "193.46.255.86:18106",
+    "RemoteIp": "193.46.255.86",
+    "Username": "probe",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [
+      {
+        "Username": "probe",
+        "Password": "",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-11T13:46:06.4560299Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-11T13:46:06.1325623Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:18106",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T13:46:06.4560299Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:18106",
+          "Username": "probe",
+          "AuthMethod": "password",
+          "Password": "",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T13:46:36.8546526Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:18106",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 30.7220904
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "d31453c4b7f1431e",
     "StartedAt": "2026-10-11T13:44:35.4464491Z",
     "EndedAt": "2026-10-11T13:45:20.7478451Z",
@@ -116273,52 +116343,6 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "Disconnected",
           "DurationSeconds": 3.2457907
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "b9ff893bb9334364",
-    "StartedAt": "2026-10-10T22:05:27.4140063Z",
-    "EndedAt": "2026-10-10T22:05:31.0986042Z",
-    "DurationSeconds": 3.68,
-    "RemoteEndpoint": "154.18.197.29:51308",
-    "RemoteIp": "154.18.197.29",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-10T22:05:27.4140063Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:51308",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T22:05:31.0986042Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:51308",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "Disconnected",
-          "DurationSeconds": 3.6845981
         }
       }
     ],

@@ -2,15 +2,25 @@
   {
     "SessionId": "4980fe5ffa864bc8",
     "StartedAt": "2026-10-11T06:00:50.6931181Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-11T06:01:26.6238309Z",
+    "DurationSeconds": 35.93,
     "RemoteEndpoint": "14.17.59.195:56114",
     "RemoteIp": "14.17.59.195",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-dropbear_2020.80",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "ubuntu",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-11T06:00:52.9016523Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-11T06:00:50.6931181Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T06:00:52.9016523Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "14.17.59.195:56114",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "ubuntu",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T06:01:26.6238309Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "14.17.59.195:56114",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 35.9307131
         }
       }
     ],

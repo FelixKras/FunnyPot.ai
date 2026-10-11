@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-11T13:01:31.3550492Z",
+  "LastUpdated": "2026-10-11T13:01:37.1613577Z",
   "TotalUniqueUsernames": 634,
   "TotalUniquePasswords": 1215,
   "TotalUniqueSourceIps": 1203,
-  "TotalUniqueCommands": 176,
+  "TotalUniqueCommands": 177,
   "Usernames": {
     "root": 4845,
     "admin": 1556,
@@ -3058,7 +3058,7 @@
     "181.42.23.83": 2,
     "39.104.64.139": 2,
     "192.166.124.65": 2,
-    "8.49.218.32": 186,
+    "8.49.218.32": 190,
     "186.118.251.171": 4,
     "5.227.30.116": 2
   },
@@ -3238,6 +3238,7 @@
     "CRON=\u0022$(crontab -l 2\u003E/dev/null || true)\u0022\necho \u0022$CRON\u0022 | grep -F \u0027/dev/shm/w.sh \u0022astats\u0022 \u0022netai\u0022 \u0022kstats\u0022 \u0022ssh 2 az\u0022\u0027 \u003E/dev/null 2\u003E\u00261 || \\\n  printf \u0027%s\\n%s\\n\u0027 \u0022@reboot  /dev/shm/w.sh \u0022astats\u0022 \u0022netai\u0022 \u0022kstats\u0022 \u0022ssh 2 az\u0022\u0022 \u00220 * * * * cd \u0022/dev/shm\u0022 \u0026\u0026 ./w.sh \u0022astats\u0022 \u0022netai\u0022 \u0022kstats\u0022 \u0022ssh 2 az\u0022\u0022 | (cat -; echo \u0022$CRON\u0022) | crontab -": 1,
     "echo 1 \u0026\u0026 cat /bin/echo": 1,
     "id -un": 1,
-    "uname -s": 1
+    "uname -s": 1,
+    "uptime 2\u003E/dev/null | head -1": 1
   }
 }

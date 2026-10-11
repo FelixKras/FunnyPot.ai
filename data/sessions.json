@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "671713350b4d4012",
+    "StartedAt": "2026-10-11T02:04:40.4966346Z",
+    "EndedAt": "2026-10-11T02:04:43.05078Z",
+    "DurationSeconds": 2.55,
+    "RemoteEndpoint": "154.18.197.29:41340",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-11T02:04:40.4966346Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:41340",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T02:04:43.05078Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:41340",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 2.5541457
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "f7b1890399eb491b",
     "StartedAt": "2026-10-11T02:04:29.0050501Z",
     "EndedAt": "2026-10-11T02:04:31.7152457Z",
@@ -101346,76 +101392,6 @@
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "Disconnected",
           "DurationSeconds": 35.8808378
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "40be2b7e04394189",
-    "StartedAt": "2026-10-10T11:53:03.1416409Z",
-    "EndedAt": "2026-10-10T11:53:44.060731Z",
-    "DurationSeconds": 40.92,
-    "RemoteEndpoint": "182.208.27.219:43427",
-    "RemoteIp": "182.208.27.219",
-    "Username": "ec2-user",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": false,
-    "AuthAttempts": [
-      {
-        "Username": "ec2-user",
-        "Password": "=z9@tu$X@cUtuN\u002B",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 1,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-10-10T11:53:11.9011587Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-10T11:53:03.1416409Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "182.208.27.219:43427",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T11:53:11.9011587Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "182.208.27.219:43427",
-          "Username": "ec2-user",
-          "AuthMethod": "password",
-          "Password": "=z9@tu$X@cUtuN\u002B",
-          "ConnectionAttemptNumber": 1,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T11:53:44.060731Z",
-        "Event": "session_end",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "182.208.27.219:43427",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-          "State": "Disconnected",
-          "DurationSeconds": 40.9190919
         }
       }
     ],

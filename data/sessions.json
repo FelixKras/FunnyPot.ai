@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "1a8c7ca7ff934ebd",
+    "StartedAt": "2026-10-11T00:36:58.4752592Z",
+    "EndedAt": "2026-10-11T00:37:01.452202Z",
+    "DurationSeconds": 2.98,
+    "RemoteEndpoint": "154.18.197.29:33738",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-11T00:36:58.4752592Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:33738",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T00:37:01.452202Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:33738",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 2.9769429
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "4c0c875b700943f7",
     "StartedAt": "2026-10-11T00:36:46.7153017Z",
     "EndedAt": "2026-10-11T00:36:49.8569394Z",
@@ -146210,76 +146256,6 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "Disconnected",
           "DurationSeconds": 37.5031327
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 10
-  },
-  {
-    "SessionId": "43cb58fea06e4928",
-    "StartedAt": "2026-09-25T13:52:45.9945681Z",
-    "EndedAt": "2026-09-25T13:53:21.6714273Z",
-    "DurationSeconds": 35.68,
-    "RemoteEndpoint": "176.53.159.196:54514",
-    "RemoteIp": "176.53.159.196",
-    "Username": "support",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "support",
-        "Password": "123456789",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 3,
-        "Accepted": true,
-        "AcceptanceReason": "harvest_threshold",
-        "Timestamp": "2026-09-25T13:52:46.3422762Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-25T13:52:45.9945681Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "176.53.159.196:54514",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T13:52:46.3422762Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "176.53.159.196:54514",
-          "Username": "support",
-          "AuthMethod": "password",
-          "Password": "123456789",
-          "ConnectionAttemptNumber": 3,
-          "Accepted": true,
-          "AcceptanceReason": "harvest_threshold"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T13:53:21.6714273Z",
-        "Event": "session_end",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "176.53.159.196:54514",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "Disconnected",
-          "DurationSeconds": 35.6768594
         }
       }
     ],

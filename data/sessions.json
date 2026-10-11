@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "90b0b954ee554ce4",
+    "StartedAt": "2026-10-11T00:30:49.9965513Z",
+    "EndedAt": "2026-10-11T00:30:52.7564977Z",
+    "DurationSeconds": 2.76,
+    "RemoteEndpoint": "154.18.197.29:37090",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-11T00:30:49.9965513Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:37090",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T00:30:52.7564977Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:37090",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 2.7599466
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "9af5c9374c654a6e",
     "StartedAt": "2026-10-11T00:30:38.4572291Z",
     "EndedAt": "2026-10-11T00:30:41.2303484Z",
@@ -147388,408 +147434,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 0
-  },
-  {
-    "SessionId": "4fe8427f6caf4ccd",
-    "StartedAt": "2026-09-25T12:51:42.5001311Z",
-    "EndedAt": "2026-09-25T12:52:22.7177085Z",
-    "DurationSeconds": 40.22,
-    "RemoteEndpoint": "195.178.110.218:54934",
-    "RemoteIp": "195.178.110.218",
-    "Username": "lthpc",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "lthpc",
-        "Password": "password",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 144,
-        "Accepted": true,
-        "AcceptanceReason": "harvest_threshold",
-        "Timestamp": "2026-09-25T12:51:42.8006983Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-09-25T12:51:42.5001311Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:42.8006983Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "AuthMethod": "password",
-          "Password": "password",
-          "ConnectionAttemptNumber": 144,
-          "Accepted": true,
-          "AcceptanceReason": "harvest_threshold"
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:42.9539139Z",
-        "Event": "shell_session_start",
-        "Sequence": 3,
-        "ChannelId": "6a6fae82-9175-4dda-be09-e4379695c23e",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecOpened",
-          "DurationSeconds": 0.453783,
-          "TimeToCompromiseMs": 453
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:42.9567872Z",
-        "Event": "command",
-        "Sequence": 4,
-        "ChannelId": "6a6fae82-9175-4dda-be09-e4379695c23e",
-        "ExchangeId": "4fe8427f6caf4ccd:000001",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "MessageNumber": 1,
-          "ShellMessageNumber": 1,
-          "Command": "/bin/./uname -s -v -n -r -m",
-          "ActorAutomationHint": "unknown",
-          "DiscoveryDepthScore": 1,
-          "SemanticComplexity": 6,
-          "AssetValuePerceptionScore": 8,
-          "MitreAttackTechniques": [
-            "Execution",
-            "Discovery"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:42.9590374Z",
-        "Event": "command_result",
-        "Sequence": 5,
-        "ChannelId": "6a6fae82-9175-4dda-be09-e4379695c23e",
-        "ExchangeId": "4fe8427f6caf4ccd:000001",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "MessageNumber": 1,
-          "ShellMessageNumber": 1,
-          "Command": "/bin/./uname -s -v -n -r -m",
-          "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
-          "LlmModel": "openai/gpt-5.6-luna",
-          "ResponseSource": "cache",
-          "FailedCommand": false,
-          "ResponseDurationMs": 0,
-          "TuringMultiplier": 0.2
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:42.9609876Z",
-        "Event": "shell_session_end",
-        "Sequence": 6,
-        "ChannelId": "6a6fae82-9175-4dda-be09-e4379695c23e",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecCompleted",
-          "DurationSeconds": 0.4608567
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:51.165318Z",
-        "Event": "shell_session_start",
-        "Sequence": 7,
-        "ChannelId": "d55b06ac-ff30-4774-9d8a-47b2c8463cf5",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecOpened",
-          "DurationSeconds": 8.6651874,
-          "TimeToCompromiseMs": 8665
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:51.1706966Z",
-        "Event": "command",
-        "Sequence": 8,
-        "ChannelId": "d55b06ac-ff30-4774-9d8a-47b2c8463cf5",
-        "ExchangeId": "4fe8427f6caf4ccd:000002",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "MessageNumber": 2,
-          "ShellMessageNumber": 1,
-          "Command": "uptime -p",
-          "ActorAutomationHint": "unknown",
-          "DiscoveryDepthScore": 1,
-          "SemanticComplexity": 2,
-          "AssetValuePerceptionScore": 8,
-          "MitreAttackTechniques": [
-            "Execution",
-            "Discovery"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:51.173165Z",
-        "Event": "command_result",
-        "Sequence": 9,
-        "ChannelId": "d55b06ac-ff30-4774-9d8a-47b2c8463cf5",
-        "ExchangeId": "4fe8427f6caf4ccd:000002",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "MessageNumber": 2,
-          "ShellMessageNumber": 1,
-          "Command": "uptime -p",
-          "Response": "up 172 days, 10 hours, 36 minutes",
-          "LlmModel": "openai/gpt-5.6-luna",
-          "ResponseSource": "cache",
-          "FailedCommand": false,
-          "ResponseDurationMs": 0,
-          "TuringMultiplier": 1.61
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:51.1750587Z",
-        "Event": "shell_session_end",
-        "Sequence": 10,
-        "ChannelId": "d55b06ac-ff30-4774-9d8a-47b2c8463cf5",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecCompleted",
-          "DurationSeconds": 8.6749277
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:59.2971827Z",
-        "Event": "shell_session_start",
-        "Sequence": 11,
-        "ChannelId": "1587968f-e1f7-4de6-b132-45bb7fa2ea98",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecOpened",
-          "DurationSeconds": 16.7970522,
-          "TimeToCompromiseMs": 16797
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:59.301662Z",
-        "Event": "command",
-        "Sequence": 12,
-        "ChannelId": "1587968f-e1f7-4de6-b132-45bb7fa2ea98",
-        "ExchangeId": "4fe8427f6caf4ccd:000003",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "MessageNumber": 3,
-          "ShellMessageNumber": 1,
-          "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
-          "ActorAutomationHint": "unknown",
-          "SemanticComplexity": 14,
-          "MitreAttackTechniques": [
-            "Execution"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:59.3043052Z",
-        "Event": "command_result",
-        "Sequence": 13,
-        "ChannelId": "1587968f-e1f7-4de6-b132-45bb7fa2ea98",
-        "ExchangeId": "4fe8427f6caf4ccd:000003",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "MessageNumber": 3,
-          "ShellMessageNumber": 1,
-          "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
-          "Response": "ASPEED Technology, Inc. ASPEED Graphics Family",
-          "LlmModel": "openai/gpt-5.6-luna",
-          "ResponseSource": "cache",
-          "FailedCommand": false,
-          "ResponseDurationMs": 0,
-          "TuringMultiplier": 1.6
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:51:59.3062492Z",
-        "Event": "shell_session_end",
-        "Sequence": 14,
-        "ChannelId": "1587968f-e1f7-4de6-b132-45bb7fa2ea98",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "Username": "lthpc",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecCompleted",
-          "DurationSeconds": 16.8061182
-        }
-      },
-      {
-        "Timestamp": "2026-09-25T12:52:22.7177085Z",
-        "Event": "session_end",
-        "Sequence": 15,
-        "Data": {
-          "RemoteEndpoint": "195.178.110.218:54934",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 40.2175776
-        }
-      }
-    ],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 453,
-    "CommandCount": 3,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": "6a6fae82-9175-4dda-be09-e4379695c23e",
-        "ExchangeId": "4fe8427f6caf4ccd:000001",
-        "MessageNumber": 1,
-        "ShellMessageNumber": 1,
-        "Command": "/bin/./uname -s -v -n -r -m",
-        "Timestamp": "2026-09-25T12:51:42.9567872Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 1,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 6,
-        "AssetValuePerceptionScore": 8,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-09-25T12:51:42.9590374Z",
-        "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0.2,
-        "MitreAttackTechniques": [
-          "Execution",
-          "Discovery"
-        ],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 8,
-        "ChannelId": "d55b06ac-ff30-4774-9d8a-47b2c8463cf5",
-        "ExchangeId": "4fe8427f6caf4ccd:000002",
-        "MessageNumber": 2,
-        "ShellMessageNumber": 1,
-        "Command": "uptime -p",
-        "Timestamp": "2026-09-25T12:51:51.1706966Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 1,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 2,
-        "AssetValuePerceptionScore": 8,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-09-25T12:51:51.173165Z",
-        "Response": "up 172 days, 10 hours, 36 minutes",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 1.61,
-        "MitreAttackTechniques": [
-          "Execution",
-          "Discovery"
-        ],
-        "MitreTechnique": "T1082 System Information Discovery",
-        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
-      },
-      {
-        "Sequence": 12,
-        "ChannelId": "1587968f-e1f7-4de6-b132-45bb7fa2ea98",
-        "ExchangeId": "4fe8427f6caf4ccd:000003",
-        "MessageNumber": 3,
-        "ShellMessageNumber": 1,
-        "Command": "lspci | grep VGA | cut -f5- -d \u0027 \u0027",
-        "Timestamp": "2026-09-25T12:51:59.301662Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 14,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-09-25T12:51:59.3043052Z",
-        "Response": "ASPEED Technology, Inc. ASPEED Graphics Family",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 1.6,
-        "MitreAttackTechniques": [
-          "Execution"
-        ],
-        "MitreTechnique": "T1083 File and Directory Discovery",
-        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution",
-      "Discovery"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 36
   }
 ]

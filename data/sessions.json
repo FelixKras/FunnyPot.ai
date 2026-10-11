@@ -1,5 +1,51 @@
 [
   {
+    "SessionId": "c8328f99c0e54dfe",
+    "StartedAt": "2026-10-11T02:26:32.1453149Z",
+    "EndedAt": "2026-10-11T02:26:35.00873Z",
+    "DurationSeconds": 2.86,
+    "RemoteEndpoint": "154.18.197.29:47186",
+    "RemoteIp": "154.18.197.29",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-11T02:26:32.1453149Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:47186",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T02:26:35.00873Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "154.18.197.29:47186",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 2.8634154
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "8e9d4e298fcd41a8",
     "StartedAt": "2026-10-11T02:26:20.6065757Z",
     "EndedAt": "2026-10-11T02:26:23.3611283Z",
@@ -95839,406 +95885,5 @@
     "PayloadUrls": [],
     "PersistenceVectors": [],
     "RiskScore": 0
-  },
-  {
-    "SessionId": "f2c6681dd10f4ab5",
-    "StartedAt": "2026-10-10T14:38:47.3093009Z",
-    "EndedAt": "2026-10-10T14:39:36.7213874Z",
-    "DurationSeconds": 49.41,
-    "RemoteEndpoint": "221.207.55.165:50984",
-    "RemoteIp": "221.207.55.165",
-    "Username": "ftp",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "ftp",
-        "Password": "ftp",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 12,
-        "Accepted": true,
-        "AcceptanceReason": "harvest_threshold",
-        "Timestamp": "2026-10-10T14:38:48.3870922Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-10T14:38:47.3093009Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:48.3870922Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "AuthMethod": "password",
-          "Password": "ftp",
-          "ConnectionAttemptNumber": 12,
-          "Accepted": true,
-          "AcceptanceReason": "harvest_threshold"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:48.9306486Z",
-        "Event": "shell_session_start",
-        "Sequence": 3,
-        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecOpened",
-          "DurationSeconds": 1.6213488,
-          "TimeToCompromiseMs": 1621
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:48.9335912Z",
-        "Event": "command",
-        "Sequence": 4,
-        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
-        "ExchangeId": "f2c6681dd10f4ab5:000001",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "MessageNumber": 1,
-          "ShellMessageNumber": 1,
-          "Command": "uname -a",
-          "ActorAutomationHint": "unknown",
-          "DiscoveryDepthScore": 1,
-          "SemanticComplexity": 2,
-          "AssetValuePerceptionScore": 8,
-          "MitreAttackTechniques": [
-            "Execution",
-            "Discovery"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:48.9341535Z",
-        "Event": "command_result",
-        "Sequence": 5,
-        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
-        "ExchangeId": "f2c6681dd10f4ab5:000001",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "MessageNumber": 1,
-          "ShellMessageNumber": 1,
-          "Command": "uname -a",
-          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
-          "ResponseSource": "cache",
-          "FailedCommand": false,
-          "ResponseDurationMs": 0,
-          "TuringMultiplier": 0.2
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:48.9494934Z",
-        "Event": "shell_session_end",
-        "Sequence": 6,
-        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecCompleted",
-          "DurationSeconds": 1.640198
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:57.4608596Z",
-        "Event": "shell_session_start",
-        "Sequence": 7,
-        "ChannelId": "0ec7482c-5276-4714-bd5b-0a00177b002e",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecOpened",
-          "DurationSeconds": 10.1515612,
-          "TimeToCompromiseMs": 10151
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:57.4738427Z",
-        "Event": "command",
-        "Sequence": 8,
-        "ChannelId": "0ec7482c-5276-4714-bd5b-0a00177b002e",
-        "ExchangeId": "f2c6681dd10f4ab5:000002",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "MessageNumber": 2,
-          "ShellMessageNumber": 1,
-          "Command": "cat /etc/passwd",
-          "ActorAutomationHint": "unknown",
-          "DiscoveryDepthScore": 1,
-          "SemanticComplexity": 2,
-          "AssetValuePerceptionScore": 8,
-          "MitreAttackTechniques": [
-            "Execution",
-            "Discovery"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:57.4757234Z",
-        "Event": "command_result",
-        "Sequence": 9,
-        "ChannelId": "0ec7482c-5276-4714-bd5b-0a00177b002e",
-        "ExchangeId": "f2c6681dd10f4ab5:000002",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "MessageNumber": 2,
-          "ShellMessageNumber": 1,
-          "Command": "cat /etc/passwd",
-          "Response": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/bin/sh\nbin:x:2:2:bin:/bin:/bin/sh\nremote:x:1001:1001:,,,:/home/remote:/bin/bash\nsecretOps:x:1002:1002:,,,:/home/secretOps:/bin/bash",
-          "ResponseSource": "cache",
-          "FailedCommand": false,
-          "ResponseDurationMs": 0,
-          "TuringMultiplier": 1.49
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:38:57.4772423Z",
-        "Event": "shell_session_end",
-        "Sequence": 10,
-        "ChannelId": "0ec7482c-5276-4714-bd5b-0a00177b002e",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecCompleted",
-          "DurationSeconds": 10.1679429
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:39:06.4448955Z",
-        "Event": "shell_session_start",
-        "Sequence": 11,
-        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecOpened",
-          "DurationSeconds": 19.1355959,
-          "TimeToCompromiseMs": 19135
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:39:06.4452814Z",
-        "Event": "command",
-        "Sequence": 12,
-        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
-        "ExchangeId": "f2c6681dd10f4ab5:000003",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "MessageNumber": 3,
-          "ShellMessageNumber": 1,
-          "Command": "passwd",
-          "ActorAutomationHint": "unknown",
-          "SemanticComplexity": 1,
-          "MitreAttackTechniques": [
-            "Execution"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:39:06.4528214Z",
-        "Event": "command_result",
-        "Sequence": 13,
-        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
-        "ExchangeId": "f2c6681dd10f4ab5:000003",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "MessageNumber": 3,
-          "ShellMessageNumber": 1,
-          "Command": "passwd",
-          "Response": "Changing password for oracle.\r\n(current) UNIX password:",
-          "LlmModel": "openai/gpt-5.6-luna",
-          "ResponseSource": "cache",
-          "FailedCommand": false,
-          "ResponseDurationMs": 0,
-          "TuringMultiplier": 0.2
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:39:06.4543602Z",
-        "Event": "shell_session_end",
-        "Sequence": 14,
-        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "Username": "ftp",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ExecCompleted",
-          "DurationSeconds": 19.1450605
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T14:39:36.7213874Z",
-        "Event": "session_end",
-        "Sequence": 15,
-        "Data": {
-          "RemoteEndpoint": "221.207.55.165:50984",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 49.4120867
-        }
-      }
-    ],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 1621,
-    "CommandCount": 3,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": "d49a9299-81ea-444e-9672-bca23a6fac2c",
-        "ExchangeId": "f2c6681dd10f4ab5:000001",
-        "MessageNumber": 1,
-        "ShellMessageNumber": 1,
-        "Command": "uname -a",
-        "Timestamp": "2026-10-10T14:38:48.9335912Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 1,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 2,
-        "AssetValuePerceptionScore": 8,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-10-10T14:38:48.9341535Z",
-        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0.2,
-        "MitreAttackTechniques": [
-          "Execution",
-          "Discovery"
-        ],
-        "MitreTechnique": "T1082 System Information Discovery",
-        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
-      },
-      {
-        "Sequence": 8,
-        "ChannelId": "0ec7482c-5276-4714-bd5b-0a00177b002e",
-        "ExchangeId": "f2c6681dd10f4ab5:000002",
-        "MessageNumber": 2,
-        "ShellMessageNumber": 1,
-        "Command": "cat /etc/passwd",
-        "Timestamp": "2026-10-10T14:38:57.4738427Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 1,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 2,
-        "AssetValuePerceptionScore": 8,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-10-10T14:38:57.4757234Z",
-        "Response": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/bin/sh\nbin:x:2:2:bin:/bin:/bin/sh\nremote:x:1001:1001:,,,:/home/remote:/bin/bash\nsecretOps:x:1002:1002:,,,:/home/secretOps:/bin/bash",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 1.49,
-        "MitreAttackTechniques": [
-          "Execution",
-          "Discovery"
-        ],
-        "MitreTechnique": "T1087.001 Local Accounts",
-        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
-      },
-      {
-        "Sequence": 12,
-        "ChannelId": "c61512c9-dd18-46e5-92d1-d00edda985f7",
-        "ExchangeId": "f2c6681dd10f4ab5:000003",
-        "MessageNumber": 3,
-        "ShellMessageNumber": 1,
-        "Command": "passwd",
-        "Timestamp": "2026-10-10T14:39:06.4452814Z",
-        "CommandSequenceLatencyMs": null,
-        "ActorAutomationHint": "unknown",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 1,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-10-10T14:39:06.4528214Z",
-        "Response": "Changing password for oracle.\r\n(current) UNIX password:",
-        "ResponseDurationMs": 0,
-        "PromptTokens": 0,
-        "CompletionTokens": 0,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-5.6-luna",
-        "ResponseSource": "cache",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0.2,
-        "MitreAttackTechniques": [
-          "Execution"
-        ],
-        "MitreTechnique": "T1087.001 Local Accounts",
-        "InferredObjective": "Enumerate local user accounts, service accounts, and login shells"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution",
-      "Discovery"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 36
   }
 ]

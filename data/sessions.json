@@ -1,5 +1,144 @@
 [
   {
+    "SessionId": "56cf705400a54f72",
+    "StartedAt": "2026-10-11T11:56:40.022976Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "103.159.2.113:44114",
+    "RemoteIp": "103.159.2.113",
+    "Username": "docker",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "docker",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 16,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-11T11:56:41.2115311Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-11T11:56:40.022976Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "103.159.2.113:44114",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T11:56:41.2115311Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "103.159.2.113:44114",
+          "Username": "docker",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 16,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T11:56:41.7431993Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "21bb6445-dafa-4818-a13a-714e1ec56008",
+        "Data": {
+          "RemoteEndpoint": "103.159.2.113:44114",
+          "Username": "docker",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 1.7202234,
+          "TimeToCompromiseMs": 1720
+        }
+      },
+      {
+        "Timestamp": "2026-10-11T11:56:41.7468512Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "21bb6445-dafa-4818-a13a-714e1ec56008",
+        "ExchangeId": "56cf705400a54f72:000001",
+        "Data": {
+          "RemoteEndpoint": "103.159.2.113:44114",
+          "Username": "docker",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/bin/./uname -s -v -n -r -m",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 1720,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "21bb6445-dafa-4818-a13a-714e1ec56008",
+        "ExchangeId": "56cf705400a54f72:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "/bin/./uname -s -v -n -r -m",
+        "Timestamp": "2026-10-11T11:56:41.7468512Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": false,
+        "ResponseTimestamp": null,
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": null,
+        "ResponseSource": null,
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "9fa7343750d14ba7",
     "StartedAt": "2026-10-11T11:54:31.8401779Z",
     "EndedAt": "2026-10-11T11:54:36.8405806Z",
@@ -103956,52 +104095,6 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "Disconnected",
           "DurationSeconds": 3.6236355
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "417a3077e3094eb2",
-    "StartedAt": "2026-10-10T21:52:49.359335Z",
-    "EndedAt": "2026-10-10T21:52:52.5431181Z",
-    "DurationSeconds": 3.18,
-    "RemoteEndpoint": "154.18.197.29:60116",
-    "RemoteIp": "154.18.197.29",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-10T21:52:49.359335Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:60116",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T21:52:52.5431181Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:60116",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "Disconnected",
-          "DurationSeconds": 3.1837834
         }
       }
     ],

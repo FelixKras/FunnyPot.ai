@@ -631,11 +631,79 @@
           "State": "ExecCompleted",
           "DurationSeconds": 55.8184285
         }
+      },
+      {
+        "Timestamp": "2026-10-12T13:28:02.8057027Z",
+        "Event": "shell_session_start",
+        "Sequence": 36,
+        "ChannelId": "5429bac3-3f55-4f54-ad3a-fa88aa5c7936",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 64.283315,
+          "TimeToCompromiseMs": 64283
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:28:02.810918Z",
+        "Event": "command",
+        "Sequence": 37,
+        "ChannelId": "5429bac3-3f55-4f54-ad3a-fa88aa5c7936",
+        "ExchangeId": "664baf8659de45dc:000009",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 9,
+          "ShellMessageNumber": 1,
+          "Command": "echo Hi | cat -n",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 7,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:28:02.8134656Z",
+        "Event": "command_result",
+        "Sequence": 38,
+        "ChannelId": "5429bac3-3f55-4f54-ad3a-fa88aa5c7936",
+        "ExchangeId": "664baf8659de45dc:000009",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 9,
+          "ShellMessageNumber": 1,
+          "Command": "echo Hi | cat -n",
+          "Response": "     1\tHi",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.59
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:28:02.8150651Z",
+        "Event": "shell_session_end",
+        "Sequence": 39,
+        "ChannelId": "5429bac3-3f55-4f54-ad3a-fa88aa5c7936",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 64.2926764
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 2484,
-    "CommandCount": 8,
+    "CommandCount": 9,
     "Commands": [
       {
         "Sequence": 5,
@@ -954,6 +1022,45 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 37,
+        "ChannelId": "5429bac3-3f55-4f54-ad3a-fa88aa5c7936",
+        "ExchangeId": "664baf8659de45dc:000009",
+        "MessageNumber": 9,
+        "ShellMessageNumber": 1,
+        "Command": "echo Hi | cat -n",
+        "Timestamp": "2026-10-12T13:28:02.810918Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-12T13:28:02.8134656Z",
+        "Response": "     1\tHi",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.59,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
       }
     ],
     "TacticsObserved": [
@@ -963,7 +1070,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 56
+    "RiskScore": 58
   },
   {
     "SessionId": "65b8edd9131f4e6a",

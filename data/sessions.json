@@ -562,11 +562,80 @@
           "State": "ExecCompleted",
           "DurationSeconds": 47.938731
         }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:54.3309852Z",
+        "Event": "shell_session_start",
+        "Sequence": 32,
+        "ChannelId": "5e29461f-7323-4b9b-8947-1369111b7285",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 55.8085971,
+          "TimeToCompromiseMs": 55808
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:54.3356857Z",
+        "Event": "command",
+        "Sequence": 33,
+        "ChannelId": "5e29461f-7323-4b9b-8947-1369111b7285",
+        "ExchangeId": "664baf8659de45dc:000008",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "locate D877F783D5D3EF8Cs",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 2,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:54.3381808Z",
+        "Event": "command_result",
+        "Sequence": 34,
+        "ChannelId": "5e29461f-7323-4b9b-8947-1369111b7285",
+        "ExchangeId": "664baf8659de45dc:000008",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "locate D877F783D5D3EF8Cs",
+          "Response": "bash: locate: command not found",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 1.47
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:54.3408173Z",
+        "Event": "shell_session_end",
+        "Sequence": 35,
+        "ChannelId": "5e29461f-7323-4b9b-8947-1369111b7285",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 55.8184285
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 2484,
-    "CommandCount": 7,
+    "CommandCount": 8,
     "Commands": [
       {
         "Sequence": 5,
@@ -846,6 +915,45 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 33,
+        "ChannelId": "5e29461f-7323-4b9b-8947-1369111b7285",
+        "ExchangeId": "664baf8659de45dc:000008",
+        "MessageNumber": 8,
+        "ShellMessageNumber": 1,
+        "Command": "locate D877F783D5D3EF8Cs",
+        "Timestamp": "2026-10-12T13:27:54.3356857Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-12T13:27:54.3381808Z",
+        "Response": "bash: locate: command not found",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.47,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -855,7 +963,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 54
+    "RiskScore": 56
   },
   {
     "SessionId": "65b8edd9131f4e6a",

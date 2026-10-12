@@ -181,11 +181,78 @@
           "State": "ExecCompleted",
           "DurationSeconds": 9.204873
         }
+      },
+      {
+        "Timestamp": "2026-10-12T23:55:17.9011174Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "4c785cb4-ef43-4ff7-bb5d-ef646f55befd",
+        "Data": {
+          "RemoteEndpoint": "2.57.122.76:46848",
+          "Username": "user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 16.4364329,
+          "TimeToCompromiseMs": 16436
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T23:55:17.9063233Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "4c785cb4-ef43-4ff7-bb5d-ef646f55befd",
+        "ExchangeId": "b49f7f671d3c42d7:000003",
+        "Data": {
+          "RemoteEndpoint": "2.57.122.76:46848",
+          "Username": "user",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u00271234567890\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u00271234567890\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "ActorAutomationHint": "unknown",
+          "SemanticComplexity": 141,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T23:55:17.9070763Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "4c785cb4-ef43-4ff7-bb5d-ef646f55befd",
+        "ExchangeId": "b49f7f671d3c42d7:000003",
+        "Data": {
+          "RemoteEndpoint": "2.57.122.76:46848",
+          "Username": "user",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "echo \u00271234567890\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u00271234567890\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+          "Response": "96",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.76
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T23:55:17.9087857Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "4c785cb4-ef43-4ff7-bb5d-ef646f55befd",
+        "Data": {
+          "RemoteEndpoint": "2.57.122.76:46848",
+          "Username": "user",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 16.4441006
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 1559,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -264,6 +331,45 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "4c785cb4-ef43-4ff7-bb5d-ef646f55befd",
+        "ExchangeId": "b49f7f671d3c42d7:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "echo \u00271234567890\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u00271234567890\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null",
+        "Timestamp": "2026-10-12T23:55:17.9063233Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 141,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-12T23:55:17.9070763Z",
+        "Response": "96",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.76,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
       }
     ],
     "TacticsObserved": [
@@ -271,7 +377,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 24
+    "RiskScore": 26
   },
   {
     "SessionId": "858179f4060b48d0",

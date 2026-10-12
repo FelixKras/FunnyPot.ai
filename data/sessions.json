@@ -2,15 +2,25 @@
   {
     "SessionId": "f041557c32174027",
     "StartedAt": "2026-10-12T21:39:55.7905111Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-12T21:40:32.9809698Z",
+    "DurationSeconds": 37.19,
     "RemoteEndpoint": "62.171.133.1:34738",
     "RemoteIp": "62.171.133.1",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-paramiko_4.0.0",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "12345",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 71,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-12T21:39:56.2369981Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-12T21:39:55.7905111Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-12T21:39:56.2369981Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:34738",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "12345",
+          "ConnectionAttemptNumber": 71,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T21:40:32.9809698Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:34738",
+          "ClientVersion": "SSH-2.0-paramiko_4.0.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 37.1904588
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "8232d6206c1f4b64",

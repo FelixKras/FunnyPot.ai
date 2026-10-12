@@ -1,5 +1,75 @@
 [
   {
+    "SessionId": "3a15f821d4f04532",
+    "StartedAt": "2026-10-12T21:03:09.6987483Z",
+    "EndedAt": "2026-10-12T21:03:45.5614837Z",
+    "DurationSeconds": 35.86,
+    "RemoteEndpoint": "2.57.121.112:41332",
+    "RemoteIp": "2.57.121.112",
+    "Username": "cadence",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "cadence",
+        "Password": "cadence",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 29,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-12T21:03:10.23209Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-12T21:03:09.6987483Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:41332",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T21:03:10.23209Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:41332",
+          "Username": "cadence",
+          "AuthMethod": "password",
+          "Password": "cadence",
+          "ConnectionAttemptNumber": 29,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T21:03:45.5614837Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:41332",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 35.8627357
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
     "SessionId": "64ae936125cb47c3",
     "StartedAt": "2026-10-12T21:00:12.2252646Z",
     "EndedAt": "2026-10-12T21:00:49.7705403Z",
@@ -137322,52 +137392,6 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "Disconnected",
           "DurationSeconds": 2.9036399
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "877e8b512e7149b1",
-    "StartedAt": "2026-10-10T23:17:12.8342883Z",
-    "EndedAt": "2026-10-10T23:17:15.5844461Z",
-    "DurationSeconds": 2.75,
-    "RemoteEndpoint": "154.18.197.29:38678",
-    "RemoteIp": "154.18.197.29",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-10T23:17:12.8342883Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:38678",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-10T23:17:15.5844461Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:38678",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "Disconnected",
-          "DurationSeconds": 2.7501579
         }
       }
     ],

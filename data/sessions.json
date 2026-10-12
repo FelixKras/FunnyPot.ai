@@ -2,15 +2,25 @@
   {
     "SessionId": "e6b5c3c1d8b24e4d",
     "StartedAt": "2026-10-12T01:12:23.3325356Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-12T01:13:00.3306824Z",
+    "DurationSeconds": 37,
     "RemoteEndpoint": "74.210.180.133:43142",
     "RemoteIp": "74.210.180.133",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "ec2-user",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-dropbear_2020.80",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "ec2-user",
+        "Password": "=z9@tu$X@cUtuN\u002B",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-12T01:12:28.8009931Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-12T01:12:23.3325356Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T01:12:28.8009931Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "74.210.180.133:43142",
+          "Username": "ec2-user",
+          "AuthMethod": "password",
+          "Password": "=z9@tu$X@cUtuN\u002B",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T01:13:00.3306824Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "74.210.180.133:43142",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 36.998147
         }
       }
     ],

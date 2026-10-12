@@ -2,15 +2,25 @@
   {
     "SessionId": "ad18b6f166e7483f",
     "StartedAt": "2026-10-12T15:43:57.4569326Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-12T15:44:35.618617Z",
+    "DurationSeconds": 38.16,
     "RemoteEndpoint": "62.171.133.1:46266",
     "RemoteIp": "62.171.133.1",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-paramiko_4.0.0",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "12345",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 63,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-12T15:44:02.5922593Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-12T15:43:57.4569326Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-12T15:44:02.5922593Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:46266",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "12345",
+          "ConnectionAttemptNumber": 63,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T15:44:35.618617Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:46266",
+          "ClientVersion": "SSH-2.0-paramiko_4.0.0",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 38.1616846
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "c7fa8d86ab094683",

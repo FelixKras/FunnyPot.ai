@@ -419,11 +419,82 @@
           "State": "ExecCompleted",
           "DurationSeconds": 33.0359367
         }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:38.6784121Z",
+        "Event": "shell_session_start",
+        "Sequence": 24,
+        "ChannelId": "8918ec8b-3fdf-4e1c-b56b-bc51729cfdaa",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 40.1560239,
+          "TimeToCompromiseMs": 40156
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:38.6834993Z",
+        "Event": "command",
+        "Sequence": 25,
+        "ChannelId": "8918ec8b-3fdf-4e1c-b56b-bc51729cfdaa",
+        "ExchangeId": "664baf8659de45dc:000006",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 6,
+          "ShellMessageNumber": 1,
+          "Command": "ps -ef | grep \u0027[Mm]iner\u0027",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 7,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:38.6856134Z",
+        "Event": "command_result",
+        "Sequence": 26,
+        "ChannelId": "8918ec8b-3fdf-4e1c-b56b-bc51729cfdaa",
+        "ExchangeId": "664baf8659de45dc:000006",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 6,
+          "ShellMessageNumber": 1,
+          "Command": "ps -ef | grep \u0027[Mm]iner\u0027",
+          "Response": "root      1842     1  92  Jun18 ?        172-04:12:37 /usr/bin/minerd --url=stratum\u002Btcp://pool.example.net:3333 --user=server01 --pass=x\r\nroot      2719     1   0  Jun18 ?        00:00:00 /usr/local/bin/miner-watchdog --config=/etc/miner.conf\r\nroot      3198  2719   0  Jun18 ?        00:00:03 /bin/sh /opt/scripts/miner_cleanup.sh",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.35
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:38.6871021Z",
+        "Event": "shell_session_end",
+        "Sequence": 27,
+        "ChannelId": "8918ec8b-3fdf-4e1c-b56b-bc51729cfdaa",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 40.1647133
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 2484,
-    "CommandCount": 5,
+    "CommandCount": 6,
     "Commands": [
       {
         "Sequence": 5,
@@ -623,6 +694,46 @@
         ],
         "MitreTechnique": "T1057 Process Discovery",
         "InferredObjective": "Inspect running processes, background services, and security monitors"
+      },
+      {
+        "Sequence": 25,
+        "ChannelId": "8918ec8b-3fdf-4e1c-b56b-bc51729cfdaa",
+        "ExchangeId": "664baf8659de45dc:000006",
+        "MessageNumber": 6,
+        "ShellMessageNumber": 1,
+        "Command": "ps -ef | grep \u0027[Mm]iner\u0027",
+        "Timestamp": "2026-10-12T13:27:38.6834993Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-12T13:27:38.6856134Z",
+        "Response": "root      1842     1  92  Jun18 ?        172-04:12:37 /usr/bin/minerd --url=stratum\u002Btcp://pool.example.net:3333 --user=server01 --pass=x\r\nroot      2719     1   0  Jun18 ?        00:00:00 /usr/local/bin/miner-watchdog --config=/etc/miner.conf\r\nroot      3198  2719   0  Jun18 ?        00:00:03 /bin/sh /opt/scripts/miner_cleanup.sh",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.35,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
       }
     ],
     "TacticsObserved": [
@@ -632,7 +743,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 50
+    "RiskScore": 52
   },
   {
     "SessionId": "65b8edd9131f4e6a",

@@ -2,15 +2,25 @@
   {
     "SessionId": "8bc563539fc942fc",
     "StartedAt": "2026-10-12T18:39:59.9554319Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-12T18:40:34.866212Z",
+    "DurationSeconds": 34.91,
     "RemoteEndpoint": "176.53.159.196:24218",
     "RemoteIp": "176.53.159.196",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "support",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "support",
+        "Password": "123456789",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 37,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-12T18:40:00.3088284Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-12T18:39:59.9554319Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-12T18:40:00.3088284Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:24218",
+          "Username": "support",
+          "AuthMethod": "password",
+          "Password": "123456789",
+          "ConnectionAttemptNumber": 37,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T18:40:34.866212Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "176.53.159.196:24218",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 34.9107803
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "206cb1d6d0094a96",

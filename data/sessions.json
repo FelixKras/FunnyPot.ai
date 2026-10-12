@@ -490,11 +490,83 @@
           "State": "ExecCompleted",
           "DurationSeconds": 40.1647133
         }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:46.4506247Z",
+        "Event": "shell_session_start",
+        "Sequence": 28,
+        "ChannelId": "bb322ca6-e301-4944-a0da-07e20c0ff9af",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 47.9282368,
+          "TimeToCompromiseMs": 47928
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:46.4560197Z",
+        "Event": "command",
+        "Sequence": 29,
+        "ChannelId": "bb322ca6-e301-4944-a0da-07e20c0ff9af",
+        "ExchangeId": "664baf8659de45dc:000007",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*",
+          "ActorAutomationHint": "unknown",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 14,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:46.4580564Z",
+        "Event": "command_result",
+        "Sequence": 30,
+        "ChannelId": "bb322ca6-e301-4944-a0da-07e20c0ff9af",
+        "ExchangeId": "664baf8659de45dc:000007",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*",
+          "Response": "ls: cannot access \u0027/root/.local/share/TelegramDesktop/tdata\u0027: No such file or directory\r\nls: cannot access \u0027/home/*/.local/share/TelegramDesktop/tdata\u0027: No such file or directory\r\nls: cannot access \u0027/dev/ttyGSM*\u0027: No such file or directory\r\nls: cannot access \u0027/dev/ttyUSB-mod*\u0027: No such file or directory\r\nls: cannot access \u0027/var/spool/sms/*\u0027: No such file or directory\r\nls: cannot access \u0027/var/log/smsd.log\u0027: No such file or directory\r\nls: cannot access \u0027/etc/smsd.conf*\u0027: No such file or directory\r\nls: cannot access \u0027/usr/bin/qmuxd\u0027: No such file or directory\r\nls: cannot access \u0027/var/qmux_connect_socket\u0027: No such file or directory\r\nls: cannot access \u0027/etc/config/simman\u0027: No such file or directory\r\nls: cannot access \u0027/dev/modem*\u0027: No such file or directory\r\nls: cannot access \u0027/var/config/sms/*\u0027: No such file or directory",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 1.47
+        }
+      },
+      {
+        "Timestamp": "2026-10-12T13:27:46.4611197Z",
+        "Event": "shell_session_end",
+        "Sequence": 31,
+        "ChannelId": "bb322ca6-e301-4944-a0da-07e20c0ff9af",
+        "Data": {
+          "RemoteEndpoint": "193.163.187.107:55742",
+          "Username": "test",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 47.938731
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 2484,
-    "CommandCount": 6,
+    "CommandCount": 7,
     "Commands": [
       {
         "Sequence": 5,
@@ -734,6 +806,46 @@
         ],
         "MitreTechnique": "T1057 Process Discovery",
         "InferredObjective": "Inspect running processes, background services, and security monitors"
+      },
+      {
+        "Sequence": 29,
+        "ChannelId": "bb322ca6-e301-4944-a0da-07e20c0ff9af",
+        "ExchangeId": "664baf8659de45dc:000007",
+        "MessageNumber": 7,
+        "ShellMessageNumber": 1,
+        "Command": "ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*",
+        "Timestamp": "2026-10-12T13:27:46.4560197Z",
+        "CommandSequenceLatencyMs": null,
+        "ActorAutomationHint": "unknown",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 14,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-12T13:27:46.4580564Z",
+        "Response": "ls: cannot access \u0027/root/.local/share/TelegramDesktop/tdata\u0027: No such file or directory\r\nls: cannot access \u0027/home/*/.local/share/TelegramDesktop/tdata\u0027: No such file or directory\r\nls: cannot access \u0027/dev/ttyGSM*\u0027: No such file or directory\r\nls: cannot access \u0027/dev/ttyUSB-mod*\u0027: No such file or directory\r\nls: cannot access \u0027/var/spool/sms/*\u0027: No such file or directory\r\nls: cannot access \u0027/var/log/smsd.log\u0027: No such file or directory\r\nls: cannot access \u0027/etc/smsd.conf*\u0027: No such file or directory\r\nls: cannot access \u0027/usr/bin/qmuxd\u0027: No such file or directory\r\nls: cannot access \u0027/var/qmux_connect_socket\u0027: No such file or directory\r\nls: cannot access \u0027/etc/config/simman\u0027: No such file or directory\r\nls: cannot access \u0027/dev/modem*\u0027: No such file or directory\r\nls: cannot access \u0027/var/config/sms/*\u0027: No such file or directory",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.47,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -743,7 +855,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 52
+    "RiskScore": 54
   },
   {
     "SessionId": "65b8edd9131f4e6a",

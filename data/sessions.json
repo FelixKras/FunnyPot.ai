@@ -2,15 +2,25 @@
   {
     "SessionId": "ddc689e6bf6d463a",
     "StartedAt": "2026-10-13T17:38:33.4537525Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-13T17:39:11.2189314Z",
+    "DurationSeconds": 37.77,
     "RemoteEndpoint": "193.46.255.86:33850",
     "RemoteIp": "193.46.255.86",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "probe",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "probe",
+        "Password": "",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 6,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-13T17:38:33.7920193Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-13T17:38:33.4537525Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-13T17:38:33.7920193Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:33850",
+          "Username": "probe",
+          "AuthMethod": "password",
+          "Password": "",
+          "ConnectionAttemptNumber": 6,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-13T17:39:11.2189314Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "193.46.255.86:33850",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 37.7651791
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "2b9180757f174c66",

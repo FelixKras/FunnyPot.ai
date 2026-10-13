@@ -2,15 +2,25 @@
   {
     "SessionId": "b5ee9319156f4c43",
     "StartedAt": "2026-10-13T13:23:20.4309209Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-13T13:23:57.582806Z",
+    "DurationSeconds": 37.15,
     "RemoteEndpoint": "117.72.37.15:58440",
     "RemoteIp": "117.72.37.15",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "centos",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-13T13:23:22.9986496Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-13T13:23:20.4309209Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-13T13:23:22.9986496Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "117.72.37.15:58440",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "centos",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-13T13:23:57.582806Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "117.72.37.15:58440",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 37.1518854
         }
       }
     ],

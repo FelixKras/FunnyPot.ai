@@ -2,15 +2,25 @@
   {
     "SessionId": "bee4bda1087d45a1",
     "StartedAt": "2026-10-13T10:24:46.0395387Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-13T10:25:23.0232499Z",
+    "DurationSeconds": 36.98,
     "RemoteEndpoint": "119.28.84.193:51330",
     "RemoteIp": "119.28.84.193",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "user",
+    "ClientVersion": "SSH-2.0-libssh2_1.11.1",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "user",
+        "Password": "user",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-13T10:24:48.1350485Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-13T10:24:46.0395387Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-13T10:24:48.1350485Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "119.28.84.193:51330",
+          "Username": "user",
+          "AuthMethod": "password",
+          "Password": "user",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-13T10:25:23.0232499Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "119.28.84.193:51330",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 36.9837113
         }
       }
     ],

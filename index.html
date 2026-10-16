@@ -2385,6 +2385,15 @@
             return `<div class="exchange-detail"><div class="exchange-detail-label">${escapeHtml(label)}</div><div class="exchange-detail-value">${escapeHtml(String(value ?? '-'))}</div></div>`;
         }
 
+        function automationHintLabel(hint) {
+            const normalized = String(hint || '').trim().toLowerCase();
+            if (normalized === 'scripted' || normalized === 'automation') return 'scripted';
+            if (normalized === 'hands_on_keyboard') return 'hands-on-keyboard';
+            if (normalized === 'automated_paste') return 'automated paste';
+            if (normalized === 'llm_harness') return 'LLM / harness';
+            return '';
+        }
+
         function commandExchangeMeta(session, command, result) {
             const timing = sessionTimingMetrics(session);
             const complexity = Number(command.SemanticComplexity);
@@ -2396,6 +2405,11 @@
                 `Sophistication: ${scoreLabel(complexity)} (${formatNumber(complexity)}/10)`,
                 `Target value: ${scoreLabel(assetValue)} (${formatNumber(assetValue)}/10)`,
             ];
+            const actorMode = automationHintLabel(command.ActorAutomationHint);
+            if (actorMode) parts.push(`Delivery: ${actorMode}`);
+            if (Number(command.InputTypingDurationMs) > 0 || Number(command.InputChunkCount) > 1) {
+                parts.push(`Keystroke cadence: ${formatDurationMs(command.InputTypingDurationMs || 0)} (${command.InputChunkCount || 1} chunks${command.InputBackspaceCount ? `, ${command.InputBackspaceCount} edits` : ''})`);
+            }
             const attackerResponseMs = command.AttackerResponseTimeMs ?? command.CommandSequenceLatencyMs;
             if (attackerResponseMs !== undefined && attackerResponseMs !== null) {
                 parts.push(`Attacker response time: ${formatDurationMs(attackerResponseMs)}`);
@@ -2413,23 +2427,29 @@
             if (!result) return 'No response record was captured for this command.';
             const duration = result.ResponseDurationMs !== undefined && result.ResponseDurationMs !== null ? formatDurationMs(result.ResponseDurationMs) : 'unknown time';
             const source = responseSourceLabel(result.ResponseSource, result.LlmModel);
-            if (String(result.ResponseSource || '').toLowerCase() === 'cache') {
-                const model = result.LlmModel ? `Original model: ${result.LlmModel}` : 'Original source: unknown';
-                return `Served from response cache in ${duration} / ${model}`;
+            const normalizedSource = String(result.ResponseSource || '').trim().toLowerCase();
+            if (normalizedSource === 'cache' || normalizedSource === 'compound cache') {
+                const model = result.LlmModel ? `Original model: ${result.LlmModel}` : 'Original source: seed/cache';
+                return `Served from ${source} in ${duration} / ${model}`;
             }
             const status = result.FailedCommand ? 'Simulated a realistic command failure' : 'Simulated output generated';
             return `${status} in ${duration} / Source: ${source}`;
         }
 
         function responseCacheBadge(result) {
-            return String(result?.ResponseSource || '').trim().toLowerCase() === 'cache'
-                ? `${badge('cached response', 'amber')} `
-                : '';
+            const normalized = String(result?.ResponseSource || '').trim().toLowerCase();
+            if (normalized === 'cache' || normalized === 'compound cache')
+                return `${badge('cached response', 'amber')} `;
+            if (normalized === 'compound hybrid')
+                return `${badge('hybrid cache+LLM', 'cyan')} `;
+            return '';
         }
 
         function responseSourceLabel(source, model) {
             const normalized = String(source || '').trim().toLowerCase();
             if (normalized === 'cache') return 'response cache';
+            if (normalized === 'compound cache') return 'segmented compound cache';
+            if (normalized === 'compound hybrid') return model ? `segmented cache + LLM (${model})` : 'segmented cache + LLM';
             if (normalized === 'llm') return model ? `LLM (${model})` : 'LLM';
             if (normalized === 'static response') return 'static response library';
             if (normalized === 'built-in') return 'built-in shell simulation';
@@ -2503,7 +2523,10 @@
                 : (responseTimes[middle - 1] + responseTimes[middle]) / 2;
             const meanMs = average(responseTimes);
             const variance = average(responseTimes.map(value => (value - meanMs) ** 2));
-            const hintedCommands = (session.commands || []).filter(command => command.ActorAutomationHint === 'automation').length;
+            const hintedCommands = (session.commands || []).filter(command => {
+                const hint = String(command.ActorAutomationHint || '').toLowerCase();
+                return hint === 'automation' || hint === 'scripted';
+            }).length;
             session._timingMetrics = {
                 responseTimes,
                 sampleCount,
@@ -2536,15 +2559,31 @@
                     && !/^(command|output|error|failed|success|permission|denied|unknown|directory)$/.test(token.toLowerCase())
                     && new RegExp(`(^|[^\\w.-])${token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^\\w.-]|$)`, 'i').test(next))) outputFollowUps++;
             }
-            const exec = (session.timeline || []).some(item => item.type === 'shell_session_start' && item.data?.State === 'ExecOpened');
+            const exec = (session.timeline || []).some(item => item.type === 'shell_session_start' && item.data?.State === 'ExecOpened')
+                || (session.commands || []).some(command => String(command.DeliveryChannel || '').toLowerCase() === 'exec');
+            const typedCommands = (session.commands || []).filter(command =>
+                String(command.ActorAutomationHint || '').toLowerCase() === 'hands_on_keyboard'
+                || Number(command.InputBackspaceCount) > 0
+                || (Number(command.InputChunkCount) >= 3 && Number(command.InputTypingDurationMs) >= 250)).length;
+            const scriptedHints = (session.commands || []).filter(command => {
+                const h = String(command.ActorAutomationHint || '').toLowerCase();
+                return h === 'scripted' || h === 'automation';
+            }).length;
+            const harnessHints = (session.commands || []).filter(command => {
+                const h = String(command.ActorAutomationHint || '').toLowerCase();
+                return h === 'llm_harness' || h === 'automated_paste';
+            }).length;
             const scores = { script: 0, harness: 0, handsOnKeyboard: 0 };
             if (exec) scores.script += 2;
             if (timing.firstCommandDelayMs !== null && timing.firstCommandDelayMs <= 250) scores.script++;
             if (timing.sampleCount >= 2 && timing.rapidShare >= 0.75) scores.script += 2;
-            if (timing.automationHintShare >= 0.5 && commands.length >= 2) scores.script++;
+            if (timing.automationHintShare >= 0.5 && commands.length >= 1) scores.script += 2;
+            if (scriptedHints >= 1 && commands.length === 1) scores.script++;
             if (chainCount >= 2) scores.script++;
             if (outputFollowUps >= 2) scores.harness += 2;
             if (outputFollowUps >= 1 && chainCount >= 1) scores.harness++;
+            if (harnessHints >= 1) scores.harness += 2;
+            if (typedCommands >= 1) scores.handsOnKeyboard += 3;
             if (timing.sampleCount >= 3 && timing.medianMs >= 1500 && timing.medianMs <= 30000) {
                 scores.handsOnKeyboard++;
                 if (timing.variability >= 0.3) scores.handsOnKeyboard++;

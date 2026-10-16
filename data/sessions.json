@@ -119,11 +119,84 @@
           "State": "ExecCompleted",
           "DurationSeconds": 0.4913298
         }
+      },
+      {
+        "Timestamp": "2026-10-16T23:11:39.3588179Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "10fee12b-76b9-420d-9aab-5f2ff8fe2ca3",
+        "Data": {
+          "RemoteEndpoint": "178.128.169.146:33056",
+          "Username": "avisa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecOpened",
+          "DurationSeconds": 0.638899,
+          "TimeToCompromiseMs": 638
+        }
+      },
+      {
+        "Timestamp": "2026-10-16T23:11:52.3788187Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "10fee12b-76b9-420d-9aab-5f2ff8fe2ca3",
+        "ExchangeId": "01cd179de829415b:000002",
+        "Data": {
+          "RemoteEndpoint": "178.128.169.146:33056",
+          "Username": "avisa",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "uptime -p",
+          "CommandSequenceLatencyMs": 13020,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-16T23:11:52.3840055Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "10fee12b-76b9-420d-9aab-5f2ff8fe2ca3",
+        "ExchangeId": "01cd179de829415b:000002",
+        "Data": {
+          "RemoteEndpoint": "178.128.169.146:33056",
+          "Username": "avisa",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "uptime -p",
+          "Response": "up 172 days, 10 hours, 36 minutes",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 2.61
+        }
+      },
+      {
+        "Timestamp": "2026-10-16T23:11:52.3866651Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "10fee12b-76b9-420d-9aab-5f2ff8fe2ca3",
+        "Data": {
+          "RemoteEndpoint": "178.128.169.146:33056",
+          "Username": "avisa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecCompleted",
+          "DurationSeconds": 13.666748
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 485,
-    "CommandCount": 1,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -165,6 +238,47 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "10fee12b-76b9-420d-9aab-5f2ff8fe2ca3",
+        "ExchangeId": "01cd179de829415b:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "uptime -p",
+        "Timestamp": "2026-10-16T23:11:52.3788187Z",
+        "CommandSequenceLatencyMs": 13020,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-16T23:11:52.3840055Z",
+        "Response": "up 172 days, 10 hours, 36 minutes",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 2.61,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
       }
     ],
     "TacticsObserved": [
@@ -173,7 +287,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 34
   },
   {
     "SessionId": "be2a8720150149e4",

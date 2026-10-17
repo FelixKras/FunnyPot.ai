@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-17T07:11:19.451104Z",
+  "LastUpdated": "2026-10-17T07:11:23.391654Z",
   "TotalUniqueUsernames": 768,
   "TotalUniquePasswords": 1383,
   "TotalUniqueSourceIps": 1467,
-  "TotalUniqueCommands": 179,
+  "TotalUniqueCommands": 180,
   "Usernames": {
     "root": 5030,
     "admin": 1594,
@@ -3626,7 +3626,7 @@
     "202.86.149.20": 5,
     "27.79.3.14": 30,
     "106.219.147.252": 4,
-    "77.239.124.79": 18
+    "77.239.124.79": 22
   },
   "FrequentCommands": {
     "id": 26,
@@ -3807,6 +3807,7 @@
     "uname -s": 1,
     "uptime 2\u003E/dev/null | head -1": 1,
     "uname -s -v -n -r -m": 1,
-    "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 1
+    "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 1,
+    "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1": 1
   }
 }

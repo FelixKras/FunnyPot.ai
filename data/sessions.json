@@ -2,15 +2,25 @@
   {
     "SessionId": "1257b67a60cc4c64",
     "StartedAt": "2026-10-17T03:39:22.15846Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-17T03:40:01.798778Z",
+    "DurationSeconds": 39.64,
     "RemoteEndpoint": "85.11.167.154:44174",
     "RemoteIp": "85.11.167.154",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "user",
+    "ClientVersion": "SSH-2.0-libssh_0.12.0",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "user",
+        "Password": "qq12",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 7,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-17T03:39:22.4602187Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-17T03:39:22.15846Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-17T03:39:22.4602187Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "85.11.167.154:44174",
+          "Username": "user",
+          "AuthMethod": "password",
+          "Password": "qq12",
+          "ConnectionAttemptNumber": 7,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T03:40:01.798778Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "85.11.167.154:44174",
+          "ClientVersion": "SSH-2.0-libssh_0.12.0",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 39.6403182
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "f617da680348473f",

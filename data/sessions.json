@@ -2,15 +2,25 @@
   {
     "SessionId": "aa65a3f4c8b141af",
     "StartedAt": "2026-10-17T04:18:00.2226326Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-17T04:18:39.6794673Z",
+    "DurationSeconds": 39.46,
     "RemoteEndpoint": "43.228.157.57:60246",
     "RemoteIp": "43.228.157.57",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "fa",
+    "ClientVersion": "SSH-2.0-libssh_0.12.0",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "fa",
+        "Password": "fa",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-17T04:18:00.9301128Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-17T04:18:00.2226326Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-17T04:18:00.9301128Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "43.228.157.57:60246",
+          "Username": "fa",
+          "AuthMethod": "password",
+          "Password": "fa",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T04:18:39.6794673Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "43.228.157.57:60246",
+          "ClientVersion": "SSH-2.0-libssh_0.12.0",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 39.4568348
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "76db378dd2e24d83",

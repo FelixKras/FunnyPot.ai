@@ -119,11 +119,80 @@
           "State": "ExecCompleted",
           "DurationSeconds": 17.7845674
         }
+      },
+      {
+        "Timestamp": "2026-10-17T07:11:03.6681487Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "1e33e65a-748a-405e-834f-30290f0dcf8a",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 27.8804358,
+          "TimeToCompromiseMs": 27880
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:11:07.7234023Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "1e33e65a-748a-405e-834f-30290f0dcf8a",
+        "ExchangeId": "6bbefb0cba124e4b:000002",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo",
+          "CommandSequenceLatencyMs": 4055,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 11,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:11:07.7298584Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "1e33e65a-748a-405e-834f-30290f0dcf8a",
+        "ExchangeId": "6bbefb0cba124e4b:000002",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo",
+          "Response": "96",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.81
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:11:07.7336467Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "1e33e65a-748a-405e-834f-30290f0dcf8a",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 31.9459341
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 17745,
-    "CommandCount": 1,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -165,6 +234,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "1e33e65a-748a-405e-834f-30290f0dcf8a",
+        "ExchangeId": "6bbefb0cba124e4b:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo",
+        "Timestamp": "2026-10-17T07:11:07.7234023Z",
+        "CommandSequenceLatencyMs": 4055,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 11,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-17T07:11:07.7298584Z",
+        "Response": "96",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.81,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
       }
     ],
     "TacticsObserved": [
@@ -173,7 +282,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 34
   },
   {
     "SessionId": "8e9ce6bfcb4d4bc5",

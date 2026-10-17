@@ -2,15 +2,25 @@
   {
     "SessionId": "4d9bbeb7fd764cc4",
     "StartedAt": "2026-10-17T08:51:32.6173993Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-17T08:52:16.4241347Z",
+    "DurationSeconds": 43.81,
     "RemoteEndpoint": "85.11.167.239:61166",
     "RemoteIp": "85.11.167.239",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-libssh_0.12.0",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "HuaWei@123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 8,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-17T08:51:33.246884Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-17T08:51:32.6173993Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-17T08:51:33.246884Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "85.11.167.239:61166",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "HuaWei@123",
+          "ConnectionAttemptNumber": 8,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T08:52:16.4241347Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "85.11.167.239:61166",
+          "ClientVersion": "SSH-2.0-libssh_0.12.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 43.8067356
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "583e06a758db4c7f",

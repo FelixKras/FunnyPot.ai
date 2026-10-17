@@ -1,5 +1,181 @@
 [
   {
+    "SessionId": "6bbefb0cba124e4b",
+    "StartedAt": "2026-10-17T07:10:35.7877129Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "77.239.124.79:18176",
+    "RemoteIp": "77.239.124.79",
+    "Username": "fa",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "fa",
+        "Password": "fa",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-17T07:10:51.623669Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-17T07:10:35.7877129Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:10:51.623669Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "AuthMethod": "password",
+          "Password": "fa",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:10:53.5328726Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "8ac5bb5b-f433-48a8-afa2-2c5c65d7d99e",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 17.7451597,
+          "TimeToCompromiseMs": 17745
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:10:53.5571052Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "8ac5bb5b-f433-48a8-afa2-2c5c65d7d99e",
+        "ExchangeId": "6bbefb0cba124e4b:000001",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -s -v -n -r -m",
+          "CommandSequenceLatencyMs": 24,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:10:53.5574634Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "8ac5bb5b-f433-48a8-afa2-2c5c65d7d99e",
+        "ExchangeId": "6bbefb0cba124e4b:000001",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "uname -s -v -n -r -m",
+          "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
+          "LlmModel": "openai/gpt-5.6-luna",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:10:53.5722797Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "8ac5bb5b-f433-48a8-afa2-2c5c65d7d99e",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 17.7845674
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 17745,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "8ac5bb5b-f433-48a8-afa2-2c5c65d7d99e",
+        "ExchangeId": "6bbefb0cba124e4b:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "uname -s -v -n -r -m",
+        "Timestamp": "2026-10-17T07:10:53.5571052Z",
+        "CommandSequenceLatencyMs": 24,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-17T07:10:53.5574634Z",
+        "Response": "Linux #1 SMP Tue Apr 9 10:12:00 UTC 2024 omegablack 5.15.144-omegablack x86_64",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-5.6-luna",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 32
+  },
+  {
     "SessionId": "8e9ce6bfcb4d4bc5",
     "StartedAt": "2026-10-17T07:09:58.9424127Z",
     "EndedAt": "2026-10-17T07:10:30.4110577Z",
@@ -268987,52 +269163,6 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "Disconnected",
           "DurationSeconds": 2.5469817
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "49ab710632004929",
-    "StartedAt": "2026-10-11T01:56:22.9705559Z",
-    "EndedAt": "2026-10-11T01:56:25.6219862Z",
-    "DurationSeconds": 2.65,
-    "RemoteEndpoint": "154.18.197.29:51282",
-    "RemoteIp": "154.18.197.29",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-11T01:56:22.9705559Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:51282",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-11T01:56:25.6219862Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:51282",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "Disconnected",
-          "DurationSeconds": 2.6514306
         }
       }
     ],

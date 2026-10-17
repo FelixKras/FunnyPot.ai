@@ -6,11 +6,21 @@
     "DurationSeconds": 0,
     "RemoteEndpoint": "62.171.133.1:48980",
     "RemoteIp": "62.171.133.1",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
     "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "12345",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 11,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-17T07:30:16.9336361Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-17T07:30:14.2075003Z",
@@ -22,16 +32,142 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-17T07:30:16.9336361Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:48980",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "12345",
+          "ConnectionAttemptNumber": 11,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:30:24.9746467Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "7c0ef1cd-8ed1-4d01-b6b9-5f046bbdbe90",
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:48980",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 10.7671464,
+          "TimeToCompromiseMs": 10767
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:30:24.9781642Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "7c0ef1cd-8ed1-4d01-b6b9-5f046bbdbe90",
+        "ExchangeId": "77c6b62164fd45da:000001",
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:48980",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022GPU:$gpu_info\u0022",
+          "CommandSequenceLatencyMs": 3,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 340,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:30:24.9792394Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "7c0ef1cd-8ed1-4d01-b6b9-5f046bbdbe90",
+        "ExchangeId": "77c6b62164fd45da:000001",
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:48980",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022GPU:$gpu_info\u0022",
+          "Response": "UNAME:Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux\r\nARCH:x86_64\r\nUPTIME:8303820.00 732145600.00\r\nCPUS:96\r\nGPU:00:00.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 41)\r\n3b:00.0 3D controller: NVIDIA Corporation GA100 [A100 SXM4 80GB] (rev a1)\r\n4b:00.0 3D controller: NVIDIA Corporation GA100 [A100 SXM4 80GB] (rev a1)",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:30:24.9821262Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "7c0ef1cd-8ed1-4d01-b6b9-5f046bbdbe90",
+        "Data": {
+          "RemoteEndpoint": "62.171.133.1:48980",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 10.7746263
+        }
       }
     ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 10767,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "7c0ef1cd-8ed1-4d01-b6b9-5f046bbdbe90",
+        "ExchangeId": "77c6b62164fd45da:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH\nuname=$(uname -s -v -n -m 2\u003E/dev/null || /bin/uname -s -v -n -m 2\u003E/dev/null || /usr/bin/uname -s -v -n -m 2\u003E/dev/null || busybox uname -s -v -n -m 2\u003E/dev/null || ( [ -f /proc/version ] \u0026\u0026 head -1 /proc/version | cut -d\u0027 \u0027 -f1 ) || ( [ -f /etc/os-release ] \u0026\u0026 grep \u0027^ID=\u0027 /etc/os-release | cut -d= -f2 | tr -d \u0027\u0022\u0027 ) || echo \u0022\u0022)\narch=$(uname -m 2\u003E/dev/null || /bin/uname -m 2\u003E/dev/null || /usr/bin/uname -m 2\u003E/dev/null || busybox uname -m 2\u003E/dev/null || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022lm\u0022 /proc/cpuinfo \u0026\u0026 echo x86_64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 8\u0022 /proc/cpuinfo \u0026\u0026 echo aarch64 ) || ( [ -f /proc/cpuinfo ] \u0026\u0026 grep -q \u0022CPU architecture: 7\u0022 /proc/cpuinfo \u0026\u0026 echo armv7l ) || echo \u0022\u0022)\nuptime=$(cat /proc/uptime 2\u003E/dev/null || busybox cat /proc/uptime 2\u003E/dev/null)\ncpus=$(nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0022^processor\u0022 /proc/cpuinfo 2\u003E/dev/null)\ngpu_info=$( (lspci 2\u003E/dev/null | grep -i vga; lspci 2\u003E/dev/null | grep -i nvidia; busybox lspci 2\u003E/dev/null | grep -i vga; busybox lspci 2\u003E/dev/null | grep -i nvidia) 2\u003E/dev/null )\necho \u0022UNAME:$uname\u0022\necho \u0022ARCH:$arch\u0022\necho \u0022UPTIME:$uptime\u0022\necho \u0022CPUS:$cpus\u0022\necho \u0022GPU:$gpu_info\u0022",
+        "Timestamp": "2026-10-17T07:30:24.9781642Z",
+        "CommandSequenceLatencyMs": 3,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 340,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-17T07:30:24.9792394Z",
+        "Response": "UNAME:Linux omegablack 5.15.144-omegablack #1 SMP Tue Apr 9 10:12:00 UTC 2024 x86_64 GNU/Linux\r\nARCH:x86_64\r\nUPTIME:8303820.00 732145600.00\r\nCPUS:96\r\nGPU:00:00.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 41)\r\n3b:00.0 3D controller: NVIDIA Corporation GA100 [A100 SXM4 80GB] (rev a1)\r\n4b:00.0 3D controller: NVIDIA Corporation GA100 [A100 SXM4 80GB] (rev a1)",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, RAM, and distribution baseline"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 22
   },
   {
     "SessionId": "631c80c20eac45c9",

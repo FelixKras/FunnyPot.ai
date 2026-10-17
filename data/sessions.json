@@ -471,11 +471,83 @@
           "State": "ExecCompleted",
           "DurationSeconds": 91.9554318
         }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:19.5337783Z",
+        "Event": "shell_session_start",
+        "Sequence": 27,
+        "ChannelId": "781d12e2-4e02-4766-86d8-59e0ebc554aa",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 103.7460654,
+          "TimeToCompromiseMs": 103746
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:23.6028398Z",
+        "Event": "command",
+        "Sequence": 28,
+        "ChannelId": "781d12e2-4e02-4766-86d8-59e0ebc554aa",
+        "ExchangeId": "6bbefb0cba124e4b:000007",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done",
+          "CommandSequenceLatencyMs": 4069,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 24,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:25.9061481Z",
+        "Event": "command_result",
+        "Sequence": 29,
+        "ChannelId": "781d12e2-4e02-4766-86d8-59e0ebc554aa",
+        "ExchangeId": "6bbefb0cba124e4b:000007",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done",
+          "Response": "ZmE=ZmE=ZmE=",
+          "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 2302,
+          "PromptTokens": 3804,
+          "CompletionTokens": 13,
+          "TuringMultiplier": 1.27
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:25.9096646Z",
+        "Event": "shell_session_end",
+        "Sequence": 30,
+        "ChannelId": "781d12e2-4e02-4766-86d8-59e0ebc554aa",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 110.1219519
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 17745,
-    "CommandCount": 6,
+    "CommandCount": 7,
     "Commands": [
       {
         "Sequence": 4,
@@ -718,6 +790,46 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 28,
+        "ChannelId": "781d12e2-4e02-4766-86d8-59e0ebc554aa",
+        "ExchangeId": "6bbefb0cba124e4b:000007",
+        "MessageNumber": 7,
+        "ShellMessageNumber": 1,
+        "Command": "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done",
+        "Timestamp": "2026-10-17T07:12:23.6028398Z",
+        "CommandSequenceLatencyMs": 4069,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 24,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-17T07:12:25.9061481Z",
+        "Response": "ZmE=ZmE=ZmE=",
+        "ResponseDurationMs": 2302,
+        "PromptTokens": 3804,
+        "CompletionTokens": 13,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "nvidia/nemotron-3-super-120b-a12b:free",
+        "ResponseSource": "llm",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.27,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
       }
     ],
     "TacticsObserved": [
@@ -726,7 +838,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 42
+    "RiskScore": 44
   },
   {
     "SessionId": "8e9ce6bfcb4d4bc5",

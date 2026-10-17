@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-17T07:12:21.0620362Z",
+  "LastUpdated": "2026-10-17T07:12:27.6271057Z",
   "TotalUniqueUsernames": 768,
   "TotalUniquePasswords": 1383,
   "TotalUniqueSourceIps": 1467,
-  "TotalUniqueCommands": 183,
+  "TotalUniqueCommands": 184,
   "Usernames": {
     "root": 5030,
     "admin": 1594,
@@ -3626,7 +3626,7 @@
     "202.86.149.20": 5,
     "27.79.3.14": 30,
     "106.219.147.252": 4,
-    "77.239.124.79": 34
+    "77.239.124.79": 38
   },
   "FrequentCommands": {
     "id": 26,
@@ -3811,6 +3811,7 @@
     "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1": 1,
     "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027": 1,
     "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027": 1,
-    "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 1
+    "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 1,
+    "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done": 1
   }
 }

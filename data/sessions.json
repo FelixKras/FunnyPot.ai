@@ -2,15 +2,25 @@
   {
     "SessionId": "b96391cde7814071",
     "StartedAt": "2026-10-17T09:56:18.8886007Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-17T09:56:29.0011409Z",
+    "DurationSeconds": 10.11,
     "RemoteEndpoint": "45.156.87.153:60218",
     "RemoteIp": "45.156.87.153",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "labadmin",
+    "ClientVersion": "SSH-2.0-libssh_0.12.0",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "labadmin",
+        "Password": "111111",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-10-17T09:56:19.233095Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-17T09:56:18.8886007Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T09:56:19.233095Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "45.156.87.153:60218",
+          "Username": "labadmin",
+          "AuthMethod": "password",
+          "Password": "111111",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T09:56:29.0011409Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "45.156.87.153:60218",
+          "ClientVersion": "SSH-2.0-libssh_0.12.0",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 10.1125416
         }
       }
     ],

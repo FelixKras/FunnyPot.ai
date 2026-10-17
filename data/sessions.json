@@ -2,15 +2,25 @@
   {
     "SessionId": "c8cc290b25dd4ee5",
     "StartedAt": "2026-10-17T03:48:48.0875189Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-10-17T03:49:27.9967621Z",
+    "DurationSeconds": 39.91,
     "RemoteEndpoint": "130.12.181.23:50990",
     "RemoteIp": "130.12.181.23",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "montes",
+    "ClientVersion": "SSH-2.0-libssh_0.12.0",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "montes",
+        "Password": "montes",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 4,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-17T03:48:48.4620047Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-10-17T03:48:48.0875189Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-10-17T03:48:48.4620047Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "130.12.181.23:50990",
+          "Username": "montes",
+          "AuthMethod": "password",
+          "Password": "montes",
+          "ConnectionAttemptNumber": 4,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T03:49:27.9967621Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "130.12.181.23:50990",
+          "ClientVersion": "SSH-2.0-libssh_0.12.0",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 39.9092434
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "e42c82d3f13d4c66",

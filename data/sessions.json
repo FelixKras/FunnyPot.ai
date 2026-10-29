@@ -1,5 +1,178 @@
 [
   {
+    "SessionId": "30bea7a843c04dec",
+    "StartedAt": "2026-10-29T06:47:16.6790781Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "172.18.0.1:44694",
+    "RemoteIp": "172.18.0.1",
+    "Username": "bridge-deployment-probe",
+    "ClientVersion": "SSH-2.0-paramiko_5.0.0",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "bridge-deployment-probe",
+        "Password": "synthetic-bridge-final-1",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-29T06:47:25.9490337Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-29T06:47:16.6790781Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:44694",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:47:25.9490337Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:44694",
+          "Username": "bridge-deployment-probe",
+          "AuthMethod": "password",
+          "Password": "synthetic-bridge-final-1",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:47:25.962899Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "7a287ac7-95f6-4c40-9251-a3c47d15d718",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:44694",
+          "Username": "bridge-deployment-probe",
+          "ClientVersion": "SSH-2.0-paramiko_5.0.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecOpened",
+          "DurationSeconds": 9.2838209,
+          "TimeToCompromiseMs": 9283
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:47:25.9749062Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "7a287ac7-95f6-4c40-9251-a3c47d15d718",
+        "ExchangeId": "30bea7a843c04dec:000001",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:44694",
+          "Username": "bridge-deployment-probe",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "LC_ALL=C printf \u0027funnypot-minimal-bridge-20261029-0647\\n\u0027; uname -s",
+          "CommandSequenceLatencyMs": 12,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 7,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:47:27.8617892Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "7a287ac7-95f6-4c40-9251-a3c47d15d718",
+        "ExchangeId": "30bea7a843c04dec:000001",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:44694",
+          "Username": "bridge-deployment-probe",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "LC_ALL=C printf \u0027funnypot-minimal-bridge-20261029-0647\\n\u0027; uname -s",
+          "Response": "funnypot-minimal-bridge-20261029-0647\r\nLinux",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 1860,
+          "PromptTokens": 3639,
+          "CompletionTokens": 21,
+          "TuringMultiplier": 0.38
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:47:27.8679086Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "7a287ac7-95f6-4c40-9251-a3c47d15d718",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:44694",
+          "Username": "bridge-deployment-probe",
+          "ClientVersion": "SSH-2.0-paramiko_5.0.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecCompleted",
+          "DurationSeconds": 11.1888327
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 9283,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "7a287ac7-95f6-4c40-9251-a3c47d15d718",
+        "ExchangeId": "30bea7a843c04dec:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "LC_ALL=C printf \u0027funnypot-minimal-bridge-20261029-0647\\n\u0027; uname -s",
+        "Timestamp": "2026-10-29T06:47:25.9749062Z",
+        "CommandSequenceLatencyMs": 12,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-29T06:47:27.8617892Z",
+        "Response": "funnypot-minimal-bridge-20261029-0647\r\nLinux",
+        "ResponseDurationMs": 1860,
+        "PromptTokens": 3639,
+        "CompletionTokens": 21,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "llm",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.38,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 22
+  },
+  {
     "SessionId": "92c8de4315f84e9f",
     "StartedAt": "2026-10-29T06:46:41.5852133Z",
     "EndedAt": "2026-10-29T06:47:11.8421218Z",
@@ -349873,52 +350046,6 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "Disconnected",
           "DurationSeconds": 2.3845999
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "da08bc5ed0a444e1",
-    "StartedAt": "2026-10-11T02:26:35.1826332Z",
-    "EndedAt": "2026-10-11T02:27:12.8600894Z",
-    "DurationSeconds": 37.68,
-    "RemoteEndpoint": "34.52.145.157:48394",
-    "RemoteIp": "34.52.145.157",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Fingerprintx-SSH2",
-    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-11T02:26:35.1826332Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "34.52.145.157:48394",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-11T02:27:12.8600894Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "34.52.145.157:48394",
-          "ClientVersion": "SSH-2.0-Fingerprintx-SSH2",
-          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-          "State": "Disconnected",
-          "DurationSeconds": 37.6774565
         }
       }
     ],

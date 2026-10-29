@@ -1,5 +1,178 @@
 [
   {
+    "SessionId": "9fb7b846f18948f3",
+    "StartedAt": "2026-10-29T06:18:52.301039Z",
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "172.18.0.1:53868",
+    "RemoteIp": "172.18.0.1",
+    "Username": "deployment-probe",
+    "ClientVersion": "SSH-2.0-paramiko_5.0.0",
+    "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "deployment-probe",
+        "Password": "synthetic-deployment-check-final",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-10-29T06:18:52.393147Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-10-29T06:18:52.301039Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:53868",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:18:52.393147Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:53868",
+          "Username": "deployment-probe",
+          "AuthMethod": "password",
+          "Password": "synthetic-deployment-check-final",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:18:52.4066091Z",
+        "Event": "shell_session_start",
+        "Sequence": 3,
+        "ChannelId": "3977a28e-a907-4800-b08a-aea1f4f31cf7",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:53868",
+          "Username": "deployment-probe",
+          "ClientVersion": "SSH-2.0-paramiko_5.0.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecOpened",
+          "DurationSeconds": 0.1055701,
+          "TimeToCompromiseMs": 105
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:18:52.4200342Z",
+        "Event": "command",
+        "Sequence": 4,
+        "ChannelId": "3977a28e-a907-4800-b08a-aea1f4f31cf7",
+        "ExchangeId": "9fb7b846f18948f3:000001",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:53868",
+          "Username": "deployment-probe",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "LC_ALL=C printf \u0027funnypot-kilo-production-20261029-0619\\n\u0027; uname -s",
+          "CommandSequenceLatencyMs": 13,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 7,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:19:01.4845578Z",
+        "Event": "command_result",
+        "Sequence": 5,
+        "ChannelId": "3977a28e-a907-4800-b08a-aea1f4f31cf7",
+        "ExchangeId": "9fb7b846f18948f3:000001",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:53868",
+          "Username": "deployment-probe",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "LC_ALL=C printf \u0027funnypot-kilo-production-20261029-0619\\n\u0027; uname -s",
+          "Response": "funnypot-kilo-production-20261029-0619\r\nLinux",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 9049,
+          "PromptTokens": 5139,
+          "CompletionTokens": 54,
+          "TuringMultiplier": 1.82
+        }
+      },
+      {
+        "Timestamp": "2026-10-29T06:19:01.5068238Z",
+        "Event": "shell_session_end",
+        "Sequence": 6,
+        "ChannelId": "3977a28e-a907-4800-b08a-aea1f4f31cf7",
+        "Data": {
+          "RemoteEndpoint": "172.18.0.1:53868",
+          "Username": "deployment-probe",
+          "ClientVersion": "SSH-2.0-paramiko_5.0.0",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "ExecCompleted",
+          "DurationSeconds": 9.2057869
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 105,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 4,
+        "ChannelId": "3977a28e-a907-4800-b08a-aea1f4f31cf7",
+        "ExchangeId": "9fb7b846f18948f3:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "LC_ALL=C printf \u0027funnypot-kilo-production-20261029-0619\\n\u0027; uname -s",
+        "Timestamp": "2026-10-29T06:18:52.4200342Z",
+        "CommandSequenceLatencyMs": 13,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-10-29T06:19:01.4845578Z",
+        "Response": "funnypot-kilo-production-20261029-0619\r\nLinux",
+        "ResponseDurationMs": 9049,
+        "PromptTokens": 5139,
+        "CompletionTokens": 54,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "llm",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.82,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 22
+  },
+  {
     "SessionId": "6cf2d8dea4d948da",
     "StartedAt": "2026-10-29T06:18:06.9883377Z",
     "EndedAt": "2026-10-29T06:18:37.4434041Z",
@@ -349285,52 +349458,6 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "Disconnected",
           "DurationSeconds": 2.8733259
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "fb37b83df18e4d04",
-    "StartedAt": "2026-10-11T02:21:02.8481802Z",
-    "EndedAt": "2026-10-11T02:21:05.6918265Z",
-    "DurationSeconds": 2.84,
-    "RemoteEndpoint": "154.18.197.29:54272",
-    "RemoteIp": "154.18.197.29",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-10-11T02:21:02.8481802Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:54272",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-10-11T02:21:05.6918265Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "154.18.197.29:54272",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "Disconnected",
-          "DurationSeconds": 2.8436464
         }
       }
     ],

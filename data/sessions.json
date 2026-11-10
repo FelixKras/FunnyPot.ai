@@ -2,15 +2,43 @@
   {
     "SessionId": "b491c99890684067",
     "StartedAt": "2026-11-10T12:43:05.0793983Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-10T12:43:45.2403914Z",
+    "DurationSeconds": 40.16,
     "RemoteEndpoint": "2.57.121.112:8544",
     "RemoteIp": "2.57.121.112",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "tavares",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "tavares",
+        "Password": "tavares",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-10T12:43:05.4247321Z"
+      },
+      {
+        "Username": "tavares",
+        "Password": "tavares1",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-10T12:43:09.9129912Z"
+      },
+      {
+        "Username": "tavares",
+        "Password": "tavares123",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-10T12:43:09.9998791Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-10T12:43:05.0793983Z",
@@ -22,6 +50,60 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-11-10T12:43:05.4247321Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:8544",
+          "Username": "tavares",
+          "AuthMethod": "password",
+          "Password": "tavares",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T12:43:09.9129912Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:8544",
+          "Username": "tavares",
+          "AuthMethod": "password",
+          "Password": "tavares1",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T12:43:09.9998791Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:8544",
+          "Username": "tavares",
+          "AuthMethod": "password",
+          "Password": "tavares123",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T12:43:45.2403914Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:8544",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 40.1609939
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +113,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "ac4553cc774c4673",

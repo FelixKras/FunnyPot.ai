@@ -2,8 +2,8 @@
   {
     "SessionId": "cb6dbcb77ff9465b",
     "StartedAt": "2026-11-10T16:52:45.6893033Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-10T16:53:31.8445424Z",
+    "DurationSeconds": 46.16,
     "RemoteEndpoint": "195.178.110.228:56634",
     "RemoteIp": "195.178.110.228",
     "Username": "admin",
@@ -271,6 +271,39 @@
           "State": "CloseReceived",
           "DurationSeconds": 16.074167
         }
+      },
+      {
+        "Timestamp": "2026-11-10T16:53:10.6883026Z",
+        "Event": "command_result",
+        "Sequence": 14,
+        "ChannelId": "3e9fa558-a8fc-4250-89e3-2444e8929c6a",
+        "ExchangeId": "cb6dbcb77ff9465b:000005",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:56634",
+          "Username": "admin",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 5,
+          "Command": "sh -c \u0027f_check_84983f8a1137c7de82f80455a4345703() { printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_84983f8a1137c7de82f80455a4345703_small_function\u0027\u0022\u0027\u0022\u0027 \u0022$1|$#\u0022; }; f_check_84983f8a1137c7de82f80455a4345703 \u0027\u0022\u0027\u0022\u0027check_84983f8a1137c7de82f80455a4345703_function_value\u0027\u0022\u0027\u0022\u0027\u0027",
+          "Response": "[api error] Subscription bridge timed out or cancelled",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 1553,
+          "SemanticDrift": 15,
+          "TuringMultiplier": 0.94
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T16:53:31.8445424Z",
+        "Event": "session_end",
+        "Sequence": 15,
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:56634",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 46.1552393
+        }
       }
     ],
     "ShellOpened": true,
@@ -457,20 +490,20 @@
         "ReconnaissanceProbe": "none",
         "SemanticComplexity": 23,
         "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "",
-        "ResponseDurationMs": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-10T16:53:10.6883026Z",
+        "Response": "[api error] Subscription bridge timed out or cancelled",
+        "ResponseDurationMs": 1553,
         "PromptTokens": 0,
         "CompletionTokens": 0,
         "BlockedOperation": false,
         "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "llm",
         "HallucinationFeedback": false,
         "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
+        "SemanticDrift": 15,
+        "TuringMultiplier": 0.94,
         "MitreAttackTechniques": [
           "Execution"
         ],

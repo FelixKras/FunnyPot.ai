@@ -2,15 +2,25 @@
   {
     "SessionId": "3ef321bbb671464f",
     "StartedAt": "2026-11-10T23:48:42.2503628Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-10T23:49:23.3860284Z",
+    "DurationSeconds": 41.14,
     "RemoteEndpoint": "2.57.121.112:18030",
     "RemoteIp": "2.57.121.112",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "collette",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "collette",
+        "Password": "collette",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 10,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-10T23:48:42.6785253Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-10T23:48:42.2503628Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-11-10T23:48:42.6785253Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:18030",
+          "Username": "collette",
+          "AuthMethod": "password",
+          "Password": "collette",
+          "ConnectionAttemptNumber": 10,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T23:49:23.3860284Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:18030",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 41.1356658
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "78ee9dda99df4031",

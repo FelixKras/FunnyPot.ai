@@ -1,9 +1,9 @@
 {
-  "LastUpdated": "2026-11-10T18:24:26.9088029Z",
+  "LastUpdated": "2026-11-10T18:24:30.2306013Z",
   "TotalUniqueUsernames": 116,
   "TotalUniquePasswords": 236,
   "TotalUniqueSourceIps": 83,
-  "TotalUniqueCommands": 861,
+  "TotalUniqueCommands": 862,
   "Usernames": {
     "root": 101,
     "admin": 50,
@@ -443,7 +443,7 @@
     "109.160.32.180": 2,
     "95.47.164.177": 4,
     "186.156.54.73": 2,
-    "77.239.124.49": 18
+    "77.239.124.49": 22
   },
   "FrequentCommands": {
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_838e01f066c84f1e3d56106c05e7725b_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_838e01f066c84f1e3d56106c05e7725b\u0027\u0022\u0027\u0022\u0027\u0027": 1,
@@ -1306,6 +1306,7 @@
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_3446d4fe3e5c8ab73214a47bb26c441e_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_3446d4fe3e5c8ab73214a47bb26c441e\u0027\u0022\u0027\u0022\u0027\u0027": 1,
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_3446d4fe3e5c8ab73214a47bb26c441e_small_math\u0027\u0022\u0027\u0022\u0027 \u0022$((422*22\u002B94))\u0022\u0027": 1,
     "uname -s -v -n -r -m": 1,
-    "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 1
+    "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 1,
+    "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1": 1
   }
 }

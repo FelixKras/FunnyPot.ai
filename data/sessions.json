@@ -183,6 +183,27 @@
           "State": "CloseReceived",
           "DurationSeconds": 16.0355409
         }
+      },
+      {
+        "Timestamp": "2026-11-10T15:52:27.9342343Z",
+        "Event": "command_result",
+        "Sequence": 10,
+        "ChannelId": "1a1c8896-8a8b-4ae9-813f-1c22b9a6548f",
+        "ExchangeId": "8d1f45bb3059495e:000003",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:58398",
+          "Username": "root",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 3,
+          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_7ffff12b8aaf3396564cd1030e357551_small_pid\u0027\u0022\u0027\u0022\u0027 \u0022$$\u0022\u0027",
+          "Response": "[api error] Subscription bridge timed out or cancelled",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 3900,
+          "SemanticDrift": 4,
+          "TuringMultiplier": 1.35
+        }
       }
     ],
     "ShellOpened": true,
@@ -289,20 +310,20 @@
         "ReconnaissanceProbe": "none",
         "SemanticComplexity": 12,
         "AssetValuePerceptionScore": 0,
-        "HasResponse": false,
-        "ResponseTimestamp": null,
-        "Response": "",
-        "ResponseDurationMs": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-10T15:52:27.9342343Z",
+        "Response": "[api error] Subscription bridge timed out or cancelled",
+        "ResponseDurationMs": 3900,
         "PromptTokens": 0,
         "CompletionTokens": 0,
         "BlockedOperation": false,
         "FailedCommand": false,
-        "LlmModel": null,
-        "ResponseSource": null,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "llm",
         "HallucinationFeedback": false,
         "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0,
+        "SemanticDrift": 4,
+        "TuringMultiplier": 1.35,
         "MitreAttackTechniques": [
           "Execution"
         ],

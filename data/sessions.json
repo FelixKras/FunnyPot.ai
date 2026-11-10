@@ -2,15 +2,43 @@
   {
     "SessionId": "643c24f4ae134229",
     "StartedAt": "2026-11-10T11:58:14.6720579Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-10T11:58:55.2864246Z",
+    "DurationSeconds": 40.61,
     "RemoteEndpoint": "2.57.121.25:40092",
     "RemoteIp": "2.57.121.25",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "admin",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "admin",
+        "Password": "24011975",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-10T11:58:15.1065949Z"
+      },
+      {
+        "Username": "admin",
+        "Password": "2332",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-10T11:58:19.9210768Z"
+      },
+      {
+        "Username": "admin",
+        "Password": "2324",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-10T11:58:20.020569Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-10T11:58:14.6720579Z",
@@ -22,6 +50,60 @@
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-11-10T11:58:15.1065949Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:40092",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "24011975",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T11:58:19.9210768Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:40092",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "2332",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T11:58:20.020569Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:40092",
+          "Username": "admin",
+          "AuthMethod": "password",
+          "Password": "2324",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T11:58:55.2864246Z",
+        "Event": "session_end",
+        "Sequence": 5,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.25:40092",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 40.6143679
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +113,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "f985a688311146cc",

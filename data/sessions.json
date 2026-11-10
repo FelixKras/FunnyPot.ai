@@ -601,11 +601,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 62.1978634
         }
+      },
+      {
+        "Timestamp": "2026-11-10T10:23:01.9425174Z",
+        "Event": "shell_session_start",
+        "Sequence": 33,
+        "ChannelId": "3bc38078-2718-457d-b935-e3d2bb4a6e47",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 62.4713314,
+          "TimeToCompromiseMs": 62471
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:23:10.2398725Z",
+        "Event": "command",
+        "Sequence": 34,
+        "ChannelId": "3bc38078-2718-457d-b935-e3d2bb4a6e47",
+        "ExchangeId": "9f5db74598ae488f:000008",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "locate D877F783D5D3EF8Cs",
+          "CommandSequenceLatencyMs": 8297,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 2,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:23:10.2403126Z",
+        "Event": "command_result",
+        "Sequence": 35,
+        "ChannelId": "3bc38078-2718-457d-b935-e3d2bb4a6e47",
+        "ExchangeId": "9f5db74598ae488f:000008",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "locate D877F783D5D3EF8Cs",
+          "Response": "",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.66
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:23:10.2423174Z",
+        "Event": "shell_session_end",
+        "Sequence": 36,
+        "ChannelId": "3bc38078-2718-457d-b935-e3d2bb4a6e47",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 70.7711335
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 9169,
-    "CommandCount": 7,
+    "CommandCount": 8,
     "Commands": [
       {
         "Sequence": 6,
@@ -892,6 +962,46 @@
         ],
         "MitreTechnique": "T1083 File and Directory Discovery",
         "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 34,
+        "ChannelId": "3bc38078-2718-457d-b935-e3d2bb4a6e47",
+        "ExchangeId": "9f5db74598ae488f:000008",
+        "MessageNumber": 8,
+        "ShellMessageNumber": 1,
+        "Command": "locate D877F783D5D3EF8Cs",
+        "Timestamp": "2026-11-10T10:23:10.2398725Z",
+        "CommandSequenceLatencyMs": 8297,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-10T10:23:10.2403126Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.66,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
       }
     ],
     "TacticsObserved": [
@@ -901,7 +1011,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 54
+    "RiskScore": 56
   },
   {
     "SessionId": "8665c90c59a1463d",

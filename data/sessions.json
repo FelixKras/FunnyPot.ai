@@ -238,11 +238,84 @@
           "State": "ExecCompleted",
           "DurationSeconds": 18.8543592
         }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:18.5928403Z",
+        "Event": "shell_session_start",
+        "Sequence": 13,
+        "ChannelId": "c2813d57-4655-4c39-9f8d-056996357199",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 19.1216543,
+          "TimeToCompromiseMs": 19121
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:28.1099041Z",
+        "Event": "command",
+        "Sequence": 14,
+        "ChannelId": "c2813d57-4655-4c39-9f8d-056996357199",
+        "ExchangeId": "9f5db74598ae488f:000003",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "CommandSequenceLatencyMs": 9517,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:28.1103823Z",
+        "Event": "command_result",
+        "Sequence": 15,
+        "ChannelId": "c2813d57-4655-4c39-9f8d-056996357199",
+        "ExchangeId": "9f5db74598ae488f:000003",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP x86_64 GNU/Linux",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.9
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:28.1291274Z",
+        "Event": "shell_session_end",
+        "Sequence": 16,
+        "ChannelId": "c2813d57-4655-4c39-9f8d-056996357199",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 28.6579438
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 9169,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 6,
@@ -325,6 +398,47 @@
         ],
         "MitreTechnique": "T1016 System Network Configuration",
         "InferredObjective": "Map local network interfaces, subnets, and default gateway routing"
+      },
+      {
+        "Sequence": 14,
+        "ChannelId": "c2813d57-4655-4c39-9f8d-056996357199",
+        "ExchangeId": "9f5db74598ae488f:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-11-10T10:22:28.1099041Z",
+        "CommandSequenceLatencyMs": 9517,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-10T10:22:28.1103823Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.9,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
       }
     ],
     "TacticsObserved": [
@@ -334,7 +448,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 44
+    "RiskScore": 46
   },
   {
     "SessionId": "8665c90c59a1463d",

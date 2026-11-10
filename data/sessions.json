@@ -2,15 +2,25 @@
   {
     "SessionId": "f56663dbb23f42e0",
     "StartedAt": "2026-11-10T19:17:35.3762373Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-10T19:18:17.8161146Z",
+    "DurationSeconds": 42.44,
     "RemoteEndpoint": "2.57.121.112:53708",
     "RemoteIp": "2.57.121.112",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "alianna",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "alianna",
+        "Password": "alianna",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 7,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-10T19:17:35.86465Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-10T19:17:35.3762373Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-11-10T19:17:35.86465Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:53708",
+          "Username": "alianna",
+          "AuthMethod": "password",
+          "Password": "alianna",
+          "ConnectionAttemptNumber": 7,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T19:18:17.8161146Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:53708",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 42.4398774
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "d4552f40a5ea47c8",

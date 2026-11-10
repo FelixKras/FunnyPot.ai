@@ -6,11 +6,39 @@
     "DurationSeconds": 0,
     "RemoteEndpoint": "77.53.77.126:50823",
     "RemoteIp": "77.53.77.126",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-libssh2_1.11.1",
     "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "root",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-10T10:22:08.3086113Z"
+      },
+      {
+        "Username": "root",
+        "Password": "admin",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-10T10:22:08.3874515Z"
+      },
+      {
+        "Username": "root",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-10T10:22:08.4706233Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-10T10:21:59.471186Z",
@@ -22,16 +50,176 @@
           "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.3086113Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "root",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.3874515Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "admin",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.4706233Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.6404636Z",
+        "Event": "shell_session_start",
+        "Sequence": 5,
+        "ChannelId": "776d7403-e7dd-4cfb-bbc2-b317165ee2bc",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 9.1692776,
+          "TimeToCompromiseMs": 9169
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.6553217Z",
+        "Event": "command",
+        "Sequence": 6,
+        "ChannelId": "776d7403-e7dd-4cfb-bbc2-b317165ee2bc",
+        "ExchangeId": "9f5db74598ae488f:000001",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/ip cloud print",
+          "CommandSequenceLatencyMs": 14,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "ReconnaissanceProbe": "mikrotik_routeros_probe",
+          "SemanticComplexity": 3,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Reconnaissance"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.6902359Z",
+        "Event": "command_result",
+        "Sequence": 7,
+        "ChannelId": "776d7403-e7dd-4cfb-bbc2-b317165ee2bc",
+        "ExchangeId": "9f5db74598ae488f:000001",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/ip cloud print",
+          "Response": "bash: /ip: No such file or directory",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 4,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:08.6951988Z",
+        "Event": "shell_session_end",
+        "Sequence": 8,
+        "ChannelId": "776d7403-e7dd-4cfb-bbc2-b317165ee2bc",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 9.2240145
+        }
       }
     ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 9169,
+    "CommandCount": 1,
+    "Commands": [
+      {
+        "Sequence": 6,
+        "ChannelId": "776d7403-e7dd-4cfb-bbc2-b317165ee2bc",
+        "ExchangeId": "9f5db74598ae488f:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "/ip cloud print",
+        "Timestamp": "2026-11-10T10:22:08.6553217Z",
+        "CommandSequenceLatencyMs": 14,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "mikrotik_routeros_probe",
+        "SemanticComplexity": 3,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-10T10:22:08.6902359Z",
+        "Response": "bash: /ip: No such file or directory",
+        "ResponseDurationMs": 4,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Reconnaissance"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Reconnaissance"
+    ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 32
   },
   {
     "SessionId": "8665c90c59a1463d",

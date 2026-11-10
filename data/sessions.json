@@ -1,428 +1,5 @@
 [
   {
-    "SessionId": "d56c431be665449a",
-    "StartedAt": "2026-11-10T15:31:59.9230743Z",
-    "EndedAt": "2026-11-10T15:32:25.3335527Z",
-    "DurationSeconds": 25.41,
-    "RemoteEndpoint": "195.178.110.228:46948",
-    "RemoteIp": "195.178.110.228",
-    "Username": "root",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": true,
-    "AuthAttempts": [
-      {
-        "Username": "root",
-        "Password": "123123",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 3,
-        "Accepted": true,
-        "AcceptanceReason": "harvest_threshold",
-        "Timestamp": "2026-11-10T15:32:02.2481203Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-10T15:31:59.9230743Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:02.2481203Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "AuthMethod": "password",
-          "Password": "123123",
-          "ConnectionAttemptNumber": 3,
-          "Accepted": true,
-          "AcceptanceReason": "harvest_threshold"
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:03.6483266Z",
-        "Event": "shell_session_start",
-        "Sequence": 3,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ShellOpened",
-          "DurationSeconds": 3.7252523,
-          "TimeToCompromiseMs": 3725
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:04.0402279Z",
-        "Event": "command",
-        "Sequence": 4,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000001",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 1,
-          "ShellMessageNumber": 1,
-          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5\u0027\u0022\u0027\u0022\u0027\u0027",
-          "CommandSequenceLatencyMs": 391,
-          "ActorAutomationHint": "unknown",
-          "DeliveryChannel": "pty",
-          "SemanticComplexity": 8,
-          "MitreAttackTechniques": [
-            "Execution"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:07.9835492Z",
-        "Event": "command_result",
-        "Sequence": 5,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000001",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 1,
-          "ShellMessageNumber": 1,
-          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5\u0027\u0022\u0027\u0022\u0027\u0027",
-          "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_control|check_4e450efc8a9a08b162e23de234f132b5",
-          "LlmModel": "openai/gpt-6.1-terra",
-          "ResponseSource": "llm",
-          "FailedCommand": false,
-          "ResponseDurationMs": 3941,
-          "PromptTokens": 3360,
-          "CompletionTokens": 52,
-          "TuringMultiplier": 0.87
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:07.988303Z",
-        "Event": "command",
-        "Sequence": 6,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000002",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 2,
-          "ShellMessageNumber": 2,
-          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_math\u0027\u0022\u0027\u0022\u0027 \u0022$((98*864\u002B56))\u0022\u0027",
-          "CommandSequenceLatencyMs": 5,
-          "ActorAutomationHint": "automation",
-          "DeliveryChannel": "pty",
-          "SemanticComplexity": 10,
-          "MitreAttackTechniques": [
-            "Execution"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:10.3921135Z",
-        "Event": "command_result",
-        "Sequence": 7,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000002",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 2,
-          "ShellMessageNumber": 2,
-          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_math\u0027\u0022\u0027\u0022\u0027 \u0022$((98*864\u002B56))\u0022\u0027",
-          "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_math|84728",
-          "LlmModel": "openai/gpt-6.1-terra",
-          "ResponseSource": "llm",
-          "FailedCommand": false,
-          "ResponseDurationMs": 2402,
-          "PromptTokens": 3608,
-          "CompletionTokens": 51,
-          "SemanticDrift": 2,
-          "TuringMultiplier": 0.67
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:10.3944621Z",
-        "Event": "command",
-        "Sequence": 8,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000003",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 3,
-          "ShellMessageNumber": 3,
-          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_pid\u0027\u0022\u0027\u0022\u0027 \u0022$$\u0022\u0027",
-          "CommandSequenceLatencyMs": 2,
-          "ActorAutomationHint": "automation",
-          "DeliveryChannel": "pty",
-          "SemanticComplexity": 12,
-          "MitreAttackTechniques": [
-            "Execution"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:18.2005011Z",
-        "Event": "command_result",
-        "Sequence": 9,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000003",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 3,
-          "ShellMessageNumber": 3,
-          "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_pid\u0027\u0022\u0027\u0022\u0027 \u0022$$\u0022\u0027",
-          "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_pid|28417",
-          "LlmModel": "openai/gpt-6.1-terra",
-          "ResponseSource": "llm",
-          "FailedCommand": false,
-          "ResponseDurationMs": 7805,
-          "PromptTokens": 3830,
-          "CompletionTokens": 32,
-          "SemanticDrift": 4,
-          "TuringMultiplier": 0.97
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:18.2036192Z",
-        "Event": "command",
-        "Sequence": 10,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000004",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 4,
-          "ShellMessageNumber": 4,
-          "Command": "sh -c \u0027set -- \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_arg1\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_arg2\u0027\u0022\u0027\u0022\u0027; printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_positional\u0027\u0022\u0027\u0022\u0027 \u0022$#|$1|$2\u0022\u0027",
-          "CommandSequenceLatencyMs": 3,
-          "ActorAutomationHint": "automation",
-          "DeliveryChannel": "pty",
-          "SemanticComplexity": 24,
-          "MitreAttackTechniques": [
-            "Execution"
-          ]
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:25.3302343Z",
-        "Event": "command_result",
-        "Sequence": 11,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000004",
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "Username": "root",
-          "MessageNumber": 4,
-          "ShellMessageNumber": 4,
-          "Command": "sh -c \u0027set -- \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_arg1\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_arg2\u0027\u0022\u0027\u0022\u0027; printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_positional\u0027\u0022\u0027\u0022\u0027 \u0022$#|$1|$2\u0022\u0027",
-          "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_positional|2|check_4e450efc8a9a08b162e23de234f132b5_arg1|check_4e450efc8a9a08b162e23de234f132b5_arg2",
-          "LlmModel": "openai/gpt-6.1-terra",
-          "ResponseSource": "llm",
-          "FailedCommand": false,
-          "ResponseDurationMs": 7126,
-          "PromptTokens": 4121,
-          "CompletionTokens": 82,
-          "SemanticDrift": 16,
-          "TuringMultiplier": 1.08
-        }
-      },
-      {
-        "Timestamp": "2026-11-10T15:32:25.3335527Z",
-        "Event": "session_end",
-        "Sequence": 12,
-        "Data": {
-          "RemoteEndpoint": "195.178.110.228:46948",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "Disconnected",
-          "DurationSeconds": 25.4104791
-        }
-      }
-    ],
-    "ShellOpened": true,
-    "TimeToCompromiseMs": 3725,
-    "CommandCount": 4,
-    "Commands": [
-      {
-        "Sequence": 4,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000001",
-        "MessageNumber": 1,
-        "ShellMessageNumber": 1,
-        "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5\u0027\u0022\u0027\u0022\u0027\u0027",
-        "Timestamp": "2026-11-10T15:32:04.0402279Z",
-        "CommandSequenceLatencyMs": 391,
-        "ActorAutomationHint": "unknown",
-        "DeliveryChannel": "pty",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 8,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-11-10T15:32:07.9835492Z",
-        "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_control|check_4e450efc8a9a08b162e23de234f132b5",
-        "ResponseDurationMs": 3941,
-        "PromptTokens": 3360,
-        "CompletionTokens": 52,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-6.1-terra",
-        "ResponseSource": "llm",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 0,
-        "TuringMultiplier": 0.87,
-        "MitreAttackTechniques": [
-          "Execution"
-        ],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 6,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000002",
-        "MessageNumber": 2,
-        "ShellMessageNumber": 2,
-        "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_math\u0027\u0022\u0027\u0022\u0027 \u0022$((98*864\u002B56))\u0022\u0027",
-        "Timestamp": "2026-11-10T15:32:07.988303Z",
-        "CommandSequenceLatencyMs": 5,
-        "ActorAutomationHint": "automation",
-        "DeliveryChannel": "pty",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 10,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-11-10T15:32:10.3921135Z",
-        "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_math|84728",
-        "ResponseDurationMs": 2402,
-        "PromptTokens": 3608,
-        "CompletionTokens": 51,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-6.1-terra",
-        "ResponseSource": "llm",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 2,
-        "TuringMultiplier": 0.67,
-        "MitreAttackTechniques": [
-          "Execution"
-        ],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 8,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000003",
-        "MessageNumber": 3,
-        "ShellMessageNumber": 3,
-        "Command": "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_pid\u0027\u0022\u0027\u0022\u0027 \u0022$$\u0022\u0027",
-        "Timestamp": "2026-11-10T15:32:10.3944621Z",
-        "CommandSequenceLatencyMs": 2,
-        "ActorAutomationHint": "automation",
-        "DeliveryChannel": "pty",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 12,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-11-10T15:32:18.2005011Z",
-        "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_pid|28417",
-        "ResponseDurationMs": 7805,
-        "PromptTokens": 3830,
-        "CompletionTokens": 32,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-6.1-terra",
-        "ResponseSource": "llm",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 4,
-        "TuringMultiplier": 0.97,
-        "MitreAttackTechniques": [
-          "Execution"
-        ],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      },
-      {
-        "Sequence": 10,
-        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
-        "ExchangeId": "d56c431be665449a:000004",
-        "MessageNumber": 4,
-        "ShellMessageNumber": 4,
-        "Command": "sh -c \u0027set -- \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_arg1\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_arg2\u0027\u0022\u0027\u0022\u0027; printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_4e450efc8a9a08b162e23de234f132b5_small_positional\u0027\u0022\u0027\u0022\u0027 \u0022$#|$1|$2\u0022\u0027",
-        "Timestamp": "2026-11-10T15:32:18.2036192Z",
-        "CommandSequenceLatencyMs": 3,
-        "ActorAutomationHint": "automation",
-        "DeliveryChannel": "pty",
-        "DiscoveryDepthScore": 0,
-        "PersistenceVector": "none",
-        "PayloadUrls": [],
-        "EgressTargets": [],
-        "TunnelingIntent": "none",
-        "PersonaBreakoutAttempt": false,
-        "ReconnaissanceProbe": "none",
-        "SemanticComplexity": 24,
-        "AssetValuePerceptionScore": 0,
-        "HasResponse": true,
-        "ResponseTimestamp": "2026-11-10T15:32:25.3302343Z",
-        "Response": "\r\ncheck_4e450efc8a9a08b162e23de234f132b5_small_positional|2|check_4e450efc8a9a08b162e23de234f132b5_arg1|check_4e450efc8a9a08b162e23de234f132b5_arg2",
-        "ResponseDurationMs": 7126,
-        "PromptTokens": 4121,
-        "CompletionTokens": 82,
-        "BlockedOperation": false,
-        "FailedCommand": false,
-        "LlmModel": "openai/gpt-6.1-terra",
-        "ResponseSource": "llm",
-        "HallucinationFeedback": false,
-        "StandardErrorRatio": 0,
-        "SemanticDrift": 16,
-        "TuringMultiplier": 1.08,
-        "MitreAttackTechniques": [
-          "Execution"
-        ],
-        "MitreTechnique": "T1059.004 Unix Shell",
-        "InferredObjective": "Interactive shell command execution and environment probing"
-      }
-    ],
-    "TacticsObserved": [
-      "Execution"
-    ],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 28
-  },
-  {
     "SessionId": "9050e1c50214416c",
     "StartedAt": "2026-11-10T15:30:31.3759657Z",
     "EndedAt": "2026-11-10T15:31:03.8407172Z",
@@ -244243,6 +243820,43 @@
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "Disconnected",
           "DurationSeconds": 0.0668953
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "d56c431be665449a",
+    "StartedAt": null,
+    "EndedAt": null,
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "195.178.110.228:46948",
+    "RemoteIp": "195.178.110.228",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-10T15:32:31.1961046Z",
+        "Event": "shell_session_end",
+        "Sequence": 1,
+        "ChannelId": "9b14313f-089b-4f4d-9e95-4c894ebf2120",
+        "Data": {
+          "RemoteEndpoint": "195.178.110.228:46948",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "SendFailed",
+          "DurationSeconds": 31.273033
         }
       }
     ],

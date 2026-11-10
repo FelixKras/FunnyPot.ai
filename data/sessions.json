@@ -381,11 +381,84 @@
           "State": "ExecCompleted",
           "DurationSeconds": 37.6209387
         }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:37.3938399Z",
+        "Event": "shell_session_start",
+        "Sequence": 21,
+        "ChannelId": "961c929d-c28e-48ea-b910-f1088d3d991b",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 37.9226539,
+          "TimeToCompromiseMs": 37922
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:45.1862201Z",
+        "Event": "command",
+        "Sequence": 22,
+        "ChannelId": "961c929d-c28e-48ea-b910-f1088d3d991b",
+        "ExchangeId": "9f5db74598ae488f:000005",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "ps | grep \u0027[Mm]iner\u0027",
+          "CommandSequenceLatencyMs": 7792,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:45.188845Z",
+        "Event": "command_result",
+        "Sequence": 23,
+        "ChannelId": "961c929d-c28e-48ea-b910-f1088d3d991b",
+        "ExchangeId": "9f5db74598ae488f:000005",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "ps | grep \u0027[Mm]iner\u0027",
+          "Response": "",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.56
+        }
+      },
+      {
+        "Timestamp": "2026-11-10T10:22:45.1911636Z",
+        "Event": "shell_session_end",
+        "Sequence": 24,
+        "ChannelId": "961c929d-c28e-48ea-b910-f1088d3d991b",
+        "Data": {
+          "RemoteEndpoint": "77.53.77.126:50823",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.1",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 45.7199801
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 9169,
-    "CommandCount": 4,
+    "CommandCount": 5,
     "Commands": [
       {
         "Sequence": 6,
@@ -549,6 +622,47 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, CPU cores, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 22,
+        "ChannelId": "961c929d-c28e-48ea-b910-f1088d3d991b",
+        "ExchangeId": "9f5db74598ae488f:000005",
+        "MessageNumber": 5,
+        "ShellMessageNumber": 1,
+        "Command": "ps | grep \u0027[Mm]iner\u0027",
+        "Timestamp": "2026-11-10T10:22:45.1862201Z",
+        "CommandSequenceLatencyMs": 7792,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-10T10:22:45.188845Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.56,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
       }
     ],
     "TacticsObserved": [
@@ -558,7 +672,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 48
+    "RiskScore": 50
   },
   {
     "SessionId": "8665c90c59a1463d",

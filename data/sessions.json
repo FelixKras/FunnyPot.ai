@@ -332,11 +332,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 35.3511293
         }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:18.9883991Z",
+        "Event": "shell_session_start",
+        "Sequence": 19,
+        "ChannelId": "d3eca79c-c6f9-4f46-9fb5-35432fc401c7",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 36.8323263,
+          "TimeToCompromiseMs": 36832
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:26.6354418Z",
+        "Event": "command",
+        "Sequence": 20,
+        "ChannelId": "d3eca79c-c6f9-4f46-9fb5-35432fc401c7",
+        "ExchangeId": "0bd41aacc9c54c6f:000005",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027 ",
+          "CommandSequenceLatencyMs": 7647,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 44,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:26.6357936Z",
+        "Event": "command_result",
+        "Sequence": 21,
+        "ChannelId": "d3eca79c-c6f9-4f46-9fb5-35432fc401c7",
+        "ExchangeId": "0bd41aacc9c54c6f:000005",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027 ",
+          "Response": "NVIDIA A100-SXM4-80GB",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.53
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:26.6389204Z",
+        "Event": "shell_session_end",
+        "Sequence": 22,
+        "ChannelId": "d3eca79c-c6f9-4f46-9fb5-35432fc401c7",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 44.4828479
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 8036,
-    "CommandCount": 4,
+    "CommandCount": 5,
     "Commands": [
       {
         "Sequence": 4,
@@ -499,6 +569,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, CPU cores, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 20,
+        "ChannelId": "d3eca79c-c6f9-4f46-9fb5-35432fc401c7",
+        "ExchangeId": "0bd41aacc9c54c6f:000005",
+        "MessageNumber": 5,
+        "ShellMessageNumber": 1,
+        "Command": "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027 ",
+        "Timestamp": "2026-11-11T03:54:26.6354418Z",
+        "CommandSequenceLatencyMs": 7647,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 44,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-11T03:54:26.6357936Z",
+        "Response": "NVIDIA A100-SXM4-80GB",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.53,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Enumerate GPU compute accelerators and VRAM for workload or mining suitability"
       }
     ],
     "TacticsObserved": [
@@ -507,7 +617,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 38
+    "RiskScore": 40
   },
   {
     "SessionId": "7aecf7d6de454ba0",

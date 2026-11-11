@@ -189,11 +189,84 @@
           "State": "ExecCompleted",
           "DurationSeconds": 13.5498269
         }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:30.5142529Z",
+        "Event": "shell_session_start",
+        "Sequence": 11,
+        "ChannelId": "8d8ef902-1c98-4bd0-906e-811e626edcfa",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 14.6311867,
+          "TimeToCompromiseMs": 14631
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:38.1208403Z",
+        "Event": "command",
+        "Sequence": 12,
+        "ChannelId": "8d8ef902-1c98-4bd0-906e-811e626edcfa",
+        "ExchangeId": "22ff9822ea9c4bd9:000003",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1",
+          "CommandSequenceLatencyMs": 7606,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 33,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:38.1273699Z",
+        "Event": "command_result",
+        "Sequence": 13,
+        "ChannelId": "8d8ef902-1c98-4bd0-906e-811e626edcfa",
+        "ExchangeId": "22ff9822ea9c4bd9:000003",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1",
+          "Response": "111 days",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.52
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:38.1310743Z",
+        "Event": "shell_session_end",
+        "Sequence": 14,
+        "ChannelId": "8d8ef902-1c98-4bd0-906e-811e626edcfa",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 22.2480086
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 4644,
-    "CommandCount": 2,
+    "CommandCount": 3,
     "Commands": [
       {
         "Sequence": 4,
@@ -275,6 +348,47 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Profile host hardware capabilities, CPU cores, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 12,
+        "ChannelId": "8d8ef902-1c98-4bd0-906e-811e626edcfa",
+        "ExchangeId": "22ff9822ea9c4bd9:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1",
+        "Timestamp": "2026-11-11T06:27:38.1208403Z",
+        "CommandSequenceLatencyMs": 7606,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 33,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-11T06:27:38.1273699Z",
+        "Response": "111 days",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.52,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
       }
     ],
     "TacticsObserved": [
@@ -283,7 +397,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 34
+    "RiskScore": 36
   },
   {
     "SessionId": "78e154fd328342cf",

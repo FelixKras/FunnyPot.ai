@@ -472,11 +472,83 @@
           "State": "ExecCompleted",
           "DurationSeconds": 53.4147465
         }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:38.1649478Z",
+        "Event": "shell_session_start",
+        "Sequence": 27,
+        "ChannelId": "b9dcefd5-c773-48e7-b95b-d5ae278f5888",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 56.008875,
+          "TimeToCompromiseMs": 56008
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:44.7129742Z",
+        "Event": "command",
+        "Sequence": 28,
+        "ChannelId": "b9dcefd5-c773-48e7-b95b-d5ae278f5888",
+        "ExchangeId": "0bd41aacc9c54c6f:000007",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027c2hhcmU=\u0027 | base64 -d \u003E \u0022$d/.wall_03514532\u0022; done",
+          "CommandSequenceLatencyMs": 6548,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 24,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:47.331282Z",
+        "Event": "command_result",
+        "Sequence": 29,
+        "ChannelId": "b9dcefd5-c773-48e7-b95b-d5ae278f5888",
+        "ExchangeId": "0bd41aacc9c54c6f:000007",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027c2hhcmU=\u0027 | base64 -d \u003E \u0022$d/.wall_03514532\u0022; done",
+          "Response": "",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "llm",
+          "FailedCommand": false,
+          "ResponseDurationMs": 2617,
+          "PromptTokens": 3643,
+          "CompletionTokens": 4,
+          "TuringMultiplier": 1.83
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:47.3316398Z",
+        "Event": "shell_session_end",
+        "Sequence": 30,
+        "ChannelId": "b9dcefd5-c773-48e7-b95b-d5ae278f5888",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 65.1755671
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 8036,
-    "CommandCount": 6,
+    "CommandCount": 7,
     "Commands": [
       {
         "Sequence": 4,
@@ -719,6 +791,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Enumerate GPU compute accelerators and VRAM for workload or mining suitability"
+      },
+      {
+        "Sequence": 28,
+        "ChannelId": "b9dcefd5-c773-48e7-b95b-d5ae278f5888",
+        "ExchangeId": "0bd41aacc9c54c6f:000007",
+        "MessageNumber": 7,
+        "ShellMessageNumber": 1,
+        "Command": "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027c2hhcmU=\u0027 | base64 -d \u003E \u0022$d/.wall_03514532\u0022; done",
+        "Timestamp": "2026-11-11T03:54:44.7129742Z",
+        "CommandSequenceLatencyMs": 6548,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 24,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-11T03:54:47.331282Z",
+        "Response": "",
+        "ResponseDurationMs": 2617,
+        "PromptTokens": 3643,
+        "CompletionTokens": 4,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "llm",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.83,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
       }
     ],
     "TacticsObserved": [
@@ -727,7 +839,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 42
+    "RiskScore": 44
   },
   {
     "SessionId": "7aecf7d6de454ba0",

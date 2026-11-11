@@ -262,11 +262,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 26.6433618
         }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:09.7032526Z",
+        "Event": "shell_session_start",
+        "Sequence": 15,
+        "ChannelId": "23fb0763-53cd-4acc-8e22-a28ccc30cc63",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 27.5471798,
+          "TimeToCompromiseMs": 27547
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:17.4984205Z",
+        "Event": "command",
+        "Sequence": 16,
+        "ChannelId": "23fb0763-53cd-4acc-8e22-a28ccc30cc63",
+        "ExchangeId": "0bd41aacc9c54c6f:000004",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027",
+          "CommandSequenceLatencyMs": 7795,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 24,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:17.5040931Z",
+        "Event": "command_result",
+        "Sequence": 17,
+        "ChannelId": "23fb0763-53cd-4acc-8e22-a28ccc30cc63",
+        "ExchangeId": "0bd41aacc9c54c6f:000004",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027",
+          "Response": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.56
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T03:54:17.5072017Z",
+        "Event": "shell_session_end",
+        "Sequence": 18,
+        "ChannelId": "23fb0763-53cd-4acc-8e22-a28ccc30cc63",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.43:30428",
+          "Username": "share",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 35.3511293
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 8036,
-    "CommandCount": 3,
+    "CommandCount": 4,
     "Commands": [
       {
         "Sequence": 4,
@@ -389,6 +459,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Measure system uptime and evaluate host stability and administrator activity"
+      },
+      {
+        "Sequence": 16,
+        "ChannelId": "23fb0763-53cd-4acc-8e22-a28ccc30cc63",
+        "ExchangeId": "0bd41aacc9c54c6f:000004",
+        "MessageNumber": 4,
+        "ShellMessageNumber": 1,
+        "Command": "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027",
+        "Timestamp": "2026-11-11T03:54:17.4984205Z",
+        "CommandSequenceLatencyMs": 7795,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 24,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-11T03:54:17.5040931Z",
+        "Response": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.56,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, CPU cores, RAM, and distribution baseline"
       }
     ],
     "TacticsObserved": [
@@ -397,7 +507,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 36
+    "RiskScore": 38
   },
   {
     "SessionId": "7aecf7d6de454ba0",

@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2026-11-11T03:54:15.3860996Z",
+  "LastUpdated": "2026-11-11T03:54:19.1034032Z",
   "TotalUniqueUsernames": 122,
   "TotalUniquePasswords": 251,
   "TotalUniqueSourceIps": 111,
@@ -492,7 +492,7 @@
     "196.115.146.21": 4,
     "77.239.124.39": 44,
     "77.239.124.45": 2,
-    "77.239.124.43": 22
+    "77.239.124.43": 26
   },
   "FrequentCommands": {
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_838e01f066c84f1e3d56106c05e7725b_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_838e01f066c84f1e3d56106c05e7725b\u0027\u0022\u0027\u0022\u0027\u0027": 1,
@@ -1357,7 +1357,7 @@
     "uname -s -v -n -r -m": 3,
     "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 3,
     "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1": 3,
-    "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027": 2,
+    "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027": 3,
     "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027": 2,
     "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 2,
     "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027dWJ1bnR1QDEyMw==\u0027 | base64 -d \u003E \u0022$d/.wall_18010452\u0022; done": 1,

@@ -2,15 +2,25 @@
   {
     "SessionId": "d397bf25b1874145",
     "StartedAt": "2026-11-11T13:33:02.0475661Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-11T13:33:43.9632568Z",
+    "DurationSeconds": 41.92,
     "RemoteEndpoint": "2.57.121.112:39408",
     "RemoteIp": "2.57.121.112",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "janea",
+    "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
     "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "janea",
+        "Password": "janea",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 12,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-11T13:33:02.627893Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-11T13:33:02.0475661Z",
@@ -22,6 +32,32 @@
           "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
           "State": "ConnectionAccepted"
         }
+      },
+      {
+        "Timestamp": "2026-11-11T13:33:02.627893Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:39408",
+          "Username": "janea",
+          "AuthMethod": "password",
+          "Password": "janea",
+          "ConnectionAttemptNumber": 12,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T13:33:43.9632568Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "2.57.121.112:39408",
+          "ClientVersion": "SSH-2.0-PuTTY_Release_0.84",
+          "SshBanner": "SSH-2.0-OmegaBlack_Classified_Server_v1.0",
+          "State": "Disconnected",
+          "DurationSeconds": 41.9156908
+        }
       }
     ],
     "ShellOpened": false,
@@ -31,7 +67,7 @@
     "TacticsObserved": [],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 0
+    "RiskScore": 10
   },
   {
     "SessionId": "ebc0692361ff44ea",

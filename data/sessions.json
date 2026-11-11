@@ -2,15 +2,25 @@
   {
     "SessionId": "21fee63157694952",
     "StartedAt": "2026-11-11T12:51:31.2018913Z",
-    "EndedAt": null,
-    "DurationSeconds": 0,
+    "EndedAt": "2026-11-11T12:51:38.3702154Z",
+    "DurationSeconds": 7.17,
     "RemoteEndpoint": "102.220.161.79:20310",
     "RemoteIp": "102.220.161.79",
-    "Username": "unknown",
-    "ClientVersion": "pending",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-libssh_0.12.0",
     "SshBanner": "SSH-2.0-dropbear_2020.80",
     "AuthAccepted": false,
-    "AuthAttempts": [],
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "ABC12345",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-11T12:51:34.2146262Z"
+      }
+    ],
     "Timeline": [
       {
         "Timestamp": "2026-11-11T12:51:31.2018913Z",
@@ -21,6 +31,32 @@
           "ClientVersion": "pending",
           "SshBanner": "SSH-2.0-dropbear_2020.80",
           "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T12:51:34.2146262Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "102.220.161.79:20310",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "ABC12345",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T12:51:38.3702154Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "102.220.161.79:20310",
+          "ClientVersion": "SSH-2.0-libssh_0.12.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 7.1683243
         }
       }
     ],

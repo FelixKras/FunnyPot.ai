@@ -402,11 +402,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 46.6618653
         }
+      },
+      {
+        "Timestamp": "2026-11-11T10:53:26.6405693Z",
+        "Event": "shell_session_start",
+        "Sequence": 23,
+        "ChannelId": "6fdba105-18ee-4b2b-9b87-67fb29f08754",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.78:39614",
+          "Username": "dev",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecOpened",
+          "DurationSeconds": 49.4372854,
+          "TimeToCompromiseMs": 49437
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T10:53:33.4877539Z",
+        "Event": "command",
+        "Sequence": 24,
+        "ChannelId": "6fdba105-18ee-4b2b-9b87-67fb29f08754",
+        "ExchangeId": "7eacc89e6a1340d2:000006",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.78:39614",
+          "Username": "dev",
+          "MessageNumber": 6,
+          "ShellMessageNumber": 1,
+          "Command": "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027",
+          "CommandSequenceLatencyMs": 6847,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 30,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T10:53:33.5022013Z",
+        "Event": "command_result",
+        "Sequence": 25,
+        "ChannelId": "6fdba105-18ee-4b2b-9b87-67fb29f08754",
+        "ExchangeId": "7eacc89e6a1340d2:000006",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.78:39614",
+          "Username": "dev",
+          "MessageNumber": 6,
+          "ShellMessageNumber": 1,
+          "Command": "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027",
+          "Response": "2",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.37
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T10:53:33.5057088Z",
+        "Event": "shell_session_end",
+        "Sequence": 26,
+        "ChannelId": "6fdba105-18ee-4b2b-9b87-67fb29f08754",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.78:39614",
+          "Username": "dev",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ExecCompleted",
+          "DurationSeconds": 56.3024253
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 6752,
-    "CommandCount": 5,
+    "CommandCount": 6,
     "Commands": [
       {
         "Sequence": 4,
@@ -609,6 +679,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Enumerate GPU compute accelerators and VRAM for workload or mining suitability"
+      },
+      {
+        "Sequence": 24,
+        "ChannelId": "6fdba105-18ee-4b2b-9b87-67fb29f08754",
+        "ExchangeId": "7eacc89e6a1340d2:000006",
+        "MessageNumber": 6,
+        "ShellMessageNumber": 1,
+        "Command": "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027",
+        "Timestamp": "2026-11-11T10:53:33.4877539Z",
+        "CommandSequenceLatencyMs": 6847,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 30,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-11T10:53:33.5022013Z",
+        "Response": "2",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.37,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Enumerate GPU compute accelerators and VRAM for workload or mining suitability"
       }
     ],
     "TacticsObserved": [
@@ -617,7 +727,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 40
+    "RiskScore": 42
   },
   {
     "SessionId": "0801708ce309480d",

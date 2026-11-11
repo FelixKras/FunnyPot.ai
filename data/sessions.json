@@ -119,11 +119,81 @@
           "State": "ExecCompleted",
           "DurationSeconds": 4.6523493
         }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:23.7119754Z",
+        "Event": "shell_session_start",
+        "Sequence": 7,
+        "ChannelId": "ee879329-9e8b-4d65-9a93-3083e9889e55",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecOpened",
+          "DurationSeconds": 7.8289092,
+          "TimeToCompromiseMs": 7828
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:29.4243387Z",
+        "Event": "command",
+        "Sequence": 8,
+        "ChannelId": "ee879329-9e8b-4d65-9a93-3083e9889e55",
+        "ExchangeId": "22ff9822ea9c4bd9:000002",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo",
+          "CommandSequenceLatencyMs": 5712,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 11,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:29.4298451Z",
+        "Event": "command_result",
+        "Sequence": 9,
+        "ChannelId": "ee879329-9e8b-4d65-9a93-3083e9889e55",
+        "ExchangeId": "22ff9822ea9c4bd9:000002",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo",
+          "Response": "96",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 1.14
+        }
+      },
+      {
+        "Timestamp": "2026-11-11T06:27:29.4328925Z",
+        "Event": "shell_session_end",
+        "Sequence": 10,
+        "ChannelId": "ee879329-9e8b-4d65-9a93-3083e9889e55",
+        "Data": {
+          "RemoteEndpoint": "77.239.124.37:25288",
+          "Username": "deployer",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ExecCompleted",
+          "DurationSeconds": 13.5498269
+        }
       }
     ],
     "ShellOpened": true,
     "TimeToCompromiseMs": 4644,
-    "CommandCount": 1,
+    "CommandCount": 2,
     "Commands": [
       {
         "Sequence": 4,
@@ -165,6 +235,46 @@
         ],
         "MitreTechnique": "T1082 System Information Discovery",
         "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      },
+      {
+        "Sequence": 8,
+        "ChannelId": "ee879329-9e8b-4d65-9a93-3083e9889e55",
+        "ExchangeId": "22ff9822ea9c4bd9:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo",
+        "Timestamp": "2026-11-11T06:27:29.4243387Z",
+        "CommandSequenceLatencyMs": 5712,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 11,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-11T06:27:29.4298451Z",
+        "Response": "96",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 1.14,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, CPU cores, RAM, and distribution baseline"
       }
     ],
     "TacticsObserved": [
@@ -173,7 +283,7 @@
     ],
     "PayloadUrls": [],
     "PersistenceVectors": [],
-    "RiskScore": 32
+    "RiskScore": 34
   },
   {
     "SessionId": "78e154fd328342cf",

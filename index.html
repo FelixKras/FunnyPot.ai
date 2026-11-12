@@ -1824,13 +1824,43 @@
             const matching = ollamaConnections.filter(row => (status === 'all' || ollamaOutcome(row) === status)
                 && [row.Peer, row.Method, row.Path, row.UserAgent, row.Body, row.Response, row.Error, row.Id]
                     .some(value => String(value || '').toLowerCase().includes(query)));
-            const pages = Math.max(1, Math.ceil(matching.length / ollamaPageSize));
+            const bodyless = matching.filter(row => !String(row.Body || '').trim());
+            const exchanges = matching.filter(row => String(row.Body || '').trim());
+            const pages = Math.max(1, Math.ceil(exchanges.length / ollamaPageSize));
             ollamaPage = Math.min(ollamaPage, pages - 1);
-            document.getElementById('ollamaCount').textContent = `${fmt.format(matching.length)} matching connections · Page ${ollamaPage + 1} / ${pages}`;
+            document.getElementById('ollamaCount').textContent = `${fmt.format(matching.length)} matching connections · ${fmt.format(exchanges.length)} with bodies · ${fmt.format(bodyless.length)} bodyless grouped · Page ${ollamaPage + 1} / ${pages}`;
             document.getElementById('ollamaPrevious').disabled = ollamaPage === 0;
             document.getElementById('ollamaNext').disabled = ollamaPage >= pages - 1;
-            document.getElementById('ollamaConnections').innerHTML = matching.slice(ollamaPage * ollamaPageSize, (ollamaPage + 1) * ollamaPageSize)
-                .map(renderOllamaExchange).join('') || '<div class="empty">No API connections match these filters.</div>';
+            document.getElementById('ollamaConnections').innerHTML = renderBodylessOllamaGroup(bodyless)
+                + exchanges.slice(ollamaPage * ollamaPageSize, (ollamaPage + 1) * ollamaPageSize).map(renderOllamaExchange).join('')
+                || '<div class="empty">No API connections match these filters.</div>';
+        }
+
+        function renderBodylessOllamaGroup(rows) {
+            if (!rows.length) return '';
+            const outcomes = { success: 0, throttled: 0, error: 0, pending: 0 };
+            const endpoints = new Map();
+            const sources = new Set();
+            const times = [];
+            rows.forEach(row => {
+                outcomes[ollamaOutcome(row)]++;
+                const endpoint = `${row.Method || 'TCP'} ${row.Path || 'probe / incomplete request'}`;
+                endpoints.set(endpoint, (endpoints.get(endpoint) || 0) + 1);
+                if (row.Peer) sources.add(row.Peer.startsWith('[') ? row.Peer.split(']')[0] + ']' : row.Peer.replace(/:\d+$/, ''));
+                const timestamp = Date.parse(row.Timestamp);
+                if (Number.isFinite(timestamp)) times.push(timestamp);
+            });
+            const endpointRows = [...endpoints.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+            return `<section class="exchange-session ollama-bodyless-group" aria-label="Grouped bodyless API requests">
+                <div class="ollama-exchange-header"><div><div class="exchange-role">GROUPED CONNECTIONS // NO REQUEST BODY</div>
+                    <h3>${fmt.format(rows.length)} bodyless connections</h3></div><span class="badge cyan">${fmt.format(sources.size)} source IPs</span></div>
+                <p class="muted">Discovery requests, probes, throttles and incomplete captures without a body are summarized here, not shown as individual exchanges. Counts follow the current filters; raw records remain retained.</p>
+                <div class="ollama-exchange-badges">${Object.entries(outcomes).map(([outcome, count]) => `<span class="badge ${outcome === 'error' ? 'red' : outcome === 'throttled' ? 'amber' : 'cyan'}">${escapeHtml(outcome)}: ${fmt.format(count)}</span>`).join('')}</div>
+                ${times.length ? `<p class="muted">${escapeHtml(fmtTime(new Date(Math.min(...times)).toISOString()))} → ${escapeHtml(fmtTime(new Date(Math.max(...times)).toISOString()))}</p>` : ''}
+                <details><summary>Endpoint breakdown (${fmt.format(endpointRows.length)})</summary>
+                    ${endpointRows.map(([endpoint, count]) => `<div class="exchange-line"><span class="exchange-role">${fmt.format(count)} connections</span><div class="terminal-line">${escapeHtml(endpoint)}</div></div>`).join('')}
+                </details>
+            </section>`;
         }
 
         function ollamaRequestDetails(row) {

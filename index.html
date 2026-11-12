@@ -1057,6 +1057,16 @@
         .terminal-prompt { color: var(--green); }
         .terminal-response { color: #dfffe8; }
 
+        .ollama-exchange-list { display: grid; gap: 16px; }
+        .ollama-exchange { min-width: 0; overflow-wrap: anywhere; }
+        .ollama-exchange .bio-inspector-card { min-width: 0; }
+        .ollama-exchange-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+        .ollama-exchange-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+        .ollama-turn { margin-top: 10px; }
+        .ollama-turn .terminal-line { background: #04080d; border: 1px solid rgba(255,255,255,0.08); border-radius: 9px; padding: 10px 12px; max-height: 360px; overflow: auto; }
+        .ollama-raw { margin-top: 12px; }
+        .ollama-raw pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 360px; overflow: auto; }
+
         /* Turing Biometric Telemetry Deck */
         .bio-session-ribbon {
             display: flex;
@@ -1500,6 +1510,15 @@
                     </div>
                 </section>
 
+                <section class="section" aria-labelledby="ollamaOverviewTitle">
+                    <div class="section-header">
+                        <h2 class="section-title" id="ollamaOverviewTitle">Ollama / OpenAI Activity</h2>
+                        <span class="muted">Retained API window · separate from SSH totals</span>
+                    </div>
+                    <div class="grid metrics" id="ollamaOverviewStats"></div>
+                    <p class="muted" id="ollamaOverviewFreshness">Loading API statistics...</p>
+                </section>
+
                 <section class="section grid insight-grid">
                     <div class="panel">
                         <h3>Event Pipeline</h3>
@@ -1632,7 +1651,7 @@
             <div class="tab-panel" data-tab-panel="ollama">
                 <section class="section">
                     <div class="section-header">
-                        <h2 class="section-title">Ollama / OpenAI Honeypot</h2>
+                        <h2 class="section-title">Ollama / OpenAI Exchanges</h2>
                         <span class="muted">TCP 11434 / simulated API / zero upstream tokens</span>
                     </div>
                     <div class="panel">
@@ -1661,7 +1680,7 @@
                                 <button class="tab-button" id="ollamaNext" type="button">Next</button>
                             </div>
                         </div>
-                        <div id="ollamaConnections"><div class="empty">No API connections published yet.</div></div>
+                        <div id="ollamaConnections" class="ollama-exchange-list"><div class="empty">No API connections published yet.</div></div>
                     </div>
                 </section>
             </div>
@@ -1766,19 +1785,30 @@
         function setupOllama(data) {
             ollamaConnections = (Array.isArray(data?.Connections) ? data.Connections : [])
                 .slice().sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
-            document.getElementById('ollamaFreshness').textContent = data
-                ? `Last API event: ${fmtTime(data.LastUpdated)}. Latest ${data.RetentionLimit || 1000} connections retained; counts below describe this retained window, not lifetime totals. Request bodies are limited to 4,096 characters. Replies are locally simulated.`
+            const freshness = data
+                ? `Last API event: ${fmtTime(data.LastUpdated)}. Latest ${data.RetentionLimit || 1000} connections retained; counts describe this retained window, not lifetime totals. Published hourly; local capture is immediate. Request bodies are limited to 4,096 characters. Replies are locally simulated.`
                 : 'API telemetry has not been published yet or is temporarily unavailable. SSH telemetry is unaffected.';
+            document.getElementById('ollamaFreshness').textContent = freshness;
+            document.getElementById('ollamaOverviewFreshness').textContent = freshness;
             const counts = { success: 0, throttled: 0, error: 0, pending: 0 };
             ollamaConnections.forEach(row => counts[ollamaOutcome(row)]++);
             const sources = new Set(ollamaConnections.map(row => {
                 const peer = row.Peer || '';
                 return peer.startsWith('[') ? peer.slice(0, peer.indexOf(']') + 1) : peer.replace(/:\d+$/, '');
             }).filter(Boolean));
-            const metrics = [['Connections', ollamaConnections.length], ['Source IPs', sources.size],
-                ['Successful', counts.success], ['Throttled', counts.throttled], ['Errors / timeouts', counts.error], ['Upstream tokens', 0]];
-            document.getElementById('ollamaStats').innerHTML = metrics.map(([label, value]) =>
-                `<div class="metric"><div class="metric-label">${escapeHtml(label)}</div><div class="metric-value">${fmt.format(value)}</div></div>`).join('');
+            const completions = ollamaConnections.filter(row => row.Status === 200 && typeof row.Response === 'string' && row.Response.length > 0).length;
+            const metrics = [['API Connections', ollamaConnections.length, 'Accepted TCP connections'],
+                ['API Source IPs', sources.size, 'Distinct API connection sources'],
+                ['Successful Requests', counts.success, 'All HTTP 2xx, including discovery'],
+                ['Completion Replies', completions, 'Recorded simulated completion replies'],
+                ['Throttled Connections', counts.throttled, 'Rejected before request processing'],
+                ['API Errors / Timeouts', counts.error, 'HTTP errors and interrupted requests'],
+                ['Incomplete / Pending', counts.pending, 'No request outcome recorded'],
+                ['API Upstream Tokens', 0, 'Local simulation; no provider calls']];
+            const metricsHtml = metrics.map(([label, value, note]) =>
+                summaryMetric(label, data || label === 'API Upstream Tokens' ? fmt.format(value) : '—', note)).join('');
+            document.getElementById('ollamaStats').innerHTML = metricsHtml;
+            document.getElementById('ollamaOverviewStats').innerHTML = metricsHtml;
             for (const id of ['ollamaQuery', 'ollamaStatus']) {
                 document.getElementById(id).oninput = () => { ollamaPage = 0; renderOllamaConnections(); };
             }
@@ -1799,14 +1829,75 @@
             document.getElementById('ollamaPrevious').disabled = ollamaPage === 0;
             document.getElementById('ollamaNext').disabled = ollamaPage >= pages - 1;
             document.getElementById('ollamaConnections').innerHTML = matching.slice(ollamaPage * ollamaPageSize, (ollamaPage + 1) * ollamaPageSize)
-                .map(row => `<details class="panel" style="margin-top:12px;overflow-wrap:anywhere">
-                    <summary>${escapeHtml(fmtTime(row.Timestamp))} · ${escapeHtml(row.Peer || 'Unknown peer')} · ${escapeHtml(row.Method || 'TCP')} ${escapeHtml(row.Path || 'probe / incomplete request')} · ${escapeHtml(String(row.Status ?? 'pending'))} / ${escapeHtml(ollamaOutcome(row))}</summary>
-                    <p class="muted">Connection: ${escapeHtml(row.Id)}<br>User agent: ${escapeHtml(row.UserAgent || 'Not supplied')}<br>Error: ${escapeHtml(row.Error || 'None')}</p>
-                    <h4>Request body / prompt${row.BodyTruncated ? ' (truncated)' : ''}</h4>
-                    <pre style="white-space:pre-wrap;overflow-wrap:anywhere">${escapeHtml(row.Body || 'No request body captured.')}</pre>
-                    <h4>Simulated reply</h4>
-                    <pre style="white-space:pre-wrap;overflow-wrap:anywhere">${escapeHtml(row.Response || 'No completion reply (discovery, rejected, or incomplete request).')}</pre>
-                </details>`).join('') || '<div class="empty">No API connections match these filters.</div>';
+                .map(renderOllamaExchange).join('') || '<div class="empty">No API connections match these filters.</div>';
+        }
+
+        function ollamaRequestDetails(row) {
+            let request = null;
+            try { request = JSON.parse(row.Body || 'null'); } catch { /* Truncated/non-JSON capture stays visible as raw text. */ }
+            if (!request || typeof request !== 'object' || Array.isArray(request)) request = {};
+            const text = content => typeof content === 'string' ? content : JSON.stringify(content ?? '');
+            const turns = [];
+            if (typeof request.system === 'string') turns.push({ role: 'system', content: request.system });
+            if (Array.isArray(request.messages)) request.messages.forEach(message => {
+                if (!message || typeof message !== 'object') return;
+                const content = Array.isArray(message.content) ? message.content.map(part => {
+                    if (typeof part === 'string') return part;
+                    if (typeof part?.text === 'string') return part.text;
+                    return `[${text(part?.type || 'non-text content')}]`;
+                }).join('\n') : text(message.content);
+                turns.push({ role: typeof message.role === 'string' ? message.role : 'input', content });
+            });
+            if (typeof request.prompt === 'string') turns.push({ role: 'prompt', content: request.prompt });
+            if (!turns.length && row.Body) turns.push({ role: 'raw request', content: row.Body });
+            const noBody = row.Status === 429 ? 'Connection throttled before the request body was read.'
+                : row.Method === 'GET' && !row.Error ? 'No request body expected: this is a GET discovery/probe request.'
+                : row.Error ? 'No body captured: the connection failed or ended before a body was received.'
+                : !row.Method ? 'TCP probe or pending connection; no HTTP request body recorded.'
+                : 'The client sent no request body.';
+            return { turns, model: typeof request.model === 'string' ? request.model : 'Not supplied',
+                streaming: typeof request.stream === 'boolean' ? (request.stream ? 'on' : 'off')
+                    : ['/api/chat', '/api/generate'].includes(row.Path) ? 'on (default)' : 'off (default)', noBody };
+        }
+
+        function renderOllamaExchange(row) {
+            const request = ollamaRequestDetails(row);
+            const outcome = ollamaOutcome(row);
+            const badge = { success: 'green', throttled: 'amber', error: 'red', pending: 'cyan' }[outcome];
+            const reply = row.Response || (row.Status === 429 ? 'Rate limit applied; no completion generated.'
+                : row.Status === 200 ? 'Discovery/metadata response; no completion text is stored for this endpoint.'
+                : row.Status == null ? 'No response outcome recorded yet.' : 'Request rejected or interrupted; no completion generated.');
+            return `<article class="exchange-session ollama-exchange">
+                <div class="ollama-exchange-header">
+                    <div><div class="exchange-role">API CONNECTION // ${escapeHtml(row.Id || 'unknown')}</div>
+                        <h3>${escapeHtml(row.Peer || 'Unknown peer')}</h3>
+                        <div class="exchange-time">${escapeHtml(fmtTime(row.Timestamp))}</div></div>
+                    <div><span class="badge ${badge}">HTTP ${escapeHtml(String(row.Status ?? 'pending'))} · ${escapeHtml(outcome)}</span></div>
+                </div>
+                <div class="exchange-details">
+                    <div class="exchange-detail"><div class="exchange-detail-label">Endpoint</div><div class="exchange-detail-value">${escapeHtml(row.Method || 'TCP')} ${escapeHtml(row.Path || 'probe / incomplete request')}</div></div>
+                    <div class="exchange-detail"><div class="exchange-detail-label">Requested model</div><div class="exchange-detail-value">${escapeHtml(request.model)}</div></div>
+                    <div class="exchange-detail"><div class="exchange-detail-label">Streaming</div><div class="exchange-detail-value">${escapeHtml(request.streaming)}</div></div>
+                    <div class="exchange-detail"><div class="exchange-detail-label">Response engine</div><div class="exchange-detail-value">Local simulation · 0 upstream tokens</div></div>
+                </div>
+                <div class="bio-inspector-grid">
+                    <div class="bio-inspector-card">
+                        <div class="bio-card-head"><span class="exchange-role">ATTACKER INPUT // REQUEST</span></div>
+                        ${request.turns.map(turn => `<div class="ollama-turn"><div class="exchange-line-meta">${escapeHtml(turn.role)}</div><div class="terminal-line">${escapeHtml(turn.content || '(empty message)')}</div></div>`).join('') || `<p class="muted">${escapeHtml(request.noBody)}</p>`}
+                        ${row.BodyTruncated ? '<p class="muted">Published request body truncated at 4,096 characters; full local capture may contain more.</p>' : ''}
+                    </div>
+                    <div class="bio-inspector-card">
+                        <div class="bio-card-head"><span class="exchange-role">HONEYPOT RESPONSE // SIMULATED</span></div>
+                        <div class="ollama-turn"><div class="terminal-line terminal-response">${escapeHtml(reply)}</div></div>
+                        <div class="ollama-exchange-badges"><span class="badge green">Source: local simulation</span><span class="badge cyan">Upstream tokens: 0</span></div>
+                        <p class="muted">${escapeHtml(row.Error ? `Capture/transport error: ${row.Error}` : row.Response ? 'Brief canned reply; no real model was invoked.' : 'No synthetic completion is inferred for this record.')}</p>
+                    </div>
+                </div>
+                <details class="ollama-raw"><summary>Raw request & connection evidence</summary>
+                    <p class="muted">User agent: ${escapeHtml(row.UserAgent || 'Not supplied')}<br>Updated: ${escapeHtml(fmtTime(row.UpdatedAt || row.Timestamp))}</p>
+                    <pre>${escapeHtml(row.Body || request.noBody)}</pre>
+                </details>
+            </article>`;
         }
 
         function renderDashboard(stats, summary, events, threatIntel = window.cachedThreatIntel, prebuiltSessions = window.cachedPrebuiltSessions) {

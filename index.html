@@ -1460,6 +1460,7 @@
                 <button class="tab-button" data-tab="credentials" type="button">Credentials</button>
                 <button class="tab-button" data-tab="geography" type="button">Geography</button>
                 <button class="tab-button" data-tab="exchange" type="button">Attacker Exchange</button>
+                <button class="tab-button" data-tab="ollama" type="button">Ollama / OpenAI</button>
             </div>
 
             <div class="tab-panel active" data-tab-panel="overview">
@@ -1628,6 +1629,43 @@
                 </section>
             </div>
 
+            <div class="tab-panel" data-tab-panel="ollama">
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Ollama / OpenAI Honeypot</h2>
+                        <span class="muted">TCP 11434 / simulated API / zero upstream tokens</span>
+                    </div>
+                    <div class="panel">
+                        <p class="muted" id="ollamaFreshness">Loading dedicated API telemetry...</p>
+                        <div class="hud-stats" id="ollamaStats"></div>
+                        <div class="exchange-filters" role="search" aria-label="Filter Ollama connections">
+                            <div class="hud-control">
+                                <label for="ollamaQuery">Search source / endpoint / prompt</label>
+                                <input id="ollamaQuery" type="search" placeholder="e.g. /api/chat, model, source IP">
+                            </div>
+                            <div class="hud-control">
+                                <label for="ollamaStatus">Connection outcome</label>
+                                <select id="ollamaStatus">
+                                    <option value="all">All outcomes</option>
+                                    <option value="success">Successful requests</option>
+                                    <option value="throttled">Throttled (429)</option>
+                                    <option value="error">Errors / timeouts</option>
+                                    <option value="pending">No completed request</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="exchange-toolbar">
+                            <span class="muted" id="ollamaCount"></span>
+                            <div>
+                                <button class="tab-button" id="ollamaPrevious" type="button">Previous</button>
+                                <button class="tab-button" id="ollamaNext" type="button">Next</button>
+                            </div>
+                        </div>
+                        <div id="ollamaConnections"><div class="empty">No API connections published yet.</div></div>
+                    </div>
+                </section>
+            </div>
+
             <footer class="footer">
                 Last updated: <span id="lastUpdated">-</span>. Showing all retained telemetry from FunnyPot.ai <code>data</code> branch.
             </footer>
@@ -1643,6 +1681,9 @@
         let groupDuplicateCampaigns = true;
         let exchangeSort = 'newest';
         const exchangeFilters = { query: '', behavior: 'all', minCommands: 0, minRisk: 0 };
+        let ollamaConnections = [];
+        let ollamaPage = 0;
+        const ollamaPageSize = 25;
 
         const fmt = new Intl.NumberFormat();
         const fmtTime = value => {
@@ -1687,11 +1728,12 @@
 
         async function loadDashboard() {
             try {
-                const [stats, summary, threatIntel, prebuiltSessions] = await Promise.all([
+                const [stats, summary, threatIntel, prebuiltSessions, ollama] = await Promise.all([
                     fetchJson('global_stats.json'),
                     fetchEventSummary(),
                     fetchThreatIntel(),
-                    fetchStructuredSessions()
+                    fetchStructuredSessions(),
+                    fetchJson('data/ollama.json').catch(() => null)
                 ]);
 
                 window.cachedThreatIntel = threatIntel;
@@ -1699,6 +1741,7 @@
 
                 renderDashboard(stats, summary, [], threatIntel, prebuiltSessions);
                 setupTabs();
+                setupOllama(ollama);
                 setupExchangeSorting();
                 setupFloatingTooltips();
                 document.getElementById('loading').style.display = 'none';
@@ -1712,6 +1755,58 @@
                 const freshness = document.getElementById('activityFreshness');
                 if (freshness) freshness.textContent = `Status: failed to load telemetry (${error.message})`;
             }
+        }
+
+        function ollamaOutcome(row) {
+            if (row.Status === 429) return 'throttled';
+            if (row.Status == null) return 'pending';
+            return row.Status >= 200 && row.Status < 300 ? 'success' : 'error';
+        }
+
+        function setupOllama(data) {
+            ollamaConnections = (Array.isArray(data?.Connections) ? data.Connections : [])
+                .slice().sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
+            document.getElementById('ollamaFreshness').textContent = data
+                ? `Last API event: ${fmtTime(data.LastUpdated)}. Latest ${data.RetentionLimit || 1000} connections retained; counts below describe this retained window, not lifetime totals. Request bodies are limited to 4,096 characters. Replies are locally simulated.`
+                : 'API telemetry has not been published yet or is temporarily unavailable. SSH telemetry is unaffected.';
+            const counts = { success: 0, throttled: 0, error: 0, pending: 0 };
+            ollamaConnections.forEach(row => counts[ollamaOutcome(row)]++);
+            const sources = new Set(ollamaConnections.map(row => {
+                const peer = row.Peer || '';
+                return peer.startsWith('[') ? peer.slice(0, peer.indexOf(']') + 1) : peer.replace(/:\d+$/, '');
+            }).filter(Boolean));
+            const metrics = [['Connections', ollamaConnections.length], ['Source IPs', sources.size],
+                ['Successful', counts.success], ['Throttled', counts.throttled], ['Errors / timeouts', counts.error], ['Upstream tokens', 0]];
+            document.getElementById('ollamaStats').innerHTML = metrics.map(([label, value]) =>
+                `<div class="metric"><div class="metric-label">${escapeHtml(label)}</div><div class="metric-value">${fmt.format(value)}</div></div>`).join('');
+            for (const id of ['ollamaQuery', 'ollamaStatus']) {
+                document.getElementById(id).oninput = () => { ollamaPage = 0; renderOllamaConnections(); };
+            }
+            document.getElementById('ollamaPrevious').onclick = () => { ollamaPage = Math.max(0, ollamaPage - 1); renderOllamaConnections(); };
+            document.getElementById('ollamaNext').onclick = () => { ollamaPage++; renderOllamaConnections(); };
+            renderOllamaConnections();
+        }
+
+        function renderOllamaConnections() {
+            const query = document.getElementById('ollamaQuery').value.trim().toLowerCase();
+            const status = document.getElementById('ollamaStatus').value;
+            const matching = ollamaConnections.filter(row => (status === 'all' || ollamaOutcome(row) === status)
+                && [row.Peer, row.Method, row.Path, row.UserAgent, row.Body, row.Response, row.Error, row.Id]
+                    .some(value => String(value || '').toLowerCase().includes(query)));
+            const pages = Math.max(1, Math.ceil(matching.length / ollamaPageSize));
+            ollamaPage = Math.min(ollamaPage, pages - 1);
+            document.getElementById('ollamaCount').textContent = `${fmt.format(matching.length)} matching connections · Page ${ollamaPage + 1} / ${pages}`;
+            document.getElementById('ollamaPrevious').disabled = ollamaPage === 0;
+            document.getElementById('ollamaNext').disabled = ollamaPage >= pages - 1;
+            document.getElementById('ollamaConnections').innerHTML = matching.slice(ollamaPage * ollamaPageSize, (ollamaPage + 1) * ollamaPageSize)
+                .map(row => `<details class="panel" style="margin-top:12px;overflow-wrap:anywhere">
+                    <summary>${escapeHtml(fmtTime(row.Timestamp))} · ${escapeHtml(row.Peer || 'Unknown peer')} · ${escapeHtml(row.Method || 'TCP')} ${escapeHtml(row.Path || 'probe / incomplete request')} · ${escapeHtml(String(row.Status ?? 'pending'))} / ${escapeHtml(ollamaOutcome(row))}</summary>
+                    <p class="muted">Connection: ${escapeHtml(row.Id)}<br>User agent: ${escapeHtml(row.UserAgent || 'Not supplied')}<br>Error: ${escapeHtml(row.Error || 'None')}</p>
+                    <h4>Request body / prompt${row.BodyTruncated ? ' (truncated)' : ''}</h4>
+                    <pre style="white-space:pre-wrap;overflow-wrap:anywhere">${escapeHtml(row.Body || 'No request body captured.')}</pre>
+                    <h4>Simulated reply</h4>
+                    <pre style="white-space:pre-wrap;overflow-wrap:anywhere">${escapeHtml(row.Response || 'No completion reply (discovery, rejected, or incomplete request).')}</pre>
+                </details>`).join('') || '<div class="empty">No API connections match these filters.</div>';
         }
 
         function renderDashboard(stats, summary, events, threatIntel = window.cachedThreatIntel, prebuiltSessions = window.cachedPrebuiltSessions) {

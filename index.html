@@ -1507,6 +1507,7 @@
                         <div class="metric"><div class="metric-label">Harvested Creds<span class="tooltip-trigger">?<span class="tooltip-box">Credentials captured after passing the harvest threshold. After N failed attempts, auth is accepted and credentials are logged for tracking.</span></span></div><div class="metric-value" id="harvestedCreds">0</div><div class="metric-note">Credential records captured</div></div>
                         <div class="metric"><div class="metric-label">Events<span class="tooltip-trigger">?<span class="tooltip-box">Total JSONL telemetry records in the current data branch. Each event (session_start, auth_attempt, command, etc.) counts as one event.</span></span></div><div class="metric-value" id="totalEvents">0</div><div class="metric-note">JSONL telemetry records</div></div>
                         <div class="metric"><div class="metric-label">Binary Attempts<span class="tooltip-trigger">?<span class="tooltip-box">Commands involving payloads, downloads, encoding, tunneling, or persistence tooling. Indicates serious exploitation intent.</span></span></div><div class="metric-value" id="binaryAttempts">0</div><div class="metric-note">Payload/tool execution signals</div></div>
+                        <div class="metric"><div class="metric-label">Total Tokens Used<span class="tooltip-trigger">?<span class="tooltip-box">Sum of TotalPromptTokens and TotalCompletionTokens from the published global statistics. These are recorded SSH LLM usage totals, not a provider billing statement. Simulated Ollama/OpenAI API token fields are excluded because that listener makes no upstream model calls.</span></span></div><div class="metric-value" id="totalTokensUsed">—</div><div class="metric-note" id="totalTokensBreakdown">Recorded prompt + completion usage</div></div>
                     </div>
                 </section>
 
@@ -2187,6 +2188,14 @@
             setText('harvestedCreds', fmt.format(summary.EventCounts?.auth_attempt || 0));
             setText('totalEvents', fmt.format(summary.TotalEvents || events.length));
             setText('binaryAttempts', fmt.format(sessions.reduce((sum, session) => sum + session.binaryAttempts, 0)));
+            const prompt = Number(stats.TotalPromptTokens);
+            const completion = Number(stats.TotalCompletionTokens);
+            const hasUsage = stats.TotalPromptTokens != null && stats.TotalCompletionTokens != null
+                && Number.isFinite(prompt) && Number.isFinite(completion) && prompt >= 0 && completion >= 0;
+            setText('totalTokensUsed', hasUsage ? fmt.format(prompt + completion) : '—');
+            setText('totalTokensBreakdown', hasUsage
+                ? `${fmt.format(prompt)} prompt + ${fmt.format(completion)} completion`
+                : 'Token usage unavailable in published statistics');
         }
 
         function renderTimeOfDay(events, sessions) {

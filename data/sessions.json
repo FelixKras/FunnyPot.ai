@@ -1,5 +1,1487 @@
 [
   {
+    "SessionId": "c861cc54dc9c4b2d",
+    "StartedAt": "2026-11-18T02:01:50.2260255Z",
+    "EndedAt": "2026-11-18T02:01:52.2273983Z",
+    "DurationSeconds": 2,
+    "RemoteEndpoint": "82.147.85.101:42246",
+    "RemoteIp": "82.147.85.101",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T02:01:50.2260255Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "82.147.85.101:42246",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T02:01:52.2273983Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "82.147.85.101:42246",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 2.0013735
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "489a3f9f0f424bb5",
+    "StartedAt": "2026-11-18T02:00:52.2247423Z",
+    "EndedAt": "2026-11-18T02:00:52.3983367Z",
+    "DurationSeconds": 0.17,
+    "RemoteEndpoint": "82.147.85.101:45576",
+    "RemoteIp": "82.147.85.101",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T02:00:52.2247423Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "82.147.85.101:45576",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T02:00:52.3983367Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "82.147.85.101:45576",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.1735994
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "270ff85dc00149a0",
+    "StartedAt": "2026-11-18T01:57:02.8463696Z",
+    "EndedAt": "2026-11-18T01:57:08.5578844Z",
+    "DurationSeconds": 5.71,
+    "RemoteEndpoint": "134.122.19.210:41422",
+    "RemoteIp": "134.122.19.210",
+    "Username": "root",
+    "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "root",
+        "Password": "root",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-18T01:57:03.641032Z"
+      },
+      {
+        "Username": "root",
+        "Password": "admin",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 2,
+        "Accepted": false,
+        "AcceptanceReason": "rejected",
+        "Timestamp": "2026-11-18T01:57:03.7939611Z"
+      },
+      {
+        "Username": "root",
+        "Password": "123456",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 3,
+        "Accepted": true,
+        "AcceptanceReason": "harvest_threshold",
+        "Timestamp": "2026-11-18T01:57:03.9441762Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T01:57:02.8463696Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:03.641032Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "root",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:03.7939611Z",
+        "Event": "auth_attempt",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "admin",
+          "ConnectionAttemptNumber": 2,
+          "Accepted": false,
+          "AcceptanceReason": "rejected"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:03.9441762Z",
+        "Event": "auth_attempt",
+        "Sequence": 4,
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "AuthMethod": "password",
+          "Password": "123456",
+          "ConnectionAttemptNumber": 3,
+          "Accepted": true,
+          "AcceptanceReason": "harvest_threshold"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.313933Z",
+        "Event": "shell_session_start",
+        "Sequence": 5,
+        "ChannelId": "74a0a99b-1bcd-4cb5-b53a-8f0b7f602e89",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 1.4675634,
+          "TimeToCompromiseMs": 1467
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.3527861Z",
+        "Event": "command",
+        "Sequence": 6,
+        "ChannelId": "74a0a99b-1bcd-4cb5-b53a-8f0b7f602e89",
+        "ExchangeId": "270ff85dc00149a0:000001",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/ip cloud print",
+          "CommandSequenceLatencyMs": 38,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "ReconnaissanceProbe": "mikrotik_routeros_probe",
+          "SemanticComplexity": 3,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Reconnaissance"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.3914234Z",
+        "Event": "command_result",
+        "Sequence": 7,
+        "ChannelId": "74a0a99b-1bcd-4cb5-b53a-8f0b7f602e89",
+        "ExchangeId": "270ff85dc00149a0:000001",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 1,
+          "ShellMessageNumber": 1,
+          "Command": "/ip cloud print",
+          "Response": "bash: /ip: No such file or directory",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 6,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.3998091Z",
+        "Event": "shell_session_end",
+        "Sequence": 8,
+        "ChannelId": "74a0a99b-1bcd-4cb5-b53a-8f0b7f602e89",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 1.5534415
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.875413Z",
+        "Event": "shell_session_start",
+        "Sequence": 9,
+        "ChannelId": "c3180c7c-6e00-443c-92f5-6610e898b682",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 2.0290434,
+          "TimeToCompromiseMs": 2029
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.8814871Z",
+        "Event": "command",
+        "Sequence": 10,
+        "ChannelId": "c3180c7c-6e00-443c-92f5-6610e898b682",
+        "ExchangeId": "270ff85dc00149a0:000002",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "ifconfig",
+          "CommandSequenceLatencyMs": 6,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 1,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.8892991Z",
+        "Event": "command_result",
+        "Sequence": 11,
+        "ChannelId": "c3180c7c-6e00-443c-92f5-6610e898b682",
+        "ExchangeId": "270ff85dc00149a0:000002",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 2,
+          "ShellMessageNumber": 1,
+          "Command": "ifconfig",
+          "Response": "eth0      Link encap:Ethernet  HWaddr 00:25:90:ab:42:10\r\n          inet addr:10.10.20.15  Bcast:10.10.20.255  Mask:255.255.255.0\r\n          inet6 addr: fe80::225:90ff:feab:4210/64 Scope:Link\r\n          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1\r\n          RX packets:125487362 errors:0 dropped:0 overruns:0 frame:0\r\n          TX packets:98421753 errors:0 dropped:0 overruns:0 carrier:0\r\n          collisions:0 txqueuelen:1000\r\n          RX bytes:184723681904 (172.0 GiB)  TX bytes:127384926512 (118.6 GiB)\r\n\r\nlo        Link encap:Local Loopback\r\n          inet addr:127.0.0.1  Mask:255.0.0.0\r\n          inet6 addr: ::1/128 Scope:Host\r\n          UP LOOPBACK RUNNING  MTU:65536  Metric:1\r\n          RX packets:4382910 errors:0 dropped:0 overruns:0 frame:0\r\n          TX packets:4382910 errors:0 dropped:0 overruns:0 carrier:0\r\n          collisions:0 txqueuelen:1000\r\n          RX bytes:912847362 (870.5 MiB)  TX bytes:912847362 (870.5 MiB)",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:04.8951762Z",
+        "Event": "shell_session_end",
+        "Sequence": 12,
+        "ChannelId": "c3180c7c-6e00-443c-92f5-6610e898b682",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 2.0488097
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.3790498Z",
+        "Event": "shell_session_start",
+        "Sequence": 13,
+        "ChannelId": "2a68acce-0f2f-4c90-b16f-914419de9755",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 2.5326802,
+          "TimeToCompromiseMs": 2532
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.3847923Z",
+        "Event": "command",
+        "Sequence": 14,
+        "ChannelId": "2a68acce-0f2f-4c90-b16f-914419de9755",
+        "ExchangeId": "270ff85dc00149a0:000003",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "CommandSequenceLatencyMs": 5,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 2,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.3917005Z",
+        "Event": "command_result",
+        "Sequence": 15,
+        "ChannelId": "2a68acce-0f2f-4c90-b16f-914419de9755",
+        "ExchangeId": "270ff85dc00149a0:000003",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 3,
+          "ShellMessageNumber": 1,
+          "Command": "uname -a",
+          "Response": "Linux omegablack 5.15.144-omegablack #1 SMP x86_64 GNU/Linux",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.3991628Z",
+        "Event": "shell_session_end",
+        "Sequence": 16,
+        "ChannelId": "2a68acce-0f2f-4c90-b16f-914419de9755",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 2.5527996
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.8780842Z",
+        "Event": "shell_session_start",
+        "Sequence": 17,
+        "ChannelId": "31a0f064-6061-47bc-9907-613ae52f3ae9",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 3.0317146,
+          "TimeToCompromiseMs": 3031
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.8838699Z",
+        "Event": "command",
+        "Sequence": 18,
+        "ChannelId": "31a0f064-6061-47bc-9907-613ae52f3ae9",
+        "ExchangeId": "270ff85dc00149a0:000004",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "cat /proc/cpuinfo",
+          "CommandSequenceLatencyMs": 5,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 2,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.8921339Z",
+        "Event": "command_result",
+        "Sequence": 19,
+        "ChannelId": "31a0f064-6061-47bc-9907-613ae52f3ae9",
+        "ExchangeId": "270ff85dc00149a0:000004",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 4,
+          "ShellMessageNumber": 1,
+          "Command": "cat /proc/cpuinfo",
+          "Response": "processor\t: 0\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 1\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 2\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 3\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 4\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 5\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 6\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 7\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 8\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 9\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 10\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 11\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 12\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 13\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 14\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 15\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 16\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 17\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 18\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 19\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 20\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 21\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 22\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 23\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 24\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 25\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 26\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 27\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 28\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 29\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 30\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 31\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 32\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 33\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 34\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 35\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 36\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 37\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 38\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 39\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 40\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 41\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 42\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 43\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 44\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 45\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 46\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 47\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 48\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 49\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 50\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 51\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 52\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 53\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 54\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 55\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 56\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 57\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 58\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 59\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 60\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 61\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 62\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 63\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 64\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 65\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 66\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 67\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 68\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 69\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 70\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 71\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 72\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 73\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 74\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 75\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 76\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 77\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 78\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 79\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 80\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 81\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 82\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 83\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 84\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 85\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 86\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 87\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 88\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 89\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 90\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 91\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 92\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 93\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 94\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 95\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:05.8989479Z",
+        "Event": "shell_session_end",
+        "Sequence": 20,
+        "ChannelId": "31a0f064-6061-47bc-9907-613ae52f3ae9",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 3.0525808
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.3784543Z",
+        "Event": "shell_session_start",
+        "Sequence": 21,
+        "ChannelId": "db367417-474b-4300-85b7-9fecd85030db",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 3.5320847,
+          "TimeToCompromiseMs": 3532
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.3872154Z",
+        "Event": "command",
+        "Sequence": 22,
+        "ChannelId": "db367417-474b-4300-85b7-9fecd85030db",
+        "ExchangeId": "270ff85dc00149a0:000005",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "ps | grep \u0027[Mm]iner\u0027",
+          "CommandSequenceLatencyMs": 8,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 6,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.410599Z",
+        "Event": "command_result",
+        "Sequence": 23,
+        "ChannelId": "db367417-474b-4300-85b7-9fecd85030db",
+        "ExchangeId": "270ff85dc00149a0:000005",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 5,
+          "ShellMessageNumber": 1,
+          "Command": "ps | grep \u0027[Mm]iner\u0027",
+          "Response": "",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.4250266Z",
+        "Event": "shell_session_end",
+        "Sequence": 24,
+        "ChannelId": "db367417-474b-4300-85b7-9fecd85030db",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 3.5786595
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.9071663Z",
+        "Event": "shell_session_start",
+        "Sequence": 25,
+        "ChannelId": "3b0b1df4-89e6-405c-bebf-44d8899eeae7",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 4.0607967,
+          "TimeToCompromiseMs": 4060
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.9146976Z",
+        "Event": "command",
+        "Sequence": 26,
+        "ChannelId": "3b0b1df4-89e6-405c-bebf-44d8899eeae7",
+        "ExchangeId": "270ff85dc00149a0:000006",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 6,
+          "ShellMessageNumber": 1,
+          "Command": "ps -ef | grep \u0027[Mm]iner\u0027",
+          "CommandSequenceLatencyMs": 7,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 7,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.9203963Z",
+        "Event": "command_result",
+        "Sequence": 27,
+        "ChannelId": "3b0b1df4-89e6-405c-bebf-44d8899eeae7",
+        "ExchangeId": "270ff85dc00149a0:000006",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 6,
+          "ShellMessageNumber": 1,
+          "Command": "ps -ef | grep \u0027[Mm]iner\u0027",
+          "Response": "remote    18432     1  2 Apr09 ?        00:38:17 /tmp/.cache/xmrig --config=/tmp/.cache/miner.json",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:06.9282398Z",
+        "Event": "shell_session_end",
+        "Sequence": 28,
+        "ChannelId": "3b0b1df4-89e6-405c-bebf-44d8899eeae7",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 4.0818726
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.4063628Z",
+        "Event": "shell_session_start",
+        "Sequence": 29,
+        "ChannelId": "848a6dd4-ef2c-4b66-8ed6-b6557c5750dc",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 4.5599932,
+          "TimeToCompromiseMs": 4559
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.4164775Z",
+        "Event": "command",
+        "Sequence": 30,
+        "ChannelId": "848a6dd4-ef2c-4b66-8ed6-b6557c5750dc",
+        "ExchangeId": "270ff85dc00149a0:000007",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*",
+          "CommandSequenceLatencyMs": 10,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "DiscoveryDepthScore": 1,
+          "SemanticComplexity": 14,
+          "AssetValuePerceptionScore": 8,
+          "MitreAttackTechniques": [
+            "Execution",
+            "Discovery"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.417038Z",
+        "Event": "command_result",
+        "Sequence": 31,
+        "ChannelId": "848a6dd4-ef2c-4b66-8ed6-b6557c5750dc",
+        "ExchangeId": "270ff85dc00149a0:000007",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 7,
+          "ShellMessageNumber": 1,
+          "Command": "ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*",
+          "Response": "ls: cannot access \u0027/home/secretOps/.local/share/TelegramDesktop/tdata\u0027: Permission denied\r\ncrw-rw---- 1 root dialout  188, 0 Jun  1 08:00 /dev/ttyUSB-mod0\r\ncrw-rw---- 1 root dialout  240, 0 Jun  1 08:00 /dev/ttyGSM0\r\ncrw-rw---- 1 root dialout  188, 0 Jun  1 08:00 /dev/modem0\r\n-rw-r--r-- 1 root root        428 Jun  1 08:00 /etc/config/simman\r\n-rw-r--r-- 1 root root        612 Jun  1 08:00 /etc/smsd.conf\r\n-rwxr-xr-x 1 root root      68224 Jun  1 08:00 /usr/bin/qmuxd\r\nsrwxrwx--- 1 root dialout       0 Jun  1 08:00 /var/qmux_connect_socket\r\n-rw-r----- 1 root adm        1842 Jun  1 08:00 /var/log/smsd.log\r\n-rw-r--r-- 1 root root        248 Jun  1 08:00 /var/config/sms/config\r\n\r\n/home/remote/.local/share/TelegramDesktop/tdata:\r\ntotal 16\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 .\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 ..\r\n-rw------- 1 remote users  512 Jun  1 08:00 key_datas\r\ndrwx------ 2 remote users 4096 Jun  1 08:00 user_data\r\n\r\n/home/remote/.local/share/TelegramDesktop/tdata:\r\ntotal 16\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 .\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 ..\r\n-rw------- 1 remote users  512 Jun  1 08:00 key_datas\r\ndrwx------ 2 remote users 4096 Jun  1 08:00 user_data\r\n\r\n/var/spool/sms/incoming:\r\ntotal 8\r\ndrwxrwx--- 2 root dialout 4096 Jun  1 08:00 .\r\ndrwxr-xr-x 5 root root    4096 Jun  1 08:00 ..\r\n\r\n/var/spool/sms/outgoing:\r\ntotal 8\r\ndrwxrwx--- 2 root dialout 4096 Jun  1 08:00 .\r\ndrwxr-xr-x 5 root root    4096 Jun  1 08:00 ..\r\n\r\n/var/spool/sms/sent:\r\ntotal 8\r\ndrwxrwx--- 2 root dialout 4096 Jun  1 08:00 .\r\ndrwxr-xr-x 5 root root    4096 Jun  1 08:00 ..",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": true,
+          "ResponseDurationMs": 0,
+          "StandardErrorRatio": 1,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.424075Z",
+        "Event": "shell_session_end",
+        "Sequence": 32,
+        "ChannelId": "848a6dd4-ef2c-4b66-8ed6-b6557c5750dc",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 4.5777077
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.9015779Z",
+        "Event": "shell_session_start",
+        "Sequence": 33,
+        "ChannelId": "9f6d0b8d-beae-4118-a274-93a9f4aa260c",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 5.0552083,
+          "TimeToCompromiseMs": 5055
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.9098246Z",
+        "Event": "command",
+        "Sequence": 34,
+        "ChannelId": "9f6d0b8d-beae-4118-a274-93a9f4aa260c",
+        "ExchangeId": "270ff85dc00149a0:000008",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "locate D877F783D5D3EF8Cs",
+          "CommandSequenceLatencyMs": 8,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 2,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.9106178Z",
+        "Event": "command_result",
+        "Sequence": 35,
+        "ChannelId": "9f6d0b8d-beae-4118-a274-93a9f4aa260c",
+        "ExchangeId": "270ff85dc00149a0:000008",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 8,
+          "ShellMessageNumber": 1,
+          "Command": "locate D877F783D5D3EF8Cs",
+          "Response": "",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:07.9175201Z",
+        "Event": "shell_session_end",
+        "Sequence": 36,
+        "ChannelId": "9f6d0b8d-beae-4118-a274-93a9f4aa260c",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 5.0711532
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:08.3970612Z",
+        "Event": "shell_session_start",
+        "Sequence": 37,
+        "ChannelId": "7912591e-84a5-4cd2-b7d8-213e5db72851",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecOpened",
+          "DurationSeconds": 5.5506916,
+          "TimeToCompromiseMs": 5550
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:08.4048677Z",
+        "Event": "command",
+        "Sequence": 38,
+        "ChannelId": "7912591e-84a5-4cd2-b7d8-213e5db72851",
+        "ExchangeId": "270ff85dc00149a0:000009",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 9,
+          "ShellMessageNumber": 1,
+          "Command": "echo Hi | cat -n",
+          "CommandSequenceLatencyMs": 7,
+          "ActorAutomationHint": "scripted",
+          "DeliveryChannel": "exec",
+          "SemanticComplexity": 7,
+          "MitreAttackTechniques": [
+            "Execution"
+          ]
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:08.4060455Z",
+        "Event": "command_result",
+        "Sequence": 39,
+        "ChannelId": "7912591e-84a5-4cd2-b7d8-213e5db72851",
+        "ExchangeId": "270ff85dc00149a0:000009",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "MessageNumber": 9,
+          "ShellMessageNumber": 1,
+          "Command": "echo Hi | cat -n",
+          "Response": "     1\tHi",
+          "LlmModel": "openai/gpt-6.1-terra",
+          "ResponseSource": "cache",
+          "FailedCommand": false,
+          "ResponseDurationMs": 0,
+          "TuringMultiplier": 0.2
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:08.4134036Z",
+        "Event": "shell_session_end",
+        "Sequence": 40,
+        "ChannelId": "7912591e-84a5-4cd2-b7d8-213e5db72851",
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "Username": "root",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ExecCompleted",
+          "DurationSeconds": 5.5670365
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:57:08.5578844Z",
+        "Event": "session_end",
+        "Sequence": 41,
+        "Data": {
+          "RemoteEndpoint": "134.122.19.210:41422",
+          "ClientVersion": "SSH-2.0-libssh2_1.11.0",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 5.7115157
+        }
+      }
+    ],
+    "ShellOpened": true,
+    "TimeToCompromiseMs": 1467,
+    "CommandCount": 9,
+    "Commands": [
+      {
+        "Sequence": 6,
+        "ChannelId": "74a0a99b-1bcd-4cb5-b53a-8f0b7f602e89",
+        "ExchangeId": "270ff85dc00149a0:000001",
+        "MessageNumber": 1,
+        "ShellMessageNumber": 1,
+        "Command": "/ip cloud print",
+        "Timestamp": "2026-11-18T01:57:04.3527861Z",
+        "CommandSequenceLatencyMs": 38,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "mikrotik_routeros_probe",
+        "SemanticComplexity": 3,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:04.3914234Z",
+        "Response": "bash: /ip: No such file or directory",
+        "ResponseDurationMs": 6,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Reconnaissance"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      },
+      {
+        "Sequence": 10,
+        "ChannelId": "c3180c7c-6e00-443c-92f5-6610e898b682",
+        "ExchangeId": "270ff85dc00149a0:000002",
+        "MessageNumber": 2,
+        "ShellMessageNumber": 1,
+        "Command": "ifconfig",
+        "Timestamp": "2026-11-18T01:57:04.8814871Z",
+        "CommandSequenceLatencyMs": 6,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 1,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:04.8892991Z",
+        "Response": "eth0      Link encap:Ethernet  HWaddr 00:25:90:ab:42:10\r\n          inet addr:10.10.20.15  Bcast:10.10.20.255  Mask:255.255.255.0\r\n          inet6 addr: fe80::225:90ff:feab:4210/64 Scope:Link\r\n          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1\r\n          RX packets:125487362 errors:0 dropped:0 overruns:0 frame:0\r\n          TX packets:98421753 errors:0 dropped:0 overruns:0 carrier:0\r\n          collisions:0 txqueuelen:1000\r\n          RX bytes:184723681904 (172.0 GiB)  TX bytes:127384926512 (118.6 GiB)\r\n\r\nlo        Link encap:Local Loopback\r\n          inet addr:127.0.0.1  Mask:255.0.0.0\r\n          inet6 addr: ::1/128 Scope:Host\r\n          UP LOOPBACK RUNNING  MTU:65536  Metric:1\r\n          RX packets:4382910 errors:0 dropped:0 overruns:0 frame:0\r\n          TX packets:4382910 errors:0 dropped:0 overruns:0 carrier:0\r\n          collisions:0 txqueuelen:1000\r\n          RX bytes:912847362 (870.5 MiB)  TX bytes:912847362 (870.5 MiB)",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1016 System Network Configuration",
+        "InferredObjective": "Map local network interfaces, subnets, and default gateway routing"
+      },
+      {
+        "Sequence": 14,
+        "ChannelId": "2a68acce-0f2f-4c90-b16f-914419de9755",
+        "ExchangeId": "270ff85dc00149a0:000003",
+        "MessageNumber": 3,
+        "ShellMessageNumber": 1,
+        "Command": "uname -a",
+        "Timestamp": "2026-11-18T01:57:05.3847923Z",
+        "CommandSequenceLatencyMs": 5,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:05.3917005Z",
+        "Response": "Linux omegablack 5.15.144-omegablack #1 SMP x86_64 GNU/Linux",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Determine Linux kernel version, OS release, and CPU architecture"
+      },
+      {
+        "Sequence": 18,
+        "ChannelId": "31a0f064-6061-47bc-9907-613ae52f3ae9",
+        "ExchangeId": "270ff85dc00149a0:000004",
+        "MessageNumber": 4,
+        "ShellMessageNumber": 1,
+        "Command": "cat /proc/cpuinfo",
+        "Timestamp": "2026-11-18T01:57:05.8838699Z",
+        "CommandSequenceLatencyMs": 5,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:05.8921339Z",
+        "Response": "processor\t: 0\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 1\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 2\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 3\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 4\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 5\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 6\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 7\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 8\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 9\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 10\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 11\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 12\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 13\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 14\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 15\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 16\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 17\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 18\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 19\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 20\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 21\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 22\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 23\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 24\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 25\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 26\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 27\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 28\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 29\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 30\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 31\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 32\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 33\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 34\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 35\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 36\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 37\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 38\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 39\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 40\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 41\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 42\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 43\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 44\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 45\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 46\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 47\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 48\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 49\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 50\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 51\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 52\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 53\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 54\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 55\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 56\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 57\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 58\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 59\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 60\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 61\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 62\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 63\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 64\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 65\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 66\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 67\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 68\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 69\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 70\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 71\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 72\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 73\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 74\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 75\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 76\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 77\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 78\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 79\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 80\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 81\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 82\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 83\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 84\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 85\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 86\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 87\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 88\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 89\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 90\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 91\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 92\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 93\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 94\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz\r\n\r\nprocessor\t: 95\r\nmodel name\t: Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1082 System Information Discovery",
+        "InferredObjective": "Profile host hardware capabilities, CPU cores, RAM, and distribution baseline"
+      },
+      {
+        "Sequence": 22,
+        "ChannelId": "db367417-474b-4300-85b7-9fecd85030db",
+        "ExchangeId": "270ff85dc00149a0:000005",
+        "MessageNumber": 5,
+        "ShellMessageNumber": 1,
+        "Command": "ps | grep \u0027[Mm]iner\u0027",
+        "Timestamp": "2026-11-18T01:57:06.3872154Z",
+        "CommandSequenceLatencyMs": 8,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 6,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:06.410599Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
+      },
+      {
+        "Sequence": 26,
+        "ChannelId": "3b0b1df4-89e6-405c-bebf-44d8899eeae7",
+        "ExchangeId": "270ff85dc00149a0:000006",
+        "MessageNumber": 6,
+        "ShellMessageNumber": 1,
+        "Command": "ps -ef | grep \u0027[Mm]iner\u0027",
+        "Timestamp": "2026-11-18T01:57:06.9146976Z",
+        "CommandSequenceLatencyMs": 7,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:06.9203963Z",
+        "Response": "remote    18432     1  2 Apr09 ?        00:38:17 /tmp/.cache/xmrig --config=/tmp/.cache/miner.json",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1057 Process Discovery",
+        "InferredObjective": "Inspect running processes, background services, and security monitors"
+      },
+      {
+        "Sequence": 30,
+        "ChannelId": "848a6dd4-ef2c-4b66-8ed6-b6557c5750dc",
+        "ExchangeId": "270ff85dc00149a0:000007",
+        "MessageNumber": 7,
+        "ShellMessageNumber": 1,
+        "Command": "ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*",
+        "Timestamp": "2026-11-18T01:57:07.4164775Z",
+        "CommandSequenceLatencyMs": 10,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 1,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 14,
+        "AssetValuePerceptionScore": 8,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:07.417038Z",
+        "Response": "ls: cannot access \u0027/home/secretOps/.local/share/TelegramDesktop/tdata\u0027: Permission denied\r\ncrw-rw---- 1 root dialout  188, 0 Jun  1 08:00 /dev/ttyUSB-mod0\r\ncrw-rw---- 1 root dialout  240, 0 Jun  1 08:00 /dev/ttyGSM0\r\ncrw-rw---- 1 root dialout  188, 0 Jun  1 08:00 /dev/modem0\r\n-rw-r--r-- 1 root root        428 Jun  1 08:00 /etc/config/simman\r\n-rw-r--r-- 1 root root        612 Jun  1 08:00 /etc/smsd.conf\r\n-rwxr-xr-x 1 root root      68224 Jun  1 08:00 /usr/bin/qmuxd\r\nsrwxrwx--- 1 root dialout       0 Jun  1 08:00 /var/qmux_connect_socket\r\n-rw-r----- 1 root adm        1842 Jun  1 08:00 /var/log/smsd.log\r\n-rw-r--r-- 1 root root        248 Jun  1 08:00 /var/config/sms/config\r\n\r\n/home/remote/.local/share/TelegramDesktop/tdata:\r\ntotal 16\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 .\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 ..\r\n-rw------- 1 remote users  512 Jun  1 08:00 key_datas\r\ndrwx------ 2 remote users 4096 Jun  1 08:00 user_data\r\n\r\n/home/remote/.local/share/TelegramDesktop/tdata:\r\ntotal 16\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 .\r\ndrwx------ 3 remote users 4096 Jun  1 08:00 ..\r\n-rw------- 1 remote users  512 Jun  1 08:00 key_datas\r\ndrwx------ 2 remote users 4096 Jun  1 08:00 user_data\r\n\r\n/var/spool/sms/incoming:\r\ntotal 8\r\ndrwxrwx--- 2 root dialout 4096 Jun  1 08:00 .\r\ndrwxr-xr-x 5 root root    4096 Jun  1 08:00 ..\r\n\r\n/var/spool/sms/outgoing:\r\ntotal 8\r\ndrwxrwx--- 2 root dialout 4096 Jun  1 08:00 .\r\ndrwxr-xr-x 5 root root    4096 Jun  1 08:00 ..\r\n\r\n/var/spool/sms/sent:\r\ntotal 8\r\ndrwxrwx--- 2 root dialout 4096 Jun  1 08:00 .\r\ndrwxr-xr-x 5 root root    4096 Jun  1 08:00 ..",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": true,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 1,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution",
+          "Discovery"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 34,
+        "ChannelId": "9f6d0b8d-beae-4118-a274-93a9f4aa260c",
+        "ExchangeId": "270ff85dc00149a0:000008",
+        "MessageNumber": 8,
+        "ShellMessageNumber": 1,
+        "Command": "locate D877F783D5D3EF8Cs",
+        "Timestamp": "2026-11-18T01:57:07.9098246Z",
+        "CommandSequenceLatencyMs": 8,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 2,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:07.9106178Z",
+        "Response": "",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1083 File and Directory Discovery",
+        "InferredObjective": "Enumerate directories, discover sensitive files, and check permissions"
+      },
+      {
+        "Sequence": 38,
+        "ChannelId": "7912591e-84a5-4cd2-b7d8-213e5db72851",
+        "ExchangeId": "270ff85dc00149a0:000009",
+        "MessageNumber": 9,
+        "ShellMessageNumber": 1,
+        "Command": "echo Hi | cat -n",
+        "Timestamp": "2026-11-18T01:57:08.4048677Z",
+        "CommandSequenceLatencyMs": 7,
+        "ActorAutomationHint": "scripted",
+        "DeliveryChannel": "exec",
+        "DiscoveryDepthScore": 0,
+        "PersistenceVector": "none",
+        "PayloadUrls": [],
+        "EgressTargets": [],
+        "TunnelingIntent": "none",
+        "PersonaBreakoutAttempt": false,
+        "ReconnaissanceProbe": "none",
+        "SemanticComplexity": 7,
+        "AssetValuePerceptionScore": 0,
+        "HasResponse": true,
+        "ResponseTimestamp": "2026-11-18T01:57:08.4060455Z",
+        "Response": "     1\tHi",
+        "ResponseDurationMs": 0,
+        "PromptTokens": 0,
+        "CompletionTokens": 0,
+        "BlockedOperation": false,
+        "FailedCommand": false,
+        "LlmModel": "openai/gpt-6.1-terra",
+        "ResponseSource": "cache",
+        "HallucinationFeedback": false,
+        "StandardErrorRatio": 0,
+        "SemanticDrift": 0,
+        "TuringMultiplier": 0.2,
+        "MitreAttackTechniques": [
+          "Execution"
+        ],
+        "MitreTechnique": "T1059.004 Unix Shell",
+        "InferredObjective": "Interactive shell command execution and environment probing"
+      }
+    ],
+    "TacticsObserved": [
+      "Execution",
+      "Reconnaissance",
+      "Discovery"
+    ],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 58
+  },
+  {
+    "SessionId": "f7d5298ee9134655",
+    "StartedAt": "2026-11-18T01:48:14.452794Z",
+    "EndedAt": "2026-11-18T01:48:14.5339671Z",
+    "DurationSeconds": 0.08,
+    "RemoteEndpoint": "109.160.32.147:53246",
+    "RemoteIp": "109.160.32.147",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T01:48:14.452794Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "109.160.32.147:53246",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:48:14.5339671Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "109.160.32.147:53246",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0811744
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "9f10670d737f4727",
+    "StartedAt": "2026-11-18T01:45:06.4089041Z",
+    "EndedAt": "2026-11-18T01:45:44.910322Z",
+    "DurationSeconds": 38.5,
+    "RemoteEndpoint": "77.90.185.29:38298",
+    "RemoteIp": "77.90.185.29",
+    "Username": "test",
+    "ClientVersion": "SSH-2.0-Go",
+    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+    "AuthAccepted": true,
+    "AuthAttempts": [
+      {
+        "Username": "test",
+        "Password": "test",
+        "AuthMethod": "password",
+        "ConnectionAttemptNumber": 1,
+        "Accepted": true,
+        "AcceptanceReason": "configured_credential",
+        "Timestamp": "2026-11-18T01:45:06.7666241Z"
+      }
+    ],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T01:45:06.4089041Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.29:38298",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:45:06.7666241Z",
+        "Event": "auth_attempt",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.29:38298",
+          "Username": "test",
+          "AuthMethod": "password",
+          "Password": "test",
+          "ConnectionAttemptNumber": 1,
+          "Accepted": true,
+          "AcceptanceReason": "configured_credential"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:45:44.910322Z",
+        "Event": "session_end",
+        "Sequence": 3,
+        "Data": {
+          "RemoteEndpoint": "77.90.185.29:38298",
+          "ClientVersion": "SSH-2.0-Go",
+          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
+          "State": "Disconnected",
+          "DurationSeconds": 38.5014192
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 10
+  },
+  {
+    "SessionId": "e256a39cbdcd4401",
+    "StartedAt": "2026-11-18T01:42:31.9574975Z",
+    "EndedAt": "2026-11-18T01:42:31.9579023Z",
+    "DurationSeconds": 0,
+    "RemoteEndpoint": "119.13.156.27:25434",
+    "RemoteIp": "119.13.156.27",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T01:42:31.9574975Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "119.13.156.27:25434",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:42:31.9579023Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "119.13.156.27:25434",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-OpenSSH_7.2p2 Ubuntu",
+          "State": "Disconnected",
+          "DurationSeconds": 0.0004051
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "81c7983c53cc41d9",
+    "StartedAt": "2026-11-18T01:08:41.6379253Z",
+    "EndedAt": "2026-11-18T01:08:41.7923016Z",
+    "DurationSeconds": 0.15,
+    "RemoteEndpoint": "103.203.57.11:35476",
+    "RemoteIp": "103.203.57.11",
+    "Username": "unknown",
+    "ClientVersion": "unknown",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T01:08:41.6379253Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "103.203.57.11:35476",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:08:41.7923016Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "103.203.57.11:35476",
+          "ClientVersion": "unknown",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 0.1543778
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
+    "SessionId": "b5b9694e701549fd",
+    "StartedAt": "2026-11-18T01:07:05.4680703Z",
+    "EndedAt": "2026-11-18T01:07:06.0479979Z",
+    "DurationSeconds": 0.58,
+    "RemoteEndpoint": "62.60.130.148:30166",
+    "RemoteIp": "62.60.130.148",
+    "Username": "unknown",
+    "ClientVersion": "SSH-2.0-PUTTY",
+    "SshBanner": "SSH-2.0-dropbear_2020.80",
+    "AuthAccepted": false,
+    "AuthAttempts": [],
+    "Timeline": [
+      {
+        "Timestamp": "2026-11-18T01:07:05.4680703Z",
+        "Event": "session_start",
+        "Sequence": 1,
+        "Data": {
+          "RemoteEndpoint": "62.60.130.148:30166",
+          "ClientVersion": "pending",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "ConnectionAccepted"
+        }
+      },
+      {
+        "Timestamp": "2026-11-18T01:07:06.0479979Z",
+        "Event": "session_end",
+        "Sequence": 2,
+        "Data": {
+          "RemoteEndpoint": "62.60.130.148:30166",
+          "ClientVersion": "SSH-2.0-PUTTY",
+          "SshBanner": "SSH-2.0-dropbear_2020.80",
+          "State": "Disconnected",
+          "DurationSeconds": 0.5799304
+        }
+      }
+    ],
+    "ShellOpened": false,
+    "TimeToCompromiseMs": 0,
+    "CommandCount": 0,
+    "Commands": [],
+    "TacticsObserved": [],
+    "PayloadUrls": [],
+    "PersistenceVectors": [],
+    "RiskScore": 0
+  },
+  {
     "SessionId": "5a3ce60ef0174f42",
     "StartedAt": "2026-11-18T00:23:45.6820625Z",
     "EndedAt": "2026-11-18T00:23:45.6824192Z",
@@ -154222,98 +155704,6 @@
     "RiskScore": 10
   },
   {
-    "SessionId": "0ba363041e2145a5",
-    "StartedAt": "2026-11-11T12:38:20.1500936Z",
-    "EndedAt": "2026-11-11T12:38:20.25885Z",
-    "DurationSeconds": 0.11,
-    "RemoteEndpoint": "193.32.162.15:59864",
-    "RemoteIp": "193.32.162.15",
-    "Username": "unknown",
-    "ClientVersion": "unknown",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T12:38:20.1500936Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "193.32.162.15:59864",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T12:38:20.25885Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "193.32.162.15:59864",
-          "ClientVersion": "unknown",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "Disconnected",
-          "DurationSeconds": 0.1087566
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "ecf197ff6d1e40da",
-    "StartedAt": "2026-11-11T11:36:25.0302513Z",
-    "EndedAt": "2026-11-11T11:36:25.1491813Z",
-    "DurationSeconds": 0.12,
-    "RemoteEndpoint": "77.239.124.149:33800",
-    "RemoteIp": "77.239.124.149",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-dropbear_2020.80",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T11:36:25.0302513Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.149:33800",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:36:25.1491813Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.149:33800",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-dropbear_2020.80",
-          "State": "Disconnected",
-          "DurationSeconds": 0.11893
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
     "SessionId": "97022a570db74d02",
     "StartedAt": "2026-11-11T11:13:28.6136448Z",
     "EndedAt": "2026-11-11T11:15:16.9638132Z",
@@ -155308,330 +156698,6 @@
     ],
     "PersistenceVectors": [],
     "RiskScore": 76
-  },
-  {
-    "SessionId": "651900eac2044019",
-    "StartedAt": "2026-11-11T11:12:52.2131252Z",
-    "EndedAt": "2026-11-11T11:13:22.8734005Z",
-    "DurationSeconds": 30.66,
-    "RemoteEndpoint": "77.239.124.42:24840",
-    "RemoteIp": "77.239.124.42",
-    "Username": "root",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [
-      {
-        "Username": "root",
-        "Password": "India@2023",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 2,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-11-11T11:12:52.7009276Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T11:12:52.2131252Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:24840",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:12:52.7009276Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:24840",
-          "Username": "root",
-          "AuthMethod": "password",
-          "Password": "India@2023",
-          "ConnectionAttemptNumber": 2,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:13:22.8734005Z",
-        "Event": "session_end",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:24840",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 30.6602754
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "35c0f8d4497c4e3a",
-    "StartedAt": "2026-11-11T11:10:37.4371366Z",
-    "EndedAt": "2026-11-11T11:11:08.6316638Z",
-    "DurationSeconds": 31.19,
-    "RemoteEndpoint": "77.239.124.42:25554",
-    "RemoteIp": "77.239.124.42",
-    "Username": "root",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [
-      {
-        "Username": "root",
-        "Password": "GpSMKdFD",
-        "AuthMethod": "password",
-        "ConnectionAttemptNumber": 1,
-        "Accepted": false,
-        "AcceptanceReason": "rejected",
-        "Timestamp": "2026-11-11T11:10:38.2335792Z"
-      }
-    ],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T11:10:37.4371366Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:25554",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:10:38.2335792Z",
-        "Event": "auth_attempt",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:25554",
-          "Username": "root",
-          "AuthMethod": "password",
-          "Password": "GpSMKdFD",
-          "ConnectionAttemptNumber": 1,
-          "Accepted": false,
-          "AcceptanceReason": "rejected"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:11:08.6316638Z",
-        "Event": "session_end",
-        "Sequence": 3,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:25554",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 31.1945274
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "94207a6e45174aa1",
-    "StartedAt": "2026-11-11T11:10:13.5801187Z",
-    "EndedAt": "2026-11-11T11:10:13.6851214Z",
-    "DurationSeconds": 0.11,
-    "RemoteEndpoint": "77.239.124.42:51876",
-    "RemoteIp": "77.239.124.42",
-    "Username": "unknown",
-    "ClientVersion": "unknown",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T11:10:13.5801187Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:51876",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:10:13.6851214Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "77.239.124.42:51876",
-          "ClientVersion": "unknown",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 0.105003
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "c2a6aaf196834049",
-    "StartedAt": "2026-11-11T11:09:13.7663973Z",
-    "EndedAt": "2026-11-11T11:09:13.8709672Z",
-    "DurationSeconds": 0.1,
-    "RemoteEndpoint": "109.160.32.143:41690",
-    "RemoteIp": "109.160.32.143",
-    "Username": "unknown",
-    "ClientVersion": "SSH-2.0-Go",
-    "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T11:09:13.7663973Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "109.160.32.143:41690",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T11:09:13.8709672Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "109.160.32.143:41690",
-          "ClientVersion": "SSH-2.0-Go",
-          "SshBanner": "SSH-2.0-OpenSSH_6.6.1",
-          "State": "Disconnected",
-          "DurationSeconds": 0.10457
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "b599f54614844cd3",
-    "StartedAt": "2026-11-11T10:56:40.3688426Z",
-    "EndedAt": "2026-11-11T10:56:40.3692482Z",
-    "DurationSeconds": 0,
-    "RemoteEndpoint": "190.192.68.254:33190",
-    "RemoteIp": "190.192.68.254",
-    "Username": "unknown",
-    "ClientVersion": "unknown",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T10:56:40.3688426Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "190.192.68.254:33190",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T10:56:40.3692482Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "190.192.68.254:33190",
-          "ClientVersion": "unknown",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "Disconnected",
-          "DurationSeconds": 0.0004056
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
-  },
-  {
-    "SessionId": "fe5efa837bb84d95",
-    "StartedAt": "2026-11-11T10:56:24.1161375Z",
-    "EndedAt": "2026-11-11T10:56:24.1164853Z",
-    "DurationSeconds": 0,
-    "RemoteEndpoint": "190.192.68.254:42088",
-    "RemoteIp": "190.192.68.254",
-    "Username": "unknown",
-    "ClientVersion": "unknown",
-    "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-    "AuthAccepted": false,
-    "AuthAttempts": [],
-    "Timeline": [
-      {
-        "Timestamp": "2026-11-11T10:56:24.1161375Z",
-        "Event": "session_start",
-        "Sequence": 1,
-        "Data": {
-          "RemoteEndpoint": "190.192.68.254:42088",
-          "ClientVersion": "pending",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "ConnectionAccepted"
-        }
-      },
-      {
-        "Timestamp": "2026-11-11T10:56:24.1164853Z",
-        "Event": "session_end",
-        "Sequence": 2,
-        "Data": {
-          "RemoteEndpoint": "190.192.68.254:42088",
-          "ClientVersion": "unknown",
-          "SshBanner": "SSH-2.0-OpenSSH_for_Windows_8.1",
-          "State": "Disconnected",
-          "DurationSeconds": 0.0003478
-        }
-      }
-    ],
-    "ShellOpened": false,
-    "TimeToCompromiseMs": 0,
-    "CommandCount": 0,
-    "Commands": [],
-    "TacticsObserved": [],
-    "PayloadUrls": [],
-    "PersistenceVectors": [],
-    "RiskScore": 0
   },
   {
     "SessionId": "7eacc89e6a1340d2",

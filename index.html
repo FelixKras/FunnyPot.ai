@@ -2463,8 +2463,15 @@
                         if (s.EndedAt) timeline.push({ type: 'session_end', timestamp: s.EndedAt, data: { DurationSeconds: s.DurationSeconds } });
                     }
                     const uploads = timeline
-                        .filter(item => item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected')
-                        .map(item => ({ ...item.data, Timestamp: item.timestamp, EventType: item.type }));
+                        .filter(item => item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected' || (item.type === 'payload_capture' && (item.data?.Path || item.data?.BytesCaptured > 0)))
+                        .map(item => ({
+                            ...item.data,
+                            Filename: item.data?.Filename || (item.data?.Url ? item.data.Url.split('/').pop() : 'downloaded_payload.bin'),
+                            Bytes: item.data?.Bytes ?? item.data?.BytesCaptured ?? 0,
+                            Source: item.data?.Source || (item.type === 'payload_capture' ? 'url_payload' : 'scp'),
+                            Timestamp: item.timestamp,
+                            EventType: item.type === 'payload_capture' && item.data?.Status === 'captured' ? 'scp_upload_captured' : item.type
+                        }));
                     const payloadUrls = new Set([...(s.PayloadUrls || []), ...commands.flatMap(command => command.PayloadUrls)]);
                     const egressTargets = new Set(commands.flatMap(command => command.EgressTargets));
                     const persistence = new Set([...(s.PersistenceVectors || []), ...commands.map(command => command.PersistenceVector).filter(value => value && value !== 'none')]);
@@ -4400,7 +4407,15 @@
             if (item.type === 'auth_attempt') return `${data.Accepted ? badge('accepted', 'green') : badge('rejected', 'red')} ${escapeHtml(data.Username)} / ${escapeHtml(data.AcceptanceReason)}`;
             if (item.type === 'shell_session_start') return `shell opened for <strong>${escapeHtml(data.Username)}</strong>`;
             if (item.type === 'shell_session_end') return `shell ended: ${escapeHtml(data.Event || 'unknown')}`;
-            if (item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected') return renderUpload({ ...data, EventType: item.type });
+            if (item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected' || item.type === 'payload_capture') {
+                return renderUpload({
+                    ...data,
+                    Filename: data.Filename || (data.Url ? data.Url.split('/').pop() : 'downloaded_payload.bin'),
+                    Bytes: data.Bytes ?? data.BytesCaptured ?? 0,
+                    Source: data.Source || (item.type === 'payload_capture' ? 'url_payload' : 'scp'),
+                    EventType: item.type === 'payload_capture' && data.Status === 'captured' ? 'scp_upload_captured' : item.type
+                });
+            }
             return escapeHtml(data.Event || item.type);
         }
 

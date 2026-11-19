@@ -1858,7 +1858,9 @@
             if (!raw) return null;
             const analysis = raw.Analysis || {};
             const status = raw.Status || (raw.EventType === 'scp_upload_captured' ? 'captured' : 'rejected_saved');
-            const isCaptured = status === 'captured' || raw.EventType === 'scp_upload_captured';
+            const storedFilePath = raw.StoredFilePath || raw.Path || '';
+            const isUrlPayloadSaved = (raw.Source === 'url_payload' || raw.EventType === 'payload_capture') && Boolean(storedFilePath);
+            const isCaptured = status === 'captured' || raw.EventType === 'scp_upload_captured' || isUrlPayloadSaved;
             const capturedBytes = Number(raw.CapturedBytes ?? raw.Bytes ?? raw.BytesCaptured ?? 0) || 0;
             const expectedBytes = Number(raw.ExpectedBytes ?? capturedBytes) || capturedBytes;
             const remoteEndpoint = raw.RemoteEndpoint || sessionFallback?.remote || 'unknown';

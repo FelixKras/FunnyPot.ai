@@ -1970,7 +1970,7 @@
                     ['Packed / High Entropy', fmt.format(packedCount), 'Entropy ≥ 7.20 or UPX markers'],
                     ['With Threat Indicators', fmt.format(indicatorCount), 'Packers, miners, reverse shells'],
                     ['Originating Sessions', fmt.format(uniqueSessionsCount), 'Sessions that delivered real binaries'],
-                    ['Downloaded Volume', formatBytes(totalBytes), 'Stored read-only (0400) in quarantine'],
+                    ['Downloaded Volume', formatBytes(totalBytes), '50 MiB cap per source IP · Read-only (0400)'],
                     ['Rejected / Unstored Attempts', fmt.format(totalRejectedStatsCount), 'Counted in stats only (not shown below)']
                 ];
                 statsEl.innerHTML = metrics.map(([label, value, note]) => summaryMetric(label, value, note)).join('');
@@ -2090,7 +2090,7 @@
             const sizeSummary = item.Truncated && item.ExpectedBytes > item.CapturedBytes
                 ? `${formatBytes(item.CapturedBytes)} captured sample (of ${formatBytes(item.ExpectedBytes)} stream)`
                 : formatBytes(item.CapturedBytes);
-            const storageProtection = 'Saved to quarantine · Read-Only (0400 / non-executable)';
+            const storageProtection = 'Saved to quarantine · Read-Only (0400 / non-executable) · 50 MiB/IP cap';
 
             return `<article class="exchange-session ollama-exchange">
                 <div class="ollama-exchange-header">

@@ -1656,35 +1656,8 @@
                         <h2 class="section-title">Downloaded Binaries &amp; Static Analysis</h2>
                         <span class="muted">Summary statistics and static binary analysis of real downloaded files</span>
                     </div>
-                    <div class="panel" id="malware-analysis" aria-labelledby="malwareAnalysisTitle">
-                        <h3 id="malwareAnalysisTitle">SysMonitorCrew-like SSH activity: analysis of the <code>.sysmonitor</code> payload</h3>
-                        <p><strong>Assessment: strong match to a reported SSH staging pattern; executable family unconfirmed.</strong> Two captures from the same delivery endpoint contained byte-identical prefixes. Neither capture contained the complete file.</p>
-                        <p><strong>SHA-256 of the captured prefix:</strong> <code style="overflow-wrap: anywhere">38002fe5c4e785442d97fa7c58e0ad00bd618abb7bb688819913f1dd91cc4cb3</code>. Use this hash to correlate identical captures, not as the hash of the complete executable.</p>
-                        <details open>
-                            <summary>Campaign comparison: what matched and what did not</summary>
-                            <p>The 23:56 UTC SSH session queried the OS and kernel, CPU count, uptime, CPU model, NVIDIA product name, and attached GPU count, then attempted to save a tokenized HTTP download as <code>~/.sysmonitor</code>. It requested execution and subsequent history clearing. These are observed SSH requests, not actions performed by the quarantined binary.</p>
-                            <p><a href="https://darkfoe.ca/post/19-honeypot-six-weeks-later">Darkfoe’s May 2026 honeypot report</a> calls similar activity <strong>SysMonitorCrew</strong>. The strongest overlap is the combination of both NVIDIA queries, the same hidden destination, and the same curl-to-wget fallback pattern. The CPU-model query differed and the retained FunnyPot session shows no organization lookup. We found no public match for the exact captured-prefix hash or delivery endpoint. This supports a link to the reported staging pattern, not a claim of shared infrastructure, operator identity, or binary lineage.</p>
-                            <p>GPU inventory makes cryptomining a plausible objective, but the capture does not confirm mining. The reference describes RedtailBot and MdrfckrCrew separately; neither is an identification of this sample.</p>
-                        </details>
-                        <details open>
-                            <summary>Capture provenance and completeness</summary>
-                            <p>FunnyPot quarantined bytes collected from two SSH exec sessions on 19 November 2026, at 13:27:22 and 23:56:17 UTC. Both records identify the same HTTP delivery endpoint (<code>103[.]160[.]59[.]94:28816</code>), not a confirmed command-and-control server. The earlier capture has no corresponding command sequence in the retained log. Each record retained 5,242,880 of 37,784,120 reported bytes (13.88%). Both recomputed hashes matched the sidecars; the matching prefixes do not establish that the discarded tails were identical.</p>
-                        </details>
-                        <details open>
-                            <summary>ELF structure and packing evidence</summary>
-                            <ul>
-                                <li>The header identifies a 64-bit little-endian x86-64 ELF executable (ET_EXEC). It declares three program headers and no section table or interpreter. The load segments are separately read/write and read/execute; the GNU stack header does not request execution.</li>
-                                <li>The executable segment declares 37,783,886 file-backed bytes. The entry point maps to file offset 37,778,752, outside the retained prefix. The initial code and end of the executable segment were not available for analysis.</li>
-                                <li>Two <code>UPX!</code> markers occur at file offsets 236 and 1,517,603. Shannon entropy over the capture is 7.9988 of 8 bits per byte; each 1 MiB window exceeds 7.98 bits per byte. Together these findings support packing, but do not establish a UPX version, confirm successful unpacking, or identify the payload.</li>
-                            </ul>
-                        </details>
-                        <details open>
-                            <summary>Indicators, limitations, and defensive follow-up</summary>
-                            <p>The retained bytes had no literal HTTP(S) URLs or clear mining, shell, or SSH-key persistence strings in targeted checks. A lone <code>/proc/</code> fragment is not enough to infer behavior. Packing and truncation can conceal strings, so these negative results do not rule out network activity, persistence, or other capabilities.</p>
-                            <p>No sample was executed, unpacked, or sent to a third party. No process activity, network destinations, persistence, exploitation, or malware family was confirmed. For triage, correlate the two capture times and prefix hash with retained SSH and endpoint telemetry. If a complete copy is already available in internal evidence, hash it separately and analyze it in an isolated environment before drawing behavioral conclusions.</p>
-                        </details>
-                    </div>
                     <div class="panel">
+                        <p class="muted">Capture window: from <time datetime="2026-11-20T12:44:31Z">20 November 2026, 12:44:31 UTC</time>.</p>
                         <p class="muted" id="binariesFreshness">Loading binary statistics and downloaded files...</p>
                         <div class="hud-stats" id="binariesStats"></div>
                         <div class="exchange-toolbar" style="margin-top: 16px;">
@@ -1819,7 +1792,7 @@
 
                 renderDashboard(stats, summary, [], threatIntel, prebuiltSessions);
                 setupTabs();
-                setupBinaries(binaries, sessionModels, summary);
+                setupBinaries(binaries, sessionModels);
                 setupOllama(ollama);
                 setupExchangeSorting();
                 setupFloatingTooltips();
@@ -1906,10 +1879,11 @@
             );
         }
 
-        function setupBinaries(publishedBinaries, sessions = sessionModels, summary = {}) {
+        function setupBinaries(publishedBinaries, sessions = sessionModels) {
+            const captureWindowStart = Date.parse('2026-11-20T12:44:31Z');
             const byKey = new Map();
             const addRecord = (record) => {
-                if (!record) return;
+                if (!record || !(Date.parse(record.CapturedAtUtc) >= captureWindowStart)) return;
                 const key = `${record.SessionId}|${record.ExchangeId || ''}|${record.StoredFilePath || record.OriginalFilename}|${record.Sha256 || ''}`;
                 if (!byKey.has(key)) byKey.set(key, record);
             };
@@ -1930,12 +1904,7 @@
             const allRecords = [...byKey.values()].sort((a, b) => new Date(b.CapturedAtUtc || 0) - new Date(a.CapturedAtUtc || 0));
             caughtBinaries = allRecords.filter(isRealAnalyzedBinary);
 
-            const unstoredAttemptsCount = allRecords.length - caughtBinaries.length;
-            const eventCounts = summary?.EventCounts || {};
-            const totalRejectedStatsCount = Math.max(
-                unstoredAttemptsCount,
-                (Number(eventCounts.scp_upload_rejected) || 0) + Math.max(0, (Number(eventCounts.payload_capture) || 0) - caughtBinaries.length)
-            );
+            const totalRejectedStatsCount = allRecords.length - caughtBinaries.length;
             const uniqueHashes = new Set(caughtBinaries.map(b => b.Sha256).filter(Boolean)).size;
             const executableCount = caughtBinaries.filter(b => b.Analysis.IsExecutable).length;
             const packedCount = caughtBinaries.filter(b => b.Analysis.IsLikelyPackedOrEncrypted).length;
@@ -2018,7 +1987,7 @@
                     <div>
                         <div class="exchange-role">DOWNLOADED BINARY // ${escapeHtml(item.Source.toUpperCase())} // SESSION ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</div>
                         <h3>${escapeHtml(item.OriginalFilename || 'upload.bin')} <span class="muted" style="font-weight:400;font-size:0.95rem;">(${escapeHtml(sizeSummary)})</span></h3>
-                        <div class="exchange-time">Downloaded ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code>${item.Sha256?.toLowerCase() === '38002fe5c4e785442d97fa7c58e0ad00bd618abb7bb688819913f1dd91cc4cb3' ? ' · <a href="#malware-analysis">View sample analysis</a>' : ''}</div>
+                        <div class="exchange-time">Downloaded ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code></div>
                     </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
                         <span class="badge green">DOWNLOADED &amp; ANALYZED</span>

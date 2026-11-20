@@ -1657,12 +1657,18 @@
                         <span class="muted">Summary statistics and static binary analysis of real downloaded files</span>
                     </div>
                     <div class="panel" id="malware-analysis" aria-labelledby="malwareAnalysisTitle">
-                        <h3 id="malwareAnalysisTitle">Malware analysis: probable UPX-packed Linux executable</h3>
-                        <p><strong>Verdict: suspicious; family and behavior unconfirmed.</strong> Two captures contained byte-identical prefixes of one apparent executable. Neither capture contained the complete file.</p>
+                        <h3 id="malwareAnalysisTitle">SysMonitorCrew-like SSH activity: analysis of the <code>.sysmonitor</code> payload</h3>
+                        <p><strong>Assessment: strong match to a reported SSH staging pattern; executable family unconfirmed.</strong> Two captures from the same delivery endpoint contained byte-identical prefixes. Neither capture contained the complete file.</p>
                         <p><strong>SHA-256 of the captured prefix:</strong> <code style="overflow-wrap: anywhere">38002fe5c4e785442d97fa7c58e0ad00bd618abb7bb688819913f1dd91cc4cb3</code>. Use this hash to correlate identical captures, not as the hash of the complete executable.</p>
                         <details open>
+                            <summary>Campaign comparison: what matched and what did not</summary>
+                            <p>The 23:56 UTC SSH session queried the OS and kernel, CPU count, uptime, CPU model, NVIDIA product name, and attached GPU count, then attempted to save a tokenized HTTP download as <code>~/.sysmonitor</code>. It requested execution and subsequent history clearing. These are observed SSH requests, not actions performed by the quarantined binary.</p>
+                            <p><a href="https://darkfoe.ca/post/19-honeypot-six-weeks-later">Darkfoe’s May 2026 honeypot report</a> calls similar activity <strong>SysMonitorCrew</strong>. The strongest overlap is the combination of both NVIDIA queries, the same hidden destination, and the same curl-to-wget fallback pattern. The CPU-model query differed and the retained FunnyPot session shows no organization lookup. We found no public match for the exact captured-prefix hash or delivery endpoint. This supports a link to the reported staging pattern, not a claim of shared infrastructure, operator identity, or binary lineage.</p>
+                            <p>GPU inventory makes cryptomining a plausible objective, but the capture does not confirm mining. The reference describes RedtailBot and MdrfckrCrew separately; neither is an identification of this sample.</p>
+                        </details>
+                        <details open>
                             <summary>Capture provenance and completeness</summary>
-                            <p>FunnyPot quarantined bytes collected from download attempts in two SSH exec sessions on 19 November 2026, at 13:27:22 and 23:56:17 UTC. Each record retained 5,242,880 of 37,784,120 reported bytes (13.88%). The two SHA-256 values were independently recomputed and matched the sidecars. The matching prefixes do not establish that the discarded tails were identical.</p>
+                            <p>FunnyPot quarantined bytes collected from two SSH exec sessions on 19 November 2026, at 13:27:22 and 23:56:17 UTC. Both records identify the same HTTP delivery endpoint (<code>103[.]160[.]59[.]94:28816</code>), not a confirmed command-and-control server. The earlier capture has no corresponding command sequence in the retained log. Each record retained 5,242,880 of 37,784,120 reported bytes (13.88%). Both recomputed hashes matched the sidecars; the matching prefixes do not establish that the discarded tails were identical.</p>
                         </details>
                         <details open>
                             <summary>ELF structure and packing evidence</summary>
@@ -2012,7 +2018,7 @@
                     <div>
                         <div class="exchange-role">DOWNLOADED BINARY // ${escapeHtml(item.Source.toUpperCase())} // SESSION ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</div>
                         <h3>${escapeHtml(item.OriginalFilename || 'upload.bin')} <span class="muted" style="font-weight:400;font-size:0.95rem;">(${escapeHtml(sizeSummary)})</span></h3>
-                        <div class="exchange-time">Downloaded ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code></div>
+                        <div class="exchange-time">Downloaded ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code>${item.Sha256?.toLowerCase() === '38002fe5c4e785442d97fa7c58e0ad00bd618abb7bb688819913f1dd91cc4cb3' ? ' · <a href="#malware-analysis">View sample analysis</a>' : ''}</div>
                     </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
                         <span class="badge green">DOWNLOADED &amp; ANALYZED</span>

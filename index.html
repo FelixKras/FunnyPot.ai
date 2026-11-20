@@ -1331,6 +1331,112 @@
             .bio-vitals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .bio-transcript-row { grid-template-columns: 42px 80px 1fr 100px; }
             .bio-transcript-row > :nth-child(3), .bio-transcript-row > :nth-child(5) { display: none; }
+            .exchange-turn-pair { grid-template-columns: 1fr !important; }
+        }
+
+        .exchange-story-banner {
+            background: linear-gradient(135deg, rgba(72, 223, 255, 0.08), rgba(167, 139, 250, 0.07));
+            border: 1px solid rgba(72, 223, 255, 0.22);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 16px;
+        }
+        .exchange-story-title {
+            font: 800 0.72rem "SFMono-Regular", Consolas, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--cyan);
+            margin-bottom: 5px;
+        }
+        .exchange-story-body {
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: #eef8ff;
+        }
+        .exchange-dialogue-list {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .exchange-turn-card {
+            background: rgba(6, 13, 21, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 14px;
+            padding: 14px 16px;
+            transition: border-color 0.15s ease;
+        }
+        .exchange-turn-card.active {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 1px rgba(72, 223, 255, 0.18);
+        }
+        .exchange-turn-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .exchange-turn-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            align-items: stretch;
+        }
+        .actor-pane {
+            border-radius: 11px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .actor-pane.attacker {
+            background: rgba(255, 100, 124, 0.055);
+            border: 1px solid rgba(255, 100, 124, 0.24);
+            border-left: 4px solid var(--red);
+        }
+        .actor-pane.honeypot {
+            background: rgba(53, 255, 122, 0.05);
+            border: 1px solid rgba(53, 255, 122, 0.24);
+            border-left: 4px solid var(--green);
+        }
+        .actor-pane-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .actor-badge {
+            font: 800 0.69rem "SFMono-Regular", Consolas, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .actor-badge.attacker { color: #ff8fa0; }
+        .actor-badge.honeypot { color: #69ff9c; }
+        .actor-explain {
+            font-size: 0.81rem;
+            line-height: 1.45;
+            color: #dbeafe;
+        }
+        .deep-dive-drawer {
+            margin-top: 12px;
+            background: rgba(5, 11, 18, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+        .deep-dive-drawer > summary {
+            cursor: pointer;
+            font: 700 0.76rem "SFMono-Regular", Consolas, monospace;
+            color: var(--cyan);
+            letter-spacing: 0.06em;
         }
 
         .session-card-title, .history-title {
@@ -1981,65 +2087,98 @@
                 ? `${formatBytes(item.CapturedBytes)} captured sample (of ${formatBytes(item.ExpectedBytes)} stream)`
                 : formatBytes(item.CapturedBytes);
             const storageProtection = 'Saved to quarantine · Read-Only (0400 / non-executable) · 50 MiB/IP cap';
+            const whoSent = `${item.Username || 'unknown'}@${item.RemoteEndpoint || item.RemoteIp || 'unknown'}`;
+            const deliveryMethod = item.Source === 'url_payload'
+                ? 'Issued a shell download command (curl/wget) to fetch an external payload'
+                : `Transferred a binary directly over ${String(item.Source || 'SSH').toUpperCase()}`;
 
             return `<article class="exchange-session ollama-exchange">
                 <div class="ollama-exchange-header">
                     <div>
-                        <div class="exchange-role">DOWNLOADED BINARY // ${escapeHtml(item.Source.toUpperCase())} // SESSION ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</div>
+                        <div class="exchange-role">CAUGHT MALWARE ARTIFACT // ${escapeHtml(item.Source.toUpperCase())} // SESSION ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</div>
                         <h3>${escapeHtml(item.OriginalFilename || 'upload.bin')} <span class="muted" style="font-weight:400;font-size:0.95rem;">(${escapeHtml(sizeSummary)})</span></h3>
-                        <div class="exchange-time">Downloaded ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code></div>
+                        <div class="exchange-time">Captured ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code></div>
                     </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                        <span class="badge green">DOWNLOADED &amp; ANALYZED</span>
+                        <span class="badge green">QUARANTINED &amp; ANALYZED</span>
                         ${a.IsExecutable ? '<span class="badge red">Executable</span>' : ''}
                         ${a.IsLikelyPackedOrEncrypted ? '<span class="badge purple">Packed / High Entropy</span>' : ''}
                         <span class="badge ${entropyColor}">Entropy ${escapeHtml(entropyVal)} / 8.00</span>
                     </div>
                 </div>
 
-                <div class="exchange-details">
-                    <div class="exchange-detail"><div class="exchange-detail-label">Source IP & Endpoint</div><div class="exchange-detail-value">${escapeHtml(item.RemoteEndpoint || item.RemoteIp || 'unknown')}</div></div>
-                    <div class="exchange-detail"><div class="exchange-detail-label">Authenticated User</div><div class="exchange-detail-value">${escapeHtml(item.Username || 'unknown')} (${escapeHtml(item.DeliveryChannel || 'exec')})</div></div>
-                    <div class="exchange-detail"><div class="exchange-detail-label">SSH Client / Banner</div><div class="exchange-detail-value">${escapeHtml(item.ClientVersion || 'unknown')}</div></div>
-                    <div class="exchange-detail"><div class="exchange-detail-label">Session / Exchange ID</div><div class="exchange-detail-value"><code>${escapeHtml(item.SessionId || 'unknown')}</code>${item.ExchangeId ? ` · <code>${escapeHtml(item.ExchangeId)}</code>` : ''}</div></div>
+                <div class="exchange-story-banner">
+                    <div class="exchange-story-title">What Happened</div>
+                    <div class="exchange-story-body">
+                        Attacker <strong>${escapeHtml(whoSent)}</strong> (${escapeHtml(item.ClientVersion || 'SSH client')}) ${escapeHtml(deliveryMethod.toLowerCase())}.
+                        FunnyPot intercepted the transfer, simulated a believable shell outcome to keep the attacker engaged, and locked the file in non-executable quarantine (<code>0400</code>) for static analysis.
+                    </div>
                 </div>
 
-                <div class="bio-inspector-grid">
-                    <div class="bio-inspector-card">
-                        <div class="bio-card-head"><span class="exchange-role">STATIC BINARY CLASSIFICATION</span></div>
-                        <div class="kv" style="margin-top:8px;">
-                            ${kvRows({
-                                'Detected Format': formatSummary,
-                                'MIME Type': a.MimeType || 'application/octet-stream',
-                                'Architecture / Class': [a.Architecture, a.Endianness, a.BinaryType].filter(Boolean).join(' / ') || (a.Shebang ? `Interpreter: ${a.Shebang}` : 'N/A'),
-                                'Magic Bytes (16B Hex)': a.MagicBytesHex || '-',
-                                'Shannon Entropy': `${entropyVal} bits/byte (${a.IsLikelyPackedOrEncrypted ? 'likely packed, compressed, or encrypted' : 'standard code/text distribution'})`,
-                                'Quarantine Path': item.StoredFilePath || '-',
-                                'Metadata Sidecar': item.MetadataFilePath || '-',
-                                'Quarantine Protection': storageProtection,
-                            })}
-                        </div>
-                        ${item.SessionId && item.SessionId !== 'unknown' ? `<div style="margin-top:12px;"><button class="tab-button" type="button" data-jump-session="${escapeAttr(item.SessionId)}">Inspect originating session in Attacker Exchange →</button></div>` : ''}
-                    </div>
-
-                    <div class="bio-inspector-card">
-                        <div class="bio-card-head"><span class="exchange-role">EXTRACTED INDICATORS, IOCS & DELIVERY CONTEXT</span></div>
-                        ${item.CommandText ? `<div class="ollama-turn"><div class="exchange-line-meta">Sanitized Download Source / Vector</div><div class="terminal-line">${escapeHtml(item.CommandText)}</div></div>` : ''}
-                        ${item.ScpHeader ? `<div class="ollama-turn"><div class="exchange-line-meta">SCP Protocol Header</div><div class="terminal-line">${escapeHtml(item.ScpHeader)} (mode ${escapeHtml(item.ScpPermissions || 'n/a')})</div></div>` : ''}
-                        <div style="margin-top:10px;">
-                            <div class="exchange-line-meta">Suspicious Behavioral Indicators</div>
-                            <div style="margin-top:6px;">
-                                ${(a.SuspiciousIndicators || []).length
-                                    ? a.SuspiciousIndicators.map(ind => badge(ind, 'red')).join(' ')
-                                    : '<span class="muted">No specific malware family or persistence keyword matched static rules.</span>'}
+                <div class="exchange-turn-pair" style="margin-bottom:14px;">
+                    <div class="actor-pane attacker">
+                        <div>
+                            <div class="actor-pane-head">
+                                <span class="actor-badge attacker">1. Attacker Sent / Delivery Action</span>
+                                <span class="badge red">${escapeHtml(item.DeliveryChannel || 'exec')} channel</span>
                             </div>
+                            <div class="actor-explain" style="margin-top:6px;">
+                                <strong>Who:</strong> <code>${escapeHtml(whoSent)}</code><br>
+                                <strong>How:</strong> ${escapeHtml(deliveryMethod)}
+                            </div>
+                            ${item.CommandText ? `<div style="margin-top:8px;"><div class="exchange-line-meta">Exact Command / Payload URL Sent by Attacker</div><div class="terminal-line">${escapeHtml(item.CommandText)}</div></div>` : ''}
+                            ${item.ScpHeader ? `<div style="margin-top:8px;"><div class="exchange-line-meta">SCP Transfer Header Sent by Attacker</div><div class="terminal-line">${escapeHtml(item.ScpHeader)} (mode ${escapeHtml(item.ScpPermissions || 'n/a')})</div></div>` : ''}
                         </div>
-                        ${(a.ExtractedUrls || []).length ? `<div style="margin-top:10px;"><div class="exchange-line-meta">Embedded URLs (${fmt.format(a.ExtractedUrls.length)})</div>${a.ExtractedUrls.map(u => `<div class="terminal-line">${escapeHtml(u)}</div>`).join('')}</div>` : ''}
-                        ${(a.ExtractedIpAddresses || []).length ? `<div style="margin-top:10px;"><div class="exchange-line-meta">Embedded IPv4 Endpoints (${fmt.format(a.ExtractedIpAddresses.length)})</div><div>${a.ExtractedIpAddresses.map(ip => badge(ip, 'amber')).join(' ')}</div></div>` : ''}
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+                            <span class="badge amber">Source: ${escapeHtml(item.RemoteIp || item.RemoteEndpoint || 'unknown')}</span>
+                            <span class="badge cyan">Session: ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</span>
+                        </div>
+                    </div>
+
+                    <div class="actor-pane honeypot">
+                        <div>
+                            <div class="actor-pane-head">
+                                <span class="actor-badge honeypot">2. FunnyPot Response &amp; Static Verdict</span>
+                                <span class="badge green">Never Executed (0400)</span>
+                            </div>
+                            <div class="actor-explain" style="margin-top:6px;">
+                                <strong>What FunnyPot Did:</strong> Simulated command completion in the virtual shell while capturing <strong>${escapeHtml(sizeSummary)}</strong> into isolated quarantine.<br>
+                                <strong>Static Classification:</strong> <code>${escapeHtml(formatSummary)}</code> (${escapeHtml(a.MimeType || 'application/octet-stream')})
+                            </div>
+                            <div style="margin-top:8px;">
+                                <div class="exchange-line-meta">Detected Threat &amp; Packing Indicators</div>
+                                <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
+                                    ${(a.SuspiciousIndicators || []).length
+                                        ? a.SuspiciousIndicators.map(ind => badge(ind, 'red')).join(' ')
+                                        : '<span class="muted">No specific packer or family keyword matched static rules.</span>'}
+                                </div>
+                            </div>
+                            ${(a.ExtractedUrls || []).length ? `<div style="margin-top:8px;"><div class="exchange-line-meta">Embedded URLs in Binary (${fmt.format(a.ExtractedUrls.length)})</div>${a.ExtractedUrls.map(u => `<div class="terminal-line">${escapeHtml(u)}</div>`).join('')}</div>` : ''}
+                            ${(a.ExtractedIpAddresses || []).length ? `<div style="margin-top:8px;"><div class="exchange-line-meta">Embedded IPv4 Endpoints (${fmt.format(a.ExtractedIpAddresses.length)})</div><div>${a.ExtractedIpAddresses.map(ip => badge(ip, 'amber')).join(' ')}</div></div>` : ''}
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:8px;">
+                            <span class="badge purple">${escapeHtml(storageProtection)}</span>
+                            ${item.SessionId && item.SessionId !== 'unknown' ? `<button class="tab-button" type="button" data-jump-session="${escapeAttr(item.SessionId)}">View full SSH conversation →</button>` : ''}
+                        </div>
                     </div>
                 </div>
 
-                ${(a.NotableStrings || []).length ? `<details class="ollama-raw"><summary>Extracted printable strings (${fmt.format(a.NotableStrings.length)} prioritized strings)</summary><pre>${escapeHtml(a.NotableStrings.join('\n'))}</pre></details>` : ''}
+                <details class="deep-dive-drawer">
+                    <summary>Technical file metadata, quarantine paths &amp; extracted strings</summary>
+                    <div class="kv" style="margin-top:10px;">
+                        ${kvRows({
+                            'Detected Format': formatSummary,
+                            'MIME Type': a.MimeType || 'application/octet-stream',
+                            'Architecture / Class': [a.Architecture, a.Endianness, a.BinaryType].filter(Boolean).join(' / ') || (a.Shebang ? `Interpreter: ${a.Shebang}` : 'N/A'),
+                            'Magic Bytes (16B Hex)': a.MagicBytesHex || '-',
+                            'Shannon Entropy': `${entropyVal} bits/byte (${a.IsLikelyPackedOrEncrypted ? 'likely packed, compressed, or encrypted' : 'standard code/text distribution'})`,
+                            'Quarantine Path': item.StoredFilePath || '-',
+                            'Metadata Sidecar': item.MetadataFilePath || '-',
+                            'Quarantine Protection': storageProtection,
+                        })}
+                    </div>
+                    ${(a.NotableStrings || []).length ? `<div style="margin-top:10px;"><div class="exchange-line-meta">Extracted printable strings (${fmt.format(a.NotableStrings.length)} prioritized strings)</div><pre style="margin-top:6px;">${escapeHtml(a.NotableStrings.join('\n'))}</pre></div>` : ''}
+                </details>
             </article>`;
         }
 
@@ -2164,35 +2303,72 @@
             const reply = row.Response || (row.Status === 429 ? 'Rate limit applied; no completion generated.'
                 : row.Status === 200 ? 'Discovery/metadata response; no completion text is stored for this endpoint.'
                 : row.Status == null ? 'No response outcome recorded yet.' : 'Request rejected or interrupted; no completion generated.');
+            const peerIp = row.Peer || 'Unknown peer';
+            const endpointLabel = `${row.Method || 'TCP'} ${row.Path || 'probe / incomplete request'}`;
+            const outcomeExplanation = row.Status === 429
+                ? 'FunnyPot throttled the request (HTTP 429) before reading a payload.'
+                : row.Response
+                    ? 'FunnyPot returned a simulated completion reply using 0 upstream LLM tokens.'
+                    : row.Status === 200
+                        ? 'FunnyPot returned a simulated API discovery/status response.'
+                        : 'The connection ended or was rejected before a valid API completion was produced.';
+
             return `<article class="exchange-session ollama-exchange">
                 <div class="ollama-exchange-header">
                     <div><div class="exchange-role">API CONNECTION // ${escapeHtml(row.Id || 'unknown')}</div>
-                        <h3>${escapeHtml(row.Peer || 'Unknown peer')}</h3>
-                        <div class="exchange-time">${escapeHtml(fmtTime(row.Timestamp))}</div></div>
+                        <h3>${escapeHtml(peerIp)} <span class="muted" style="font-weight:400;font-size:0.95rem;">→ <code>${escapeHtml(endpointLabel)}</code></span></h3>
+                        <div class="exchange-time">${escapeHtml(fmtTime(row.Timestamp))} · Requested model: <strong>${escapeHtml(request.model)}</strong> · Streaming: ${escapeHtml(request.streaming)}</div></div>
                     <div><span class="badge ${badge}">HTTP ${escapeHtml(String(row.Status ?? 'pending'))} · ${escapeHtml(outcome)}</span></div>
                 </div>
-                <div class="exchange-details">
-                    <div class="exchange-detail"><div class="exchange-detail-label">Endpoint</div><div class="exchange-detail-value">${escapeHtml(row.Method || 'TCP')} ${escapeHtml(row.Path || 'probe / incomplete request')}</div></div>
-                    <div class="exchange-detail"><div class="exchange-detail-label">Requested model</div><div class="exchange-detail-value">${escapeHtml(request.model)}</div></div>
-                    <div class="exchange-detail"><div class="exchange-detail-label">Streaming</div><div class="exchange-detail-value">${escapeHtml(request.streaming)}</div></div>
-                    <div class="exchange-detail"><div class="exchange-detail-label">Response engine</div><div class="exchange-detail-value">Local simulation · 0 upstream tokens</div></div>
-                </div>
-                <div class="bio-inspector-grid">
-                    <div class="bio-inspector-card">
-                        <div class="bio-card-head"><span class="exchange-role">ATTACKER INPUT // REQUEST</span></div>
-                        ${request.turns.map(turn => `<div class="ollama-turn"><div class="exchange-line-meta">${escapeHtml(turn.role)}</div><div class="terminal-line">${escapeHtml(turn.content || '(empty message)')}</div></div>`).join('') || `<p class="muted">${escapeHtml(request.noBody)}</p>`}
-                        ${row.BodyTruncated ? '<p class="muted">Published request body truncated at 4,096 characters; full local capture may contain more.</p>' : ''}
-                    </div>
-                    <div class="bio-inspector-card">
-                        <div class="bio-card-head"><span class="exchange-role">HONEYPOT RESPONSE // SIMULATED</span></div>
-                        <div class="ollama-turn"><div class="terminal-line terminal-response">${escapeHtml(reply)}</div></div>
-                        <div class="ollama-exchange-badges"><span class="badge green">Source: local simulation</span><span class="badge cyan">Upstream tokens: 0</span></div>
-                        <p class="muted">${escapeHtml(row.Error ? `Capture/transport error: ${row.Error}` : row.Response ? 'Brief canned reply; no real model was invoked.' : 'No synthetic completion is inferred for this record.')}</p>
+
+                <div class="exchange-story-banner">
+                    <div class="exchange-story-title">What Happened</div>
+                    <div class="exchange-story-body">
+                        Attacker at <strong>${escapeHtml(peerIp)}</strong> sent <code>${escapeHtml(endpointLabel)}</code>${request.model !== 'Not supplied' ? ` asking for model <strong>${escapeHtml(request.model)}</strong>` : ''}.
+                        ${escapeHtml(outcomeExplanation)}
                     </div>
                 </div>
-                <details class="ollama-raw"><summary>Raw request & connection evidence</summary>
-                    <p class="muted">User agent: ${escapeHtml(row.UserAgent || 'Not supplied')}<br>Updated: ${escapeHtml(fmtTime(row.UpdatedAt || row.Timestamp))}</p>
-                    <pre>${escapeHtml(row.Body || request.noBody)}</pre>
+
+                <div class="exchange-turn-pair">
+                    <div class="actor-pane attacker">
+                        <div>
+                            <div class="actor-pane-head">
+                                <span class="actor-badge attacker">ATTACKER INPUT // WHAT THEY SENT</span>
+                                <span class="badge purple">Requested model: ${escapeHtml(request.model)}</span>
+                            </div>
+                            <div style="margin-top:8px;">
+                                ${request.turns.map(turn => `<div class="ollama-turn"><div class="exchange-line-meta">Role: ${escapeHtml(turn.role)}</div><div class="terminal-line">${escapeHtml(turn.content || '(empty message)')}</div></div>`).join('') || `<p class="muted">${escapeHtml(request.noBody)}</p>`}
+                                ${row.BodyTruncated ? '<p class="muted">Published request body truncated at 4,096 characters; full local capture may contain more.</p>' : ''}
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+                            <span class="badge amber">Endpoint: ${escapeHtml(endpointLabel)}</span>
+                            <span class="badge cyan">Streaming: ${escapeHtml(request.streaming)}</span>
+                        </div>
+                    </div>
+
+                    <div class="actor-pane honeypot">
+                        <div>
+                            <div class="actor-pane-head">
+                                <span class="actor-badge honeypot">HONEYPOT RESPONSE // WHAT FUNNYPOT REPLIED</span>
+                                <span class="badge ${badge}">HTTP ${escapeHtml(String(row.Status ?? 'pending'))}</span>
+                            </div>
+                            <div class="ollama-turn" style="margin-top:8px;">
+                                <div class="exchange-line-meta">Simulated API Reply</div>
+                                <div class="terminal-line terminal-response">${escapeHtml(reply)}</div>
+                            </div>
+                            <p class="muted" style="margin-top:8px;">${escapeHtml(row.Error ? `Capture/transport error: ${row.Error}` : row.Response ? 'Brief canned reply; no real model was invoked.' : 'No synthetic completion is inferred for this record.')}</p>
+                        </div>
+                        <div class="ollama-exchange-badges">
+                            <span class="badge green">Source: local simulation</span>
+                            <span class="badge cyan">Upstream tokens: 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <details class="deep-dive-drawer"><summary>Raw HTTP request &amp; connection evidence</summary>
+                    <p class="muted" style="margin-top:8px;">User agent: ${escapeHtml(row.UserAgent || 'Not supplied')} · Updated: ${escapeHtml(fmtTime(row.UpdatedAt || row.Timestamp))}</p>
+                    <pre style="margin-top:6px;">${escapeHtml(row.Body || request.noBody)}</pre>
                 </details>
             </article>`;
         }
@@ -3197,10 +3373,57 @@
                 </div>
             `).join('');
 
+            const whoLabel = `${activeSession.username || 'root'}@${remoteIp(activeSession.remote) || 'unknown'}${activeSession.location?.country ? ` (${activeSession.location.country})` : ''}`;
+            const dialogueTurnsHtml = activeBio.pulses.map((p, idx) => {
+                const isSel = idx === selectedPulseIndex;
+                return `
+                    <div class="exchange-turn-card ${isSel ? 'active' : ''}" onclick="selectBiometricPulse(${idx})">
+                        <div class="exchange-turn-top">
+                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                                <span class="badge cyan">Step #${idx + 1} of ${activeBio.pulses.length}</span>
+                                <span style="font:700 0.78rem 'SFMono-Regular',Consolas,monospace;color:#fff;">${escapeHtml(p.timeLabel)} (${escapeHtml(p.delta)})</span>
+                                <span class="badge purple">${escapeHtml(p.intent)} · ${escapeHtml(p.mitre)}</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                                <span class="badge amber">Delivery: ${escapeHtml(p.deliveryLabel)}</span>
+                                <span class="badge green">Answered by: ${escapeHtml(p.sourceShort)} (${escapeHtml(p.engineLatency)})</span>
+                            </div>
+                        </div>
+
+                        <div class="exchange-turn-pair">
+                            <div class="actor-pane attacker">
+                                <div>
+                                    <div class="actor-pane-head">
+                                        <span class="actor-badge attacker">ATTACKER SENT // ${escapeHtml(whoLabel)}</span>
+                                    </div>
+                                    <div class="terminal-line" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px; margin-top:8px;">$ ${escapeHtml(p.cmd)}</div>
+                                    <div class="actor-explain" style="margin-top:8px;">
+                                        <strong>What they were trying to do:</strong> ${escapeHtml(p.chainExplanation)}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="actor-pane honeypot">
+                                <div>
+                                    <div class="actor-pane-head">
+                                        <span class="actor-badge honeypot">FUNNYPOT / LLM REPLIED // ${escapeHtml(p.sourceShort)}</span>
+                                        ${responseCacheBadge(p.result)}
+                                    </div>
+                                    <div class="terminal-line terminal-response" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px; margin-top:8px;">${escapeHtml(p.resp)}</div>
+                                    <div class="actor-explain" style="margin-top:8px;">
+                                        <strong>How FunnyPot answered:</strong> ${escapeHtml(p.deceptionNote)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
             target.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
                     <div style="font-size:0.8rem; color:var(--muted);">
-                        Showing <strong>${displaySessions.length}</strong> ${groupDuplicateCampaigns ? 'unique playbook clusters' : 'sessions'} (from ${sorted.length} matching sessions). Click any session tab or pulse node to inspect.
+                        Showing <strong>${displaySessions.length}</strong> ${groupDuplicateCampaigns ? 'unique attacker sessions/playbooks' : 'sessions'} (from ${sorted.length} matching sessions). Click any session below to read its full conversation.
                     </div>
                     <label style="display:inline-flex; align-items:center; gap:7px; font-size:0.78rem; color:var(--cyan); cursor:pointer;">
                         <input type="checkbox" ${groupDuplicateCampaigns ? 'checked' : ''} onchange="toggleCampaignGrouping(this.checked)">
@@ -3211,112 +3434,81 @@
                 <div class="bio-session-ribbon">${ribbonHtml}</div>
 
                 <div class="bio-stage exchange-session">
-                    <div class="bio-dossier-header">
-                        <div>
-                            <div class="bio-verdict-kicker" style="color:${activeBio.color};">
-                                // BIOMETRIC TELEMETRY VERDICT ${activeBio.aiTag ? `· [${escapeHtml(activeBio.aiTag)}]` : ''} ${analysisTooltip(activeSession)}
-                            </div>
-                            <h3 class="bio-verdict-headline">${escapeHtml(activeBio.headline)}</h3>
-                            <div class="bio-verdict-reason">${escapeHtml(activeBio.reason)}</div>
+                    <div class="exchange-story-banner">
+                        <div class="exchange-story-title">What Happened in This Session // ${escapeHtml(activeBio.playbookName)}</div>
+                        <div class="exchange-story-body">
+                            <strong>Who:</strong> Attacker <code>${escapeHtml(whoLabel)}</code> using <code>${escapeHtml(activeSession.client || activeSession.sshBanner || 'SSH-2.0')}</code> (${escapeHtml(activeBio.headline)}).<br>
+                            <strong>Summary:</strong> ${escapeHtml(activeBio.sequenceNarrative)}<br>
+                            <strong>Timing &amp; LLM Engine:</strong> ${escapeHtml(activeBio.reason)}
                         </div>
-                        <div class="bio-vitals-grid">${vitalsHtml}</div>
                     </div>
 
-                    <div class="bio-sequence-bar">
-                        <div class="bio-seq-top">
-                            <span class="bio-seq-kicker">// SEQUENCE PLAYBOOK EXPLAINER — ${escapeHtml(activeBio.playbookName)}</span>
-                            <span style="font:600 0.71rem 'SFMono-Regular',Consolas,monospace; color:var(--muted);">
-                                ${escapeHtml(sessionRef(activeSession))} · Latest: ${fmtTime(latestExchangeTimestamp(activeSession))}
-                            </span>
-                        </div>
-                        <div class="bio-seq-narrative">${escapeHtml(activeBio.sequenceNarrative)}</div>
-                        <div class="bio-seq-arc">${arcCardsHtml}</div>
+                    <div class="exchange-dialogue-list">
+                        ${dialogueTurnsHtml}
                     </div>
 
-                    <div class="bio-scope-frame">
-                        <div class="bio-scope-top">
-                            <span>BIOMETRIC CADENCE OSCILLOSCOPE // CLICK ANY PULSE NODE OR STEP CARD</span>
-                            <div style="display:flex; gap:14px; flex-wrap:wrap;">
-                                <span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-right:5px;"></i>Discovery</span>
-                                <span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:5px;"></i>PrivEsc / Auth</span>
-                                <span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:5px;"></i>Payload / C2</span>
-                            </div>
-                        </div>
-                        <svg class="bio-waveform-svg" viewBox="0 0 1000 145">
-                            <line x1="0" y1="110" x2="990" y2="110" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4 4"/>
-                            <path d="${activeBio.wavePath}" fill="none" stroke="${activeBio.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            ${nodesSvg}
-                        </svg>
-                    </div>
-
-                    ${activePulse ? `
-                    <div class="bio-inspector-grid">
-                        <div class="bio-inspector-card">
-                            <div class="bio-card-head">
-                                <span style="font:800 0.72rem 'SFMono-Regular',Consolas,monospace; color:var(--muted); letter-spacing:0.12em;">
-                                    PULSE #${selectedPulseIndex + 1} (${escapeHtml(activePulse.timeLabel)}) // ATTACKER INPUT
-                                </span>
-                                <span class="badge purple">${escapeHtml(activePulse.intent)} · ${escapeHtml(activePulse.mitre)}</span>
-                            </div>
-                            <div class="terminal-line" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px;">${escapeHtml(activePulse.cmd)}</div>
-
-                            <div class="bio-explainer-callout">
-                                <div class="bio-explainer-label">// WHAT THIS COMMAND CHAIN DOES & WHY IT WAS WRITTEN THIS WAY</div>
-                                <div class="bio-explainer-text">${escapeHtml(activePulse.chainExplanation)}</div>
-                            </div>
-
-                            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
-                                <span class="badge cyan">Delivery: ${escapeHtml(activePulse.deliveryLabel)}</span>
-                                <span class="badge amber">Wait: ${escapeHtml(activePulse.delta)}</span>
-                                <span class="badge purple">Sophistication: ${escapeHtml(activePulse.sophistication)}</span>
-                                <span class="badge green">Target Value: ${escapeHtml(activePulse.avp)}</span>
-                            </div>
-
-                            <div style="border-top:1px dashed rgba(255,255,255,0.12); padding-top:10px;">
-                                <div style="font:700 0.67rem 'SFMono-Regular',Consolas,monospace; color:var(--cyan); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">
-                                    STEP-BY-STEP CHAIN EXECUTION (${activePulse.steps.length} SEGMENT${activePulse.steps.length === 1 ? '' : 'S'})
+                    <details class="deep-dive-drawer">
+                        <summary>Biometric oscilloscope, session vitals &amp; step-by-step chain breakdown (Step #${selectedPulseIndex + 1})</summary>
+                        <div style="margin-top:14px;">
+                            <div class="bio-dossier-header">
+                                <div>
+                                    <div class="bio-verdict-kicker" style="color:${activeBio.color};">
+                                        // BIOMETRIC TELEMETRY VERDICT ${activeBio.aiTag ? `· [${escapeHtml(activeBio.aiTag)}]` : ''} ${analysisTooltip(activeSession)}
+                                    </div>
+                                    <h3 class="bio-verdict-headline">${escapeHtml(activeBio.headline)}</h3>
+                                    <div class="bio-verdict-reason">${escapeHtml(activeBio.reason)}</div>
                                 </div>
-                                ${stepsHtml}
-                            </div>
-                        </div>
-
-                        <div class="bio-inspector-card">
-                            <div class="bio-card-head">
-                                <span style="font:800 0.72rem 'SFMono-Regular',Consolas,monospace; color:var(--muted); letter-spacing:0.12em;">
-                                    HONEYPOT DECEPTION // RESPONSE & ENGINE EXPLAINER
-                                </span>
-                                ${responseCacheBadge(activePulse.result)}
-                            </div>
-                            <div class="terminal-line terminal-response" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px;">${escapeHtml(activePulse.resp)}</div>
-
-                            <div class="bio-explainer-callout" style="background:rgba(53,255,122,0.06); border-left-color:var(--green);">
-                                <div class="bio-explainer-label" style="color:var(--green);">// HOW FUNNYPOT RESOLVED THIS EXCHANGE</div>
-                                <div class="bio-explainer-text">${escapeHtml(activePulse.deceptionNote)}</div>
+                                <div class="bio-vitals-grid">${vitalsHtml}</div>
                             </div>
 
-                            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
-                                <span class="badge green">Source: ${escapeHtml(activePulse.sourceShort)}</span>
-                                <span class="badge cyan">Engine Latency: ${escapeHtml(activePulse.engineLatency)}</span>
-                                <span class="badge amber">Tokens: ${escapeHtml(activePulse.tokensLabel)}</span>
-                            </div>
-
-                            <div style="border-top:1px dashed rgba(255,255,255,0.12); padding-top:10px;">
-                                <div style="font:700 0.67rem 'SFMono-Regular',Consolas,monospace; color:var(--purple); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">
-                                    TEMPLATE PLACEHOLDERS & EXTRACTED IOCS
+                            <div class="bio-sequence-bar">
+                                <div class="bio-seq-top">
+                                    <span class="bio-seq-kicker">// SEQUENCE PLAYBOOK STEPS — CLICK TO INSPECT</span>
+                                    <span style="font:600 0.71rem 'SFMono-Regular',Consolas,monospace; color:var(--muted);">
+                                        ${escapeHtml(sessionRef(activeSession))} · Latest: ${fmtTime(latestExchangeTimestamp(activeSession))}
+                                    </span>
                                 </div>
-                                ${iocsHtml}
+                                <div class="bio-seq-arc">${arcCardsHtml}</div>
                             </div>
-                        </div>
-                    </div>
-                    ` : ''}
 
-                    <div class="bio-transcript-drawer">
-                        <div style="padding:10px 14px; background:rgba(255,255,255,0.025); border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; font:700 0.69rem 'SFMono-Regular',Consolas,monospace; color:var(--muted); text-transform:uppercase; letter-spacing:0.11em;">
-                            <span>FULL SESSION EXCHANGE TIMELINE (CLICK ANY ROW TO LOCK OSCILLOSCOPE)</span>
-                            <span>${activeBio.pulses.length} EXCHANGES</span>
+                            <div class="bio-scope-frame">
+                                <div class="bio-scope-top">
+                                    <span>BIOMETRIC CADENCE OSCILLOSCOPE // CLICK ANY PULSE NODE</span>
+                                    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                                        <span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-right:5px;"></i>Discovery</span>
+                                        <span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:5px;"></i>PrivEsc / Auth</span>
+                                        <span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:5px;"></i>Payload / C2</span>
+                                    </div>
+                                </div>
+                                <svg class="bio-waveform-svg" viewBox="0 0 1000 145">
+                                    <line x1="0" y1="110" x2="990" y2="110" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4 4"/>
+                                    <path d="${activeBio.wavePath}" fill="none" stroke="${activeBio.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    ${nodesSvg}
+                                </svg>
+                            </div>
+
+                            ${activePulse ? `
+                            <div class="bio-inspector-grid">
+                                <div class="bio-inspector-card">
+                                    <div class="bio-card-head">
+                                        <span style="font:800 0.72rem 'SFMono-Regular',Consolas,monospace; color:var(--muted); letter-spacing:0.12em;">
+                                            STEP #${selectedPulseIndex + 1} CHAIN BREAKDOWN (${activePulse.steps.length} SEGMENT${activePulse.steps.length === 1 ? '' : 'S'})
+                                        </span>
+                                    </div>
+                                    ${stepsHtml}
+                                </div>
+                                <div class="bio-inspector-card">
+                                    <div class="bio-card-head">
+                                        <span style="font:800 0.72rem 'SFMono-Regular',Consolas,monospace; color:var(--muted); letter-spacing:0.12em;">
+                                            EXTRACTED IOCS &amp; TEMPLATE PLACEHOLDERS
+                                        </span>
+                                    </div>
+                                    ${iocsHtml}
+                                </div>
+                            </div>
+                            ` : ''}
                         </div>
-                        ${transcriptRowsHtml}
-                    </div>
+                    </details>
                 </div>
             `;
         }

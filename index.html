@@ -1679,20 +1679,12 @@
                                 <input id="binaryQuery" type="search" placeholder="e.g. ELF, xmrig, sha256, session ID, IP">
                             </div>
                             <div class="hud-control">
-                                <label for="binaryStatusFilter">Quarantine status</label>
-                                <select id="binaryStatusFilter">
-                                    <option value="all">All statuses (captured & rejected)</option>
-                                    <option value="captured">Captured (accepted & saved)</option>
-                                    <option value="rejected">Rejected & saved to quarantine</option>
-                                </select>
-                            </div>
-                            <div class="hud-control">
                                 <label for="binarySourceFilter">Capture vector</label>
                                 <select id="binarySourceFilter">
                                     <option value="all">All delivery vectors</option>
                                     <option value="scp">SCP transfer</option>
                                     <option value="inline">Inline SSH / PTY / Base64 / Hex</option>
-                                    <option value="url">Fetched URL payload</option>
+                                    <option value="url">Downloaded URL binary (curl / wget)</option>
                                 </select>
                             </div>
                             <div class="hud-control">
@@ -1707,9 +1699,9 @@
                         </div>
                         <div class="exchange-toolbar">
                             <span class="muted" id="binariesCount">0 caught binaries</span>
-                            <span class="muted">Rejected binary uploads are preserved in <code>${LogDir}/uploads/&lt;session&gt;/</code> alongside <code>.meta.json</code> sidecars.</span>
+                            <span class="muted">Showing real downloaded &amp; quarantined binaries stored in <code>${LogDir}/uploads/&lt;session&gt;/</code> (`0400` read-only) with static analysis.</span>
                         </div>
-                        <div id="binariesList" class="ollama-exchange-list"><div class="empty">No caught or rejected binary payloads published yet.</div></div>
+                        <div id="binariesList" class="ollama-exchange-list"><div class="empty">No downloaded binary payloads analyzed yet.</div></div>
                     </div>
                 </section>
             </div>
@@ -1857,12 +1849,11 @@
         function normalizeBinaryRecord(raw, sessionFallback = null) {
             if (!raw) return null;
             const analysis = raw.Analysis || {};
-            const status = raw.Status || (raw.EventType === 'scp_upload_captured' ? 'captured' : 'rejected_saved');
             const storedFilePath = raw.StoredFilePath || raw.Path || '';
-            const isUrlPayloadSaved = (raw.Source === 'url_payload' || raw.EventType === 'payload_capture') && Boolean(storedFilePath);
-            const isCaptured = status === 'captured' || raw.EventType === 'scp_upload_captured' || isUrlPayloadSaved;
             const capturedBytes = Number(raw.CapturedBytes ?? raw.Bytes ?? raw.BytesCaptured ?? 0) || 0;
             const expectedBytes = Number(raw.ExpectedBytes ?? capturedBytes) || capturedBytes;
+            const hasSavedFile = Boolean(storedFilePath) && capturedBytes > 0;
+            const status = hasSavedFile ? 'captured' : (raw.Status || 'rejected');
             const remoteEndpoint = raw.RemoteEndpoint || sessionFallback?.remote || 'unknown';
             const sourceIp = raw.RemoteIp || remoteIp(remoteEndpoint) || 'unknown';
             const filename = raw.OriginalFilename || raw.Filename || (raw.Url ? raw.Url.split('/').pop() : '') || 'upload.bin';
@@ -1874,8 +1865,8 @@
                 ExchangeId: raw.ExchangeId || '',
                 Source: source,
                 Status: status,
-                IsCaptured: isCaptured,
-                RejectionReason: raw.RejectionReason || (status.startsWith('too_large') ? 'too_large' : (!isCaptured ? 'Binary content not allowed' : '')),
+                IsCaptured: hasSavedFile,
+                RejectionReason: hasSavedFile ? '' : (raw.RejectionReason || raw.Status || 'rejected'),
                 RemoteEndpoint: remoteEndpoint,
                 RemoteIp: sourceIp,
                 Username: raw.Username || sessionFallback?.username || 'unknown',
@@ -1886,7 +1877,7 @@
                 ScpHeader: raw.ScpHeader || '',
                 ScpPermissions: raw.ScpPermissions || '',
                 OriginalFilename: filename,
-                StoredFilePath: raw.StoredFilePath || raw.Path || '',
+                StoredFilePath: storedFilePath,
                 MetadataFilePath: raw.MetadataFilePath || raw.MetadataPath || '',
                 ExpectedBytes: expectedBytes,
                 CapturedBytes: capturedBytes,
@@ -1912,11 +1903,24 @@
             };
         }
 
+        function isRealAnalyzedBinary(item) {
+            if (!item) return false;
+            const a = item.Analysis || {};
+            const format = String(a.FileFormat || '').trim().toLowerCase();
+            return Boolean(
+                item.StoredFilePath
+                && Number(item.CapturedBytes) > 0
+                && format
+                && format !== 'unknown'
+                && format !== 'empty'
+            );
+        }
+
         function setupBinaries(publishedBinaries, sessions = sessionModels, summary = {}) {
             const byKey = new Map();
             const addRecord = (record) => {
                 if (!record) return;
-                const key = `${record.SessionId}|${record.ExchangeId || ''}|${record.StoredFilePath || record.OriginalFilename}|${record.Sha256 || ''}|${record.CapturedAtUtc || ''}`;
+                const key = `${record.SessionId}|${record.ExchangeId || ''}|${record.StoredFilePath || record.OriginalFilename}|${record.Sha256 || ''}`;
                 if (!byKey.has(key)) byKey.set(key, record);
             };
 
@@ -1933,12 +1937,16 @@
                 });
             });
 
-            caughtBinaries = [...byKey.values()].sort((a, b) => new Date(b.CapturedAtUtc || 0) - new Date(a.CapturedAtUtc || 0));
+            const allRecords = [...byKey.values()].sort((a, b) => new Date(b.CapturedAtUtc || 0) - new Date(a.CapturedAtUtc || 0));
+            caughtBinaries = allRecords.filter(isRealAnalyzedBinary);
 
-            const capturedCount = caughtBinaries.filter(b => b.IsCaptured).length;
-            const rejectedSavedCount = caughtBinaries.filter(b => !b.IsCaptured && hasAnalyzableBinaryContent(b)).length;
-            const rejectedEmptyCount = caughtBinaries.filter(b => !b.IsCaptured && !hasAnalyzableBinaryContent(b)).length;
-            const uniqueHashes = new Set(caughtBinaries.filter(hasAnalyzableBinaryContent).map(b => b.Sha256).filter(Boolean)).size;
+            const unstoredAttemptsCount = allRecords.length - caughtBinaries.length;
+            const eventCounts = summary?.EventCounts || {};
+            const totalRejectedStatsCount = Math.max(
+                unstoredAttemptsCount,
+                (Number(eventCounts.scp_upload_rejected) || 0) + Math.max(0, (Number(eventCounts.payload_capture) || 0) - caughtBinaries.length)
+            );
+            const uniqueHashes = new Set(caughtBinaries.map(b => b.Sha256).filter(Boolean)).size;
             const executableCount = caughtBinaries.filter(b => b.Analysis.IsExecutable).length;
             const packedCount = caughtBinaries.filter(b => b.Analysis.IsLikelyPackedOrEncrypted).length;
             const indicatorCount = caughtBinaries.filter(b => b.Analysis.SuspiciousIndicators.length > 0).length;
@@ -1949,21 +1957,21 @@
             if (freshnessEl) {
                 const latestCapture = caughtBinaries[0]?.CapturedAtUtc;
                 freshnessEl.textContent = caughtBinaries.length
-                    ? `Latest binary event: ${fmtTime(latestCapture)}. Showing ${fmt.format(caughtBinaries.length)} binary upload records (${fmt.format(capturedCount)} accepted SCP/payload captures, ${fmt.format(rejectedSavedCount)} rejected with quarantined payload bytes, ${fmt.format(rejectedEmptyCount)} rejected without payload bytes clustered in a single panel).`
-                    : `No binary files have been caught or rejected in the current telemetry window yet. Both accepted SCP uploads and rejected binary drops (oversized transfers, raw PTY/exec binary injections, base64/hex stagers) are automatically quarantined in uploads/<session>/ with .meta.json sidecars and published here.`;
+                    ? `Latest binary downloaded & analyzed: ${fmtTime(latestCapture)}. Presenting ${fmt.format(caughtBinaries.length)} real downloaded binary artifact${caughtBinaries.length === 1 ? '' : 's'} with verified static analysis (${fmt.format(totalRejectedStatsCount)} rejected/unstored transfer attempts summarized in statistics only).`
+                    : `No real downloaded binary files have been analyzed yet (${fmt.format(totalRejectedStatsCount)} rejected or unstored transfer attempts recorded in statistics).`;
             }
 
             const statsEl = document.getElementById('binariesStats');
             if (statsEl) {
                 const metrics = [
-                    ['Total Upload Events', fmt.format(caughtBinaries.length), 'Accepted & rejected binary attempts'],
-                    ['Accepted & Captured', fmt.format(capturedCount), 'Completed SCP / URL captures'],
-                    ['Rejected & Quarantined', fmt.format(rejectedSavedCount), 'Rejected with analyzable payload bytes'],
-                    ['Rejected (No Payload)', fmt.format(rejectedEmptyCount), 'Clustered header-rejected / 0-byte attempts'],
-                    ['Unique SHA-256', fmt.format(uniqueHashes), 'Distinct analyzable payload hashes'],
-                    ['Executable Payloads', fmt.format(executableCount), 'ELF, PE, Mach-O, or #! scripts'],
+                    ['Downloaded Binaries', fmt.format(caughtBinaries.length), 'Real files saved & analyzed on disk'],
+                    ['Unique SHA-256', fmt.format(uniqueHashes), 'Distinct downloaded binary hashes'],
+                    ['Executable Binaries', fmt.format(executableCount), 'ELF, PE, Mach-O, or #! scripts'],
                     ['Packed / High Entropy', fmt.format(packedCount), 'Entropy ≥ 7.20 or UPX markers'],
-                    ['Quarantined Volume', formatBytes(totalBytes), `${fmt.format(indicatorCount)} with threat indicators · ${fmt.format(uniqueSessionsCount)} sessions`]
+                    ['With Threat Indicators', fmt.format(indicatorCount), 'Packers, miners, reverse shells'],
+                    ['Originating Sessions', fmt.format(uniqueSessionsCount), 'Sessions that delivered real binaries'],
+                    ['Downloaded Volume', formatBytes(totalBytes), 'Stored read-only (0400) in quarantine'],
+                    ['Rejected / Unstored Attempts', fmt.format(totalRejectedStatsCount), 'Counted in stats only (not shown below)']
                 ];
                 statsEl.innerHTML = metrics.map(([label, value, note]) => summaryMetric(label, value, note)).join('');
             }
@@ -1972,9 +1980,7 @@
             const sourceCounts = {};
             const indicatorCounts = {};
             caughtBinaries.forEach(item => {
-                const fmtLabel = hasAnalyzableBinaryContent(item)
-                    ? ([item.Analysis.FileFormat, item.Analysis.Architecture].filter(Boolean).join(' · ') || 'unknown')
-                    : 'Rejected before payload transfer (0B)';
+                const fmtLabel = [item.Analysis.FileFormat, item.Analysis.Architecture].filter(Boolean).join(' · ') || 'unknown';
                 formatCounts[fmtLabel] = (formatCounts[fmtLabel] || 0) + 1;
                 sourceCounts[item.Source || 'unknown'] = (sourceCounts[item.Source || 'unknown'] || 0) + 1;
                 (item.Analysis.SuspiciousIndicators || []).forEach(ind => {
@@ -1986,7 +1992,7 @@
             renderBars('binarySourceBars', takeTop(sourceCounts, 10), 'amber');
             renderBars('binaryIndicatorBars', takeTop(indicatorCounts, 10), 'purple');
 
-            for (const id of ['binaryQuery', 'binaryStatusFilter', 'binarySourceFilter', 'binaryFormatFilter']) {
+            for (const id of ['binaryQuery', 'binarySourceFilter', 'binaryFormatFilter']) {
                 const el = document.getElementById(id);
                 if (el && !el.dataset.ready) {
                     el.dataset.ready = 'true';
@@ -1999,26 +2005,7 @@
         }
 
         function hasAnalyzableBinaryContent(item) {
-            if (!item) return false;
-            const a = item.Analysis || {};
-            const hasBytes = Number(item.CapturedBytes) > 0;
-            const format = String(a.FileFormat || '').trim().toLowerCase();
-            const hasFormat = Boolean(format && format !== 'unknown' && format !== 'empty');
-            const hasDetails = Boolean(
-                a.MagicBytesHex
-                || a.Architecture
-                || a.Shebang
-                || (a.SuspiciousIndicators && a.SuspiciousIndicators.length)
-                || (a.ExtractedUrls && a.ExtractedUrls.length)
-                || (a.ExtractedIpAddresses && a.ExtractedIpAddresses.length)
-                || (a.NotableStrings && a.NotableStrings.length)
-            );
-            return hasBytes && (hasFormat || hasDetails);
-        }
-
-        function isClusteredRejectedBinary(item) {
-            if (!item) return false;
-            return !item.IsCaptured || !hasAnalyzableBinaryContent(item);
+            return isRealAnalyzedBinary(item);
         }
 
         function renderCaughtBinariesList() {
@@ -2026,14 +2013,10 @@
             if (!target) return;
 
             const query = (document.getElementById('binaryQuery')?.value || '').trim().toLowerCase();
-            const statusFilter = document.getElementById('binaryStatusFilter')?.value || 'all';
             const sourceFilter = document.getElementById('binarySourceFilter')?.value || 'all';
             const formatFilter = document.getElementById('binaryFormatFilter')?.value || 'all';
 
             const filtered = caughtBinaries.filter(item => {
-                if (statusFilter === 'captured' && !item.IsCaptured) return false;
-                if (statusFilter === 'rejected' && item.IsCaptured) return false;
-
                 if (sourceFilter === 'scp' && !String(item.Source).startsWith('scp')) return false;
                 if (sourceFilter === 'inline' && !String(item.Source).startsWith('ssh_') && !String(item.Source).startsWith('inline_')) return false;
                 if (sourceFilter === 'url' && item.Source !== 'url_payload') return false;
@@ -2057,8 +2040,6 @@
                     item.ClientVersion,
                     item.SshBanner,
                     item.Source,
-                    item.Status,
-                    item.RejectionReason,
                     item.CommandText,
                     item.Analysis.FileFormat,
                     item.Analysis.Summary,
@@ -2075,21 +2056,17 @@
                 return haystack.includes(query);
             });
 
-            const individualCards = filtered.filter(item => !isClusteredRejectedBinary(item));
-            const clusteredRejected = filtered.filter(isClusteredRejectedBinary);
-
             const countEl = document.getElementById('binariesCount');
             if (countEl) {
-                countEl.textContent = `${fmt.format(filtered.length)} matching binary record${filtered.length === 1 ? '' : 's'} · ${fmt.format(individualCards.length)} captured & analyzed · ${fmt.format(clusteredRejected.length)} rejected (clustered in single panel)`;
+                countEl.textContent = `${fmt.format(filtered.length)} downloaded & analyzed binary artifact${filtered.length === 1 ? '' : 's'}`;
             }
 
             if (!filtered.length) {
-                target.innerHTML = `<div class="empty">${caughtBinaries.length ? 'No caught binaries match the active filters.' : 'No caught or rejected binary payloads published yet.'}</div>`;
+                target.innerHTML = `<div class="empty">${caughtBinaries.length ? 'No downloaded binaries match the active filters.' : 'No downloaded binary payloads analyzed yet.'}</div>`;
                 return;
             }
 
-            target.innerHTML = renderRejectedBinariesCluster(clusteredRejected)
-                + individualCards.map(renderCaughtBinaryCard).join('');
+            target.innerHTML = filtered.map(renderCaughtBinaryCard).join('');
 
             target.querySelectorAll('[data-jump-session]').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -2105,118 +2082,25 @@
             });
         }
 
-        function renderRejectedBinariesCluster(rows) {
-            if (!rows.length) return '';
-            const reasons = new Map();
-            const filenames = new Map();
-            const formats = new Map();
-            const indicators = new Set();
-            const sources = new Set();
-            const sessions = new Set();
-            const times = [];
-            let totalAnnouncedBytes = 0;
-            let totalSavedBytes = 0;
-            let withPayloadCount = 0;
-            let withoutPayloadCount = 0;
-
-            rows.forEach(item => {
-                const hasPayload = hasAnalyzableBinaryContent(item);
-                if (hasPayload) withPayloadCount++;
-                else withoutPayloadCount++;
-
-                const reason = item.RejectionReason || item.Status || 'rejected';
-                reasons.set(reason, (reasons.get(reason) || 0) + 1);
-                const fname = item.OriginalFilename || 'upload.bin';
-                filenames.set(fname, (filenames.get(fname) || 0) + 1);
-                if (hasPayload) {
-                    const fmtLabel = [item.Analysis?.FileFormat, item.Analysis?.Architecture].filter(Boolean).join(' · ') || 'Raw binary';
-                    formats.set(fmtLabel, (formats.get(fmtLabel) || 0) + 1);
-                    (item.Analysis?.SuspiciousIndicators || []).forEach(ind => indicators.add(ind));
-                }
-                if (item.RemoteIp && item.RemoteIp !== 'unknown') sources.add(item.RemoteIp);
-                else if (item.RemoteEndpoint && item.RemoteEndpoint !== 'unknown') sources.add(item.RemoteEndpoint);
-                if (item.SessionId && item.SessionId !== 'unknown') sessions.add(item.SessionId);
-                totalAnnouncedBytes += Number(item.ExpectedBytes || item.CapturedBytes || 0) || 0;
-                totalSavedBytes += Number(item.CapturedBytes || 0) || 0;
-                const ts = Date.parse(item.CapturedAtUtc);
-                if (Number.isFinite(ts)) times.push(ts);
-            });
-
-            const reasonBadges = [...reasons.entries()]
-                .sort((a, b) => b[1] - a[1])
-                .map(([reason, count]) => `<span class="badge amber">${escapeHtml(reason)}: ${fmt.format(count)}</span>`)
-                .join(' ');
-
-            const formatBadges = [...formats.entries()]
-                .sort((a, b) => b[1] - a[1])
-                .map(([fmtLabel, count]) => `<span class="badge purple">${escapeHtml(fmtLabel)}: ${fmt.format(count)}</span>`)
-                .join(' ');
-
-            const filenameSummary = [...filenames.entries()]
-                .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-
-            return `<section class="exchange-session ollama-bodyless-group" aria-label="Clustered rejected binary uploads">
-                <div class="ollama-exchange-header">
-                    <div>
-                        <div class="exchange-role">CLUSTERED REJECTED UPLOADS // QUARANTINE SUMMARY</div>
-                        <h3>${fmt.format(rows.length)} rejected binary upload${rows.length === 1 ? '' : 's'} (${fmt.format(withoutPayloadCount)} without payload bytes · ${fmt.format(withPayloadCount)} quarantined on disk)</h3>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                        <span class="badge amber">${fmt.format(sessions.size)} session${sessions.size === 1 ? '' : 's'}</span>
-                        <span class="badge cyan">${fmt.format(sources.size)} source IP${sources.size === 1 ? '' : 's'}</span>
-                        ${totalSavedBytes > 0 ? `<span class="badge green">${escapeHtml(formatBytes(totalSavedBytes))} quarantined</span>` : ''}
-                        ${totalAnnouncedBytes > totalSavedBytes ? `<span class="badge red">Announced ${escapeHtml(formatBytes(totalAnnouncedBytes))}</span>` : ''}
-                    </div>
-                </div>
-                <p class="muted">Rejected binary upload attempts and uploads without a complete binary to analyze are clustered into this single summary panel instead of rendering separate cards. Any bytes received before rejection remain saved in <code>\${LogDir}/uploads/&lt;session&gt;/</code> with <code>.meta.json</code> sidecars for offline analysis.</p>
-                <div class="ollama-exchange-badges">${reasonBadges} ${formatBadges} ${[...indicators].map(ind => `<span class="badge red">${escapeHtml(ind)}</span>`).join(' ')}</div>
-                ${times.length ? `<p class="muted">${escapeHtml(fmtTime(new Date(Math.min(...times)).toISOString()))} → ${escapeHtml(fmtTime(new Date(Math.max(...times)).toISOString()))}</p>` : ''}
-                <details><summary>Inspect clustered rejected upload entries (${fmt.format(rows.length)})</summary>
-                    <div style="margin-top:8px;">
-                        ${filenameSummary.slice(0, 15).map(([fname, count]) => `<span class="badge cyan">${escapeHtml(fname)} × ${fmt.format(count)}</span>`).join(' ')}
-                    </div>
-                    <div style="margin-top:10px;">
-                        ${rows.slice(0, 50).map(item => {
-                            const hasPayload = hasAnalyzableBinaryContent(item);
-                            const analysisSummary = hasPayload
-                                ? (item.Analysis?.Summary || [item.Analysis?.FileFormat, item.Analysis?.Architecture].filter(Boolean).join(' | '))
-                                : 'no binary payload bytes transferred';
-                            return `
-                            <div class="exchange-line" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-                                <div>
-                                    <span class="exchange-role">${escapeHtml(fmtTime(item.CapturedAtUtc))} · ${escapeHtml(item.Source || 'scp')} · ${escapeHtml(item.Status || 'rejected')}</span>
-                                    <div class="terminal-line"><strong>${escapeHtml(item.OriginalFilename || 'upload.bin')}</strong> — ${escapeHtml(item.RejectionReason || item.Status || 'rejected')} · ${escapeHtml(formatBytes(item.CapturedBytes || 0))} saved${item.ExpectedBytes && item.ExpectedBytes !== item.CapturedBytes ? ` (of ${escapeHtml(formatBytes(item.ExpectedBytes))} announced)` : ''} · ${escapeHtml(analysisSummary)}${item.Sha256 ? ` · sha256 <code>${escapeHtml(item.Sha256.slice(0, 16))}…</code>` : ''}${item.StoredFilePath ? ` · <code>${escapeHtml(item.StoredFilePath)}</code>` : ''} · session <code>${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</code></div>
-                                </div>
-                                ${item.SessionId && item.SessionId !== 'unknown' ? `<button class="tab-button" type="button" data-jump-session="${escapeAttr(item.SessionId)}">Session →</button>` : ''}
-                            </div>`;
-                        }).join('')}
-                    </div>
-                </details>
-            </section>`;
-        }
-
         function renderCaughtBinaryCard(item) {
             const a = item.Analysis || {};
-            const statusBadgeColor = item.IsCaptured ? 'green' : 'amber';
-            const statusLabel = item.IsCaptured
-                ? 'CAPTURED & SAVED'
-                : (item.Status === 'too_large_saved' ? 'REJECTED (TOO LARGE) · SAMPLE SAVED' : 'REJECTED & QUARANTINED');
             const entropyVal = Number(a.Entropy || 0).toFixed(2);
             const entropyColor = a.Entropy >= 7.2 ? 'red' : a.Entropy >= 6.0 ? 'amber' : 'cyan';
             const formatSummary = [a.FileFormat, a.Architecture, a.Endianness, a.BinaryType].filter(Boolean).join(' · ') || 'Unknown format';
             const sizeSummary = item.Truncated && item.ExpectedBytes > item.CapturedBytes
-                ? `${formatBytes(item.CapturedBytes)} saved of ${formatBytes(item.ExpectedBytes)} announced (truncated)`
+                ? `${formatBytes(item.CapturedBytes)} captured sample (of ${formatBytes(item.ExpectedBytes)} stream)`
                 : formatBytes(item.CapturedBytes);
+            const storageProtection = 'Saved to quarantine · Read-Only (0400 / non-executable)';
 
             return `<article class="exchange-session ollama-exchange">
                 <div class="ollama-exchange-header">
                     <div>
-                        <div class="exchange-role">BINARY ARTIFACT // ${escapeHtml(item.Source.toUpperCase())} // SESSION ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</div>
+                        <div class="exchange-role">DOWNLOADED BINARY // ${escapeHtml(item.Source.toUpperCase())} // SESSION ${escapeHtml(String(item.SessionId || 'unknown').slice(0, 12))}</div>
                         <h3>${escapeHtml(item.OriginalFilename || 'upload.bin')} <span class="muted" style="font-weight:400;font-size:0.95rem;">(${escapeHtml(sizeSummary)})</span></h3>
-                        <div class="exchange-time">Captured ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code></div>
+                        <div class="exchange-time">Downloaded ${escapeHtml(fmtTime(item.CapturedAtUtc))} · SHA-256 <code>${escapeHtml(item.Sha256 || 'n/a')}</code></div>
                     </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                        <span class="badge ${statusBadgeColor}">${escapeHtml(statusLabel)}</span>
+                        <span class="badge green">DOWNLOADED &amp; ANALYZED</span>
                         ${a.IsExecutable ? '<span class="badge red">Executable</span>' : ''}
                         ${a.IsLikelyPackedOrEncrypted ? '<span class="badge purple">Packed / High Entropy</span>' : ''}
                         <span class="badge ${entropyColor}">Entropy ${escapeHtml(entropyVal)} / 8.00</span>
@@ -2242,7 +2126,7 @@
                                 'Shannon Entropy': `${entropyVal} bits/byte (${a.IsLikelyPackedOrEncrypted ? 'likely packed, compressed, or encrypted' : 'standard code/text distribution'})`,
                                 'Quarantine Path': item.StoredFilePath || '-',
                                 'Metadata Sidecar': item.MetadataFilePath || '-',
-                                'Rejection / Status Note': item.RejectionReason || (item.IsCaptured ? 'Accepted within 5 MiB limit' : 'Quarantined on rejection'),
+                                'Quarantine Protection': storageProtection,
                             })}
                         </div>
                         ${item.SessionId && item.SessionId !== 'unknown' ? `<div style="margin-top:12px;"><button class="tab-button" type="button" data-jump-session="${escapeAttr(item.SessionId)}">Inspect originating session in Attacker Exchange →</button></div>` : ''}
@@ -2250,7 +2134,7 @@
 
                     <div class="bio-inspector-card">
                         <div class="bio-card-head"><span class="exchange-role">EXTRACTED INDICATORS, IOCS & DELIVERY CONTEXT</span></div>
-                        ${item.CommandText ? `<div class="ollama-turn"><div class="exchange-line-meta">Originating Command / Transfer Vector</div><div class="terminal-line">${escapeHtml(item.CommandText)}</div></div>` : ''}
+                        ${item.CommandText ? `<div class="ollama-turn"><div class="exchange-line-meta">Sanitized Download Source / Vector</div><div class="terminal-line">${escapeHtml(item.CommandText)}</div></div>` : ''}
                         ${item.ScpHeader ? `<div class="ollama-turn"><div class="exchange-line-meta">SCP Protocol Header</div><div class="terminal-line">${escapeHtml(item.ScpHeader)} (mode ${escapeHtml(item.ScpPermissions || 'n/a')})</div></div>` : ''}
                         <div style="margin-top:10px;">
                             <div class="exchange-line-meta">Suspicious Behavioral Indicators</div>

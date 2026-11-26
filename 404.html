@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunnyPot SSH Intelligence Dashboard</title>
+    <script>
+        (function () {
+            var pathname = window.location.pathname || '/';
+            var search = window.location.search || '';
+            var hash = window.location.hash || '';
+            var knownRoutes = [
+                'overview', 'credentials', 'geography',
+                'attackerexchange', 'attacker-exchange', 'exchange',
+                'caughtbinaries', 'caught-binaries', 'binaries',
+                'ollama', 'ollama-openai', 'openai',
+                'attackmindmap', 'attack-mind-map', 'mindmap', 'mind-map', 'pilot'
+            ];
+            var segments = pathname.split('/').filter(Boolean);
+            var last = segments.length ? segments[segments.length - 1].toLowerCase() : '';
+            var baseSegments = knownRoutes.indexOf(last) !== -1
+                ? segments.slice(0, -1)
+                : (segments.length > 1 ? segments.slice(0, 1) : []);
+            var basePath = baseSegments.length ? '/' + baseSegments.join('/') + '/' : '/';
+            try {
+                window.sessionStorage.setItem('funnypot:redirectPath', pathname + search + hash);
+            } catch (e) { }
+            window.location.replace(basePath);
+        })();
+    </script>
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=./">
+    </noscript>
+</head>
+<body style="background:#081018;color:#ecf5ff;font-family:sans-serif;padding:32px;">
+    <p>Redirecting to FunnyPot Dashboard… <a href="./" style="color:#48dfff;">Continue</a></p>
+</body>
+</html>

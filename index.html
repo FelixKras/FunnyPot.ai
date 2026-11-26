@@ -133,12 +133,27 @@
             font: inherit;
             font-weight: 800;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .tab-button.active {
             border-color: rgba(53, 255, 122, 0.55);
             background: rgba(53, 255, 122, 0.12);
             color: var(--green);
+        }
+
+        .pilot-pill {
+            font: 800 0.62rem "SFMono-Regular", Consolas, monospace;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 999px;
+            background: rgba(167, 139, 250, 0.22);
+            border: 1px solid rgba(167, 139, 250, 0.55);
+            color: #ddd6fe;
         }
 
         .tab-panel { display: none; }
@@ -1491,9 +1506,235 @@
         .empty { color: var(--muted); padding: 18px; text-align: center; }
         .loading { padding: 22px; color: var(--muted); background: var(--panel); border-radius: 16px; }
 
+        /* Attack Mind Map (Pilot) */
+        .mindmap-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .mindmap-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-end;
+            flex: 1;
+        }
+        .mindmap-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .mindmap-session-strip {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+        }
+        .mm-session-chip {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 9px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(8, 16, 26, 0.85);
+            color: var(--ink);
+            cursor: pointer;
+            text-align: left;
+            min-width: 195px;
+            transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+        }
+        .mm-session-chip:hover {
+            border-color: rgba(72, 223, 255, 0.45);
+            transform: translateY(-1px);
+        }
+        .mm-session-chip.active {
+            border-color: var(--green);
+            background: rgba(53, 255, 122, 0.1);
+            box-shadow: 0 0 0 1px rgba(53, 255, 122, 0.25);
+        }
+        .mindmap-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) minmax(320px, 1fr);
+            gap: 16px;
+            align-items: start;
+        }
+        .mindmap-canvas {
+            background:
+                radial-gradient(rgba(72, 223, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(6, 13, 22, 0.96), rgba(4, 9, 16, 0.98));
+            background-size: 22px 22px, 100% 100%;
+            border: 1px solid rgba(72, 223, 255, 0.22);
+            border-radius: 16px;
+            padding: 18px;
+            overflow-x: auto;
+            min-height: 460px;
+        }
+        .mm-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 540px;
+        }
+        .mm-branch {
+            --mm-accent: var(--cyan);
+            display: flex;
+            flex-direction: column;
+        }
+        .mm-branch[data-color="green"] { --mm-accent: var(--green); }
+        .mm-branch[data-color="cyan"] { --mm-accent: var(--cyan); }
+        .mm-branch[data-color="amber"] { --mm-accent: var(--amber); }
+        .mm-branch[data-color="red"] { --mm-accent: var(--red); }
+        .mm-branch[data-color="purple"] { --mm-accent: var(--purple); }
+        .mm-node-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mm-node {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid color-mix(in srgb, var(--mm-accent) 42%, rgba(255,255,255,0.12));
+            background: rgba(9, 18, 29, 0.94);
+            color: #fff;
+            cursor: pointer;
+            max-width: 100%;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
+        }
+        .mm-node:hover {
+            border-color: var(--mm-accent);
+            transform: translateX(2px);
+        }
+        .mm-node.selected {
+            border-color: var(--mm-accent);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--mm-accent) 32%, transparent), 0 8px 22px rgba(0, 0, 0, 0.35);
+            background: color-mix(in srgb, var(--mm-accent) 12%, rgba(9, 18, 29, 0.96));
+        }
+        .mm-node.root-node {
+            padding: 13px 16px;
+            border-width: 2px;
+            background: linear-gradient(135deg, rgba(53, 255, 122, 0.12), rgba(72, 223, 255, 0.08));
+        }
+        .mm-node-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--mm-accent);
+            box-shadow: 0 0 10px var(--mm-accent);
+            flex: 0 0 auto;
+        }
+        .mm-node-body {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+            text-align: left;
+        }
+        .mm-node-kicker {
+            font: 800 0.64rem "SFMono-Regular", Consolas, monospace;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--mm-accent);
+        }
+        .mm-node-title {
+            font: 700 0.85rem var(--sans);
+            color: #f8fafc;
+            overflow-wrap: anywhere;
+        }
+        .mm-node-sub {
+            font: 500 0.74rem "SFMono-Regular", Consolas, monospace;
+            color: var(--muted);
+            overflow-wrap: anywhere;
+        }
+        .mm-fold-btn {
+            flex: 0 0 auto;
+            border: 1px solid color-mix(in srgb, var(--mm-accent) 45%, rgba(255,255,255,0.16));
+            background: rgba(5, 12, 20, 0.92);
+            color: var(--mm-accent);
+            border-radius: 999px;
+            padding: 4px 9px;
+            font: 800 0.72rem "SFMono-Regular", Consolas, monospace;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .mm-fold-btn:hover {
+            background: color-mix(in srgb, var(--mm-accent) 18%, rgba(5, 12, 20, 0.95));
+        }
+        .mm-children {
+            position: relative;
+            margin-left: 22px;
+            padding-left: 24px;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .mm-children::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -8px;
+            bottom: 20px;
+            width: 2px;
+            background: linear-gradient(180deg, color-mix(in srgb, var(--mm-accent) 65%, transparent), color-mix(in srgb, var(--mm-accent) 28%, transparent));
+            border-radius: 2px;
+        }
+        .mm-child {
+            position: relative;
+        }
+        .mm-child::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 20px;
+            width: 22px;
+            height: 14px;
+            margin-top: -12px;
+            border-left: 2px solid color-mix(in srgb, var(--mm-accent) 55%, transparent);
+            border-bottom: 2px solid color-mix(in srgb, var(--mm-accent) 55%, transparent);
+            border-bottom-left-radius: 12px;
+        }
+        .mm-inspector {
+            position: sticky;
+            top: 16px;
+            background: rgba(8, 16, 26, 0.94);
+            border: 1px solid rgba(72, 223, 255, 0.28);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .mm-inspector-explain {
+            background: rgba(72, 223, 255, 0.06);
+            border: 1px solid rgba(72, 223, 255, 0.22);
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #e2f2ff;
+        }
+        .mm-inspector pre {
+            margin: 0;
+            max-height: 220px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
         @media (max-width: 1100px) {
             .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .insight-grid, .details-layout { grid-template-columns: 1fr; }
+            .insight-grid, .details-layout, .mindmap-layout { grid-template-columns: 1fr; }
+            .mm-inspector { position: static; }
             .project-intro { grid-template-columns: 1fr; }
             .hud-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .hud-main-grid { grid-template-columns: 1fr; }
@@ -1572,12 +1813,13 @@
 
         <section id="dashboard" style="display:none;">
             <div class="tabs" role="tablist" aria-label="Dashboard sections">
-                <button class="tab-button active" data-tab="overview" type="button">Overview</button>
-                <button class="tab-button" data-tab="credentials" type="button">Credentials</button>
-                <button class="tab-button" data-tab="geography" type="button">Geography</button>
-                <button class="tab-button" data-tab="exchange" type="button">Attacker Exchange</button>
-                <button class="tab-button" data-tab="binaries" type="button">Caught Binaries</button>
-                <button class="tab-button" data-tab="ollama" type="button">Ollama / OpenAI</button>
+                <a class="tab-button active" role="tab" aria-selected="true" data-tab="overview" href="Overview">Overview</a>
+                <a class="tab-button" role="tab" aria-selected="false" data-tab="credentials" href="Credentials">Credentials</a>
+                <a class="tab-button" role="tab" aria-selected="false" data-tab="geography" href="Geography">Geography</a>
+                <a class="tab-button" role="tab" aria-selected="false" data-tab="exchange" href="AttackerExchange">Attacker Exchange</a>
+                <a class="tab-button" role="tab" aria-selected="false" data-tab="binaries" href="CaughtBinaries">Caught Binaries</a>
+                <a class="tab-button" role="tab" aria-selected="false" data-tab="ollama" href="Ollama">Ollama / OpenAI</a>
+                <a class="tab-button" role="tab" aria-selected="false" data-tab="mindmap" href="AttackMindMap">Attack Mind Map <span class="pilot-pill">PILOT</span></a>
             </div>
 
             <div class="tab-panel active" data-tab-panel="overview">
@@ -1812,6 +2054,52 @@
                 </section>
             </div>
 
+            <div class="tab-panel" data-tab-panel="mindmap">
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Attack Mind Map <span class="pilot-pill" style="vertical-align:middle;margin-left:6px;">PILOT</span></h2>
+                        <span class="muted">Click any artefact to explain it · use − / + toggles to fold or unfold branches</span>
+                    </div>
+                    <div class="panel">
+                        <div class="mindmap-toolbar">
+                            <div class="mindmap-controls">
+                                <div class="hud-control" style="min-width:220px;flex:1;">
+                                    <label for="mindmapQuery">Search attack session / IP / binary</label>
+                                    <input id="mindmapQuery" type="search" placeholder="e.g. hafih, 77.239.124.73, UPX, curl">
+                                </div>
+                                <div class="hud-control" style="min-width:190px;">
+                                    <label for="mindmapFilter">Attack lens</label>
+                                    <select id="mindmapFilter">
+                                        <option value="rich">Rich attacks first (binaries &amp; multi-step)</option>
+                                        <option value="binaries">Sessions with caught binaries</option>
+                                        <option value="high">High-risk sessions</option>
+                                        <option value="newest">Newest sessions first</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mindmap-actions">
+                                <button class="tab-button" id="mindmapExpandAll" type="button">Expand all</button>
+                                <button class="tab-button" id="mindmapFoldAll" type="button">Fold all</button>
+                                <button class="tab-button" id="mindmapJumpExchange" type="button">Open in Attacker Exchange →</button>
+                            </div>
+                        </div>
+                        <div class="exchange-toolbar" style="margin-bottom:10px;">
+                            <span class="muted" id="mindmapCount">Loading attack sessions...</span>
+                            <span class="muted">Tip: click any node to inspect &amp; explain it; click <code>−</code> / <code>+N</code> to fold branches.</span>
+                        </div>
+                        <div class="mindmap-session-strip" id="mindmapSessions"></div>
+                        <div class="mindmap-layout">
+                            <div class="mindmap-canvas" id="mindmapCanvas">
+                                <div class="empty">Select an attack session to render its interactive mind map.</div>
+                            </div>
+                            <aside class="mm-inspector" id="mindmapInspector" aria-live="polite">
+                                <div class="empty">Click any artefact in the mind map to see its plain-English explanation and raw evidence.</div>
+                            </aside>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
             <footer class="footer">
                 Last updated: <span id="lastUpdated">-</span>. Showing all retained telemetry from FunnyPot.ai <code>data</code> branch.
             </footer>
@@ -1831,6 +2119,34 @@
         let ollamaPage = 0;
         const ollamaPageSize = 25;
         let caughtBinaries = [];
+
+        const TAB_ROUTES = {
+            overview: 'Overview',
+            credentials: 'Credentials',
+            geography: 'Geography',
+            exchange: 'AttackerExchange',
+            binaries: 'CaughtBinaries',
+            ollama: 'Ollama',
+            mindmap: 'AttackMindMap',
+        };
+        const TAB_TITLES = {
+            overview: 'Overview',
+            credentials: 'Credentials',
+            geography: 'Geography',
+            exchange: 'Attacker Exchange',
+            binaries: 'Caught Binaries',
+            ollama: 'Ollama / OpenAI',
+            mindmap: 'Attack Mind Map (Pilot)',
+        };
+        let siteBasePath = '/';
+        let activeTabId = 'overview';
+        let mindmapSessionId = null;
+        let mindmapSelectedNodeId = null;
+        let mindmapFoldedNodes = new Set();
+        let mindmapFilter = 'rich';
+        let mindmapQuery = '';
+        let mindmapNodeIndex = new Map();
+        let mindmapCurrentTree = null;
 
         const fmt = new Intl.NumberFormat();
         const fmtTime = value => {
@@ -1897,10 +2213,11 @@
                 window.cachedBinaries = binaries;
 
                 renderDashboard(stats, summary, [], threatIntel, prebuiltSessions);
-                setupTabs();
                 setupBinaries(binaries, sessionModels);
                 setupOllama(ollama);
                 setupExchangeSorting();
+                setupMindMap(sessionModels);
+                setupTabs();
                 setupFloatingTooltips();
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
@@ -1968,6 +2285,8 @@
                     ExtractedUrls: Array.isArray(analysis.ExtractedUrls) ? analysis.ExtractedUrls : [],
                     ExtractedIpAddresses: Array.isArray(analysis.ExtractedIpAddresses) ? analysis.ExtractedIpAddresses : [],
                     SuspiciousIndicators: Array.isArray(analysis.SuspiciousIndicators) ? analysis.SuspiciousIndicators : [],
+                    LlmReview: analysis.LlmReview || null,
+                    ToolOutputs: Array.isArray(analysis.ToolOutputs) ? analysis.ToolOutputs : [],
                 }
             };
         }
@@ -1983,6 +2302,171 @@
                 && format !== 'unknown'
                 && format !== 'empty'
             );
+        }
+
+        function sessionCaughtBinaries(session) {
+            if (!session) return [];
+            const byKey = new Map();
+            const addRecord = (record) => {
+                if (!record || !isRealAnalyzedBinary(record)) return;
+                const key = record.StoredFilePath && record.Sha256
+                    ? `${record.StoredFilePath}|${record.Sha256}`
+                    : `${record.ExchangeId || ''}|${record.StoredFilePath || record.OriginalFilename}|${record.Sha256 || ''}`;
+                if (!byKey.has(key)) {
+                    byKey.set(key, record);
+                    return;
+                }
+                const existing = byKey.get(key);
+                if (!existing.ExchangeId && record.ExchangeId) existing.ExchangeId = record.ExchangeId;
+                if (!existing.CommandText && record.CommandText) existing.CommandText = record.CommandText;
+                if (!existing.Analysis.LlmReview && record.Analysis.LlmReview) existing.Analysis.LlmReview = record.Analysis.LlmReview;
+                if (!existing.Analysis.ToolOutputs.length && record.Analysis.ToolOutputs.length) existing.Analysis.ToolOutputs = record.Analysis.ToolOutputs;
+            };
+
+            const sid = session.id || session.sessionKey;
+            if (Array.isArray(window.cachedBinaries) && sid) {
+                window.cachedBinaries.forEach(item => {
+                    if ((item?.SessionId || item?.SessionKey) === sid) addRecord(normalizeBinaryRecord(item, session));
+                });
+            }
+            (session.uploads || []).forEach(upload => addRecord(normalizeBinaryRecord(upload, session)));
+            (session.timeline || []).forEach(item => {
+                if (item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected' || item.type === 'payload_capture') {
+                    addRecord(normalizeBinaryRecord({
+                        ...item.data,
+                        Timestamp: item.timestamp,
+                        EventType: item.type,
+                        SessionId: sid,
+                        ShellSessionId: item.channelId,
+                        ExchangeId: item.exchangeId || item.data?.ExchangeId || '',
+                    }, session));
+                }
+            });
+
+            return [...byKey.values()].sort((a, b) => new Date(b.CapturedAtUtc || 0) - new Date(a.CapturedAtUtc || 0));
+        }
+
+        function matchTurnBinaries(pulse, binaries) {
+            if (!pulse || !Array.isArray(binaries) || !binaries.length) return [];
+            return binaries.filter(b => {
+                if (pulse.exchangeId && b.ExchangeId) return b.ExchangeId === pulse.exchangeId;
+                return Boolean(b.CommandText && pulse.cmd && pulse.cmd.includes(b.CommandText));
+            });
+        }
+
+        function renderExchangeCaughtBinaries(session, binaries) {
+            if (!Array.isArray(binaries) || !binaries.length) return '';
+            const cardsHtml = binaries.map(item => {
+                const a = item.Analysis || {};
+                const entropyVal = Number(a.Entropy || 0).toFixed(2);
+                const entropyColor = a.Entropy >= 7.2 ? 'red' : a.Entropy >= 6.0 ? 'amber' : 'cyan';
+                const formatSummary = [a.FileFormat, a.Architecture, a.Endianness, a.BinaryType].filter(Boolean).join(' · ') || 'Unknown format';
+                const sizeSummary = item.Truncated && item.ExpectedBytes > item.CapturedBytes
+                    ? `${formatBytes(item.CapturedBytes)} captured sample (of ${formatBytes(item.ExpectedBytes)} stream)`
+                    : formatBytes(item.CapturedBytes);
+                const inCaughtBinariesTab = caughtBinaries.length
+                    ? caughtBinaries.some(b =>
+                        (b.Sha256 && item.Sha256 && b.Sha256 === item.Sha256 && b.SessionId === item.SessionId)
+                        || (b.StoredFilePath && b.StoredFilePath === item.StoredFilePath))
+                    : Date.parse(item.CapturedAtUtc) >= Date.parse('2026-11-20T12:44:31Z');
+                const llmReview = a.LlmReview || null;
+                const toolOutputs = Array.isArray(a.ToolOutputs) ? a.ToolOutputs : [];
+                return `
+                    <div class="exchange-turn-card" style="border-color:rgba(255,100,124,0.34);background:linear-gradient(135deg,rgba(255,100,124,0.08),rgba(72,223,255,0.05));">
+                        <div class="exchange-turn-top">
+                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                                <span class="badge red">CAUGHT BINARY // ${escapeHtml(String(item.Source || 'binary').toUpperCase())}</span>
+                                <strong style="color:#fff;font-family:'SFMono-Regular',Consolas,monospace;font-size:0.86rem;">${escapeHtml(item.OriginalFilename || 'upload.bin')}</strong>
+                                <span class="muted" style="font-size:0.8rem;">(${escapeHtml(sizeSummary)})</span>
+                                ${item.ExchangeId ? `<span class="badge cyan">Exchange ${escapeHtml(item.ExchangeId)}</span>` : ''}
+                            </div>
+                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                                <span class="badge green">QUARANTINED (0400)</span>
+                                ${a.IsExecutable ? '<span class="badge red">Executable</span>' : ''}
+                                ${a.IsLikelyPackedOrEncrypted ? '<span class="badge purple">Packed / High Entropy</span>' : ''}
+                                <span class="badge ${entropyColor}">Entropy ${escapeHtml(entropyVal)} / 8.00</span>
+                            </div>
+                        </div>
+                        <div class="actor-explain" style="margin-top:8px;">
+                            <strong>Static Analysis:</strong> <code>${escapeHtml(formatSummary)}</code> (${escapeHtml(a.MimeType || 'application/octet-stream')})${a.Summary ? ` — ${escapeHtml(a.Summary)}` : ''}<br>
+                            <strong>SHA-256:</strong> <code>${escapeHtml(item.Sha256 || 'n/a')}</code> · <strong>Captured:</strong> ${escapeHtml(fmtTime(item.CapturedAtUtc))}
+                        </div>
+                        ${item.CommandText ? `<div style="margin-top:8px;"><div class="exchange-line-meta">Delivery URL / Command</div><div class="terminal-line">${escapeHtml(item.CommandText)}</div></div>` : ''}
+                        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+                                ${(a.SuspiciousIndicators || []).length
+                                    ? a.SuspiciousIndicators.map(ind => badge(ind, 'red')).join(' ')
+                                    : '<span class="muted" style="font-size:0.78rem;">No packer or family signature matched static rules.</span>'}
+                                ${(a.ExtractedUrls || []).slice(0, 3).map(u => badge(`URL: ${shorten(u, 42)}`, 'amber')).join(' ')}
+                                ${(a.ExtractedIpAddresses || []).slice(0, 4).map(ip => badge(`IP: ${ip}`, 'amber')).join(' ')}
+                            </div>
+                            ${inCaughtBinariesTab ? '<button class="tab-button" type="button" data-open-binaries-tab="true">Open in Caught Binaries →</button>' : ''}
+                        </div>
+                        ${llmReview ? `
+                        <div class="exchange-story-banner" style="margin-top:10px;background:linear-gradient(135deg,rgba(167,139,250,0.12),rgba(53,255,122,0.06));border-color:rgba(167,139,250,0.34);">
+                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px;">
+                                <div class="exchange-story-title" style="color:var(--purple);margin-bottom:0;">LLM Malware Review // ${escapeHtml(llmReview.Model || 'LLM')}</div>
+                                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                                    <span class="badge red">Verdict: ${escapeHtml(llmReview.Verdict || 'suspicious')}</span>
+                                    <span class="badge purple">Family: ${escapeHtml(llmReview.SuspectedFamily || 'Unknown')}</span>
+                                </div>
+                            </div>
+                            <div class="exchange-story-body">${escapeHtml(llmReview.ExecutiveSummary || '')}</div>
+                        </div>` : ''}
+                        <details class="deep-dive-drawer" style="margin-top:10px;">
+                            <summary>Binary quarantine metadata, magic bytes &amp; extracted strings (${fmt.format((a.NotableStrings || []).length)} strings${toolOutputs.length ? `, ${fmt.format(toolOutputs.length)} tool outputs` : ''})</summary>
+                            <div class="kv" style="margin-top:10px;">
+                                ${kvRows({
+                                    'Detected Format': formatSummary,
+                                    'MIME Type': a.MimeType || 'application/octet-stream',
+                                    'Magic Bytes (16B Hex)': a.MagicBytesHex || '-',
+                                    'Shannon Entropy': `${entropyVal} bits/byte`,
+                                    'Quarantine Path': item.StoredFilePath || '-',
+                                    'Metadata Sidecar': item.MetadataFilePath || '-',
+                                })}
+                            </div>
+                            ${(a.NotableStrings || []).length ? `<div style="margin-top:10px;"><div class="exchange-line-meta">Extracted printable strings (${fmt.format(a.NotableStrings.length)})</div><pre style="margin-top:6px;">${escapeHtml(a.NotableStrings.join('\n'))}</pre></div>` : ''}
+                            ${toolOutputs.length ? `<div style="margin-top:10px;display:grid;gap:8px;">${toolOutputs.map(t => `<div style="background:rgba(3,7,12,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:8px 10px;"><div style="font:700 0.74rem 'SFMono-Regular',Consolas,monospace;color:var(--cyan);margin-bottom:4px;">$ ${escapeHtml(t.Tool)} ${escapeHtml(t.Arguments || '')}</div><pre style="margin:0;max-height:200px;overflow:auto;">${escapeHtml(t.Output || '(no output)')}</pre></div>`).join('')}</div>` : ''}
+                        </details>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="exchange-caught-binaries" style="margin-bottom:14px;">
+                    <div class="exchange-story-title" style="color:#ff8fa0;margin-bottom:8px;">
+                        Caught Binary Artifact${binaries.length === 1 ? '' : 's'} Captured in This Session (${fmt.format(binaries.length)})
+                    </div>
+                    <div style="display:grid;gap:10px;">${cardsHtml}</div>
+                </div>
+            `;
+        }
+
+        function renderExchangeTurnBinaries(turnBinaries) {
+            if (!Array.isArray(turnBinaries) || !turnBinaries.length) return '';
+            return turnBinaries.map(item => {
+                const a = item.Analysis || {};
+                const formatSummary = [a.FileFormat, a.Architecture, a.BinaryType].filter(Boolean).join(' · ') || 'Binary';
+                const indicators = Array.isArray(a.SuspiciousIndicators) ? a.SuspiciousIndicators : [];
+                return `
+                    <div style="margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(255,100,124,0.09);border:1px solid rgba(255,100,124,0.34);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                            <span style="font:800 0.72rem 'SFMono-Regular',Consolas,monospace;color:#ff8fa0;letter-spacing:0.08em;">
+                                CAUGHT BINARY ARTIFACT // ${escapeHtml(item.OriginalFilename || 'upload.bin')} (${escapeHtml(formatBytes(item.CapturedBytes))})
+                            </span>
+                            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                                <span class="badge green">QUARANTINED (0400)</span>
+                                <span class="badge cyan">${escapeHtml(formatSummary)}</span>
+                                <span class="badge ${a.Entropy >= 7.2 ? 'red' : 'amber'}">Entropy ${escapeHtml(Number(a.Entropy || 0).toFixed(2))}</span>
+                                ${indicators.map(ind => badge(ind, 'red')).join('')}
+                            </div>
+                        </div>
+                        <div style="margin-top:6px;font-size:0.78rem;color:#dbeafe;word-break:break-all;">
+                            <strong>SHA-256:</strong> <code>${escapeHtml(item.Sha256 || 'n/a')}</code>${a.Summary ? ` · ${escapeHtml(a.Summary)}` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         function setupBinaries(publishedBinaries, sessions = sessionModels) {
@@ -2067,13 +2551,13 @@
             target.querySelectorAll('[data-jump-session]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const sessionId = btn.dataset.jumpSession;
-                    const exchangeTab = document.querySelector('[data-tab="exchange"]');
-                    if (exchangeTab) exchangeTab.click();
-                    const searchInput = document.getElementById('exchangeQuery');
-                    if (searchInput && sessionId) {
-                        searchInput.value = sessionId.slice(0, 12);
-                        searchInput.dispatchEvent(new Event('input'));
-                    }
+                    jumpToExchangeSession(sessionId);
+                });
+            });
+            target.querySelectorAll('[data-jump-mindmap]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const sessionId = btn.dataset.jumpMindmap;
+                    openSessionInMindMap(sessionId);
                 });
             });
         }
@@ -2091,6 +2575,54 @@
             const deliveryMethod = item.Source === 'url_payload'
                 ? 'Issued a shell download command (curl/wget) to fetch an external payload'
                 : `Transferred a binary directly over ${String(item.Source || 'SSH').toUpperCase()}`;
+            const llmReview = a.LlmReview || null;
+            const toolOutputs = Array.isArray(a.ToolOutputs) ? a.ToolOutputs : [];
+            const renderBulletList = (items) => Array.isArray(items) && items.length
+                ? `<ul style="margin:6px 0 0 18px;padding:0;font-size:0.81rem;line-height:1.45;color:#dbeafe;">${items.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul>`
+                : '';
+            const llmReviewHtml = llmReview ? `
+                <div class="exchange-story-banner" style="background:linear-gradient(135deg,rgba(167,139,250,0.12),rgba(53,255,122,0.06));border-color:rgba(167,139,250,0.34);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+                        <div class="exchange-story-title" style="color:var(--purple);margin-bottom:0;">
+                            3. LLM Malware Reverse-Engineering Review // ${escapeHtml(llmReview.Model || 'LLM')}
+                        </div>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                            <span class="badge red">Verdict: ${escapeHtml(llmReview.Verdict || 'suspicious')}</span>
+                            <span class="badge purple">Family / Campaign: ${escapeHtml(llmReview.SuspectedFamily || 'Unknown')}</span>
+                            ${llmReview.ReviewedAtUtc ? `<span class="badge cyan">Reviewed ${escapeHtml(fmtTime(llmReview.ReviewedAtUtc))}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="exchange-story-body">${escapeHtml(llmReview.ExecutiveSummary || '')}</div>
+                    <div class="exchange-turn-pair" style="margin-top:12px;">
+                        ${(llmReview.Capabilities || []).length || (llmReview.PackingAndObfuscation || []).length ? `
+                        <div style="background:rgba(4,9,15,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;">
+                            ${(llmReview.Capabilities || []).length ? `<div class="exchange-line-meta">Capabilities &amp; Behavior</div>${renderBulletList(llmReview.Capabilities)}` : ''}
+                            ${(llmReview.PackingAndObfuscation || []).length ? `<div class="exchange-line-meta" style="margin-top:8px;">Packing, Headers &amp; Obfuscation</div>${renderBulletList(llmReview.PackingAndObfuscation)}` : ''}
+                        </div>` : ''}
+                        ${(llmReview.NetworkAndPersistenceIndicators || []).length || (llmReview.DefensiveRecommendations || []).length ? `
+                        <div style="background:rgba(4,9,15,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;">
+                            ${(llmReview.NetworkAndPersistenceIndicators || []).length ? `<div class="exchange-line-meta">Network &amp; Persistence Indicators</div>${renderBulletList(llmReview.NetworkAndPersistenceIndicators)}` : ''}
+                            ${(llmReview.DefensiveRecommendations || []).length ? `<div class="exchange-line-meta" style="margin-top:8px;">Defensive Recommendations</div>${renderBulletList(llmReview.DefensiveRecommendations)}` : ''}
+                        </div>` : ''}
+                    </div>
+                </div>
+            ` : '';
+            const toolOutputsHtml = toolOutputs.length ? `
+                <details class="deep-dive-drawer">
+                    <summary>Static reverse-engineering tool outputs (${fmt.format(toolOutputs.length)} tools: ${escapeHtml(toolOutputs.map(t => t.Tool).join(', '))})</summary>
+                    <div style="display:grid;gap:10px;margin-top:10px;">
+                        ${toolOutputs.map(t => `
+                            <div style="background:rgba(3,7,12,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:10px 12px;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+                                    <span style="font:700 0.75rem 'SFMono-Regular',Consolas,monospace;color:var(--cyan);">$ ${escapeHtml(t.Tool)} ${escapeHtml(t.Arguments || '')}</span>
+                                    <span class="badge ${t.ExitCode === 0 ? 'green' : 'amber'}">exit ${escapeHtml(String(t.ExitCode ?? 0))}</span>
+                                </div>
+                                <pre style="margin:0;max-height:240px;overflow:auto;">${escapeHtml(t.Output || '(no output)')}</pre>
+                            </div>
+                        `).join('')}
+                    </div>
+                </details>
+            ` : '';
 
             return `<article class="exchange-session ollama-exchange">
                 <div class="ollama-exchange-header">
@@ -2158,10 +2690,16 @@
                         </div>
                         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:8px;">
                             <span class="badge purple">${escapeHtml(storageProtection)}</span>
-                            ${item.SessionId && item.SessionId !== 'unknown' ? `<button class="tab-button" type="button" data-jump-session="${escapeAttr(item.SessionId)}">View full SSH conversation →</button>` : ''}
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                ${item.SessionId && item.SessionId !== 'unknown' ? `<button class="tab-button" type="button" data-jump-mindmap="${escapeAttr(item.SessionId)}">Attack Mind Map →</button>` : ''}
+                                ${item.SessionId && item.SessionId !== 'unknown' ? `<button class="tab-button" type="button" data-jump-session="${escapeAttr(item.SessionId)}">View full SSH conversation →</button>` : ''}
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                ${llmReviewHtml}
+                ${toolOutputsHtml}
 
                 <details class="deep-dive-drawer">
                     <summary>Technical file metadata, quarantine paths &amp; extracted strings</summary>
@@ -2405,19 +2943,28 @@
                         exchangeId: item.ExchangeId,
                         data: item.Data || {},
                     }));
-                    if (!timeline.length) {
-                        if (s.StartedAt) timeline.push({ type: 'session_start', timestamp: s.StartedAt, data: { RemoteEndpoint: s.RemoteEndpoint, ClientVersion: s.ClientVersion, SshBanner: s.SshBanner } });
+                    if (!timeline.some(item => item.type === 'auth_attempt')) {
                         (s.AuthAttempts || []).forEach(attempt => timeline.push({ type: 'auth_attempt', timestamp: attempt.Timestamp, data: attempt }));
+                    }
+                    if (!timeline.some(item => item.type === 'command')) {
                         commands.forEach(command => {
                             timeline.push({ type: 'command', timestamp: command.Timestamp, sequence: command.Sequence, exchangeId: command.ExchangeId, data: command });
                             if (structuredCommandHasResponse(command)) timeline.push({ type: 'command_result', timestamp: command.ResponseTimestamp || null, exchangeId: command.ExchangeId, data: command });
                         });
-                        if (s.EndedAt) timeline.push({ type: 'session_end', timestamp: s.EndedAt, data: { DurationSeconds: s.DurationSeconds } });
                     }
+                    if (!timeline.some(item => item.type === 'session_start') && s.StartedAt) {
+                        timeline.push({ type: 'session_start', timestamp: s.StartedAt, data: { RemoteEndpoint: s.RemoteEndpoint, ClientVersion: s.ClientVersion, SshBanner: s.SshBanner } });
+                    }
+                    if (!timeline.some(item => item.type === 'session_end') && s.EndedAt) {
+                        timeline.push({ type: 'session_end', timestamp: s.EndedAt, data: { DurationSeconds: s.DurationSeconds } });
+                    }
+                    timeline.sort((a, b) => new Date(a.timestamp || 0) - new Date(b.timestamp || 0) || (a.sequence || 0) - (b.sequence || 0));
                     const uploads = timeline
                         .filter(item => item.type === 'scp_upload_captured' || item.type === 'scp_upload_rejected' || (item.type === 'payload_capture' && (item.data?.Path || item.data?.BytesCaptured > 0)))
                         .map(item => ({
                             ...item.data,
+                            ExchangeId: item.exchangeId || item.data?.ExchangeId || '',
+                            ShellSessionId: item.channelId || item.data?.ShellSessionId || '',
                             Filename: item.data?.Filename || (item.data?.Url ? item.data.Url.split('/').pop() : 'downloaded_payload.bin'),
                             Bytes: item.data?.Bytes ?? item.data?.BytesCaptured ?? 0,
                             Source: item.data?.Source || (item.type === 'payload_capture' ? 'url_payload' : 'scp'),
@@ -2941,14 +3488,976 @@
                 .slice(0, limit));
         }
 
+        function resolveTabFromRoute(raw) {
+            if (!raw) return null;
+            const cleaned = String(raw)
+                .trim()
+                .replace(/^#!?/, '')
+                .replace(/^\/+|\/+$/g, '')
+                .replace(/\.html$/i, '')
+                .toLowerCase()
+                .replace(/[-_\s]+/g, '');
+            if (!cleaned) return null;
+            const map = {
+                overview: 'overview',
+                credentials: 'credentials',
+                geography: 'geography',
+                attackerexchange: 'exchange',
+                exchange: 'exchange',
+                caughtbinaries: 'binaries',
+                binaries: 'binaries',
+                ollama: 'ollama',
+                ollamaopenai: 'ollama',
+                openai: 'ollama',
+                attackmindmap: 'mindmap',
+                mindmap: 'mindmap',
+                pilot: 'mindmap',
+            };
+            return map[cleaned] || null;
+        }
+
+        function detectSiteBasePath(pathname = '') {
+            const raw = String(pathname || '/');
+            const withoutIndex = raw.replace(/\/index\.html$/i, '/');
+            const segments = withoutIndex.split('/').filter(Boolean);
+            if (segments.length && resolveTabFromRoute(segments[segments.length - 1])) {
+                segments.pop();
+            }
+            return segments.length ? `/${segments.join('/')}/` : '/';
+        }
+
+        function tabUrl(tab, basePath = siteBasePath) {
+            const slug = TAB_ROUTES[tab] || TAB_ROUTES.overview;
+            const proto = typeof window !== 'undefined' && window.location ? window.location.protocol : 'https:';
+            if (proto === 'file:') return `#${slug}`;
+            const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+            return `${normalizedBase}${slug}`;
+        }
+
+        function resolveInitialRoute(locationLike = null, redirectedPath = null) {
+            const loc = locationLike || (typeof window !== 'undefined' ? window.location : null) || { pathname: '/', search: '', hash: '' };
+            let pathname = loc.pathname || '/';
+            let search = loc.search || '';
+            let hash = loc.hash || '';
+            let fromRedirect = false;
+
+            if (redirectedPath) {
+                try {
+                    const parsed = new URL(redirectedPath, 'https://example.invalid');
+                    pathname = parsed.pathname || pathname;
+                    search = parsed.search || '';
+                    hash = parsed.hash || '';
+                    fromRedirect = true;
+                } catch { }
+            }
+
+            const basePath = detectSiteBasePath(pathname);
+            const pathSegments = pathname.replace(/\/index\.html$/i, '').split('/').filter(Boolean);
+            const pathTab = pathSegments.length ? resolveTabFromRoute(pathSegments[pathSegments.length - 1]) : null;
+            let queryTab = null;
+            try {
+                queryTab = resolveTabFromRoute(new URLSearchParams(search).get('tab'));
+            } catch { }
+            const hashTab = resolveTabFromRoute(hash);
+            const tab = pathTab || queryTab || hashTab || 'overview';
+            return { tab, basePath, fromRedirect, hasExplicitRoute: Boolean(pathTab || queryTab || hashTab) };
+        }
+
+        function activateTab(tab, options = {}) {
+            const targetTab = TAB_ROUTES[tab] ? tab : 'overview';
+            const { pushHistory = false, replaceHistory = false } = options;
+            activeTabId = targetTab;
+
+            document.querySelectorAll('[data-tab]').forEach(item => {
+                const isActive = item.dataset.tab === targetTab;
+                item.classList?.toggle('active', isActive);
+                item.setAttribute?.('aria-selected', isActive ? 'true' : 'false');
+            });
+            document.querySelectorAll('[data-tab-panel]').forEach(panel => {
+                panel.classList?.toggle('active', panel.dataset.tabPanel === targetTab);
+            });
+
+            if (typeof document !== 'undefined') {
+                document.title = `${TAB_TITLES[targetTab] || 'Dashboard'} — FunnyPot SSH Intelligence Dashboard`;
+            }
+
+            if ((pushHistory || replaceHistory) && typeof window !== 'undefined' && window.history) {
+                const nextUrl = tabUrl(targetTab, siteBasePath);
+                try {
+                    if (pushHistory) window.history.pushState({ tab: targetTab }, '', nextUrl);
+                    else if (replaceHistory) window.history.replaceState({ tab: targetTab }, '', nextUrl);
+                } catch { }
+            }
+
+            if (targetTab === 'mindmap') {
+                renderMindMap(sessionModels);
+            }
+        }
+
+        function jumpToExchangeSession(sessionId) {
+            activateTab('exchange', { pushHistory: true });
+            const behaviorEl = document.getElementById('exchangeBehavior');
+            if (behaviorEl) behaviorEl.value = 'all';
+            const engagementEl = document.getElementById('exchangeEngagement');
+            if (engagementEl) engagementEl.value = '0';
+            const riskEl = document.getElementById('exchangeRisk');
+            if (riskEl) riskEl.value = '0';
+            exchangeFilters.behavior = 'all';
+            exchangeFilters.minCommands = 0;
+            exchangeFilters.minRisk = 0;
+            if (sessionId) selectedExchangeSessionId = sessionId;
+            const searchInput = document.getElementById('exchangeQuery');
+            if (searchInput && sessionId) {
+                searchInput.value = sessionId.slice(0, 12);
+                if (typeof searchInput.dispatchEvent === 'function' && typeof Event === 'function') {
+                    searchInput.dispatchEvent(new Event('input'));
+                } else {
+                    exchangeFilters.query = searchInput.value.toLowerCase().trim();
+                    renderExchangeHud(sessionModels);
+                    renderLatestExchanges(sessionModels);
+                }
+            } else {
+                renderExchangeHud(sessionModels);
+                renderLatestExchanges(sessionModels);
+            }
+        }
+
+        function openSessionInMindMap(sessionId) {
+            if (sessionId) {
+                mindmapSessionId = sessionId;
+                mindmapSelectedNodeId = null;
+                mindmapFoldedNodes = new Set();
+                mindmapFilter = 'newest';
+                mindmapQuery = '';
+                const queryEl = document.getElementById('mindmapQuery');
+                if (queryEl) queryEl.value = '';
+                const filterEl = document.getElementById('mindmapFilter');
+                if (filterEl) filterEl.value = 'newest';
+            }
+            activateTab('mindmap', { pushHistory: true });
+        }
+
         function setupTabs() {
+            let redirectedPath = null;
+            try {
+                if (typeof window !== 'undefined' && window.sessionStorage) {
+                    redirectedPath = window.sessionStorage.getItem('funnypot:redirectPath');
+                    if (redirectedPath) window.sessionStorage.removeItem('funnypot:redirectPath');
+                }
+            } catch { }
+
+            const initial = resolveInitialRoute(typeof window !== 'undefined' ? window.location : null, redirectedPath);
+            siteBasePath = initial.basePath;
+
+            // Keep relative static assets working cleanly even when routed to /FunnyPot.ai/AttackerExchange
+            if (typeof window !== 'undefined' && window.location && window.location.protocol !== 'file:' && typeof document.querySelectorAll === 'function') {
+                document.querySelectorAll('img[src^="assets/"]').forEach(img => {
+                    img.setAttribute('src', `${siteBasePath}${img.getAttribute('src')}`);
+                });
+            }
+
             document.querySelectorAll('[data-tab]').forEach(button => {
-                button.addEventListener('click', () => {
-                    const tab = button.dataset.tab;
-                    document.querySelectorAll('[data-tab]').forEach(item => item.classList.toggle('active', item === button));
-                    document.querySelectorAll('[data-tab-panel]').forEach(panel => panel.classList.toggle('active', panel.dataset.tabPanel === tab));
+                const tab = button.dataset.tab;
+                if (typeof button.setAttribute === 'function') {
+                    button.setAttribute('href', tabUrl(tab, siteBasePath));
+                }
+                if (button.dataset.tabBound) return;
+                button.dataset.tabBound = 'true';
+                button.addEventListener('click', (event) => {
+                    if (event && (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button === 1)) return;
+                    event?.preventDefault?.();
+                    activateTab(tab, { pushHistory: true });
                 });
             });
+
+            if (typeof window !== 'undefined' && !window.__funnypotRoutingBound) {
+                window.__funnypotRoutingBound = true;
+                window.addEventListener('popstate', () => {
+                    const resolved = resolveInitialRoute(window.location, null);
+                    activateTab(resolved.tab, { pushHistory: false, replaceHistory: false });
+                });
+                window.addEventListener('hashchange', () => {
+                    const resolved = resolveInitialRoute(window.location, null);
+                    activateTab(resolved.tab, { pushHistory: false, replaceHistory: false });
+                });
+            }
+
+            activateTab(initial.tab, { replaceHistory: initial.fromRedirect || initial.hasExplicitRoute });
+        }
+
+        function setupMindMap(sessions = sessionModels) {
+            const queryEl = document.getElementById('mindmapQuery');
+            if (queryEl && !queryEl.dataset.ready) {
+                queryEl.dataset.ready = 'true';
+                queryEl.addEventListener('input', () => {
+                    mindmapQuery = queryEl.value.toLowerCase().trim();
+                    renderMindMap(sessionModels);
+                });
+            }
+            const filterEl = document.getElementById('mindmapFilter');
+            if (filterEl && !filterEl.dataset.ready) {
+                filterEl.dataset.ready = 'true';
+                filterEl.addEventListener('change', () => {
+                    mindmapFilter = filterEl.value || 'rich';
+                    mindmapSessionId = null;
+                    mindmapSelectedNodeId = null;
+                    mindmapFoldedNodes = new Set();
+                    renderMindMap(sessionModels);
+                });
+            }
+            const expandBtn = document.getElementById('mindmapExpandAll');
+            if (expandBtn && !expandBtn.dataset.ready) {
+                expandBtn.dataset.ready = 'true';
+                expandBtn.addEventListener('click', () => {
+                    mindmapFoldedNodes = new Set();
+                    renderMindMapTreeAndInspector();
+                });
+            }
+            const foldBtn = document.getElementById('mindmapFoldAll');
+            if (foldBtn && !foldBtn.dataset.ready) {
+                foldBtn.dataset.ready = 'true';
+                foldBtn.addEventListener('click', () => {
+                    mindmapFoldedNodes = new Set();
+                    if (mindmapCurrentTree) {
+                        const collectFoldable = (node, depth) => {
+                            if (depth >= 1 && Array.isArray(node.children) && node.children.length) {
+                                mindmapFoldedNodes.add(node.id);
+                            }
+                            (node.children || []).forEach(child => collectFoldable(child, depth + 1));
+                        };
+                        collectFoldable(mindmapCurrentTree, 0);
+                    }
+                    renderMindMapTreeAndInspector();
+                });
+            }
+            const jumpBtn = document.getElementById('mindmapJumpExchange');
+            if (jumpBtn && !jumpBtn.dataset.ready) {
+                jumpBtn.dataset.ready = 'true';
+                jumpBtn.addEventListener('click', () => {
+                    if (mindmapSessionId) jumpToExchangeSession(mindmapSessionId);
+                });
+            }
+            renderMindMap(sessions);
+        }
+
+        function filteredMindMapSessions(sessions = sessionModels) {
+            const eligible = (sessions || []).filter(s => s.commands.length > 0 || sessionCaughtBinaries(s).length > 0);
+            const matching = eligible.filter(s => {
+                if (mindmapFilter === 'binaries' && !sessionCaughtBinaries(s).length) return false;
+                if (mindmapFilter === 'high' && riskScore(s) < 60) return false;
+                return !mindmapQuery || exchangeSearchMatches(s, mindmapQuery);
+            });
+            return matching.slice().sort((a, b) => {
+                if (mindmapFilter === 'newest') return latestExchangeTime(b) - latestExchangeTime(a);
+                const aBins = sessionCaughtBinaries(a).length;
+                const bBins = sessionCaughtBinaries(b).length;
+                if (bBins !== aBins) return bBins - aBins;
+                const aScore = a.commands.length * 8 + riskScore(a) + (a.payloadUrls?.size || 0) * 15;
+                const bScore = b.commands.length * 8 + riskScore(b) + (b.payloadUrls?.size || 0) * 15;
+                return bScore - aScore || latestExchangeTime(b) - latestExchangeTime(a);
+            });
+        }
+
+        function explainSshClient(clientBanner) {
+            const c = String(clientBanner || 'unknown');
+            const lower = c.toLowerCase();
+            if (lower.includes('ssh-2.0-go')) return 'Go standard crypto/ssh client — commonly used by automated botnets, cloud credential stuffers, and compiled Go intrusion tooling.';
+            if (lower.includes('paramiko')) return 'Python Paramiko SSH library — frequently used by scripted scanners, automation frameworks, or LLM-driven offensive harnesses.';
+            if (lower.includes('libssh')) return 'libssh native C library — common in high-speed brute-force scanners and embedded botnet loaders.';
+            if (lower.includes('openssh')) return 'Standard OpenSSH client — can indicate either an interactive human operator or a shell script invoking ssh/scp.';
+            if (lower.includes('putty')) return 'PuTTY Windows SSH client — typically interactive operator tooling or scripted plink sessions.';
+            return 'Observed SSH client identification string sent during the protocol handshake.';
+        }
+
+        function explainStagingPath(pathText) {
+            const p = String(pathText || '');
+            if (p.startsWith('/dev/shm')) return 'Shared-memory tmpfs path (/dev/shm) — attackers favor it because it is world-writable, RAM-backed, and often avoids disk-based scanners.';
+            if (p.startsWith('/tmp') || p.startsWith('/var/tmp')) return 'World-writable temporary directory commonly used to stage downloaded payloads or marker files without root privileges.';
+            if (p.includes('sysmonitor')) return 'Disguised hidden filename (~/.sysmonitor) mimicking a benign system monitor daemon to evade casual process and directory checks.';
+            return 'Filesystem staging target referenced in the attacker command.';
+        }
+
+        function buildAttackMindMap(session) {
+            const binaries = sessionCaughtBinaries(session);
+            const pairs = recentCommandResponsePairs(session).slice().sort(compareExchangePairs);
+            const bio = buildBiometricDeckModel(session, pairs, 1);
+            const ev = interactionEvidence(session);
+            const timing = sessionTimingMetrics(session);
+            const ip = remoteIp(session.remote) || session.remote || 'unknown';
+            const country = [session.location?.city, session.location?.country].filter(Boolean).join(', ') || 'Geo-IP pending / unresolved';
+            const whoLabel = `${session.username || 'unknown'}@${ip}`;
+
+            const originChildren = [
+                {
+                    id: 'origin-ip',
+                    kind: 'Network Origin',
+                    color: 'cyan',
+                    title: ip,
+                    subtitle: `${session.remote} · ${country}`,
+                    summary: `The SSH connection originated from ${session.remote} (${country}). FunnyPot records the source endpoint and correlates it across authentication, shell commands, and payload captures.`,
+                    evidence: session.remote,
+                    meta: {
+                        'Source IP': ip,
+                        'Remote Endpoint': session.remote || 'unknown',
+                        'Resolved Location': country,
+                        'Session Started': fmtTime(session.startedAt),
+                        'Session Ended': fmtTime(session.endedAt),
+                        'Duration': sec(session.durationSeconds),
+                    },
+                    children: [],
+                },
+                {
+                    id: 'origin-client',
+                    kind: 'SSH Fingerprint',
+                    color: 'cyan',
+                    title: session.client || 'Unknown SSH client',
+                    subtitle: session.sshBanner ? `Honeypot banner: ${session.sshBanner}` : 'SSH protocol handshake',
+                    summary: explainSshClient(session.client),
+                    evidence: `Client: ${session.client || 'unknown'}\nPresented Honeypot Banner: ${session.sshBanner || 'default'}`,
+                    meta: {
+                        'Client Version': session.client || 'unknown',
+                        'Presented Banner': session.sshBanner || '-',
+                        'Time To Shell': session.timeToCompromiseMs ? `${fmt.format(session.timeToCompromiseMs)}ms` : '-',
+                    },
+                    children: [],
+                },
+            ];
+
+            const authChildren = (session.authAttempts || []).map((attempt, idx) => ({
+                id: `auth-${idx}`,
+                kind: 'Credential Attempt',
+                color: attempt.Accepted ? 'green' : 'amber',
+                title: `${attempt.Username || 'unknown'} (${attempt.Accepted ? 'accepted' : 'rejected'})`,
+                subtitle: `${attempt.AuthMethod || 'password'} · ${attempt.AcceptanceReason || 'recorded'}`,
+                summary: attempt.Accepted
+                    ? `FunnyPot accepted authentication for "${attempt.Username}" (${attempt.AcceptanceReason || 'threshold reached'}) to lure the attacker into the synthetic shell and observe post-compromise behavior.`
+                    : `Authentication for "${attempt.Username}" was rejected during the initial credential-harvesting phase before granting fake shell access.`,
+                evidence: `User: ${attempt.Username || 'unknown'}\nMethod: ${attempt.AuthMethod || 'unknown'}\nOutcome: ${attempt.Accepted ? 'ACCEPTED' : 'REJECTED'} (${attempt.AcceptanceReason || 'n/a'})`,
+                meta: {
+                    'Attempt #': attempt.ConnectionAttemptNumber || idx + 1,
+                    'Username': attempt.Username || 'unknown',
+                    'Method': attempt.AuthMethod || 'unknown',
+                    'Accepted': attempt.Accepted ? 'Yes' : 'No',
+                    'Reason': attempt.AcceptanceReason || '-',
+                    'Timestamp': fmtTime(attempt.Timestamp),
+                },
+                children: [],
+            }));
+            originChildren.push({
+                id: 'origin-auth',
+                kind: 'Authentication',
+                color: 'cyan',
+                title: `Auth Trail (${session.username})`,
+                subtitle: `${authChildren.length} recorded attempt${authChildren.length === 1 ? '' : 's'}`,
+                summary: `Tracks how the attacker gained access as "${session.username}". FunnyPot intentionally admits attackers after harvesting credentials so their post-login tooling and payloads can be captured.`,
+                evidence: authChildren.length
+                    ? authChildren.map(a => a.title).join('\n')
+                    : `Authenticated user: ${session.username}`,
+                meta: {
+                    'Primary User': session.username || 'unknown',
+                    'Recorded Attempts': authChildren.length,
+                    'Shell Opened': hasShellOpen(session) ? 'Yes' : 'No',
+                },
+                defaultFolded: authChildren.length > 2,
+                children: authChildren,
+            });
+
+            const commandChildren = bio.pulses.map((p, idx) => {
+                const matchedBins = matchTurnBinaries(p, binaries);
+                const stepColor = matchedBins.length ? 'red' : (p.color === '#ff647c' ? 'red' : p.color === '#ffcc66' ? 'amber' : 'cyan');
+                const stepChildren = [
+                    {
+                        id: `cmd-${idx}-chain`,
+                        kind: 'Command Breakdown',
+                        color: stepColor,
+                        title: `Shell Chain (${p.steps.length} segment${p.steps.length === 1 ? '' : 's'})`,
+                        subtitle: shorten(p.chainExplanation, 68),
+                        summary: p.chainExplanation,
+                        evidence: p.steps.map(st => `[${st.Op} | ${st.Status}] ${st.Cmd}\n  -> ${st.Explain}`).join('\n'),
+                        meta: {
+                            'Delivery': p.deliveryLabel,
+                            'Timing Delta': p.delta,
+                            'Sophistication': p.sophistication,
+                            'Target Value': p.avp,
+                        },
+                        children: [],
+                    },
+                    {
+                        id: `cmd-${idx}-reply`,
+                        kind: 'Honeypot Reply',
+                        color: 'green',
+                        title: `FunnyPot Replied (${p.sourceShort})`,
+                        subtitle: `${p.engineLatency} · ${p.tokensLabel}`,
+                        summary: `${p.deceptionNote} FunnyPot returns realistic synthetic Linux output so the attacker continues revealing follow-on payloads.`,
+                        evidence: p.resp || '(empty stdout / silent command completion)',
+                        meta: {
+                            'Response Source': p.sourceShort,
+                            'Latency': p.engineLatency,
+                            'LLM Tokens': p.tokensLabel,
+                            'Failed Command': p.result?.FailedCommand ? 'Yes' : 'No',
+                        },
+                        children: [],
+                    },
+                    {
+                        id: `cmd-${idx}-mitre`,
+                        kind: 'MITRE ATT&CK',
+                        color: 'purple',
+                        title: `${p.mitre} · ${p.intent}`,
+                        subtitle: 'Mapped adversary technique',
+                        summary: `This command maps to ${p.mitre} (${p.intent}). ${mitreExplanation(mitreTactics(p.result?.MitreAttackTechniques)[0] || p.intent, [session])}`,
+                        evidence: p.cmd,
+                        meta: {
+                            'Technique': p.mitre,
+                            'Inferred Objective': p.intent,
+                        },
+                        children: [],
+                    },
+                ];
+
+                const cmdObj = pairs[idx]?.command || {};
+                (cmdObj.PayloadUrls || []).forEach((url, uIdx) => {
+                    stepChildren.push({
+                        id: `cmd-${idx}-url-${uIdx}`,
+                        kind: 'Payload URL',
+                        color: 'red',
+                        title: shorten(url, 56),
+                        subtitle: 'External malware staging endpoint',
+                        summary: `The attacker instructed the host to download an external artifact from ${url}. FunnyPot sanitizes and fetches the URL out-of-band into non-executable quarantine (0400) for static analysis.`,
+                        evidence: url,
+                        meta: {
+                            'Payload URL': url,
+                            'Command Step': `#${idx + 1}`,
+                        },
+                        children: [],
+                    });
+                });
+
+                const stagingMatches = [...new Set(String(p.cmd || '').match(/(?:~\/\.?[A-Za-z0-9_.-]+|\/(?:tmp|var\/tmp|dev\/shm)\/[A-Za-z0-9_.$"-]+)/g) || [])];
+                stagingMatches.slice(0, 4).forEach((pathHit, pIdx) => {
+                    stepChildren.push({
+                        id: `cmd-${idx}-path-${pIdx}`,
+                        kind: 'Staging Path',
+                        color: 'amber',
+                        title: pathHit,
+                        subtitle: 'Target drop / persistence path',
+                        summary: explainStagingPath(pathHit),
+                        evidence: p.cmd,
+                        meta: {
+                            'Path': pathHit,
+                            'Command Step': `#${idx + 1}`,
+                        },
+                        children: [],
+                    });
+                });
+
+                if (/base64\s+(?:-d|--decode)/i.test(p.cmd)) {
+                    const b64Match = p.cmd.match(/['"]([A-Za-z0-9+/=]{8,})['"]/);
+                    let decodedPreview = '';
+                    if (b64Match) {
+                        try {
+                            decodedPreview = typeof atob === 'function'
+                                ? atob(b64Match[1])
+                                : Buffer.from(b64Match[1], 'base64').toString('utf8');
+                        } catch { }
+                    }
+                    stepChildren.push({
+                        id: `cmd-${idx}-b64`,
+                        kind: 'Encoded Payload',
+                        color: 'amber',
+                        title: 'Inline Base64 Decode',
+                        subtitle: decodedPreview ? `Decoded: ${shorten(decodedPreview, 36)}` : 'Obfuscated inline write',
+                        summary: 'The attacker used base64 decoding to write data or a marker file without exposing raw bytes directly in shell arguments. Botnets often write a password or wallet marker to /dev/shm, /var/tmp, and /tmp to verify writable staging directories.',
+                        evidence: decodedPreview ? `Base64: ${b64Match[1]}\nDecoded UTF-8: ${decodedPreview}` : p.cmd,
+                        meta: {
+                            'Encoding': 'Base64',
+                            'Decoded Preview': decodedPreview || '(binary / unavailable)',
+                        },
+                        children: [],
+                    });
+                }
+
+                matchedBins.forEach((b, bIdx) => {
+                    stepChildren.push({
+                        id: `cmd-${idx}-bin-${bIdx}`,
+                        kind: 'Captured Artifact',
+                        color: 'red',
+                        title: `Caught: ${b.OriginalFilename}`,
+                        subtitle: `${formatBytes(b.CapturedBytes)} · ${b.Analysis?.FileFormat || 'Binary'} · Entropy ${Number(b.Analysis?.Entropy || 0).toFixed(2)}`,
+                        summary: `This command directly triggered capture of "${b.OriginalFilename}" (${formatBytes(b.CapturedBytes)}). It was quarantined read-only (0400, never executed) and statically analyzed as ${b.Analysis?.Summary || b.Analysis?.FileFormat || 'binary'}.`,
+                        evidence: `SHA-256: ${b.Sha256 || 'n/a'}\nPath: ${b.StoredFilePath || 'n/a'}\nIndicators: ${(b.Analysis?.SuspiciousIndicators || []).join(', ') || 'none'}`,
+                        meta: {
+                            'Filename': b.OriginalFilename,
+                            'Size': formatBytes(b.CapturedBytes),
+                            'Format': b.Analysis?.FileFormat || 'unknown',
+                            'SHA-256': b.Sha256 || 'n/a',
+                        },
+                        actions: [{ label: 'Open Caught Binaries tab →', action: 'binaries' }],
+                        children: [],
+                    });
+                });
+
+                return {
+                    id: `cmd-${idx}`,
+                    kind: `Step #${idx + 1}`,
+                    color: stepColor,
+                    title: `${p.intent} (${p.delta})`,
+                    subtitle: `$ ${shorten(p.cmd, 62)}`,
+                    summary: `Command #${idx + 1} sent at ${p.timeLabel} (${p.delta}). ${p.chainExplanation}`,
+                    evidence: `$ ${p.cmd}\n\n--- FunnyPot Reply (${p.sourceShort}) ---\n${p.resp || '(no output)'}`,
+                    meta: {
+                        'Step': `#${idx + 1} of ${bio.pulses.length}`,
+                        'Exchange ID': p.exchangeId || '-',
+                        'MITRE': p.mitre,
+                        'Delivery': p.deliveryLabel,
+                        'Answered By': `${p.sourceShort} (${p.engineLatency})`,
+                    },
+                    defaultFolded: bio.pulses.length > 3 && matchedBins.length === 0,
+                    children: stepChildren,
+                };
+            });
+
+            const binaryChildren = binaries.map((b, idx) => {
+                const a = b.Analysis || {};
+                const entropyVal = Number(a.Entropy || 0).toFixed(2);
+                const formatSummary = [a.FileFormat, a.Architecture, a.Endianness, a.BinaryType].filter(Boolean).join(' · ') || 'Unknown format';
+                const binSubNodes = [
+                    {
+                        id: `bin-${idx}-format`,
+                        kind: 'Binary Header',
+                        color: 'red',
+                        title: formatSummary,
+                        subtitle: `${a.MimeType || 'application/octet-stream'} · Magic ${a.MagicBytesHex || '-'}`,
+                        summary: `Static header inspection identified this file as ${formatSummary}. ${a.IsExecutable ? 'It is an executable binary capable of running directly on a matching Linux host if not quarantined.' : 'It is a non-executable payload or script artifact.'}`,
+                        evidence: `Format: ${formatSummary}\nMIME: ${a.MimeType || 'application/octet-stream'}\nMagic Bytes: ${a.MagicBytesHex || '-'}`,
+                        meta: {
+                            'Format': a.FileFormat || 'unknown',
+                            'Architecture': a.Architecture || '-',
+                            'Endianness': a.Endianness || '-',
+                            'Binary Type': a.BinaryType || '-',
+                            'Executable': a.IsExecutable ? 'Yes' : 'No',
+                        },
+                        children: [],
+                    },
+                    {
+                        id: `bin-${idx}-entropy`,
+                        kind: 'Packing & Entropy',
+                        color: a.IsLikelyPackedOrEncrypted || a.Entropy >= 7.2 ? 'red' : 'amber',
+                        title: `Entropy ${entropyVal} / 8.00${(a.SuspiciousIndicators || []).length ? ` · ${a.SuspiciousIndicators.join(', ')}` : ''}`,
+                        subtitle: a.IsLikelyPackedOrEncrypted ? 'Likely packed, compressed, or encrypted' : 'Standard code/text byte distribution',
+                        summary: a.IsLikelyPackedOrEncrypted
+                            ? `Shannon entropy of ${entropyVal} bits/byte (near the 8.00 maximum) strongly indicates compressed, packed, or encrypted content. ${(a.SuspiciousIndicators || []).length ? `Static signatures matched: ${a.SuspiciousIndicators.join(', ')}. Packers like UPX are routinely used by botnets and miners to shrink payloads and hinder basic string inspection.` : ''}`
+                            : `Shannon entropy is ${entropyVal} bits/byte, consistent with standard unencrypted code or scripts.`,
+                        evidence: `Entropy: ${entropyVal} / 8.00\nIndicators: ${(a.SuspiciousIndicators || []).join(', ') || 'none'}`,
+                        meta: {
+                            'Shannon Entropy': `${entropyVal} bits/byte`,
+                            'Likely Packed': a.IsLikelyPackedOrEncrypted ? 'Yes' : 'No',
+                            'Indicators': (a.SuspiciousIndicators || []).join(', ') || 'None',
+                        },
+                        children: [],
+                    },
+                    {
+                        id: `bin-${idx}-hash`,
+                        kind: 'Hash & Quarantine',
+                        color: 'green',
+                        title: `SHA-256 ${shorten(b.Sha256 || 'n/a', 24)}`,
+                        subtitle: 'Read-only (0400) · Never executed',
+                        summary: 'Cryptographic SHA-256 fingerprint for threat-intel lookups (e.g., VirusTotal / MalwareBazaar). FunnyPot saves the artifact with a .quarantine suffix and chmod 0400 permissions so it cannot execute.',
+                        evidence: `SHA-256: ${b.Sha256 || 'n/a'}\nQuarantine Path: ${b.StoredFilePath || '-'}\nMetadata Sidecar: ${b.MetadataFilePath || '-'}`,
+                        meta: {
+                            'SHA-256': b.Sha256 || 'n/a',
+                            'Captured Size': formatBytes(b.CapturedBytes),
+                            'Expected Size': formatBytes(b.ExpectedBytes),
+                            'Truncated': b.Truncated ? 'Yes' : 'No',
+                            'Quarantine Path': b.StoredFilePath || '-',
+                        },
+                        actions: [{ label: 'Open Caught Binaries tab →', action: 'binaries' }],
+                        children: [],
+                    },
+                ];
+
+                if ((a.NotableStrings || []).length || (a.ExtractedUrls || []).length || (a.ExtractedIpAddresses || []).length) {
+                    binSubNodes.push({
+                        id: `bin-${idx}-strings`,
+                        kind: 'Extracted Artifacts',
+                        color: 'amber',
+                        title: `Strings & Embedded IOCs (${(a.NotableStrings || []).length} strings)`,
+                        subtitle: `${(a.ExtractedUrls || []).length} URLs · ${(a.ExtractedIpAddresses || []).length} IPs`,
+                        summary: 'Printable strings, URLs, and IPv4 addresses extracted statically from the quarantined binary. For UPX-packed binaries, visible strings often include packer markers (like "UPX!") while core strings remain compressed.',
+                        evidence: [
+                            (a.ExtractedUrls || []).length ? `Embedded URLs:\n${a.ExtractedUrls.join('\n')}` : '',
+                            (a.ExtractedIpAddresses || []).length ? `Embedded IPs:\n${a.ExtractedIpAddresses.join(', ')}` : '',
+                            (a.NotableStrings || []).length ? `Notable Strings:\n${a.NotableStrings.join('\n')}` : '',
+                        ].filter(Boolean).join('\n\n'),
+                        meta: {
+                            'Printable Strings': (a.NotableStrings || []).length,
+                            'Embedded URLs': (a.ExtractedUrls || []).length,
+                            'Embedded IPs': (a.ExtractedIpAddresses || []).length,
+                        },
+                        children: [],
+                    });
+                }
+
+                if (a.LlmReview) {
+                    binSubNodes.push({
+                        id: `bin-${idx}-llm`,
+                        kind: 'LLM Malware Review',
+                        color: 'purple',
+                        title: `${a.LlmReview.Verdict || 'suspicious'} · ${a.LlmReview.SuspectedFamily || 'Unknown family'}`,
+                        subtitle: a.LlmReview.Model || 'Static LLM triage',
+                        summary: a.LlmReview.ExecutiveSummary || 'Automated static reverse-engineering review generated from read-only file/readelf metadata.',
+                        evidence: [
+                            ...(a.LlmReview.Capabilities || []).map(x => `Capability: ${x}`),
+                            ...(a.LlmReview.PackingAndObfuscation || []).map(x => `Packing: ${x}`),
+                            ...(a.LlmReview.DefensiveRecommendations || []).map(x => `Defense: ${x}`),
+                        ].join('\n'),
+                        meta: {
+                            'Verdict': a.LlmReview.Verdict || 'suspicious',
+                            'Suspected Family': a.LlmReview.SuspectedFamily || 'Unknown',
+                            'Model': a.LlmReview.Model || '-',
+                        },
+                        children: [],
+                    });
+                }
+
+                return {
+                    id: `bin-${idx}`,
+                    kind: 'Caught Binary',
+                    color: 'red',
+                    title: `${b.OriginalFilename || 'upload.bin'} (${formatBytes(b.CapturedBytes)})`,
+                    subtitle: `${formatSummary} · Entropy ${entropyVal}`,
+                    summary: `Malware artifact captured via ${b.Source === 'url_payload' ? 'out-of-band URL download' : b.Source || 'transfer'} during this session. ${a.Summary || ''}`,
+                    evidence: `Command / URL: ${b.CommandText || 'n/a'}\nSHA-256: ${b.Sha256 || 'n/a'}\nQuarantine: ${b.StoredFilePath || 'n/a'}`,
+                    meta: {
+                        'Filename': b.OriginalFilename || 'upload.bin',
+                        'Delivery Source': b.Source || 'unknown',
+                        'Size': formatBytes(b.CapturedBytes),
+                        'Exchange ID': b.ExchangeId || '-',
+                        'Captured At': fmtTime(b.CapturedAtUtc),
+                    },
+                    actions: [{ label: 'Open Caught Binaries tab →', action: 'binaries' }],
+                    defaultFolded: false,
+                    children: binSubNodes,
+                };
+            });
+
+            const tacticNodes = [
+                {
+                    id: 'signal-biometrics',
+                    kind: 'Behavioral Biometrics',
+                    color: 'purple',
+                    title: bio.headline,
+                    subtitle: `Scores (script / harness / human): ${ev.scores.script} / ${ev.scores.harness} / ${ev.scores.handsOnKeyboard}`,
+                    summary: `${bio.reason} Behavioral biometrics are heuristic estimates derived from command delivery channel (exec vs PTY), keystroke chunking, and inter-command cadence—not verified actor identity.`,
+                    evidence: `Profile: ${ev.profile} (${ev.confidence} confidence)\nFirst command delay: ${formatDurationMs(timing.firstCommandDelayMs)}\nMedian cadence: ${formatDurationMs(timing.medianMs)}\nChain operators: ${ev.chainCount}\nOutput-dependent follow-ups: ${ev.outputFollowUps}`,
+                    meta: {
+                        'Verdict': ev.profile,
+                        'Confidence': ev.confidence,
+                        'Median Cadence': formatDurationMs(timing.medianMs),
+                        'Chain Operators': ev.chainCount,
+                    },
+                    children: [],
+                },
+                ...[...session.tactics].map((tactic, idx) => ({
+                    id: `tactic-${idx}`,
+                    kind: 'MITRE Tactic',
+                    color: 'purple',
+                    title: tactic,
+                    subtitle: 'Observed adversary objective',
+                    summary: mitreExplanation(tactic, [session]),
+                    evidence: `Tactic: ${tactic}\nRisk Score: ${riskScore(session)} (${riskLabel(session)})`,
+                    meta: {
+                        'Tactic': tactic,
+                        'Session Risk': `${riskLabel(session).toUpperCase()} (${riskScore(session)})`,
+                    },
+                    children: [],
+                })),
+            ];
+            if (isGpuProspector(session)) {
+                tacticNodes.push({
+                    id: 'signal-gpu',
+                    kind: 'Behavior Signal',
+                    color: 'purple',
+                    title: 'GPU / Compute Prospector',
+                    subtitle: 'Hardware / nvidia-smi reconnaissance detected',
+                    summary: 'The attacker probed CPU cores, GPU models (nvidia-smi), or compute resources before deciding whether to stage a monetized payload (such as a cryptominer or compute bot).',
+                    evidence: session.commands.filter(c => /nvidia|lscpu|nproc|gpu|miner/i.test(c.Command || '')).map(c => `$ ${c.Command}`).join('\n'),
+                    meta: { 'Classification': 'GPU prospector' },
+                    children: [],
+                });
+            }
+
+            const branches = [
+                {
+                    id: 'branch-origin',
+                    kind: 'Branch 1',
+                    color: 'cyan',
+                    title: 'Origin & Access',
+                    subtitle: `${ip} · ${session.client || 'SSH'} · ${authChildren.length} auth event${authChildren.length === 1 ? '' : 's'}`,
+                    summary: 'Network origin, SSH client fingerprint, and credential attempts that led to shell compromise.',
+                    evidence: `Remote: ${session.remote}\nUser: ${session.username}\nClient: ${session.client}`,
+                    meta: { 'Origin IP': ip, 'User': session.username, 'Client': session.client },
+                    defaultFolded: false,
+                    children: originChildren,
+                },
+                {
+                    id: 'branch-commands',
+                    kind: 'Branch 2',
+                    color: 'amber',
+                    title: `Command Kill-Chain (${commandChildren.length} step${commandChildren.length === 1 ? '' : 's'})`,
+                    subtitle: commandChildren.length ? bio.playbookName : 'No shell commands recorded',
+                    summary: commandChildren.length
+                        ? `Chronological tree of all ${commandChildren.length} commands issued by the attacker, their chain breakdowns, FunnyPot replies, MITRE mappings, and extracted IOCs.`
+                        : 'No shell commands were logged in this session (e.g., direct binary upload or post-close capture).',
+                    evidence: pairs.map((pair, i) => `#${i + 1} $ ${pair.command.Command}`).join('\n') || '(no shell commands)',
+                    meta: { 'Commands': commandChildren.length, 'Playbook': bio.playbookName },
+                    defaultFolded: false,
+                    children: commandChildren,
+                },
+            ];
+
+            if (binaryChildren.length) {
+                branches.push({
+                    id: 'branch-binaries',
+                    kind: 'Branch 3',
+                    color: 'red',
+                    title: `Caught Binaries & Malware (${binaryChildren.length})`,
+                    subtitle: binaries.map(b => `${b.OriginalFilename} (${formatBytes(b.CapturedBytes)})`).join(' · '),
+                    summary: `Real binary artifacts downloaded or uploaded during this session, quarantined read-only (0400) and statically analyzed without execution.`,
+                    evidence: binaries.map(b => `${b.OriginalFilename} | ${formatBytes(b.CapturedBytes)} | ${b.Sha256}`).join('\n'),
+                    meta: { 'Captured Binaries': binaryChildren.length },
+                    actions: [{ label: 'Open Caught Binaries tab →', action: 'binaries' }],
+                    defaultFolded: false,
+                    children: binaryChildren,
+                });
+            }
+
+            branches.push({
+                id: 'branch-tactics',
+                kind: `Branch ${branches.length + 1}`,
+                color: 'purple',
+                title: `Tactics & Behavioral Signals (${tacticNodes.length})`,
+                subtitle: [...session.tactics].slice(0, 3).join(' · ') || behaviorType(session),
+                summary: 'High-level MITRE ATT&CK tactics, behavioral biometrics, and strategic classifications inferred across the entire session.',
+                evidence: `Behavior: ${behaviorType(session)}\nRisk: ${riskLabel(session).toUpperCase()} (${riskScore(session)})\nTactics: ${[...session.tactics].join(', ') || 'none'}`,
+                meta: {
+                    'Behavior': behaviorType(session),
+                    'Risk Score': `${riskLabel(session).toUpperCase()} (${riskScore(session)})`,
+                },
+                defaultFolded: false,
+                children: tacticNodes,
+            });
+
+            return {
+                id: 'root',
+                kind: 'Attack Session Root',
+                color: binaries.length || riskScore(session) >= 60 ? 'red' : 'green',
+                title: `${whoLabel} // ${bio.playbookName}`,
+                subtitle: `Session ${shortSessionId(session)} · ${session.commands.length} cmd${session.commands.length === 1 ? '' : 's'} · ${binaries.length} caught binar${binaries.length === 1 ? 'y' : 'ies'} · ${riskLabel(session).toUpperCase()} risk (${riskScore(session)})`,
+                summary: `${bio.sequenceNarrative} Click any branch or artefact on the left to inspect its plain-English explanation and raw telemetry evidence, or fold branches with − / +.`,
+                evidence: `Session ID: ${session.id}\nRemote: ${session.remote}\nUsername: ${session.username}\nClient: ${session.client}\nStarted: ${fmtTime(session.startedAt)}`,
+                meta: {
+                    'Session ID': session.id,
+                    'Attacker': whoLabel,
+                    'Behavior': behaviorType(session),
+                    'Interaction Profile': bio.headline,
+                    'Commands': session.commands.length,
+                    'Caught Binaries': binaries.length,
+                    'Risk Score': `${riskLabel(session).toUpperCase()} (${riskScore(session)})`,
+                },
+                actions: [
+                    { label: 'View in Attacker Exchange →', action: 'exchange' },
+                    ...(binaries.length ? [{ label: 'Open Caught Binaries →', action: 'binaries' }] : []),
+                ],
+                defaultFolded: false,
+                children: branches,
+            };
+        }
+
+        function countMindMapDescendants(node) {
+            if (!node || !Array.isArray(node.children) || !node.children.length) return 0;
+            return node.children.reduce((sum, child) => sum + 1 + countMindMapDescendants(child), 0);
+        }
+
+        function renderMindMapNode(node, depth = 0) {
+            const hasChildren = Array.isArray(node.children) && node.children.length > 0;
+            const isFolded = hasChildren && mindmapFoldedNodes.has(node.id);
+            const isSelected = mindmapSelectedNodeId === node.id;
+            const descCount = hasChildren ? countMindMapDescendants(node) : 0;
+            const foldBtn = hasChildren
+                ? `<button class="mm-fold-btn" type="button" data-mm-fold="${escapeAttr(node.id)}" aria-expanded="${isFolded ? 'false' : 'true'}" title="${isFolded ? 'Expand branch' : 'Fold branch'}">${isFolded ? `+ ${descCount}` : '−'}</button>`
+                : '';
+            const childrenHtml = hasChildren && !isFolded
+                ? `<div class="mm-children">${node.children.map(child => `<div class="mm-child">${renderMindMapNode(child, depth + 1)}</div>`).join('')}</div>`
+                : '';
+            return `
+                <div class="mm-branch" data-color="${escapeAttr(node.color || 'cyan')}">
+                    <div class="mm-node-row">
+                        <button class="mm-node ${depth === 0 ? 'root-node' : ''} ${isSelected ? 'selected' : ''}" type="button" data-mm-select="${escapeAttr(node.id)}">
+                            <span class="mm-node-dot"></span>
+                            <span class="mm-node-body">
+                                <span class="mm-node-kicker">${escapeHtml(node.kind || 'Artefact')}</span>
+                                <span class="mm-node-title">${escapeHtml(node.title || '')}</span>
+                                ${node.subtitle ? `<span class="mm-node-sub">${escapeHtml(node.subtitle)}</span>` : ''}
+                            </span>
+                        </button>
+                        ${foldBtn}
+                    </div>
+                    ${childrenHtml}
+                </div>
+            `;
+        }
+
+        function renderMindMapInspector() {
+            const inspector = document.getElementById('mindmapInspector');
+            if (!inspector) return;
+            const node = mindmapNodeIndex.get(mindmapSelectedNodeId) || mindmapCurrentTree;
+            if (!node) {
+                inspector.innerHTML = '<div class="empty">Click any artefact in the mind map to see its explanation and evidence.</div>';
+                return;
+            }
+            const hasChildren = Array.isArray(node.children) && node.children.length > 0;
+            const isFolded = hasChildren && mindmapFoldedNodes.has(node.id);
+            const metaRows = node.meta && Object.keys(node.meta).length ? kvRows(node.meta) : '';
+            const actionButtons = [
+                hasChildren ? `<button class="tab-button" type="button" data-mm-fold="${escapeAttr(node.id)}">${isFolded ? `Unfold ${countMindMapDescendants(node)} sub-artefacts` : 'Fold this branch'}</button>` : '',
+                ...(node.actions || []).map(a => `<button class="tab-button" type="button" data-mm-action="${escapeAttr(a.action)}">${escapeHtml(a.label)}</button>`),
+            ].filter(Boolean).join('');
+
+            inspector.innerHTML = `
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                    <span class="badge ${escapeAttr(node.color || 'cyan')}">${escapeHtml(node.kind || 'Artefact')}</span>
+                    <span class="muted" style="font-size:0.75rem;">${hasChildren ? `${node.children.length} direct child${node.children.length === 1 ? '' : 'ren'}` : 'Leaf artefact'}</span>
+                </div>
+                <div>
+                    <h3 style="margin:0 0 4px;font-size:1.02rem;color:#fff;overflow-wrap:anywhere;">${escapeHtml(node.title || '')}</h3>
+                    ${node.subtitle ? `<div class="muted" style="font-size:0.8rem;overflow-wrap:anywhere;">${escapeHtml(node.subtitle)}</div>` : ''}
+                </div>
+                <div class="mm-inspector-explain">
+                    <div class="exchange-line-meta" style="margin-bottom:5px;color:var(--cyan);">Plain-English Explanation</div>
+                    <div>${escapeHtml(node.summary || 'Telemetry artefact captured by FunnyPot.')}</div>
+                </div>
+                ${node.evidence ? `
+                <div>
+                    <div class="exchange-line-meta" style="margin-bottom:6px;">Observed Evidence</div>
+                    <pre>${escapeHtml(node.evidence)}</pre>
+                </div>` : ''}
+                ${metaRows ? `<div class="kv">${metaRows}</div>` : ''}
+                ${actionButtons ? `<div style="display:flex;gap:8px;flex-wrap:wrap;">${actionButtons}</div>` : ''}
+            `;
+
+            if (typeof inspector.querySelectorAll === 'function') {
+                inspector.querySelectorAll('[data-mm-fold]').forEach(btn => {
+                    btn.addEventListener('click', () => toggleMindMapFold(btn.dataset.mmFold));
+                });
+                inspector.querySelectorAll('[data-mm-action]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (btn.dataset.mmAction === 'exchange' && mindmapSessionId) jumpToExchangeSession(mindmapSessionId);
+                        if (btn.dataset.mmAction === 'binaries') activateTab('binaries', { pushHistory: true });
+                    });
+                });
+            }
+        }
+
+        function toggleMindMapFold(nodeId) {
+            if (!nodeId) return;
+            if (mindmapFoldedNodes.has(nodeId)) mindmapFoldedNodes.delete(nodeId);
+            else mindmapFoldedNodes.add(nodeId);
+            renderMindMapTreeAndInspector();
+        }
+
+        function selectMindMapNode(nodeId) {
+            if (!nodeId || !mindmapNodeIndex.has(nodeId)) return;
+            mindmapSelectedNodeId = nodeId;
+            renderMindMapTreeAndInspector();
+        }
+
+        function renderMindMapTreeAndInspector() {
+            const canvas = document.getElementById('mindmapCanvas');
+            if (!canvas) return;
+            if (!mindmapCurrentTree) {
+                canvas.innerHTML = '<div class="empty">No matching attack sessions to map.</div>';
+                renderMindMapInspector();
+                return;
+            }
+            canvas.innerHTML = `<div class="mm-tree">${renderMindMapNode(mindmapCurrentTree, 0)}</div>`;
+            if (typeof canvas.querySelectorAll === 'function') {
+                canvas.querySelectorAll('[data-mm-select]').forEach(btn => {
+                    btn.addEventListener('click', () => selectMindMapNode(btn.dataset.mmSelect));
+                });
+                canvas.querySelectorAll('[data-mm-fold]').forEach(btn => {
+                    btn.addEventListener('click', (event) => {
+                        event?.stopPropagation?.();
+                        toggleMindMapFold(btn.dataset.mmFold);
+                    });
+                });
+            }
+            renderMindMapInspector();
+        }
+
+        function renderMindMap(sessions = sessionModels) {
+            const sessionsEl = document.getElementById('mindmapSessions');
+            const countEl = document.getElementById('mindmapCount');
+            const canvas = document.getElementById('mindmapCanvas');
+            if (!canvas) return;
+
+            const ranked = filteredMindMapSessions(sessions);
+            if (countEl) {
+                countEl.textContent = `${fmt.format(ranked.length)} mappable attack session${ranked.length === 1 ? '' : 's'}`;
+            }
+
+            if (!ranked.length) {
+                mindmapCurrentTree = null;
+                mindmapNodeIndex = new Map();
+                if (sessionsEl) sessionsEl.innerHTML = '';
+                renderMindMapTreeAndInspector();
+                return;
+            }
+
+            const sessionChanged = !mindmapSessionId || !ranked.some(s => s.id === mindmapSessionId);
+            if (sessionChanged) {
+                mindmapSessionId = ranked[0].id;
+            }
+            const activeSession = ranked.find(s => s.id === mindmapSessionId) || ranked[0];
+
+            if (sessionsEl) {
+                sessionsEl.innerHTML = ranked.slice(0, 20).map(s => {
+                    const bins = sessionCaughtBinaries(s);
+                    const isSel = s.id === activeSession.id;
+                    return `
+                        <button class="mm-session-chip ${isSel ? 'active' : ''}" type="button" data-mm-session="${escapeAttr(s.id)}">
+                            <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+                                <strong style="font-family:'SFMono-Regular',Consolas,monospace;font-size:0.8rem;color:#fff;">${escapeHtml(s.username)}@${escapeHtml(remoteIp(s.remote) || s.remote)}</strong>
+                                ${bins.length ? `<span class="badge red">${bins.length} bin</span>` : riskBadge(s)}
+                            </div>
+                            <span class="muted" style="font-size:0.72rem;">${s.commands.length} cmd${s.commands.length === 1 ? '' : 's'} · ${escapeHtml(shortSessionId(s))} · ${escapeHtml(behaviorType(s))}</span>
+                        </button>
+                    `;
+                }).join('');
+                if (typeof sessionsEl.querySelectorAll === 'function') {
+                    sessionsEl.querySelectorAll('[data-mm-session]').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            mindmapSessionId = btn.dataset.mmSession;
+                            mindmapSelectedNodeId = null;
+                            mindmapFoldedNodes = new Set();
+                            renderMindMap(sessionModels);
+                        });
+                    });
+                }
+            }
+
+            mindmapCurrentTree = buildAttackMindMap(activeSession);
+            mindmapNodeIndex = new Map();
+            const indexTree = (node) => {
+                mindmapNodeIndex.set(node.id, node);
+                if (sessionChanged && node.defaultFolded) mindmapFoldedNodes.add(node.id);
+                (node.children || []).forEach(indexTree);
+            };
+            indexTree(mindmapCurrentTree);
+            if (!mindmapSelectedNodeId || !mindmapNodeIndex.has(mindmapSelectedNodeId)) {
+                mindmapSelectedNodeId = mindmapCurrentTree.id;
+            }
+
+            renderMindMapTreeAndInspector();
         }
 
         function setupExchangeSorting() {
@@ -3069,14 +4578,20 @@
         function filteredExchangeSessions(sessions) {
             const query = exchangeFilters.query;
             return sessions.filter(session => {
-                if (!session.commands.length || session.commands.length < exchangeFilters.minCommands || riskScore(session) < exchangeFilters.minRisk) return false;
+                const hasCommands = session.commands.length > 0;
+                const hasBinaries = sessionCaughtBinaries(session).length > 0;
+                if ((!hasCommands && !hasBinaries) || session.commands.length < exchangeFilters.minCommands || riskScore(session) < exchangeFilters.minRisk) return false;
                 if (exchangeFilters.behavior !== 'all' && behaviorType(session) !== exchangeFilters.behavior) return false;
                 return !query || exchangeSearchMatches(session, query);
             });
         }
 
         function exchangeSearchMatches(session, query) {
+            const binaries = sessionCaughtBinaries(session);
             const rawFields = [
+                session.id,
+                session.sessionKey,
+                session.shellSessionId,
                 session.remote,
                 remoteIp(session.remote),
                 session.username,
@@ -3086,6 +4601,16 @@
                 ...summarizeTools(session),
                 ...session.commands.flatMap(command => [command.Command, command.CommandText, command.Input]),
                 ...session.results.flatMap(result => [result.Command, result.Response, result.ResponseSource, result.LlmModel]),
+                ...binaries.flatMap(b => [
+                    b.OriginalFilename,
+                    b.Sha256,
+                    b.Source,
+                    b.CommandText,
+                    b.StoredFilePath,
+                    b.Analysis?.FileFormat,
+                    b.Analysis?.Summary,
+                    ...(b.Analysis?.SuspiciousIndicators || []),
+                ]),
             ];
             const haystack = normalizeExchangeSearchText(rawFields.join(' '));
             const compactHaystack = haystack.replace(/\s+/g, '');
@@ -3114,7 +4639,7 @@
             const riskTotal = filtered.reduce((total, session) => total + riskScore(session), 0);
             const peakHour = peakCommandHour(commands);
             const stats = [
-                ['Sessions in scope', filtered.length, `${sessions.filter(session => session.commands.length).length} total exchanges`],
+                ['Sessions in scope', filtered.length, `${sessions.filter(session => session.commands.length || sessionCaughtBinaries(session).length).length} total exchanges`],
                 ['Command volume', fmt.format(commands.length), `${fmt.format(uniqueValues(commands.map(command => command.Command)).length)} unique inputs`],
                 ['Reply coverage', pct(responseCoverage), `${fmt.format(results.length)} replies correlated`],
                 ['Risk load', fmt.format(riskTotal), `${fmt.format(filtered.filter(session => riskScore(session) >= 60).length)} high-risk sessions`],
@@ -3130,7 +4655,7 @@
             const behaviorTarget = document.getElementById('exchangeBehavior');
             if (behaviorTarget) {
                 const current = exchangeFilters.behavior;
-                const types = [...new Set(sessions.filter(session => session.commands.length).map(behaviorType))].sort();
+                const types = [...new Set(sessions.filter(session => session.commands.length || sessionCaughtBinaries(session).length).map(behaviorType))].sort();
                 behaviorTarget.innerHTML = '<option value="all">All signatures</option>' + types.map(type => `<option value="${escapeAttr(type)}">${escapeHtml(type)}</option>`).join('');
                 behaviorTarget.value = types.includes(current) ? current : 'all';
                 exchangeFilters.behavior = behaviorTarget.value;
@@ -3278,6 +4803,7 @@
                 selectedPulseIndex = 0;
             }
             const activeSession = displaySessions.find(s => s.id === selectedExchangeSessionId) || displaySessions[0];
+            const activeBinaries = sessionCaughtBinaries(activeSession);
             const pairs = recentCommandResponsePairs(activeSession).slice().sort(compareExchangePairs);
             if (selectedPulseIndex >= pairs.length) selectedPulseIndex = 0;
 
@@ -3287,6 +4813,7 @@
             const ribbonHtml = displaySessions.slice(0, 24).map(s => {
                 const isSelected = s.id === activeSession.id;
                 const clusterCount = campaignCounts.get(sessionCanonicalSignature(s)) || 1;
+                const binCount = sessionCaughtBinaries(s).length;
                 const ev = interactionEvidence(s);
                 const ai = s.AiEnhancement || {};
                 const verdictShort = ai.InteractionVerdict || ev.profile;
@@ -3301,7 +4828,7 @@
                                     ${escapeHtml(remoteIp(s.remote))}${escapeHtml(country)}
                                 </div>
                                 <div style="font-size:0.72rem; color:var(--muted); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                                    ${escapeHtml(s.username)} · ${s.commands.length} cmd${s.commands.length === 1 ? '' : 's'}${clusterCount > 1 ? ` · ${clusterCount}x cluster` : ''}
+                                    ${escapeHtml(s.username)} · ${s.commands.length} cmd${s.commands.length === 1 ? '' : 's'}${binCount > 0 ? ` · ${binCount} bin${binCount === 1 ? '' : 's'}` : ''}${clusterCount > 1 ? ` · ${clusterCount}x cluster` : ''}
                                 </div>
                             </div>
                         </div>
@@ -3374,51 +4901,56 @@
             `).join('');
 
             const whoLabel = `${activeSession.username || 'root'}@${remoteIp(activeSession.remote) || 'unknown'}${activeSession.location?.country ? ` (${activeSession.location.country})` : ''}`;
-            const dialogueTurnsHtml = activeBio.pulses.map((p, idx) => {
-                const isSel = idx === selectedPulseIndex;
-                return `
-                    <div class="exchange-turn-card ${isSel ? 'active' : ''}" onclick="selectBiometricPulse(${idx})">
-                        <div class="exchange-turn-top">
-                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                                <span class="badge cyan">Step #${idx + 1} of ${activeBio.pulses.length}</span>
-                                <span style="font:700 0.78rem 'SFMono-Regular',Consolas,monospace;color:#fff;">${escapeHtml(p.timeLabel)} (${escapeHtml(p.delta)})</span>
-                                <span class="badge purple">${escapeHtml(p.intent)} · ${escapeHtml(p.mitre)}</span>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                                <span class="badge amber">Delivery: ${escapeHtml(p.deliveryLabel)}</span>
-                                <span class="badge green">Answered by: ${escapeHtml(p.sourceShort)} (${escapeHtml(p.engineLatency)})</span>
-                            </div>
-                        </div>
-
-                        <div class="exchange-turn-pair">
-                            <div class="actor-pane attacker">
-                                <div>
-                                    <div class="actor-pane-head">
-                                        <span class="actor-badge attacker">ATTACKER SENT // ${escapeHtml(whoLabel)}</span>
-                                    </div>
-                                    <div class="terminal-line" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px; margin-top:8px;">$ ${escapeHtml(p.cmd)}</div>
-                                    <div class="actor-explain" style="margin-top:8px;">
-                                        <strong>What they were trying to do:</strong> ${escapeHtml(p.chainExplanation)}
-                                    </div>
+            const activeBinariesHtml = renderExchangeCaughtBinaries(activeSession, activeBinaries);
+            const dialogueTurnsHtml = activeBio.pulses.length
+                ? activeBio.pulses.map((p, idx) => {
+                    const isSel = idx === selectedPulseIndex;
+                    const turnBinariesHtml = renderExchangeTurnBinaries(matchTurnBinaries(p, activeBinaries));
+                    return `
+                        <div class="exchange-turn-card ${isSel ? 'active' : ''}" onclick="selectBiometricPulse(${idx})">
+                            <div class="exchange-turn-top">
+                                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                                    <span class="badge cyan">Step #${idx + 1} of ${activeBio.pulses.length}</span>
+                                    <span style="font:700 0.78rem 'SFMono-Regular',Consolas,monospace;color:#fff;">${escapeHtml(p.timeLabel)} (${escapeHtml(p.delta)})</span>
+                                    <span class="badge purple">${escapeHtml(p.intent)} · ${escapeHtml(p.mitre)}</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                                    <span class="badge amber">Delivery: ${escapeHtml(p.deliveryLabel)}</span>
+                                    <span class="badge green">Answered by: ${escapeHtml(p.sourceShort)} (${escapeHtml(p.engineLatency)})</span>
                                 </div>
                             </div>
 
-                            <div class="actor-pane honeypot">
-                                <div>
-                                    <div class="actor-pane-head">
-                                        <span class="actor-badge honeypot">FUNNYPOT / LLM REPLIED // ${escapeHtml(p.sourceShort)}</span>
-                                        ${responseCacheBadge(p.result)}
+                            <div class="exchange-turn-pair">
+                                <div class="actor-pane attacker">
+                                    <div>
+                                        <div class="actor-pane-head">
+                                            <span class="actor-badge attacker">ATTACKER SENT // ${escapeHtml(whoLabel)}</span>
+                                        </div>
+                                        <div class="terminal-line" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px; margin-top:8px;">$ ${escapeHtml(p.cmd)}</div>
+                                        <div class="actor-explain" style="margin-top:8px;">
+                                            <strong>What they were trying to do:</strong> ${escapeHtml(p.chainExplanation)}
+                                        </div>
                                     </div>
-                                    <div class="terminal-line terminal-response" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px; margin-top:8px;">${escapeHtml(p.resp)}</div>
-                                    <div class="actor-explain" style="margin-top:8px;">
-                                        <strong>How FunnyPot answered:</strong> ${escapeHtml(p.deceptionNote)}
+                                </div>
+
+                                <div class="actor-pane honeypot">
+                                    <div>
+                                        <div class="actor-pane-head">
+                                            <span class="actor-badge honeypot">FUNNYPOT / LLM REPLIED // ${escapeHtml(p.sourceShort)}</span>
+                                            ${responseCacheBadge(p.result)}
+                                        </div>
+                                        <div class="terminal-line terminal-response" style="background:#04080d; border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:10px 12px; margin-top:8px;">${escapeHtml(p.resp)}</div>
+                                        <div class="actor-explain" style="margin-top:8px;">
+                                            <strong>How FunnyPot answered:</strong> ${escapeHtml(p.deceptionNote)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            ${turnBinariesHtml}
                         </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('')
+                : '<div class="empty">No shell command transcript recorded for this session — see the caught binary artifact details above.</div>';
 
             target.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
@@ -3435,13 +4967,18 @@
 
                 <div class="bio-stage exchange-session">
                     <div class="exchange-story-banner">
-                        <div class="exchange-story-title">What Happened in This Session // ${escapeHtml(activeBio.playbookName)}</div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+                            <div class="exchange-story-title" style="margin-bottom:0;">What Happened in This Session // ${escapeHtml(activeBio.playbookName)}</div>
+                            <button class="tab-button" type="button" data-open-mindmap-session="${escapeAttr(activeSession.id)}">Explore in Attack Mind Map (Pilot) →</button>
+                        </div>
                         <div class="exchange-story-body">
                             <strong>Who:</strong> Attacker <code>${escapeHtml(whoLabel)}</code> using <code>${escapeHtml(activeSession.client || activeSession.sshBanner || 'SSH-2.0')}</code> (${escapeHtml(activeBio.headline)}).<br>
                             <strong>Summary:</strong> ${escapeHtml(activeBio.sequenceNarrative)}<br>
                             <strong>Timing &amp; LLM Engine:</strong> ${escapeHtml(activeBio.reason)}
                         </div>
                     </div>
+
+                    ${activeBinariesHtml}
 
                     <div class="exchange-dialogue-list">
                         ${dialogueTurnsHtml}
@@ -3511,6 +5048,19 @@
                     </details>
                 </div>
             `;
+
+            if (typeof target.querySelectorAll === 'function') {
+                target.querySelectorAll('[data-open-binaries-tab]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        activateTab('binaries', { pushHistory: true });
+                    });
+                });
+                target.querySelectorAll('[data-open-mindmap-session]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        openSessionInMindMap(btn.dataset.openMindmapSession);
+                    });
+                });
+            }
         }
 
         function selectBiometricSession(sessionId) {
@@ -3531,7 +5081,8 @@
         }
 
         function sessionCanonicalSignature(session) {
-            return (session.commands || []).map(c => c.AiEnhancement?.CanonicalTemplate || normalizeCommandSignature(c.Command)).join(' || ');
+            const cmdSig = (session.commands || []).map(c => c.AiEnhancement?.CanonicalTemplate || normalizeCommandSignature(c.Command)).join(' || ');
+            return cmdSig || `binary:${session.id || session.sessionKey || 'unknown'}`;
         }
 
         function verdictColor(verdict) {
@@ -3603,6 +5154,7 @@
 
                 return {
                     x, y, color: pColor,
+                    exchangeId: command.ExchangeId || '',
                     timeLabel: fmtTime(command.Timestamp).split(' ')[1] || `#${idx + 1}`,
                     delta,
                     intent: command.InferredObjective ? shorten(command.InferredObjective, 28) : cat,
@@ -3974,7 +5526,7 @@
 
         function latestExchangeTimestamp(session) {
             const pair = recentCommandResponsePairs(session)[0];
-            return pair?.result?.Timestamp || pair?.command?.Timestamp || session.endedAt || session.startedAt;
+            return pair?.result?.Timestamp || pair?.command?.Timestamp || session.endedAt || session.startedAt || sessionCaughtBinaries(session)[0]?.CapturedAtUtc;
         }
 
         function latestExchangeTime(session) {
